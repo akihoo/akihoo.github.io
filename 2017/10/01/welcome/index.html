@@ -21,6 +21,8 @@
     <meta http-equiv="x-dns-prefetch-control" content="on">
 
 
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
 
 
 
@@ -492,6 +494,19 @@
                 <!-- Post Comments -->
                 
                     
+    <div id="comment" class="comment"></div>
+<script>
+    window.onload = function() {
+        new Valine({
+            av: AV, // source from av-min.js
+            el: '.comment',
+            app_id: "j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz",
+            app_key: "G3iYBi1UqmHMjy8QxLeFaRpB",
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+        });
+    }
+</script>
+
                 
             </div>
 
@@ -563,6 +578,9 @@
 
 
 
+
+   <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/valine@1.1.1/dist/Valine.min.js"></script>
 
 
 
