@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="Xiong FY&#39;s blog">
 <meta property="og:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i61.photobucket.com/albums/h63/kic990/shujugeshi_zps6fy9jkpv.png">
-<meta property="og:updated_time" content="2017-10-06T07:47:58.202Z">
+<meta property="og:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
+<meta property="og:updated_time" content="2017-10-06T08:26:50.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python读写Excel文件">
 <meta name="twitter:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
-<meta name="twitter:image" content="http://i61.photobucket.com/albums/h63/kic990/shujugeshi_zps6fy9jkpv.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
 
 
 
@@ -345,7 +345,7 @@
 <blockquote>
 <p>python操作excel主要用到xlrd和xlwt这两个库，即xlrd是读excel，xlwt是写excel的库。</p>
 </blockquote>
-<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><img src="http://i61.photobucket.com/albums/h63/kic990/shujugeshi_zps6fy9jkpv.png" alt="数据格式"></p>
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><img src="[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&amp;authkey=AW34ts-nbW7HI-SUHSx6yu0]" alt="数据格式"></p>
 <p>表格的列代表不同时刻下力的数值，以弯矩为例，需要将弯矩的一列的所有数据读完，共16002个数据，然后返回 Max Bending Moment 所对应的行的数据，即为弯矩最大时刻立管接头处的受力状态。</p>
 <h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="xlrd"><a href="#xlrd" class="headerlink" title="xlrd"></a>xlrd</h3><blockquote>
 <p>1、导入模块<br>import xlrd<br>2、打开Excel文件读取数据<br>data = xlrd.open_workbook(‘excel.xls’)<br>3、获取一个工作表<br>①  table = data.sheets()[0]       #通过索引顺序获取<br>②  table = data.sheet_by_index(0) #通过索引顺序获取<br>③  table = data.sheet_by_name(u’Sheet1’)#通过名称获取<br>4、获取整行和整列的值（返回数组）<br>table.row_values(i)<br>table.col_values(i)<br>5、获取行数和列数　<br>table.nrows<br>table.ncols<br>6、获取单元格<br>table.cell(0,0).value<br>table.cell(2,3).value</p>
@@ -401,6 +401,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/11/Python 爬虫入门-爬取拉勾网实战/" rel="prev" title="Python 爬虫入门-爬取拉勾网实战">
+                Python 爬虫入门-爬取拉勾网实战 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -482,7 +486,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -495,7 +499,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -728,7 +732,7 @@
     new Valine({
         av: AV,
         el: '#vcomments' ,
-        verify: true,
+        verify: false,
         notify: true,
         app_id: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
         app_key: 'G3iYBi1UqmHMjy8QxLeFaRpB',
