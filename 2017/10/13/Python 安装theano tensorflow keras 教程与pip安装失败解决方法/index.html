@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python 、keras、TensorFlow," />
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="这里什么都没有    寻龙千万看缠山    一重缠是一重关    关门若有千重锁 支付宝红包口令见title  定有王侯居此间">
+<meta name="description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
+<meta name="keywords" content="python 、keras、TensorFlow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="欢迎来到知识的荒原">
-<meta property="og:url" content="http://yoursite.com/2017/10/01/welcome/index.html">
+<meta property="og:title" content="Python 安装theano tensorflow keras 教程与pip安装失败解决方法">
+<meta property="og:url" content="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/index.html">
 <meta property="og:site_name" content="ForIce">
-<meta property="og:description" content="这里什么都没有    寻龙千万看缠山    一重缠是一重关    关门若有千重锁 支付宝红包口令见title  定有王侯居此间">
+<meta property="og:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-01T07:40:14.207Z">
+<meta property="og:image" content="http://img.blog.csdn.net/20171013130256781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-10-13T05:20:13.052Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="欢迎来到知识的荒原">
-<meta name="twitter:description" content="这里什么都没有    寻龙千万看缠山    一重缠是一重关    关门若有千重锁 支付宝红包口令见title  定有王侯居此间">
+<meta name="twitter:title" content="Python 安装theano tensorflow keras 教程与pip安装失败解决方法">
+<meta name="twitter:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171013130256781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/01/welcome/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/"/>
 
 
 
 
 
-  <title>欢迎来到知识的荒原 | ForIce</title>
+  <title>Python 安装theano tensorflow keras 教程与pip安装失败解决方法 | ForIce</title>
   
 
 
@@ -262,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/01/welcome/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ForIce">
@@ -279,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">欢迎来到知识的荒原</h1>
+          <h1 class="post-title" itemprop="name headline">Python 安装theano tensorflow keras 教程与pip安装失败解决方法</h1>
         
 
         <div class="post-meta">
@@ -291,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-01T15:29:01+08:00">
-                2017-10-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T13:07:22+08:00">
+                2017-10-13
               </time>
             
 
@@ -334,17 +337,14 @@
       
 
       
-        <ul>
-<li><strong>这里什么都没有</strong></li>
-<li><strong><font color="ffffff"> </font> </strong></li>
-<li><strong>寻龙千万看缠山</strong></li>
-<li><strong><font color="ffffff"> </font> </strong></li>
-<li><strong>一重缠是一重关</strong></li>
-<li><strong><font color="ffffff"> </font> </strong></li>
-<li><strong>关门若有千重锁</strong></li>
-<li><strong><font color="ffffff">支付宝红包口令见title</font> </strong></li>
-<li><strong>定有王侯居此间</strong></li>
-</ul>
+        <p>这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版）</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="官方中文文档"><a href="#官方中文文档" class="headerlink" title="官方中文文档"></a>官方中文文档</h2><p><a href="https://keras-cn.readthedocs.io/en/latest/for_beginners/keras_windows/" target="_blank" rel="external">Keras安装和配置指南(Windows)</a><br><a href="http://www.tensorfly.cn/tfdoc/get_started/os_setup.html" target="_blank" rel="external">TensorFlow中文社区</a><br><a href="http://www.deeplearning.net/software/theano/install.html" target="_blank" rel="external">Installing Theano</a></p>
+<h2 id="安装失败"><a href="#安装失败" class="headerlink" title="安装失败"></a>安装失败</h2><p>仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访问不是很顺畅，总之错误很多就是了。</p>
+<h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>安装 keras 基本上必出错，这里便以安装 keras 为例谈一谈 pip 安装失败后改如何解决。<br>安装 keras 失败的原因是安装 keras 需要安装一些依赖包，其中的 scipy 在 win 下安装有很大概率失败，原因是scipy要依赖于numpy和其他的很多库（如LAPACK/BLAS），但这些库在windows下并不是可以简单获取的。解决方式可参考回答：<a href="https://www.zhihu.com/question/30188492?sort=created" target="_blank" rel="external">python3.4版本 scipy库函数怎么安装？</a><br>这里用到下载 whl 文件，再使用 pip install xxx.whl 命令安装第三方模块。</p>
+<p>接下来安装 keras 一般都不会有什么问题，如果出现问题，可以用上 <a href="https://github.com/fchollet/keras" target="_blank" rel="external">github</a> 将其源码下载下来，在 WINDOWS POWERSHELL 中使用 cd 命令切换到解压目录，使用 python setup.py install 命令安装。</p>
+<h2 id="Anaconda-与-Python-共存问题"><a href="#Anaconda-与-Python-共存问题" class="headerlink" title="Anaconda 与 Python 共存问题"></a>Anaconda 与 Python 共存问题</h2><p>看网上很多人推荐安装科学计算库 Anaconda，我也下载使用了一下，感觉用 Anaconda 的pip安装好像也有一些奇妙的问题，当然我们可以用上文提到的本地安装的方式进行安装，但我还下载了一个纯净的 Python，进行共存。<br>共存还是比较简单，配置好环境变量后，只需把 C:\Python35 下的 python.exe 文件重命名为 python3.exe，这个 3 只是个编号，你可以给他任意的数字（或字母？）用于区分2个版本的 python。之后你就可以通过 python 或 python3 调用不同版本的 python。<br><img src="http://img.blog.csdn.net/20171013130256781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="python"></p>
+<p>之后你可以用 python -m pip 或 python3 -m pip 来分别对 2 个版本的 python 进行pip安装操作。<br>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PS C:\Users\jared&gt; python -m pip install numpy</div><div class="line">Requirement already satisfied: numpy in e:\anaconda3\lib\site-packages</div><div class="line">PS C:\Users\jared&gt; python3 -m pip install numpy</div><div class="line">Requirement already satisfied: numpy in c:\python\python35\lib\site-packages</div><div class="line">PS C:\Users\jared&gt;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -360,6 +360,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/python-、keras、TensorFlow/" rel="tag"># python 、keras、TensorFlow</a>
+          
+        </div>
+      
 
       
       
@@ -369,15 +375,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/11/Python 爬虫入门-爬取拉勾网实战/" rel="next" title="Python 爬虫入门-爬取拉勾网实战">
+                <i class="fa fa-chevron-left"></i> Python 爬虫入门-爬取拉勾网实战
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/06/PythonreadExcel/" rel="prev" title="Python读写Excel文件">
-                Python读写Excel文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -430,8 +436,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -488,6 +503,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方中文文档"><span class="nav-number">1.1.</span> <span class="nav-text">官方中文文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装失败"><span class="nav-number">1.2.</span> <span class="nav-text">安装失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方式"><span class="nav-number">1.3.</span> <span class="nav-text">解决方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anaconda-与-Python-共存问题"><span class="nav-number">1.4.</span> <span class="nav-text">Anaconda 与 Python 共存问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
