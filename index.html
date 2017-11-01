@@ -262,6 +262,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ForIce">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ForIce">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="url">ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T21:18:55+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>aptitude 与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具基于大名鼎鼎的APT机制, 整合了 dselect 和 apt-get 的所有功能, 并提供的更多特性,特别是在依赖关系处理上。与 apt-get 不同的是，aptitude在处理依赖问题上更佳一些。举例来说，aptitude在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装直接 apt-get 就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install aptitude</div></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>aptitude 的使用与 apt 类似。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">aptitude update                    更新可用的包列表</div><div class="line">aptitude upgrade                   升级可用的包</div><div class="line">aptitude dist-upgrade              将系统升级到新的发行版</div><div class="line">aptitude install pkgname           安装包</div><div class="line">aptitude remove pkgname            删除包</div><div class="line">aptitude purge pkgname             删除包及其配置文件</div><div class="line">aptitude search string             搜索包</div><div class="line">aptitude show pkgname              显示包的详细信息</div><div class="line">aptitude clean                     删除下载的包文件</div><div class="line">aptitude autoclean                 仅删除过期的包文件</div></pre></td></tr></table></figure>
+<p>另外可直接在终端输入 aptitude 进入 aptitude 的图形界面<br><img src="http://img.blog.csdn.net/20171101211530457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="aptitude"></p>
+<p>以下为转载</p>
+<blockquote>
+<p>相信大家也有用aptitude這個方便的工具，最近我發現原來aptitude是可以用來做 dpkg-reconfigure的。首先打開 aptitude，然後把光棒移到你想重新設定的套件，然後按 “shift+r”，就可以看到跟安裝時設定一樣的畫面啦<br> 介紹一下 aptitude 的用法:<br>按 ? 可以看有那些功能可用,<br>—————————————————————————————————————————————————<br>在進入 aptitude 的第一件事, 先按 u, 將 packages list 給更新,再做其他的步驟。但如果一天之內開 aptitude 好幾次, 也不用每次按 u, 約每天按一次就夠了, 因為 packages list 不會隨時更動, 有些 mirror, 有可能一天才去國外更新一次, 所以我們如果從那裡更新檔案列表, 自然也就一天後才會有更新。 如有出現 Upgradable Packages, 則表示目前系統上已安裝好的 package 中, 有新的版本可以更新, 那當然要給他更新了, 我們假設系統裝的版本是穩定版本stable(woody),由於在 woody 中, 並不會有新的 package 或功能新增,大部份都是安全性的更新。<br>—————————————————————————————————————————————————<br>將游標移到 Upgradable Packages 上, 按 g 即可開始更新。 在更新前可以先看看有那些東東是這次要更新的。 Enter 鍵可切換樹狀結構展開與否。<br>iu libgnomevfs2-0 2.2.5-2 2.2.5-3 如上這行, 表示這個 package 叫 libgnomevfs2-0, 而下方的視窗則為此 package 的說明, 第一個字母 i(install) 表示這個 package 本來就安裝在系統中了, 第二個字母 u(upgrade) 為現在要做 Upgrade 的動作, 從 2.2.5-2 昇級到 2.2.5-3。<br>接著按 g 即會切換到另一個視窗, 這個視窗顯示的是所有要更新的 packages, 再按一次 g 即可開始更新。<br> — New Packages — Upgradable Packages — Installed Packages — Not Installed Packages — Obsolete and Locally Created Packages — Virtual Packages — Tasks * New Packages –&gt; o 此次更新列表後, 有那些 package 是新出現的, 前提是用 testing or unstable 才會有 New Packages。<br>記得在這一次要結束前, 按 f 或選 menu Actions(按 F10) 選 Forget new packages, 這樣下次進來 aptitude 時才不會又出現同樣的 new packages。</p>
+<ul>
+<li>Upgradable Packages –&gt; o 可昇級旳 packages, 表示目前已安裝在系統中的 package 有新的版本可更新。</li>
+<li>Installed Packages –&gt; o 已經安裝在系統中的 packages, 可對 packages 做刪除等等。</li>
+<li>Not Installed Packages –&gt; o 可以安裝但是未安裝的 packages。<ul>
+<li>Obsolete and Locally Created Packages –&gt; o 陳舊的或是自己抓回來安裝的 packages。</li>
+</ul>
+</li>
+<li>Virtual Packages –&gt; o 虛擬的 packages, 這些是不存在的 packages, 用途很多, 其中一個是為了相容於某些舊的 package, 譬如 A 的版本昇級了, 但是 B 卻要有舊版的 A 才能安裝, 在 B 還沒修正 dependencies 之前, 確保 B 能夠正確的安裝。<ul>
+<li>Tasks –&gt; o 大項目的安裝, 通常是 packages 的集合, 選一個 package 就等於選了一串的 packages, 如 chinese-t(Chinese Tradictional), 只要裝了這個 chinese-t, 就等於要打造繁體中文的環境的 packages 都已安裝了, 只要將設定修改後, 即可使用中文環境。<br>—————————————————————————————————————————————————<br>熱鍵:</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>: 安裝<ul>
+<li>: 移除<br>_ : 移除 package, 並且將設定檔也移掉(用 - 的話會移除 package 但保留設定檔)<br>= : 保留 -&gt; 如是 testing or unstable，有可能新的 package 有 bug 或是某個功能拿掉 所以我們不想昇級，只要設成 hold 之後，Debian 就不會去更新此 package 了。<br>f : 清除 New Packages 的狀態。<br>[ : 將某一樹狀結構全部展開。<br>] : 將展開的樹狀結構關掉。<br>/ : 搜尋某 package<br>d : 顯示 package 有那些 dependencies(也就是安裝這個 package 之前要先裝那些 packages)<br>r : 有那些 packages 是 depends on 這個 package<br>q : 結束 aptitude enter : 顯示 package 的資訊<br>範例: 3dchess - 3D chess for X11 3 dimensional Chess for X11R6. Three boards, 96 pieces and 26 directions. Priority: optional Section: games Maintainer: Stephen Stafford <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x62;&#x61;&#103;&#112;&#x75;&#x73;&#115;&#64;&#x64;&#x65;&#x62;&#x69;&#x61;&#x6e;&#x2e;&#111;&#114;&#x67;">&#x62;&#x61;&#103;&#112;&#x75;&#x73;&#115;&#64;&#x64;&#x65;&#x62;&#x69;&#x61;&#x6e;&#x2e;&#111;&#114;&#x67;</a> Compressed size: 31.4k Uncompressed size: 152k Source Package: 3dchess –\ Depends — libc6 (&gt;= 2.3.1-1) — xaw3dg (&gt;= 1.5-6) — xlibs (&gt; 4.1.0) — Packages which depend on 3dchess –\ Versions i 0.8.1-10</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>3dchess 為名稱</li>
+<li>package 的說明</li>
+<li>優先權為 optional(選擇性), 就是可安裝, 可不安裝, 並不影響系統的正常運作。</li>
+<li>屬於那個區段(section)。</li>
+<li>維護人員的 e-mail</li>
+<li>下載回來的 package 為 .deb 檔的大小</li>
+<li>解開後的 package 大小</li>
+<li>從那個 source package 來的, 由於 debian 會將一個 source package 給拆成很多個 binary package, 譬如 gftp, 原作者那裡是一個完整的 source package, 但 debian 將之拆成 gftp-common, gftp, gftp-gtk, gftp-text。 gftp : 圖形介面的 ftp client, 用 glib 寫成的<br>gftp-gtk : 圖形介面的 ftp client, 用 gtk 寫成的<br>gftp-text : 文字介面的 ftp client gftp-common : 上面三個 package 共用的部份這樣的用意顯而易見, 就是我如果只想要 console 模式的 gftp, 但是如果全部包在一起的話, 全部安裝比較佔硬碟空間, 但是最重要的是, gftp 又要裝 glib 和 gtk, 假設你的機器為 firewall, 完全沒有裝 X, 現在為了要裝個 console 下的 gftp, 得先將 X Window 給裝起來, 還有 gtk等等, 這樣太不經濟了, 所以 debian 在這方面做的還不錯。回到正題, 所以上面四個 packages 的 Source Package 都是 gftp。</li>
+<li>–\ Depends : 安裝本 package 必須先安裝那些 packages 2<br>. — Packages which depend on 3dchess : 要安裝那些 packages 之前必須先安裝本 package</li>
+<li>版本號碼 順便介紹一個踩地雷遊戲, 在下載 package 的過程中可用來打發時間 ^_^。 按 F10 到 menu 中選 Actions -&gt; Play Minesweeper，按 q 可回到 aptitude 中。</li>
+</ol>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -865,7 +1026,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -878,7 +1039,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
