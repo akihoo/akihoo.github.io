@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。  当然，有以上功能还是不够的，你还需要与网站反爬策略">
+<meta name="description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。">
 <meta name="keywords" content="python 、爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 爬虫入门-爬取拉勾网实战">
 <meta property="og:url" content="http://yoursite.com/2017/10/11/Python 爬虫入门-爬取拉勾网实战/index.html">
 <meta property="og:site_name" content="ForIce">
-<meta property="og:description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。  当然，有以上功能还是不够的，你还需要与网站反爬策略">
+<meta property="og:description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20171011145316449?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-10-11T07:30:46.939Z">
+<meta property="og:updated_time" content="2017-11-02T05:04:49.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 爬虫入门-爬取拉勾网实战">
-<meta name="twitter:description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。  当然，有以上功能还是不够的，你还需要与网站反爬策略">
+<meta name="twitter:description" content="这几天学习了 python 爬虫的入门知识，也遇到很多坑，开个贴记录一下   基本原理 Python 爬虫基本要具备以下功能：（参考此回答）  向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识） 从抓取到的网页中提取出需要的数据。（你可能需要了解：正则表达式、Beautifulsoup） 保存数据并继续爬取下一个网站。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20171011145316449?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -346,8 +346,8 @@
 <ol>
 <li>向服务器发送请求，服务器响应你的请求。（你可能需要了解：网页的基本知识）</li>
 <li>从抓取到的网页中提取出需要的数据。（你可能需要了解：<a href="http://www.cnblogs.com/sunny3096/p/7201403.html" target="_blank" rel="external">正则表达式</a>、<a href="http://beautifulsoup.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">Beautifulsoup</a>）</li>
-<li>保存数据并继续爬取下一个网站。</li>
-</ol>
+<li><p>保存数据并继续爬取下一个网站。</p>
+<a id="more"></a>
 <p>当然，有以上功能还是不够的，你还需要与网站反爬策略斗智斗勇：（<a href="http://blog.csdn.net/offbye/article/details/52235139" target="_blank" rel="external">参考此回答</a>）</p>
 <ol>
 <li>构造合理的HTTP请求头</li>
@@ -356,6 +356,8 @@
 <li>注意隐含输入字段值</li>
 <li>避开蜜罐</li>
 <li>使用远程服务器来避免IP封锁</li>
+</ol>
+</li>
 </ol>
 <p>当然以上我还不怎么会。</p>
 <hr>
@@ -508,7 +510,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +523,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -659,6 +661,8 @@
   
 
 
+  
+
 
 
 
@@ -686,6 +690,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   

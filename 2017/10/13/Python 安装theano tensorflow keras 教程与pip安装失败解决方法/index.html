@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
+<meta name="description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano">
 <meta name="keywords" content="python 、keras、TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 安装theano tensorflow keras 教程与pip安装失败解决方法">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/index.html">
 <meta property="og:site_name" content="ForIce">
-<meta property="og:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
+<meta property="og:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://img.blog.csdn.net/20171013130256781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-10-13T05:20:13.052Z">
+<meta property="og:updated_time" content="2017-11-02T05:04:28.090Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 安装theano tensorflow keras 教程与pip安装失败解决方法">
-<meta name="twitter:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano 安装失败仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访">
+<meta name="twitter:description" content="这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版） 安装官方中文文档Keras安装和配置指南(Windows)TensorFlow中文社区Installing Theano">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20171013130256781?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -339,6 +339,7 @@
       
         <p>这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版）</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="官方中文文档"><a href="#官方中文文档" class="headerlink" title="官方中文文档"></a>官方中文文档</h2><p><a href="https://keras-cn.readthedocs.io/en/latest/for_beginners/keras_windows/" target="_blank" rel="external">Keras安装和配置指南(Windows)</a><br><a href="http://www.tensorfly.cn/tfdoc/get_started/os_setup.html" target="_blank" rel="external">TensorFlow中文社区</a><br><a href="http://www.deeplearning.net/software/theano/install.html" target="_blank" rel="external">Installing Theano</a></p>
+<a id="more"></a>
 <h2 id="安装失败"><a href="#安装失败" class="headerlink" title="安装失败"></a>安装失败</h2><p>仅仅依靠以上的官方文档，安装过程可能会遇到很多错误，原因一个是 windows 下Python 环境太坑爹，另外很可能是对外网访问不是很顺畅，总之错误很多就是了。</p>
 <h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><p>安装 keras 基本上必出错，这里便以安装 keras 为例谈一谈 pip 安装失败后改如何解决。<br>安装 keras 失败的原因是安装 keras 需要安装一些依赖包，其中的 scipy 在 win 下安装有很大概率失败，原因是scipy要依赖于numpy和其他的很多库（如LAPACK/BLAS），但这些库在windows下并不是可以简单获取的。解决方式可参考回答：<a href="https://www.zhihu.com/question/30188492?sort=created" target="_blank" rel="external">python3.4版本 scipy库函数怎么安装？</a><br>这里用到下载 whl 文件，再使用 pip install xxx.whl 命令安装第三方模块。</p>
 <p>接下来安装 keras 一般都不会有什么问题，如果出现问题，可以用上 <a href="https://github.com/fchollet/keras" target="_blank" rel="external">github</a> 将其源码下载下来，在 WINDOWS POWERSHELL 中使用 cd 命令切换到解压目录，使用 python setup.py install 命令安装。</p>
@@ -469,7 +470,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -482,7 +483,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -620,6 +621,8 @@
   
 
 
+  
+
 
 
 
@@ -647,6 +650,9 @@
 
   
   <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
 
 
   
