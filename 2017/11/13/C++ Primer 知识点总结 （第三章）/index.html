@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
-<meta name="keywords" content="python">
+<meta name="description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python读写Excel文件">
-<meta property="og:url" content="http://yoursite.com/2017/10/06/PythonreadExcel/index.html">
+<meta property="og:title" content="C++ Primer 知识点总结（第三章）">
+<meta property="og:url" content="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
+<meta property="og:description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
-<meta property="og:updated_time" content="2017-11-02T05:05:17.896Z">
+<meta property="og:updated_time" content="2017-11-13T06:24:11.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python读写Excel文件">
-<meta name="twitter:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
+<meta name="twitter:title" content="C++ Primer 知识点总结（第三章）">
+<meta name="twitter:description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/06/PythonreadExcel/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/"/>
 
 
 
 
 
-  <title>Python读写Excel文件 | Microke</title>
+  <title>C++ Primer 知识点总结（第三章） | Microke</title>
   
 
 
@@ -265,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/PythonreadExcel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
@@ -282,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python读写Excel文件</h1>
+          <h1 class="post-title" itemprop="name headline">C++ Primer 知识点总结（第三章）</h1>
         
 
         <div class="post-meta">
@@ -294,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T15:37:01+08:00">
-                2017-10-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T14:09:40+08:00">
+                2017-11-13
               </time>
             
 
@@ -337,31 +335,22 @@
       
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分量提取出来。</p>
+        <h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ol>
+<li>头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。</li>
+</ol>
 <a id="more"></a>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="模块列表"><a href="#模块列表" class="headerlink" title="模块列表"></a>模块列表</h2><ul>
-<li><a href="https://pypi.python.org/pypi/xlrd" target="_blank" rel="external">xlrd</a></li>
-<li><a href="https://pypi.python.org/pypi/xlwt/" target="_blank" rel="external">xlwd</a></li>
-</ul>
-<blockquote>
-<p>python操作excel主要用到xlrd和xlwt这两个库，即xlrd是读excel，xlwt是写excel的库。</p>
-</blockquote>
-<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><img src="[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&amp;authkey=AW34ts-nbW7HI-SUHSx6yu0]" alt="数据格式"></p>
-<p>表格的列代表不同时刻下力的数值，以弯矩为例，需要将弯矩的一列的所有数据读完，共16002个数据，然后返回 Max Bending Moment 所对应的行的数据，即为弯矩最大时刻立管接头处的受力状态。</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="xlrd"><a href="#xlrd" class="headerlink" title="xlrd"></a>xlrd</h3><blockquote>
-<p>1、导入模块<br>import xlrd<br>2、打开Excel文件读取数据<br>data = xlrd.open_workbook(‘excel.xls’)<br>3、获取一个工作表<br>①  table = data.sheets()[0]       #通过索引顺序获取<br>②  table = data.sheet_by_index(0) #通过索引顺序获取<br>③  table = data.sheet_by_name(u’Sheet1’)#通过名称获取<br>4、获取整行和整列的值（返回数组）<br>table.row_values(i)<br>table.col_values(i)<br>5、获取行数和列数　<br>table.nrows<br>table.ncols<br>6、获取单元格<br>table.cell(0,0).value<br>table.cell(2,3).value</p>
-</blockquote>
-<h3 id="xlwd"><a href="#xlwd" class="headerlink" title="xlwd"></a>xlwd</h3><blockquote>
-<p>写excel表要用到xlwt模块，官网下载（<a href="http://pypi.python.org/pypi/xlwt）。大致使用流程如下：" target="_blank" rel="external">http://pypi.python.org/pypi/xlwt）。大致使用流程如下：</a><br>1、导入模块<br>import xlwt</p>
-<p>2、创建workbook（其实就是excel，后来保存一下就行）<br>workbook = xlwt.Workbook(encoding = ‘ascii’)</p>
-<p>3、创建表<br>worksheet = workbook.add_sheet(‘My Worksheet’)</p>
-<p>4、往单元格内写入内容<br>worksheet.write(0, 0, label = ‘Row 0, Column 0 Value’)</p>
-<p>5、保存<br>workbook.save(‘Excel_Workbook.xls’)</p>
-</blockquote>
-<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">##!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import xlrd</div><div class="line">import xlwt</div><div class="line"></div><div class="line">path = &apos;C:\\Users\\jared\\Desktop\\test.xlsx&apos;</div><div class="line">data = xlrd.open_workbook(path)</div><div class="line">ENDB = [[10,8],[18,2],[8,12]]</div><div class="line">ENDA = [[3,9],[18,10],[11,11],[14,6]]</div><div class="line">workbook = xlwt.Workbook(encoding = &apos;ascii&apos;)</div><div class="line">worksheet = workbook.add_sheet(&apos;ENDB&apos;)</div><div class="line">for j in range(0,len(ENDB)):</div><div class="line">    table = data.sheet_by_name(str(ENDB[j][0]))</div><div class="line">    nhang = table.nrows</div><div class="line">    nlie = table.ncols</div><div class="line">    ycols = []</div><div class="line">    xrows = []</div><div class="line">    for i in range(1, nhang - 1):  # 提取某列</div><div class="line">        ycols = ycols + [table.cell(i, ENDB[j][1]).value]</div><div class="line">    xmax = ycols.index(max(ycols)) + 1</div><div class="line">    for i in range(1, nlie): </div><div class="line">        xrows = xrows + [table.cell(1, i).value]</div><div class="line">        if j == 0:</div><div class="line">            worksheet.write(0, i, table.cell(0, i).value)</div><div class="line">        worksheet.write(j+1, i, table.cell(xmax, i).value)</div><div class="line">workbook.save(&apos;100rd-float.xls&apos;)</div></pre></td></tr></table></figure>
-<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><ol>
-<li>本来想写个函数或者类，然后把数据读取后调用，但 data 是模块里的对象，好像不能直接作为变量输入函数。后来只好写了个嵌套循环。</li>
-<li>程序比较简单，而且并不是完全自动化操作，需要手动设置一些数据。</li>
+<h1 id="字符串、向量和数组"><a href="#字符串、向量和数组" class="headerlink" title="字符串、向量和数组"></a>字符串、向量和数组</h1><ol>
+<li>getline(cin , stringname) ：从输入流中读入内容直到读入换行符，保留空白符，但换行符不存入string对象中</li>
+<li>字面值与string：字符字面值和字符串字面值可以隐式转化为string对象</li>
+<li>empty 函数根据 string 是否为空返回布尔值； size_type 表示各自类型的长度或下标，返回无符号整数，类型为 string::size_type</li>
+<li>常用函数：islower(c) c是小写字母时为真；isupper(c) c是大写字母时为真 ； tolower(c) c是大写字母时，输出 c 对应的小写字母，否则原样输出 c ；toupper(c) c是小写字母时，输出 c 对应的大写字母，否则原样输出 c ；</li>
+<li>下标运算符：vector或string的下标运算符可用于访问已存在的元素，而不能用于添加元素。添加元素需使用(+= or append or push_back for string) and (insert or push_back for vector)</li>
+<li>迭代器 end() 指向尾元素的下一位置，不指向具体元素，不能解引用或递增</li>
+<li>复杂数组声明的理解：从数组名字开始按照由内向外的顺序阅读，如int <em>(&amp;a)[10]表示a是对数组引用，该数组包含10个int</em></li>
+<li>数组的缺点：数组的大小是确定不变的，不可以向数组中添加元素，丧失了vectoer的灵活性</li>
+<li>不可以将整个数组赋值给另一个数组，只能逐个元素的拷贝；可以直接将整个vector拷贝给另一个vector</li>
+<li>多维数组初始化：使用花括号的形式，未列出的元素执行默认值初始化</li>
+<li>范围for处理多维数组：除最内层循环外，其他所有循环的控制变量都应该是引用类型，以避免这些数组形式的元素被自动转换成指向数组首元素的指针</li>
 </ol>
 
       
@@ -380,7 +369,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -393,8 +382,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/01/welcome/" rel="next" title="欢迎来到知识的荒原">
-                <i class="fa fa-chevron-left"></i> 欢迎来到知识的荒原
+              <a href="/2017/11/13/C++ Primer 知识点总结 （第二章）/" rel="next" title="C++ Primer 知识点总结（第二章）">
+                <i class="fa fa-chevron-left"></i> C++ Primer 知识点总结（第二章）
               </a>
             
           </div>
@@ -402,10 +391,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/11/Python 爬虫入门-爬取拉勾网实战/" rel="prev" title="Python 爬虫入门-爬取拉勾网实战">
-                Python 爬虫入门-爬取拉勾网实战 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +520,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块列表"><span class="nav-number">2.1.</span> <span class="nav-text">模块列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">2.2.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">2.3.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xlrd"><span class="nav-number">2.3.1.</span> <span class="nav-text">xlrd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xlwd"><span class="nav-number">2.3.2.</span> <span class="nav-text">xlwd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">2.4.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不足"><span class="nav-number">2.5.</span> <span class="nav-text">不足</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串、向量和数组"><span class="nav-number">2.</span> <span class="nav-text">字符串、向量和数组</span></a></li></ol></div>
             
 
           </div>
