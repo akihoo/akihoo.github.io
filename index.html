@@ -79,16 +79,16 @@
 
 
 
-<meta name="description" content="������΢ľ��������׺�">
+<meta name="description" content="吾本贪婪，故而无妄；吾本逍遥，故而不羁；吾本小智，后知后觉，故而有悔。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ForIce">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="ForIce">
-<meta property="og:description" content="������΢ľ��������׺�">
+<meta property="og:description" content="吾本贪婪，故而无妄；吾本逍遥，故而不羁；吾本小智，后知后觉，故而有悔。">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ForIce">
-<meta name="twitter:description" content="������΢ľ��������׺�">
+<meta name="twitter:description" content="吾本贪婪，故而无妄；吾本逍遥，故而不羁；吾本小智，后知后觉，故而有悔。">
 
 
 
@@ -265,7 +265,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第二章）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -332,8 +332,7 @@
 
       
         
-          
-            <h1 id="1-算数类型"><a href="#1-算数类型" class="headerlink" title="1. 算数类型"></a>1. 算数类型</h1><table>
+          <h1 id="1-算数类型"><a href="#1-算数类型" class="headerlink" title="1. 算数类型"></a>1. 算数类型</h1><table>
 <thead>
 <tr>
 <th>类型</th>
@@ -429,63 +428,13 @@
 </tr>
 </tbody>
 </table>
-<h1 id="2-字符串的前后缀："><a href="#2-字符串的前后缀：" class="headerlink" title="2.字符串的前后缀："></a>2.字符串的前后缀：</h1><table>
-<thead>
-<tr>
-<th>前缀</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u</td>
-<td>unicode16字符</td>
-</tr>
-<tr>
-<td>U</td>
-<td>unicode32字符</td>
-</tr>
-<tr>
-<td>L</td>
-<td>宽字符</td>
-</tr>
-<tr>
-<td>u8</td>
-<td>utf-8</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>后缀</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>u或U</td>
-<td>表示该字面值为无符号类型</td>
-</tr>
-<tr>
-<td>l或L</td>
-<td>表示该字面值的类型至少为long</td>
-</tr>
-<tr>
-<td>ll或LL</td>
-<td>表示该字面值的类型至少为long long</td>
-</tr>
-<tr>
-<td>f或F</td>
-<td>表示该字面值为float类型</td>
-</tr>
-</tbody>
-</table>
-<p>前后缀可以交叉结合使用：后缀UL时，表示无符号长整型。<br>字符用单引号‘’，字符串用双引号“”。<br>十进制：20   八进制：020    十六进制：0x20或者0X20</p>
-<h1 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h1><p>当我们把一个非布尔类型的算术值赋给布尔类型时，初始值为0则结果为false，否则结果为true。<br>当我们把一个布尔值赋给非布尔类型时，初始值为false则结果为0，初始值为true则结果为1。<br>当我们把一个浮点数赋给整数类型时，进行了近似处理。结果值将仅保留浮点数中小数点之前的部分。<br>当我们把一个整数值赋给浮点类型时，小数部分记为0。如果该整数所占的空间超过了浮点类型的容量，精度可能有损失。<br>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表示数值总数取模后的余数。例如，8比特大小的unsigned char可以表示0至255区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256取模后所得的余数。因此，把-1赋给8比特大小的unsigned char所得的结果是255。<br>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的（undefined）。此时，程序可能继续工作、可能崩溃，也可能生成垃圾数据。</p>
-<h1 id="4-变量"><a href="#4-变量" class="headerlink" title="4.变量"></a>4.变量</h1><p>4.1 命名规则：字母+数字+下划线（必须以字母或者下划线开头）<br>4.2 局部变量会覆盖同名的全局变量<br>4.3 声明：规定变量的类型和名字（在变量名前添加extern可声明变量，如果显式初始化即为定义）<br>4.5 定义：负责创建与名字关联的实体，并申请存储空间和赋初始值<br>4.4 引用：它只是为存在的对象所起的另外一个名字。它不是一个对象，没有实际的地址，定义是必须初始化<br>4.5 指针：本身就是一个对象，允许指针之间的拷贝和赋值<br>4.6 const表示的不可改变的量，该变量必须初始化（可以在运行时初始化）<br>4.7 顶层／底层const：顶层const表示本身是常量（常量指针，声明时const必须放在指针符号<em>后面，即：</em>const ），底层const表示所指的对象是常量（指向常量的指针，如：int const  <em>p_a = &amp;num_a）；执行拷贝操作时，拷入拷出对象必须具有相同的底层const资格，或能够强制转换<br>4.8 常量表达式：数据类型和初始值都需要是常量类型，值不会改变并在编译过程就能得到计算结果<br>4.9 constexpr变量：一定是常量，必须用常量表达式（字面值类型，包括算术类型、引用、指针）或constexpr函数（足够简单编译时可计算结果）初始化<br>4.10 类型说明符auto会忽略顶层const，保留底层const<br>4.11 指针、常量与类型别名：typedef char </em>pstring; const pstring cstr = 0;，与const char *cstr不等价，前者的cstr是指向char的常量指针，后者中cstr是指向常量char的指针</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/13/C++ Primer 知识点总结 （第二章）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -535,7 +484,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/UE 实用技巧分享/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -669,7 +618,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/LINUX中常用操作命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -807,7 +756,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -935,7 +884,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -1060,7 +1009,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/11/Python 爬虫入门-爬取拉勾网实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -1193,7 +1142,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/PythonreadExcel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -1317,7 +1266,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/01/welcome/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ForIce">
+      <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
@@ -1467,10 +1416,10 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/uploads/avatar.jpg"
-                alt="ForIce" />
+                alt="Microke" />
             
-              <p class="site-author-name" itemprop="name">ForIce</p>
-              <p class="site-description motion-element" itemprop="description">������΢ľ��������׺�</p>
+              <p class="site-author-name" itemprop="name">Microke</p>
+              <p class="site-description motion-element" itemprop="description">吾本贪婪，故而无妄；吾本逍遥，故而不羁；吾本小智，后知后觉，故而有悔。</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1536,7 +1485,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">ForIce</span>
+  <span class="author" itemprop="copyrightHolder">Microke</span>
 
   
 </div>
