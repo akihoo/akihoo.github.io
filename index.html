@@ -332,28 +332,19 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>在abaqus分析过程中出现单元过度变形的问题，在网上找到一篇博客，介绍得很好，故转载过来<br>本文发表于<a href="http://cnzhx.net/fe/2015/01/29/view-errelemexcessdistortion-elements/" target="_blank" rel="external">水景一页</a>。永久链接：<a href="http://cnzhx.net/fe/2015/01/29/view-errelemexcessdistortion-elements/" target="_blank" rel="external">http://cnzhx.net/fe/2015/01/29/view-errelemexcessdistortion-elements/</a>。转载请保留此信息及相应链接。</p>
 <h1 id="查看-ErrElemExcessDistortion-的-Elements"><a href="#查看-ErrElemExcessDistortion-的-Elements" class="headerlink" title="查看 ErrElemExcessDistortion 的 Elements"></a>查看 ErrElemExcessDistortion 的 Elements</h1><p>Abaqus 可能会提示有些 Elements 出现了过度变形，并提示可以通过 element set ErrElemExcessDistortion 查看。即使该模拟中途因错结束，也可以在输出中查看到这些单元。</p>
 </blockquote>
 <p>错误提示类似于:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">The elements contained in element set ErrElemExcessDistortion-Step1 have distorted excessively.</div><div class="line">There are a total of 4 excessively distorted elements</div></pre></td></tr></table></figure>
-<p>查看的方法就是，</p>
-<ol>
-<li>右键单击该 Aborted 的 job 并单击 Results，或者在 Job Manager 中点击 Results 打开输出结果查看页面。</li>
-<li>在 Results 列表中展开该 job 对应的 odb。</li>
-<li>继续展开 Element Sets，或者 Node Sets，或者 Surface Sets。</li>
-<li>单击要查看的 Set 的名字，如 ErrElemExcessDistortion。- 号后面是 Step 名称。</li>
-</ol>
-<p>其它类似提示也可以通过这样的方式查看到。比如，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">90 elements are distorted. Either the isoparametric angles are out of the suggested limits or the triangular or tetrahedral quality measure is bad. The elements have been identified in element set WarnElemDistorted.</div></pre></td></tr></table></figure></p>
-<p>就可以通过上面的方式打开 Set 集，单击 WarnElemDistorted 来查看。</p>
-<p>还有，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Excessive incremental rotation of the elements</div><div class="line">Excessive incremental rotation of the elements in element set ErrElemExcessIncrementalRotation-Step1.</div><div class="line">Error in job 1-hsh-exce-remesh: There are a total of 4 elements with excessive rotations</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The ratio of deformation speed to wave speed in the elements in element set WarnElemDeformRateExceedsRatio-Step1 exceed the warning ratio</div></pre></td></tr></table></figure>
-<p>如 Node Set 的，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Some nodes involved in general contact have penetrated their</div><div class="line">tracked faces by more than 50.000 percent of the typical element</div><div class="line">dimension in the general contact domain, 4.58846E-04. Please check</div><div class="line">the node set &quot;InfoNodeDeepPenetFirst&quot;. Please make sure that these</div><div class="line">nodes and their contacting faces have sufficient mass to allow the</div><div class="line">code to calculate realistic contact penalties for enforcing the</div><div class="line">contact constraint.</div></pre></td></tr></table></figure></p>
-<p>操作大同小异。©</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/29/查看 ErrElemExcessDistortion 的 Elements/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
