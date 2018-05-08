@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python," />
+  <meta name="keywords" content="companies," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
-<meta name="keywords" content="python">
+<meta name="description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。">
+<meta name="keywords" content="companies">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python读写Excel文件">
-<meta property="og:url" content="http://yoursite.com/2017/10/06/PythonreadExcel/index.html">
+<meta property="og:title" content="2018华为软件精英挑战赛">
+<meta property="og:url" content="http://yoursite.com/2018/05/08/2018华为软件精英/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
+<meta property="og:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
-<meta property="og:updated_time" content="2017-11-02T05:05:17.896Z">
+<meta property="og:updated_time" content="2018-05-08T09:16:58.986Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python读写Excel文件">
-<meta name="twitter:description" content="介绍在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分">
-<meta name="twitter:image" content="http://yoursite.com/2017/10/06/PythonreadExcel/[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&authkey=AW34ts-nbW7HI-SUHSx6yu0]">
+<meta name="twitter:title" content="2018华为软件精英挑战赛">
+<meta name="twitter:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/06/PythonreadExcel/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/08/2018华为软件精英/"/>
 
 
 
 
 
-  <title>Python读写Excel文件 | Microke</title>
+  <title>2018华为软件精英挑战赛 | Microke</title>
   
 
 
@@ -265,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/06/PythonreadExcel/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/2018华为软件精英/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
@@ -282,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python读写Excel文件</h1>
+          <h1 class="post-title" itemprop="name headline">2018华为软件精英挑战赛</h1>
         
 
         <div class="post-meta">
@@ -294,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-06T15:37:01+08:00">
-                2017-10-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T15:29:04+08:00">
+                2018-05-08
               </time>
             
 
@@ -337,32 +335,26 @@
       
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>在立管线型初步设计结束后， 需要统计所有工况下的弯矩、剪力的极大值情况以及此情况对应的 x 、y 方向分量， 才能进行下一步极值工况分析。 但在使用 Orcaflex 批处理提取结果时， 只能提取弯矩、剪力及对应的 x 、y 方向分量在时域上的极值（range graph Max）， 而直接输出时域结果则数据众多， 手动提取极其费力， 因此写了个 Python 脚本自动找到最大的弯矩并把对应分量提取出来。</p>
-<a id="more"></a>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><h2 id="模块列表"><a href="#模块列表" class="headerlink" title="模块列表"></a>模块列表</h2><ul>
-<li><a href="https://pypi.python.org/pypi/xlrd" target="_blank" rel="external">xlrd</a></li>
-<li><a href="https://pypi.python.org/pypi/xlwt/" target="_blank" rel="external">xlwd</a></li>
+        <blockquote>
+<p>今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。</p>
+<h1 id="赛题简介"><a href="#赛题简介" class="headerlink" title="赛题简介"></a>赛题简介</h1><p>此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见<a href="http://codecraft.devcloud.huaweicloud.com/home/detail" target="_blank" rel="external">官网</a>。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。<br><a id="more"></a></p>
+</blockquote>
+<h1 id="比赛思路"><a href="#比赛思路" class="headerlink" title="比赛思路"></a>比赛思路</h1><h2 id="预测模型"><a href="#预测模型" class="headerlink" title="预测模型"></a>预测模型</h2><p>预测模型试过很多，但很多用心写的代码，不如取平均值。试过的模型有：</p>
+<ul>
+<li>二次指数平滑</li>
+<li>局部加权模型</li>
+<li>线性模型</li>
+<li>Arima模型</li>
 </ul>
-<blockquote>
-<p>python操作excel主要用到xlrd和xlwt这两个库，即xlrd是读excel，xlwt是写excel的库。</p>
-</blockquote>
-<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p><img src="[https://tenworldaxialeduau-my.sharepoint.com/personal/user0059_aeo_edu_pl/_layouts/15/guestaccess.aspx?docid=11a501f444fea407788ef9c04f547401d&amp;authkey=AW34ts-nbW7HI-SUHSx6yu0]" alt="数据格式"></p>
-<p>表格的列代表不同时刻下力的数值，以弯矩为例，需要将弯矩的一列的所有数据读完，共16002个数据，然后返回 Max Bending Moment 所对应的行的数据，即为弯矩最大时刻立管接头处的受力状态。</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="xlrd"><a href="#xlrd" class="headerlink" title="xlrd"></a>xlrd</h3><blockquote>
-<p>1、导入模块<br>import xlrd<br>2、打开Excel文件读取数据<br>data = xlrd.open_workbook(‘excel.xls’)<br>3、获取一个工作表<br>①  table = data.sheets()[0]       #通过索引顺序获取<br>②  table = data.sheet_by_index(0) #通过索引顺序获取<br>③  table = data.sheet_by_name(u’Sheet1’)#通过名称获取<br>4、获取整行和整列的值（返回数组）<br>table.row_values(i)<br>table.col_values(i)<br>5、获取行数和列数　<br>table.nrows<br>table.ncols<br>6、获取单元格<br>table.cell(0,0).value<br>table.cell(2,3).value</p>
-</blockquote>
-<h3 id="xlwd"><a href="#xlwd" class="headerlink" title="xlwd"></a>xlwd</h3><blockquote>
-<p>写excel表要用到xlwt模块，官网下载（<a href="http://pypi.python.org/pypi/xlwt）。大致使用流程如下：" target="_blank" rel="external">http://pypi.python.org/pypi/xlwt）。大致使用流程如下：</a><br>1、导入模块<br>import xlwt</p>
-<p>2、创建workbook（其实就是excel，后来保存一下就行）<br>workbook = xlwt.Workbook(encoding = ‘ascii’)</p>
-<p>3、创建表<br>worksheet = workbook.add_sheet(‘My Worksheet’)</p>
-<p>4、往单元格内写入内容<br>worksheet.write(0, 0, label = ‘Row 0, Column 0 Value’)</p>
-<p>5、保存<br>workbook.save(‘Excel_Workbook.xls’)</p>
-</blockquote>
-<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">##!/usr/bin/env python</div><div class="line"># coding=utf-8</div><div class="line"></div><div class="line">import xlrd</div><div class="line">import xlwt</div><div class="line"></div><div class="line">path = &apos;C:\\Users\\jared\\Desktop\\test.xlsx&apos;</div><div class="line">data = xlrd.open_workbook(path)</div><div class="line">ENDB = [[10,8],[18,2],[8,12]]</div><div class="line">ENDA = [[3,9],[18,10],[11,11],[14,6]]</div><div class="line">workbook = xlwt.Workbook(encoding = &apos;ascii&apos;)</div><div class="line">worksheet = workbook.add_sheet(&apos;ENDB&apos;)</div><div class="line">for j in range(0,len(ENDB)):</div><div class="line">    table = data.sheet_by_name(str(ENDB[j][0]))</div><div class="line">    nhang = table.nrows</div><div class="line">    nlie = table.ncols</div><div class="line">    ycols = []</div><div class="line">    xrows = []</div><div class="line">    for i in range(1, nhang - 1):  # 提取某列</div><div class="line">        ycols = ycols + [table.cell(i, ENDB[j][1]).value]</div><div class="line">    xmax = ycols.index(max(ycols)) + 1</div><div class="line">    for i in range(1, nlie): </div><div class="line">        xrows = xrows + [table.cell(1, i).value]</div><div class="line">        if j == 0:</div><div class="line">            worksheet.write(0, i, table.cell(0, i).value)</div><div class="line">        worksheet.write(j+1, i, table.cell(xmax, i).value)</div><div class="line">workbook.save(&apos;100rd-float.xls&apos;)</div></pre></td></tr></table></figure>
-<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><ol>
-<li>本来想写个函数或者类，然后把数据读取后调用，但 data 是模块里的对象，好像不能直接作为变量输入函数。后来只好写了个嵌套循环。</li>
-<li>程序比较简单，而且并不是完全自动化操作，需要手动设置一些数据。</li>
-</ol>
+<p>除了模型，还有试了很多去噪方法，试过不同的滑窗方式，比赛还是很累的，特别是辛苦写的代码完全没有作用，这很打击士气。建议大家找好队友，分工合作，这样才不至于中途就放弃了。最后初赛使用二次指数平滑，复赛使用局部加权模型。</p>
+<p>感觉预测算法没什么好讲的，毕竟全靠玄学，都是瞎写一通，再瞎调参，为什么分高也完全不知道。</p>
+<h2 id="放置算法"><a href="#放置算法" class="headerlink" title="放置算法"></a>放置算法</h2><ul>
+<li>放置算法采用动态规划的背包算法，其实贪心算法采用恰当的放置策略已经能取得接近最优解的结果，最后初赛对比了我的python代码和队友的C++代码，最后采用的是队友C++版代码，预测是动态规划，放置是贪心算法。</li>
+<li>由于C++代码主要部分是队友完成，没有队友许可，这里只将自己python版代码开源，此代码初赛可取得235+的成绩。开源代码使用的是二维背包进行，即以优化CPU为例，将CPU作为价值，内存作为重量（限制条件），但这样的问题是很容易产生内存放满了，CPU占比很低的情况。于是加入判断，若放置的服务器放置率小于阈值，则回收此服务器的虚拟机，打散顺序重新放置。</li>
+<li>此放置算法，线下测试了很多情况均可得最优解，后期花了2天移植倒C++版本，但是计算出的结果和python版相差很多，至今不知道原因。</li>
+<li>放置算法的改进：建议使用3维背包，即以CPU和内存作为约束条件，去max(CPU+MEM)，这样代码的运行速度更快，而且效果是一样的。</li>
+<li>关于放置率的提升：根据放置结果，最后一个服务器可能存在放置率不足的情况，可向最后一个添加虚拟机直至放满，或者直接将此虚拟机删除，即通过放置结果修改预测结果，初赛加入此条策略，提高了接近8分，还是挺有效的。</li>
+</ul>
 
       
     </div>
@@ -380,7 +372,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/companies/" rel="tag"># companies</a>
           
         </div>
       
@@ -393,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/01/welcome/" rel="next" title="欢迎来到知识的荒原">
-                <i class="fa fa-chevron-left"></i> 欢迎来到知识的荒原
+              <a href="/2017/11/29/查看 ErrElemExcessDistortion 的 Elements/" rel="next" title="查看 ErrElemExcessDistortion 的 Elements">
+                <i class="fa fa-chevron-left"></i> 查看 ErrElemExcessDistortion 的 Elements
               </a>
             
           </div>
@@ -402,10 +394,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/11/Python 爬虫入门-爬取拉勾网实战/" rel="prev" title="Python 爬虫入门-爬取拉勾网实战">
-                Python 爬虫入门-爬取拉勾网实战 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">2.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块列表"><span class="nav-number">2.1.</span> <span class="nav-text">模块列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">2.2.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">2.3.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xlrd"><span class="nav-number">2.3.1.</span> <span class="nav-text">xlrd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xlwd"><span class="nav-number">2.3.2.</span> <span class="nav-text">xlwd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">2.4.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不足"><span class="nav-number">2.5.</span> <span class="nav-text">不足</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#赛题简介"><span class="nav-number">1.</span> <span class="nav-text">赛题简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比赛思路"><span class="nav-number">2.</span> <span class="nav-text">比赛思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预测模型"><span class="nav-number">2.1.</span> <span class="nav-text">预测模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#放置算法"><span class="nav-number">2.2.</span> <span class="nav-text">放置算法</span></a></li></ol></li></ol></div>
             
 
           </div>
