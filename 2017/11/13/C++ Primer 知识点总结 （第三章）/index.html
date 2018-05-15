@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta name="description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ Primer 知识点总结（第三章）">
 <meta property="og:url" content="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta property="og:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-13T06:24:11.242Z">
+<meta property="og:updated_time" content="2018-05-10T10:51:32.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer 知识点总结（第三章）">
-<meta name="twitter:description" content="命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta name="twitter:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
 
 
 
@@ -335,22 +335,148 @@
       
 
       
-        <h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ol>
+        <blockquote>
+<p>部分内容转载自<a href="https://www.cnblogs.com/citron/p/6145291.html" target="_blank" rel="external">cnblogs</a>、<a href="https://www.cnblogs.com/danielStudy/p/7127564.html" target="_blank" rel="external">Daniel_z</a></p>
+</blockquote>
+<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ol>
 <li>头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。</li>
 </ol>
 <a id="more"></a>
-<h1 id="字符串、向量和数组"><a href="#字符串、向量和数组" class="headerlink" title="字符串、向量和数组"></a>字符串、向量和数组</h1><ol>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><ol>
 <li>getline(cin , stringname) ：从输入流中读入内容直到读入换行符，保留空白符，但换行符不存入string对象中</li>
 <li>字面值与string：字符字面值和字符串字面值可以隐式转化为string对象</li>
 <li>empty 函数根据 string 是否为空返回布尔值； size_type 表示各自类型的长度或下标，返回无符号整数，类型为 string::size_type</li>
 <li>常用函数：islower(c) c是小写字母时为真；isupper(c) c是大写字母时为真 ； tolower(c) c是大写字母时，输出 c 对应的小写字母，否则原样输出 c ；toupper(c) c是小写字母时，输出 c 对应的大写字母，否则原样输出 c ；</li>
-<li>下标运算符：vector或string的下标运算符可用于访问已存在的元素，而不能用于添加元素。添加元素需使用(+= or append or push_back for string) and (insert or push_back for vector)</li>
+</ol>
+<h1 id="向量和数组"><a href="#向量和数组" class="headerlink" title="向量和数组"></a>向量和数组</h1><ol>
+<li>下标运算符[]：vector或string的下标运算符可用于访问已存在的元素，而不能用于添加元素。添加元素需使用(+= or append or push_back for string) and (insert or push_back for vector)</li>
 <li>迭代器 end() 指向尾元素的下一位置，不指向具体元素，不能解引用或递增</li>
 <li>复杂数组声明的理解：从数组名字开始按照由内向外的顺序阅读，如int <em>(&amp;a)[10]表示a是对数组引用，该数组包含10个int</em></li>
 <li>数组的缺点：数组的大小是确定不变的，不可以向数组中添加元素，丧失了vectoer的灵活性</li>
 <li>不可以将整个数组赋值给另一个数组，只能逐个元素的拷贝；可以直接将整个vector拷贝给另一个vector</li>
 <li>多维数组初始化：使用花括号的形式，未列出的元素执行默认值初始化</li>
 <li>范围for处理多维数组：除最内层循环外，其他所有循环的控制变量都应该是引用类型，以避免这些数组形式的元素被自动转换成指向数组首元素的指针</li>
+<li>定义和初始化Vector：<ul>
+<li>默认初始化：vector<t> v1;</t></li>
+<li>拷贝初始化：vector<t> v2=v1;</t></li>
+<li>直接初始化：vector<t> v3(v2);</t></li>
+<li>指定含有多个不相同初始值的初始化：vector <t> v4{a,b,c,d};</t></li>
+<li>指定含有多个相同初始值的初始化：vector<t> v5(10,-1);</t></li>
+</ul>
+</li>
+<li>定义和初始化数组：<ul>
+<li>int arr[42]   //含有42个整形元素的数组；</li>
+<li>int *arr[10]  //含有10个整型指针的数组</li>
+<li>字符数组也可以使用花括号初始化，但是一定注意后面需要留一个位置给‘\0’<ul>
+<li>char a1[]={‘C’,’+’,’+‘，‘\0’};</li>
+<li>char a2[]=”C++”;  //a2的维度为4；</li>
+<li>char a3[3]=”C++”;//错误：”C++”，这个字符串是4个元素。</li>
+<li>char a4[]={‘C’,’+’，’+’}； //这种定义是允许的，但是后面会有一系列的问题。</li>
+</ul>
+</li>
+<li>不允许将数组的内容拷贝给其他数组作为初始值，也不能用数组为其他数组赋值：<ul>
+<li>int a[]={0,1,2};</li>
+<li>int a2[]=a;   //错误，不允许将一个数组作为初始值给另外一个数组</li>
+<li>a2=a;      //错误，不能把一个数组直接赋值给另外一个数组</li>
+</ul>
+</li>
+<li>理解复杂的数组声明<pre><code>- int *ptrs[10];  //这个数组有10个元素，每个元素都是int指针。
+</code></pre><ul>
+<li>int &amp;refs[10];  //错误，数组里面应该是对象，不能是引用。（引用不占空间）</li>
+<li>int (*Parray)[10]=&arr; //Parray指向一个含有10个int类型的元素的数组。</li>
+<li>int (&amp;arrRef)[10]=arr; //arrRef引用一个含有10个整型元素的数组。</li>
+<li>int *(&amp;arry)[10]=ptrs；//arry引用一个含有10个指向int类型的指针的数组</li>
+<li>//在编译器上试了一下把括号去掉的效果</li>
+<li>int *&amp;array[10]=ptrs;编译器会报错了，报错内容是不允许定义引用的数组。</li>
+<li>继续测试： int **array[10];这样的数组初始化必须是{ptr1,ptr2,ptr3…};</li>
+<li>因此如果对于定义数组，不打括号的话，数组里面的元素应该是数组名字左边的所有声明符加起来。</li>
+<li>书上说，对于数组的理解应该按照由内到外理解。但是按照之前对指针类型的分析，这里可以这样分析。首先看这个数组里面的元素类型是什么：int *ref[10];</li>
+<li>可以这样看（int *）ref[10]；也就是说这个数组里面的元素都是指针。而</li>
+<li>int (*Parray)[10]=&amp;arr；这种类型，首先数组里面的元素是int型的，再看parray它就是一个指针了。指向这个数组。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><ol>
+<li><p>assign()//用于赋予新值，assign函数用于将一个字符串的部分内容赋值给另一个string对象</p>
+<ul>
+<li>s2.assign(s1,0,3);//s1 = “hello”，s2的值为“hel”</li>
+</ul>
+</li>
+<li><p>swap() //交换两个字符串的内容</p>
+<ul>
+<li>swap(s1,s2);//s1=”hello”,s2=”world”，swap函数将s1和s2的内容交换，现在s1=”world”,s2=”hello”</li>
+</ul>
+</li>
+<li><p>+=、append()、push_back()//在字符串尾部追加内容,”+=”可追加string对象，字符以及C风格字符串，append函数则可以追加string对象和C风格字符串，push_back函数则只能追加字符</p>
+<ul>
+<li>string s1 = “hello”;</li>
+<li>string s2 = “ world”;</li>
+<li>s1 += s2;//正确，s1的值为”hello world“</li>
+<li>s1 +=”world”;// 正确，s1的值为”hello world”</li>
+<li>s1 +=’c’; //正确，s1的值为”helloc”</li>
+<li>s1.append(s2);//正确，s1的值为”hello world”</li>
+<li>s1.append(“ world”);//正确，s1的值为”hello world”</li>
+<li>s1.append(‘c’);//错误，append函数不支持追加字符</li>
+<li>s1.push_back(s2);//错误</li>
+<li>s1.push_back(“world”);//错误</li>
+<li>s1.push_back(‘c’);//正确</li>
+</ul>
+</li>
+<li><p>insert()//用于插入字符串</p>
+<ul>
+<li>string s1 = “hello”;</li>
+<li>s1.insert(0,”world “);//s1的值为world hello</li>
+</ul>
+</li>
+<li><p>erase()//用于删除字符的</p>
+<ul>
+<li>string str(“This is an example phrase.”);</li>
+<li>string::iterator it;//迭代器</li>
+<li>str.erase(10,8);//str的值为”This is an phrase.”,删除了从位置10开始的8个字符</li>
+<li>it = str.begin()+9;//迭代器位置为9</li>
+<li>str.erase(it);//删除了从it迭代器位置处的一个字符，str=”This is a phrase.”</li>
+<li>str.erase(str.begin()+5,str.end()-7);//删除两个参数之间的所有字符，str=”This phrase.”</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li><p>clear()函数和~string()//都是用来删除全部字符的</p>
+<ul>
+<li>str.clear();//删除str的全部字符，此时str为一个空串</li>
+<li>str.~string();//销毁所有字符，释放内存</li>
+</ul>
+</li>
+<li><p>replace()函数，用于替换字符</p>
+<ul>
+<li>string line = “this@ is@ a test string!”;</li>
+<li>line = line.replace(line.find(“@”),1,””);//将line中从find的@位置开始替换一个长度的字符为”” 结果为this is@ a test string!</li>
+</ul>
+</li>
+<li><p>==、！=、&lt;、&lt;=、&gt;、&gt;=、compare()//比较字符串</p>
+</li>
+<li><p>size()函数和length()函数，返回字符串的字符数，从第一个字符到’\0’的长度，\0表示空字符，作为字符串结束符使用，\代表转义字符</p>
+</li>
+<li><p>empty()//判断字符串是否为空</p>
+</li>
+</ol>
+<h1 id="vector-操作"><a href="#vector-操作" class="headerlink" title="vector 操作"></a>vector 操作</h1><ol>
+<li>insert(p, t) //在迭代器p之前插入t元素</li>
+<li>erase(p) //删除p所指元素</li>
+<li>push_back(t) //向尾部添加t元素</li>
+<li>pop_back() //删除末尾元素</li>
+<li>clear() //清空vector</li>
+<li>size() //返回的是vector的大小</li>
+<li>begin()、end() //返回指向开头与末尾后一位的迭代器</li>
+<li>指向常量的开始指针： vec.cbegin(); vec.cend(); //意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</li>
+<li>swap() //交换vector</li>
+<li>元素的访问：vec.front();vec.back();访问首尾元素</li>
+<li>有关算法（需要头文件#include<algorithm>）<ul>
+<li>reverse(vec.begin(),vec.end()); //将元素翻转，即逆序排列！参数为2个迭代器</li>
+<li>sort(vec.begin(),vec.end()); //(默认是按升序排列,即从小到大).</li>
+</ul>
+</algorithm></li>
 </ol>
 
       
@@ -476,7 +602,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -489,7 +615,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -524,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串、向量和数组"><span class="nav-number">2.</span> <span class="nav-text">字符串、向量和数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量和数组"><span class="nav-number">3.</span> <span class="nav-text">向量和数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">4.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-操作"><span class="nav-number">5.</span> <span class="nav-text">vector 操作</span></a></li></ol></div>
             
 
           </div>

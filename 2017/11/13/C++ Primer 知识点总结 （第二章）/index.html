@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Microke">
 <meta property="og:description" content="1. 算数类型   类型 位 范围     char 1 个字节 -128 到 127 或者 0 到 255   col 2 is centered $12   unsigned char 1 个字节 0 到 255   signed char 1 个字节 -128 到 127   int 4 个字节 -2147483648 到 2147483647   unsigned int 4 个字节 0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-13T06:23:41.189Z">
+<meta property="og:updated_time" content="2018-05-09T11:23:17.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ Primer 知识点总结（第二章）">
 <meta name="twitter:description" content="1. 算数类型   类型 位 范围     char 1 个字节 -128 到 127 或者 0 到 255   col 2 is centered $12   unsigned char 1 个字节 0 到 255   signed char 1 个字节 -128 到 127   int 4 个字节 -2147483648 到 2147483647   unsigned int 4 个字节 0">
@@ -484,9 +484,45 @@
 </tr>
 </tbody>
 </table>
-<p>前后缀可以交叉结合使用：后缀UL时，表示无符号长整型。<br>字符用单引号‘’，字符串用双引号“”。<br>十进制：20   八进制：020    十六进制：0x20或者0X20</p>
-<h1 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h1><p>当我们把一个非布尔类型的算术值赋给布尔类型时，初始值为0则结果为false，否则结果为true。<br>当我们把一个布尔值赋给非布尔类型时，初始值为false则结果为0，初始值为true则结果为1。<br>当我们把一个浮点数赋给整数类型时，进行了近似处理。结果值将仅保留浮点数中小数点之前的部分。<br>当我们把一个整数值赋给浮点类型时，小数部分记为0。如果该整数所占的空间超过了浮点类型的容量，精度可能有损失。<br>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表示数值总数取模后的余数。例如，8比特大小的unsigned char可以表示0至255区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256取模后所得的余数。因此，把-1赋给8比特大小的unsigned char所得的结果是255。<br>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的（undefined）。此时，程序可能继续工作、可能崩溃，也可能生成垃圾数据。</p>
-<h1 id="4-变量"><a href="#4-变量" class="headerlink" title="4.变量"></a>4.变量</h1><p>4.1 命名规则：字母+数字+下划线（必须以字母或者下划线开头）<br>4.2 局部变量会覆盖同名的全局变量<br>4.3 声明：规定变量的类型和名字（在变量名前添加extern可声明变量，如果显式初始化即为定义）<br>4.5 定义：负责创建与名字关联的实体，并申请存储空间和赋初始值<br>4.4 引用：它只是为存在的对象所起的另外一个名字。它不是一个对象，没有实际的地址，定义是必须初始化<br>4.5 指针：本身就是一个对象，允许指针之间的拷贝和赋值<br>4.6 const表示的不可改变的量，该变量必须初始化（可以在运行时初始化）<br>4.7 顶层／底层const：顶层const表示本身是常量（常量指针，声明时const必须放在指针符号<em>后面，即：</em>const ），底层const表示所指的对象是常量（指向常量的指针，如：int const  <em>p_a = &amp;num_a）；执行拷贝操作时，拷入拷出对象必须具有相同的底层const资格，或能够强制转换<br>4.8 常量表达式：数据类型和初始值都需要是常量类型，值不会改变并在编译过程就能得到计算结果<br>4.9 constexpr变量：一定是常量，必须用常量表达式（字面值类型，包括算术类型、引用、指针）或constexpr函数（足够简单编译时可计算结果）初始化<br>4.10 类型说明符auto会忽略顶层const，保留底层const<br>4.11 指针、常量与类型别名：typedef char </em>pstring; const pstring cstr = 0;，与const char *cstr不等价，前者的cstr是指向char的常量指针，后者中cstr是指向常量char的指针</p>
+<p>前后缀可以交叉结合使用：后缀UL时，表示无符号长整型。</p>
+<p>字符用单引号‘’，字符串用双引号“”。</p>
+<p>十进制：20   八进制：020    十六进制：0x20或者0X20</p>
+<h1 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h1><ul>
+<li>当我们把一个非布尔类型的算术值赋给布尔类型时，初始值为0则结果为false，否则结果为true。</li>
+<li>当我们把一个布尔值赋给非布尔类型时，初始值为false则结果为0，初始值为true则结果为1。</li>
+<li>当我们把一个浮点数赋给整数类型时，进行了近似处理。结果值将仅保留浮点数中小数点之前的部分。</li>
+<li>当我们把一个整数值赋给浮点类型时，小数部分记为0。如果该整数所占的空间超过了浮点类型的容量，精度可能有损失。</li>
+<li>当我们赋给无符号类型一个超出它表示范围的值时，结果是初始值对无符号类型表示数值总数取模后的余数。例如，8比特大小的unsigned char可以表示0至255区间内的值，如果我们赋了一个区间以外的值，则实际的结果是该值对256取模后所得的余数。因此，把-1赋给8比特大小的unsigned char所得的结果是255。</li>
+<li>当我们赋给带符号类型一个超出它表示范围的值时，结果是未定义的（undefined）。此时，程序可能继续工作、可能崩溃，也可能生成垃圾数据。</li>
+</ul>
+<h1 id="4-变量"><a href="#4-变量" class="headerlink" title="4.变量"></a>4.变量</h1><ol>
+<li>命名规则：字母+数字+下划线（必须以字母或者下划线开头）</li>
+<li>局部变量会覆盖同名的全局变量</li>
+<li>声明：规定变量的类型和名字（在变量名前添加extern可声明变量，如果显式初始化即为定义）</li>
+<li>定义：负责创建与名字关联的实体，并申请存储空间和赋初始值</li>
+<li>引用：它只是为存在的对象所起的另外一个名字。它不是一个对象，没有实际的地址，定义是必须初始化</li>
+<li>指针：本身就是一个对象，允许指针之间的拷贝和赋值</li>
+<li>const表示的不可改变的量，该变量必须初始化（可以在运行时初始化）</li>
+<li>顶层／底层const：顶层const表示本身是常量（常量指针，声明时const必须放在指针符号<em>后面，即：</em>const ），底层const表示所指的对象是常量（指向常量的指针，如：int const  *p_a = &amp;num_a）；执行拷贝操作时，拷入拷出对象必须具有相同的底层const资格，或能够强制转换</li>
+<li>常量表达式：数据类型和初始值都需要是常量类型，值不会改变并在编译过程就能得到计算结果</li>
+<li>constexpr变量：一定是常量，必须用常量表达式（字面值类型，包括算术类型、引用、指针）或constexpr函数（足够简单编译时可计算结果）初始化</li>
+<li>类型说明符auto会忽略顶层const，保留底层const</li>
+<li>指针、常量与类型别名：typedef char <em>pstring; const pstring cstr = 0;，与const char </em>cstr不等价，前者的cstr是指向char的常量指针，后者中cstr是指向常量char的指针</li>
+</ol>
+<h1 id="5-const-常量"><a href="#5-const-常量" class="headerlink" title="5.const 常量"></a>5.const 常量</h1><ol>
+<li>const 常量必须在定义时初始化</li>
+<li>常量指针和指向常量的指针<ul>
+<li>const int *p,表示指向常量的指针，不能通过p来修改p指向的值，而p本身所指向的地址是可以修改的。</li>
+<li>int *const p，常量指针，表示p本身是一个const，所以p所指的地址不会变，但是地址里的值是可以修改的。</li>
+</ul>
+</li>
+<li>顶层const与底层const<ul>
+<li>顶层const是指const修饰变量本身，即变量/对象本身是不可变的。</li>
+<li>底层const则表示这个变量所指向/引用的值不可变，即不能通过这个变量修改其值，只有对常量的引用和指向常量的指针是底层const</li>
+<li><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> m = <span class="number">0</span>;      <span class="comment">//m本身是const类型的值</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span>* m2 = &amp;m;     <span class="comment">//所以&amp;m是一个const int*类型的，即常量取地址得到的是一个底层const</span></div><div class="line"><span class="keyword">int</span>* <span class="keyword">const</span> m3 = &amp;m; <span class="comment">//所以第二行没有错，第三行会报错：</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> i = <span class="number">0</span>;   <span class="comment">//i是底层const</span></div><div class="line"><span class="keyword">int</span> &amp;i2 = i;     <span class="comment">//报错，因为i2不是底层const</span></div></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -611,7 +647,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -624,7 +660,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -659,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-算数类型"><span class="nav-number">1.</span> <span class="nav-text">1. 算数类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-字符串的前后缀："><span class="nav-number">2.</span> <span class="nav-text">2.字符串的前后缀：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-类型转换"><span class="nav-number">3.</span> <span class="nav-text">3.类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-变量"><span class="nav-number">4.</span> <span class="nav-text">4.变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-算数类型"><span class="nav-number">1.</span> <span class="nav-text">1. 算数类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-字符串的前后缀："><span class="nav-number">2.</span> <span class="nav-text">2.字符串的前后缀：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-类型转换"><span class="nav-number">3.</span> <span class="nav-text">3.类型转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-变量"><span class="nav-number">4.</span> <span class="nav-text">4.变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-const-常量"><span class="nav-number">5.</span> <span class="nav-text">5.const 常量</span></a></li></ol></div>
             
 
           </div>
