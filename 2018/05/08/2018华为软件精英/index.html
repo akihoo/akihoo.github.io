@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,7 +84,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '6.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这">
+  <meta name="description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
 <meta name="keywords" content="companies">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018华为软件精英挑战赛">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/2018华为软件精英/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这">
+<meta property="og:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-05-08T09:45:04.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018华为软件精英挑战赛">
-<meta name="twitter:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。 代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看到这">
+<meta name="twitter:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
 
 
 
@@ -239,9 +239,6 @@
   
 
   
-    
-
-  
 
   
 </nav>
@@ -261,6 +258,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -286,7 +286,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -337,6 +337,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/08/2018华为软件精英/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/2018华为软件精英/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -363,6 +373,8 @@
       
         <blockquote>
 <p>今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。</p>
+</blockquote>
+<blockquote>
 <p>代码开源于 <a href="https://github.com/akihoo/HW_codecraft_2018" target="_blank" rel="external">github</a>，如果觉得本文对你有帮助的话，请到 <a href="https://github.com/akihoo/HW_codecraft_2018" target="_blank" rel="external">github</a><strong>点个赞</strong>再走哦！</p>
 </blockquote>
 <h1 id="赛题简介"><a href="#赛题简介" class="headerlink" title="赛题简介"></a>赛题简介</h1><p>此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见<a href="http://codecraft.devcloud.huaweicloud.com/home/detail" target="_blank" rel="external">官网</a>。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。<br><a id="more"></a></p>
@@ -454,6 +466,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -490,6 +505,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Microke" />
+            
               <p class="site-author-name" itemprop="name">Microke</p>
               <p class="site-description motion-element" itemprop="description">-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;</p>
           </div>
@@ -501,7 +520,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -540,7 +559,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -550,6 +569,20 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -618,7 +651,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
 
 
 
@@ -672,6 +705,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -695,6 +731,16 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
 
   
 
@@ -707,6 +753,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
@@ -746,6 +799,30 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
@@ -761,6 +838,37 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   

@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,7 +84,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '6.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -241,9 +241,6 @@
   
 
   
-    
-
-  
 
   
 </nav>
@@ -263,6 +260,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -288,7 +288,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -351,6 +351,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -401,7 +411,7 @@
 </ul>
 <ul>
 <li>: 安裝<ul>
-<li>: 移除<br>_ : 移除 package, 並且將設定檔也移掉(用 - 的話會移除 package 但保留設定檔)<br>= : 保留 -&gt; 如是 testing or unstable，有可能新的 package 有 bug 或是某個功能拿掉 所以我們不想昇級，只要設成 hold 之後，Debian 就不會去更新此 package 了。<br>f : 清除 New Packages 的狀態。<br>[ : 將某一樹狀結構全部展開。<br>] : 將展開的樹狀結構關掉。<br>/ : 搜尋某 package<br>d : 顯示 package 有那些 dependencies(也就是安裝這個 package 之前要先裝那些 packages)<br>r : 有那些 packages 是 depends on 這個 package<br>q : 結束 aptitude enter : 顯示 package 的資訊<br>範例: 3dchess - 3D chess for X11 3 dimensional Chess for X11R6. Three boards, 96 pieces and 26 directions. Priority: optional Section: games Maintainer: Stephen Stafford <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#98;&#97;&#103;&#x70;&#x75;&#x73;&#115;&#64;&#x64;&#x65;&#x62;&#x69;&#x61;&#110;&#46;&#x6f;&#114;&#x67;">&#98;&#97;&#103;&#x70;&#x75;&#x73;&#115;&#64;&#x64;&#x65;&#x62;&#x69;&#x61;&#110;&#46;&#x6f;&#114;&#x67;</a> Compressed size: 31.4k Uncompressed size: 152k Source Package: 3dchess –\ Depends — libc6 (&gt;= 2.3.1-1) — xaw3dg (&gt;= 1.5-6) — xlibs (&gt; 4.1.0) — Packages which depend on 3dchess –\ Versions i 0.8.1-10</li>
+<li>: 移除<br>_ : 移除 package, 並且將設定檔也移掉(用 - 的話會移除 package 但保留設定檔)<br>= : 保留 -&gt; 如是 testing or unstable，有可能新的 package 有 bug 或是某個功能拿掉 所以我們不想昇級，只要設成 hold 之後，Debian 就不會去更新此 package 了。<br>f : 清除 New Packages 的狀態。<br>[ : 將某一樹狀結構全部展開。<br>] : 將展開的樹狀結構關掉。<br>/ : 搜尋某 package<br>d : 顯示 package 有那些 dependencies(也就是安裝這個 package 之前要先裝那些 packages)<br>r : 有那些 packages 是 depends on 這個 package<br>q : 結束 aptitude enter : 顯示 package 的資訊<br>範例: 3dchess - 3D chess for X11 3 dimensional Chess for X11R6. Three boards, 96 pieces and 26 directions. Priority: optional Section: games Maintainer: Stephen Stafford <a href="mailto:&#x62;&#97;&#x67;&#112;&#117;&#115;&#115;&#x40;&#x64;&#x65;&#98;&#x69;&#x61;&#110;&#46;&#111;&#x72;&#x67;" target="_blank" rel="external">&#x62;&#97;&#x67;&#112;&#117;&#115;&#115;&#x40;&#x64;&#x65;&#98;&#x69;&#x61;&#110;&#46;&#111;&#x72;&#x67;</a> Compressed size: 31.4k Uncompressed size: 152k Source Package: 3dchess –\ Depends — libc6 (&gt;= 2.3.1-1) — xaw3dg (&gt;= 1.5-6) — xlibs (&gt; 4.1.0) — Packages which depend on 3dchess –\ Versions i 0.8.1-10</li>
 </ul>
 </li>
 </ul>
@@ -490,6 +500,9 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+  
 
 
 
@@ -526,6 +539,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Microke" />
+            
               <p class="site-author-name" itemprop="name">Microke</p>
               <p class="site-description motion-element" itemprop="description">-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;</p>
           </div>
@@ -537,7 +554,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -576,7 +593,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -586,6 +603,20 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -654,7 +685,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
 
 
 
@@ -708,6 +739,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -731,6 +765,16 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
 
   
 
@@ -743,6 +787,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
@@ -782,6 +833,30 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
@@ -797,6 +872,37 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   

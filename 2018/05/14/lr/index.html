@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -84,7 +84,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '6.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="$y=x^2$">
+  <meta name="description" content="$y=x^2$ \begin{aligned}f_Y(y) &amp;amp; = f_X[h(y)]|h’(y)| \[2ex]&amp;amp; = f_X[h(y)]h’(y) \[2ex]&amp;amp; = \frac{1}{\theta}e^{-\frac{x}{\theta}}[\frac{dx}{dy}(-\frac{\theta}{ln(1-y)})] \[2ex]&amp;amp; = \frac{1}{\">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="test formulate">
 <meta property="og:url" content="http://yoursite.com/2018/05/14/lr/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="$y=x^2$">
+<meta property="og:description" content="$y=x^2$ \begin{aligned}f_Y(y) &amp;amp; = f_X[h(y)]|h’(y)| \[2ex]&amp;amp; = f_X[h(y)]h’(y) \[2ex]&amp;amp; = \frac{1}{\theta}e^{-\frac{x}{\theta}}[\frac{dx}{dy}(-\frac{\theta}{ln(1-y)})] \[2ex]&amp;amp; = \frac{1}{\">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-14T12:25:24.438Z">
+<meta property="og:updated_time" content="2018-05-15T09:45:07.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="test formulate">
-<meta name="twitter:description" content="$y=x^2$">
+<meta name="twitter:description" content="$y=x^2$ \begin{aligned}f_Y(y) &amp;amp; = f_X[h(y)]|h’(y)| \[2ex]&amp;amp; = f_X[h(y)]h’(y) \[2ex]&amp;amp; = \frac{1}{\theta}e^{-\frac{x}{\theta}}[\frac{dx}{dy}(-\frac{\theta}{ln(1-y)})] \[2ex]&amp;amp; = \frac{1}{\">
 
 
 
@@ -239,9 +239,6 @@
   
 
   
-    
-
-  
 
   
 </nav>
@@ -261,6 +258,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -286,7 +286,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
       <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -323,12 +323,24 @@
                 
               
 
-              <time title="Post created: 2018-05-14 20:25:31 / Updated at: 20:25:24" itemprop="dateCreated datePublished" datetime="2018-05-14T20:25:31+08:00">2018-05-14</time>
+              <time title="Post created: 2018-05-14 20:25:31" itemprop="dateCreated datePublished" datetime="2018-05-14T20:25:31+08:00">2018-05-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-05-15 17:45:07" itemprop="dateModified" datetime="2018-05-15T17:45:07+08:00">2018-05-15</time>
               
             
           </span>
@@ -336,6 +348,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/14/lr/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/14/lr/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -362,6 +384,7 @@
 
       
         <p>$y=x^2$</p>
+<p>\begin{aligned}<br>f_Y(y) &amp; = f_X[h(y)]|h’(y)| \[2ex]<br>&amp; = f_X[h(y)]h’(y) \[2ex]<br>&amp; = \frac{1}{\theta}e^{-\frac{x}{\theta}}[\frac{dx}{dy}(-\frac{\theta}{ln(1-y)})] \[2ex]<br>&amp; = \frac{1}{\theta}e^{-\frac{-\frac{\theta}{ln(1-y)}}{\theta}}\frac{\theta}{1-y} \[2ex]<br>&amp; = \frac{1}{\theta}e^{ln(1-y)}\frac{\theta}{1-y} \[2ex]<br>&amp; = \frac{1-y}{\theta}\frac{\theta}{1-y} \[2ex]<br>&amp; = 1<br>\end{aligned}</p>
 
       
     </div>
@@ -405,6 +428,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/05/15/latex/" rel="prev" title="latex 公式语法速查">
+                latex 公式语法速查 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -429,6 +456,9 @@
           </div>
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -457,6 +487,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Microke" />
+            
               <p class="site-author-name" itemprop="name">Microke</p>
               <p class="site-description motion-element" itemprop="description">-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;</p>
           </div>
@@ -468,7 +502,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -507,7 +541,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">Tags</span>
                   
                 </div>
@@ -517,6 +551,20 @@
 
           
 
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -569,7 +617,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.2.0</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
 
 
 
@@ -623,6 +671,9 @@
 
 
 
+  
+  
+
 
 
 
@@ -646,6 +697,16 @@
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
 
   
 
@@ -658,6 +719,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
@@ -697,6 +765,30 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
@@ -712,6 +804,37 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   
