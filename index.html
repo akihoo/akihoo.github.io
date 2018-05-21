@@ -280,6 +280,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/const/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Microke">
+      <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microke">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/const/" itemprop="url">
+                  Const 与指针、引用关系
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-05-21 09:33:52 / Updated at: 17:10:19" itemprop="dateCreated datePublished" datetime="2018-05-21T09:33:52+08:00">2018-05-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/const/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/21/const/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>牛客网刷题时看到一个有关指针和 const 的题，发现自己对这方面还是没有太理解，继续总结一遍</p>
+</blockquote>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>以下有哪些错误：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">   <span class="keyword">int</span> i=<span class="number">10</span>;</div><div class="line">   <span class="keyword">int</span> j=<span class="number">1</span>;</div><div class="line">   <span class="keyword">const</span> <span class="keyword">int</span> *p1;<span class="comment">//(1)</span></div><div class="line">   <span class="keyword">int</span> <span class="keyword">const</span> *p2=&amp;i; <span class="comment">//(2)</span></div><div class="line">   p2=&amp;j;<span class="comment">//(3)</span></div><div class="line">   <span class="keyword">int</span> *<span class="keyword">const</span> p3=&amp;i;<span class="comment">//(4)</span></div><div class="line">   *p3=<span class="number">20</span>;<span class="comment">//(5)</span></div><div class="line">   *p2=<span class="number">30</span>;<span class="comment">//(6)</span></div><div class="line">   p3=&amp;j;<span class="comment">//(7)</span></div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>回答<strong>__</strong>（1~7）</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/21/const/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/latex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -326,12 +484,24 @@
                 
               
 
-              <time title="Post created: 2018-05-15 19:21:24 / Updated at: 19:32:07" itemprop="dateCreated datePublished" datetime="2018-05-15T19:21:24+08:00">2018-05-15</time>
+              <time title="Post created: 2018-05-15 19:21:24" itemprop="dateCreated datePublished" datetime="2018-05-15T19:21:24+08:00">2018-05-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2018-05-18 12:31:13" itemprop="dateModified" datetime="2018-05-18T12:31:13+08:00">2018-05-18</time>
               
             
           </span>
@@ -1857,173 +2027,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Microke">
-      <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Microke">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/" itemprop="url">
-                  Python 安装theano tensorflow keras 教程与pip安装失败解决方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2017-10-13 13:07:22" itemprop="dateCreated datePublished" datetime="2017-10-13T13:07:22+08:00">2017-10-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2017-11-02 13:20:08" itemprop="dateModified" datetime="2017-11-02T13:20:08+08:00">2017-11-02</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这几天一直在折腾Python环境的事，好歹折腾出来，做个总结以备用。（注：由于本机没有独立显卡，因此tensorflow 只安装了CPU版）</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="官方中文文档"><a href="#官方中文文档" class="headerlink" title="官方中文文档"></a>官方中文文档</h2><p><a href="https://keras-cn.readthedocs.io/en/latest/for_beginners/keras_windows/" target="_blank" rel="external">Keras安装和配置指南(Windows)</a><br><a href="http://www.tensorfly.cn/tfdoc/get_started/os_setup.html" target="_blank" rel="external">TensorFlow中文社区</a><br><a href="http://www.deeplearning.net/software/theano/install.html" target="_blank" rel="external">Installing Theano</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/13/Python 安装theano tensorflow keras 教程与pip安装失败解决方法/#more" rel="contents">
-              Weiterlesen &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2075,7 +2078,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

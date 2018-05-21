@@ -108,23 +108,25 @@
 
 
 
-  <meta name="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Microke">
-<meta property="og:url" content="http://yoursite.com/tags/ubuntu/index.html">
+  <meta name="description" content="牛客网刷题时看到一个有关指针和 const 的题，发现自己对这方面还是没有太理解，继续总结一遍  例题以下有哪些错误：12345678910111213int main()&amp;#123;   int i=10;   int j=1;   const int *p1;//(1)   int const *p2=&amp;amp;i; //(2)   p2=&amp;amp;j;//(3)   int *const">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Const 与指针、引用关系">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/const/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+<meta property="og:description" content="牛客网刷题时看到一个有关指针和 const 的题，发现自己对这方面还是没有太理解，继续总结一遍  例题以下有哪些错误：12345678910111213int main()&amp;#123;   int i=10;   int j=1;   const int *p1;//(1)   int const *p2=&amp;amp;i; //(2)   p2=&amp;amp;j;//(3)   int *const">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-21T09:10:19.156Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Microke">
-<meta name="twitter:description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+<meta name="twitter:title" content="Const 与指针、引用关系">
+<meta name="twitter:description" content="牛客网刷题时看到一个有关指针和 const 的题，发现自己对这方面还是没有太理解，继续总结一遍  例题以下有哪些错误：12345678910111213int main()&amp;#123;   int i=10;   int j=1;   const int *p1;//(1)   int const *p2=&amp;amp;i; //(2)   p2=&amp;amp;j;//(3)   int *const">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/ubuntu/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/const/"/>
 
 
 
@@ -134,7 +136,7 @@
   };
 </script>
 
-  <title>Tag: ubuntu | Microke</title>
+  <title>Const 与指针、引用关系 | Microke</title>
   
 
 
@@ -181,7 +183,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -259,75 +261,210 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>ubuntu<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/const/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Microke">
+      <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microke">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="url">
-              
-                <span itemprop="name">ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Const 与指针、引用关系
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-11-01T21:18:55+08:00"
-              content="2017-11-01" >
-          11-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2018-05-21 09:33:52 / Updated at: 17:10:19" itemprop="dateCreated datePublished" datetime="2018-05-21T09:33:52+08:00">2018-05-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/21/const/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/21/const/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>牛客网刷题时看到一个有关指针和 const 的题，发现自己对这方面还是没有太理解，继续总结一遍</p>
+</blockquote>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p>以下有哪些错误：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">   <span class="keyword">int</span> i=<span class="number">10</span>;</div><div class="line">   <span class="keyword">int</span> j=<span class="number">1</span>;</div><div class="line">   <span class="keyword">const</span> <span class="keyword">int</span> *p1;<span class="comment">//(1)</span></div><div class="line">   <span class="keyword">int</span> <span class="keyword">const</span> *p2=&amp;i; <span class="comment">//(2)</span></div><div class="line">   p2=&amp;j;<span class="comment">//(3)</span></div><div class="line">   <span class="keyword">int</span> *<span class="keyword">const</span> p3=&amp;i;<span class="comment">//(4)</span></div><div class="line">   *p3=<span class="number">20</span>;<span class="comment">//(5)</span></div><div class="line">   *p2=<span class="number">30</span>;<span class="comment">//(6)</span></div><div class="line">   p3=&amp;j;<span class="comment">//(7)</span></div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>回答<strong>__</strong>（1~7）</p>
+<a id="more"></a>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>解答问题的关键在于const到底修饰的是指针还是指针指向的变量，具体修饰方法，可参考从又到左的修饰方式，以下分别对语句进行分析：</p>
+<ol>
+<li>const int <em>p1;//(1)：const 修饰 int，可看成(const int) </em>p1，p1指向const int，即不能修改p1指向的值（const），但可以修改p1指向的地址。</li>
+<li>int const <em>p2=&i; //(2)：int (const </em>p2)=&amp;i，const修饰 *p2，p2指向一个常量，即不能修改p2指向的值（const），但可以修改p2指向的地址。</li>
+<li>p2=&j;//(3)：由2知3对</li>
+<li>int <em>const p3=&i;//(4)：int </em>(const p3)，const修饰p3，不可修改p3指向的地址。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>const在<em>前后表示不同的意义，const int </em> 表示常变量，int *const 表示常指针。</li>
+<li>const int <em> ==  int const </em>，如同 const int == int const 一样。</li>
+<li>仅有常量指针，没有常量引用，因为引用就是另一个变量的别名，它本身就是一个常量。也就是说不能再让一个引用成为另外一个变量的别名。</li>
+<li>由此可见，如果我们不希望函数的调用者改变参数的值。最可靠的方法应该是使用引用。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; ri = i;<span class="comment">// 正确：表示不能通过该引用去修改对应的内存的内容。</span></div><div class="line"></div><div class="line"><span class="keyword">int</span>&amp; <span class="keyword">const</span> rci = i;<span class="comment">// 错误！不能这样写。</span></div></pre></td></tr></table></figure>
+<p>更多const关键字的解释，可以参考<a href="http://www.cnblogs.com/yc_sunniwell/archive/2010/07/14/1777416.html" target="_blank" rel="external">C/C++中const关键字详解</a></p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/15/latex/" rel="next" title="latex 公式语法速查">
+                <i class="fa fa-chevron-left"></i> latex 公式语法速查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -348,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -447,6 +593,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -594,6 +756,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
