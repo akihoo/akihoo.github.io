@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="leetcode 刷题总结 开始刷 leetcode 和剑指 offer 大概一周多了吧，从最开始最简单的代码也要敲 30 mins，各种 bug 不断，到现在简单的可以10 mins 敲完（当然也有些没有思路的），还是有些进步的，另外发现还是需要把一些题解记录下来，总结一下，因为目前按 tags 和难度分开刷的，题目编号可能不连续，打算长期更新，加油吧！  1.(easy) Two Sum 题目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microke">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/leetcode/index.html">
+<meta property="og:site_name" content="Microke">
+<meta property="og:description" content="leetcode 刷题总结 开始刷 leetcode 和剑指 offer 大概一周多了吧，从最开始最简单的代码也要敲 30 mins，各种 bug 不断，到现在简单的可以10 mins 敲完（当然也有些没有思路的），还是有些进步的，另外发现还是需要把一些题解记录下来，总结一下，因为目前按 tags 和难度分开刷的，题目编号可能不连续，打算长期更新，加油吧！  1.(easy) Two Sum 题目">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-23T02:37:39.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Microke">
+<meta name="twitter:description" content="leetcode 刷题总结 开始刷 leetcode 和剑指 offer 大概一周多了吧，从最开始最简单的代码也要敲 30 mins，各种 bug 不断，到现在简单的可以10 mins 敲完（当然也有些没有思路的），还是有些进步的，另外发现还是需要把一些题解记录下来，总结一下，因为目前按 tags 和难度分开刷的，题目编号可能不连续，打算长期更新，加油吧！  1.(easy) Two Sum 题目">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/23/leetcode/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Microke</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Microke</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/leetcode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Microke">
+      <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Microke">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-23 10:38:28 / Modified: 10:37:39" itemprop="dateCreated datePublished" datetime="2018-05-23T10:38:28+08:00">2018-05-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/23/leetcode/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/23/leetcode/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="leetcode-刷题总结"><a href="#leetcode-刷题总结" class="headerlink" title="leetcode 刷题总结"></a>leetcode 刷题总结</h1><blockquote>
+<p>开始刷 leetcode 和剑指 offer 大概一周多了吧，从最开始最简单的代码也要敲 30 mins，各种 bug 不断，到现在简单的可以10 mins 敲完（当然也有些没有思路的），还是有些进步的，另外发现还是需要把一些题解记录下来，总结一下，因为目前按 tags 和难度分开刷的，题目编号可能不连续，打算长期更新，加油吧！</p>
+</blockquote>
+<h2 id="1-easy-Two-Sum"><a href="#1-easy-Two-Sum" class="headerlink" title="1.(easy) Two Sum"></a><a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="external">1.(easy) Two Sum</a></h2><ul>
+<li>题目描述：Given an array of integers, return indices of the two numbers such that they add up to a specific target.</li>
+<li>解题思路：虽说是第一题简单难度，但是我就是不会做5555，评论区有<a href="Given an array of integers, return indices of the two numbers such that they add up to a specific target.">哈希表解法</a>，即将 target 与当前元素做差，在哈希表中查找有无此元素。</li>
+</ul>
+<h2 id="3-medium-Longest-Substring-Without-Repeating-Characters"><a href="#3-medium-Longest-Substring-Without-Repeating-Characters" class="headerlink" title="3.(medium) Longest Substring Without Repeating Characters"></a><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="external">3.(medium) Longest Substring Without Repeating Characters</a></h2><ul>
+<li>Given a string, find the length of the longest substring without repeating characters.</li>
+<li>我想到的只有暴力搜索了，讨论区有动态规划的解法，又写了一遍，用的python的dict方法，在dict中查找仅要$O(1)$复杂度，相当于hash表。思路是建立2个指针，第一个指针遍历后将所读取的字符放入dict，如果出现重复字符，则移动第二个指针并把读取的字符从dict中删除，相当于dict中仅有不重复的字串。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dict(<span class="number">256</span>, <span class="number">-1</span>);</div><div class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>, start = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i != s.length(); i++) &#123;</div><div class="line">            <span class="keyword">if</span> (dict[s[i]] &gt; start)</div><div class="line">                start = dict[s[i]];</div><div class="line">            dict[s[i]] = i;</div><div class="line">            maxLen = max(maxLen, i - start);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> maxLen;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        :type s: str</span></div><div class="line"><span class="string">        :rtype: int</span></div><div class="line"><span class="string">        """</span></div><div class="line">        a=&#123;&#125;</div><div class="line">        <span class="keyword">if</span> len(s)==<span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        maxlen=<span class="number">1</span></div><div class="line">        i=<span class="number">0</span></div><div class="line">        j=<span class="number">0</span></div><div class="line">        <span class="keyword">while</span>(j!=len(s)):</div><div class="line">            <span class="keyword">if</span> s[j] <span class="keyword">not</span> <span class="keyword">in</span> a:</div><div class="line">                a[s[j]]=<span class="number">1</span></div><div class="line">                j+=<span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                maxlen=max(len(a),maxlen)</div><div class="line">                <span class="keyword">while</span>(s[i]!=s[j]):</div><div class="line">                    a.pop(s[i])</div><div class="line">                    i+=<span class="number">1</span></div><div class="line">                i+=<span class="number">1</span></div><div class="line">                j+=<span class="number">1</span></div><div class="line">        maxlen=max(len(a),maxlen)</div><div class="line">        <span class="keyword">return</span> maxlen</div></pre></td></tr></table></figure>
+<h2 id="6-ZigZag-Conversion"><a href="#6-ZigZag-Conversion" class="headerlink" title="6. ZigZag Conversion"></a><a href="https://leetcode.com/problems/zigzag-conversion/description/" target="_blank" rel="external">6. ZigZag Conversion</a></h2><ul>
+<li>The string “PAYPALISHIRING” is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</li>
+<li>思路：简单暴力，用 vector<string>分别保存 zigzag 每一行的字符串，然后拼接起来</string></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">convert</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> numRows)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; str(numRows);</div><div class="line">        <span class="keyword">if</span>(s.size()&lt;=numRows||numRows==<span class="number">1</span>) <span class="keyword">return</span> s;</div><div class="line">        <span class="keyword">int</span> x=<span class="number">1</span>,j=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.size();i++)</div><div class="line">        &#123;</div><div class="line">            str[j].push_back(s[i]);</div><div class="line">            <span class="keyword">if</span>(j==<span class="number">0</span>)</div><div class="line">                x=<span class="number">1</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(j==numRows<span class="number">-1</span>)</div><div class="line">                x=<span class="number">-1</span>;</div><div class="line">            j+=x;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">string</span> cov=str[<span class="number">0</span>];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i=str.begin()+<span class="number">1</span>;i!=str.end();i++)</div><div class="line">            cov.append(*i);</div><div class="line">        <span class="keyword">return</span> cov;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19. Remove Nth Node From End of List"></a><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/discuss/8812/My-short-C++-solution" target="_blank" rel="external">19. Remove Nth Node From End of List</a></h2><ul>
+<li>Given a linked list, remove the n-th node from the end of list and return its head.</li>
+<li>思路还是很简单，一个指针先走k步，但边界条件很难搞定，比如输入(ListNode* head, int n)分别为([1],1)、([1,2],2),这样输出phead的话就不对了。于是再链表前面新加了一个p0当head，输出p0的下一个。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="function">ListNode <span class="title">p0</span><span class="params">(<span class="number">0</span>)</span></span>;</div><div class="line">        p0.next=head;</div><div class="line">        ListNode* ppre=&amp;p0,*pn=&amp;p0;</div><div class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>&amp;&amp;head-&gt;next==<span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(pn-&gt;next)</div><div class="line">                pn=pn-&gt;next;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> head;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>(pn-&gt;next)</div><div class="line">        &#123;</div><div class="line">            pn=pn-&gt;next;</div><div class="line">            ppre=ppre-&gt;next;</div><div class="line">        &#125;</div><div class="line">        ListNode* p=ppre-&gt;next-&gt;next;</div><div class="line">        <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> head;</div><div class="line">        ppre-&gt;next=p;</div><div class="line">        <span class="keyword">return</span> p0.next;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="24-Swap-Nodes-in-Pairs"><a href="#24-Swap-Nodes-in-Pairs" class="headerlink" title="24. Swap Nodes in Pairs"></a><a href="https://leetcode.com/problems/swap-nodes-in-pairs/description/" target="_blank" rel="external">24. Swap Nodes in Pairs</a></h2><ul>
+<li>Given a linked list, swap every two adjacent nodes and return its head.</li>
+<li>开始以为2个指针就能交换完，哼哧哼哧写完发现2个指针版本算法是错的，没办法，只好修改成3指针，关键点：[1,2,3,4]交换完[2,1,4,3]，1的指针需要指向第4位，而不是原来的第3位！！交换步骤是：<ol>
+<li>2指向1</li>
+<li>判断1应该指向第3位还是第4位还是NULL，这3种情况分别对应2指针后还有1位、2位以上以及NULL的情况</li>
+<li>如果2指针后还有2位以上，则将1指向3，2指向3-&gt;next，3指向3-&gt;next-&gt;next继续循环</li>
+</ol>
+</li>
+<li>看完题目还是该好好想一下，而不是觉得可以了就开始瞎写，边界条件要考虑清楚！</li>
+<li>评论区也有递归的解法</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function">ListNode* <span class="title">swapPairs</span><span class="params">(ListNode* head)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(!head||!(head-&gt;next)) <span class="keyword">return</span> head;</div><div class="line">        ListNode* p1=head,*p2=head-&gt;next,*p3=head-&gt;next-&gt;next,*p4=head-&gt;next;</div><div class="line">        <span class="keyword">while</span>(p2)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(p3&amp;&amp;p3-&gt;next)</div><div class="line">            &#123;</div><div class="line">                p1-&gt;next=p3-&gt;next;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(p3)</div><div class="line">            &#123;</div><div class="line">                p1-&gt;next=p3;</div><div class="line">                p2-&gt;next=p1;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                p1-&gt;next=<span class="literal">NULL</span>;</div><div class="line">                p2-&gt;next=p1;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            p2-&gt;next=p1;</div><div class="line">            p1=p3;</div><div class="line">            p2=p3-&gt;next;</div><div class="line">            p3=p2-&gt;next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p4;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="39-Combination-Sum"><a href="#39-Combination-Sum" class="headerlink" title="39. Combination Sum"></a><a href="https://leetcode.com/problems/combination-sum/description/" target="_blank" rel="external">39. Combination Sum</a></h2><ul>
+<li>Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.The same repeated number may be chosen from candidates unlimited number of times.</li>
+<li>此类问题的关键是若满足条件，则将解保存，否则需正确回溯到上一步空间状态，我的思路是：对于第i个元素，有放与不放2种状态，则用递归方式依次搜索着2种状态，另外将数组预先排序，可以降低搜索时间。需要吐槽的是，自己的代码功力还是太弱鸡，开始以为递归的话，sums数组在函数中会被修改，好像就递归不起来了，于是传了个虚参，后来发现可以用实参。然后刚开始考虑，对于第i个元素，我居然写出3种状态来了，然后result最后也传了个虚参，submit后，输出空结果，检查了半天，发现result前面少写了个&amp;。最后总共花了一个多小时，效率太慢了。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; combinationSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sums;</div><div class="line">        <span class="keyword">if</span>(candidates.size()==<span class="number">0</span>) <span class="keyword">return</span> result;</div><div class="line">        <span class="keyword">int</span> begin=<span class="number">0</span>;</div><div class="line">        sort(candidates.begin(), candidates.end());</div><div class="line">        getSum(candidates,target,begin,sums,result);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; candidates, <span class="keyword">int</span> target,<span class="keyword">int</span> begin,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;sums,<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; result)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">if</span>(candidates[begin]&lt;target)</div><div class="line">        &#123;</div><div class="line">            sums.push_back(candidates[begin]);</div><div class="line">            getSum(candidates,target-candidates[begin],begin,sums,result);<span class="comment">//将第i个元素放入解数组并搜索</span></div><div class="line">            sums.pop_back();</div><div class="line">            <span class="keyword">if</span>(begin+<span class="number">1</span>&lt;candidates.size())</div><div class="line">            &#123;</div><div class="line">                getSum(candidates,target,begin+<span class="number">1</span>,sums,result);<span class="comment">//第i个元素不放，并开始考虑i+1元素</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(candidates[begin]==target)</div><div class="line">        &#123;</div><div class="line">            sums.push_back(candidates[begin]);</div><div class="line">            result.push_back(sums);</div><div class="line">            sums.pop_back();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="55-Jump-Game"><a href="#55-Jump-Game" class="headerlink" title="55. Jump Game"></a><a href="https://leetcode.com/problems/jump-game/description/" target="_blank" rel="external">55. Jump Game</a></h2><ul>
+<li>Given an array of non-negative integers, you are initially positioned at the first index of the array.Each element in the array represents your maximum jump length at that position.Determine if you are able to reach the last index.</li>
+<li>解题思路：开始想到可能需要用动态规划法，用一个数组存放该位置可以最大跳到哪，后来想了想，只用一个int记录该位置最大可以跳到哪，最后判断该int是否大于初始数组长度就行了；</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:\\感觉代码很简洁啊，居然只击败<span class="number">50</span>%的人，囧</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> l=nums.size(),max_index=<span class="number">0</span>,index=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l;i++)</div><div class="line">        &#123;</div><div class="line">            index=i+nums[i];</div><div class="line">            <span class="keyword">if</span>(max_index&lt;index) max_index=index;</div><div class="line">            <span class="keyword">if</span>(i&gt;=max_index) <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> max_index&gt;=l<span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="62-Unique-Paths"><a href="#62-Unique-Paths" class="headerlink" title="62. Unique Paths"></a><a href="https://leetcode.com/problems/unique-paths/description/" target="_blank" rel="external">62. Unique Paths</a></h2><ul>
+<li>A robot is located at the top-left corner of a m x n grid (marked ‘Start’ in the diagram below).The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).How many possible unique paths are there?</li>
+<li>思路：最开始想用递归，三两下就把代码写完了，然后提交发现运行超时（因为重复计算！！！时间复杂度$O(n^n)$），最后想了半天还是不会，看讨论区才发现用动态规划法比较好。</li>
+</ul>
+<h2 id="64-Minimum-Path-Sum"><a href="#64-Minimum-Path-Sum" class="headerlink" title="64. Minimum Path Sum"></a><a href="https://leetcode.com/problems/minimum-path-sum/description/" target="_blank" rel="external">64. Minimum Path Sum</a></h2><ul>
+<li>Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.</li>
+<li>学会用动态规划法写题了QAQ<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minPathSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; gridSum(grid[<span class="number">0</span>].size(),grid[<span class="number">0</span>][<span class="number">0</span>]);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;grid.size();j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;grid[<span class="number">0</span>].size();i++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(j==<span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    <span class="keyword">if</span>(i!=<span class="number">0</span>)</div><div class="line">                        gridSum[i]=gridSum[i<span class="number">-1</span>]+grid[<span class="number">0</span>][i];</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    <span class="keyword">if</span>(i==<span class="number">0</span>)</div><div class="line">                        gridSum[i]=gridSum[i]+grid[j][i];</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                        gridSum[i]=min(gridSum[i],gridSum[i<span class="number">-1</span>])+grid[j][i];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> gridSum[gridSum.size()<span class="number">-1</span>];</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="202-easy-Happy-Number"><a href="#202-easy-Happy-Number" class="headerlink" title="202.(easy) Happy Number"></a><a href="https://leetcode.com/problems/happy-number/description/" target="_blank" rel="external">202.(easy) Happy Number</a></h2><ul>
+<li>题目描述：A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.</li>
+<li>解题思路：没什么思路，硬解吧（讨论区有用2个指针的方法，挺不错，即快指针追上慢指针，说明变成一个环了）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:<span class="comment">//Runtime: 4 ms,beat 86%</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isHappy</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; num=&#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">int</span> x=n;</div><div class="line">        <span class="keyword">bool</span> a=<span class="literal">true</span>;</div><div class="line">        <span class="keyword">while</span>(x!=<span class="number">1</span>)</div><div class="line">        &#123;</div><div class="line">            x=all_sum(x);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i:num)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(x==i)</div><div class="line">                &#123;</div><div class="line">                    a=<span class="literal">false</span>;</div><div class="line">                    <span class="keyword">goto</span> end;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            num.push_back(x);</div><div class="line">        &#125;</div><div class="line">        end:</div><div class="line">            <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">all_sum</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(n)&#123;</div><div class="line">            sum+=<span class="built_in">pow</span>(n%<span class="number">10</span>,<span class="number">2</span>);</div><div class="line">            n/=<span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="204-easy-Count-Primes"><a href="#204-easy-Count-Primes" class="headerlink" title="204.(easy) Count Primes"></a><a href="https://leetcode.com/problems/count-primes/description/" target="_blank" rel="external">204.(easy) Count Primes</a></h2><ul>
+<li>Count the number of prime numbers less than a non-negative number, n.</li>
+<li>如此短的题目，看完后不明所以，看讨论区也看不懂，然后找到一篇<a href="https://www.cnblogs.com/grandyang/p/4462810.html" target="_blank" rel="external">博客</a>，讲的很清楚，反正我完全不会做 QAQ。</li>
+</ul>
+<h2 id="231-easy-Power-of-Two"><a href="#231-easy-Power-of-Two" class="headerlink" title="231.(easy) Power of Two"></a><a href="https://leetcode.com/problems/power-of-two/description/" target="_blank" rel="external">231.(easy) Power of Two</a></h2><ul>
+<li>题目描述：Given an integer, write a function to determine if it is a power of two.</li>
+<li>解题思路：首先想到的是递归，然后想用位运算，看了讨论区才发现一个二的指数的特性，如果一个数n为2的指数倍的话，二进制表示为$0\times0100$，则n-1为$0\times0011$，n&amp;(n-1)=0，可用此特性来判断。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfTwo</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> <span class="keyword">long</span> i=<span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(n&gt;=i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i==n) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            i=i&lt;&lt;<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="242-easy-Valid-Anagram"><a href="#242-easy-Valid-Anagram" class="headerlink" title="242.(easy) Valid Anagram"></a><a href="https://leetcode.com/problems/valid-anagram/description/" target="_blank" rel="external">242.(easy) Valid Anagram</a></h2><ul>
+<li>题目描述：Given two strings s and t , write a function to determine if t is an anagram of s.</li>
+<li>思路：哈希表或者排序之后对比，见讨论区<a href="https://leetcode.com/problems/valid-anagram/discuss/66519/2-C++-Solutions-with-Explanations" target="_blank" rel="external">总结</a></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isAnagram</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; judge(<span class="number">27</span>,<span class="number">0</span>);</div><div class="line">        <span class="keyword">if</span>(s.size()!=t.size()) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i=s.begin(),j=t.begin();i!=s.end()&amp;&amp;j!=t.end();i++,j++)</div><div class="line">        &#123;</div><div class="line">            judge[*i-<span class="string">'a'</span>]++;</div><div class="line">            judge[*j-<span class="string">'a'</span>]--;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> count(judge.begin(),judge.end(),<span class="number">0</span>)==<span class="number">27</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="326-easy-Power-of-Three"><a href="#326-easy-Power-of-Three" class="headerlink" title="326.(easy) Power of Three"></a><a href="https://leetcode.com/problems/power-of-three/discuss" target="_blank" rel="external">326.(easy) Power of Three</a></h2><ul>
+<li>题目描述：Given an integer, write a function to determine if it is a power of 3.</li>
+<li>解题思路：题目要求不要用循环，就直接写了个递归，然后看了下讨论区，各种各样的解法，什么log的，最大数的，见讨论区<a href="https://leetcode.com/problems/power-of-three/discuss/77876/**-A-summary-of-all-solutions-(new-method-included-at-15:30pm-Jan-8th" target="_blank" rel="external">总结</a>)</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPowerOfThree</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">3</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">if</span>(n%<span class="number">3</span>!=<span class="number">0</span>||n==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">return</span> isPowerOfThree(n/<span class="number">3</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="367-easy-Valid-Perfect-Square"><a href="#367-easy-Valid-Perfect-Square" class="headerlink" title="367.(easy) Valid Perfect Square"></a><a href="https://leetcode.com/problems/valid-perfect-square/description/" target="_blank" rel="external">367.(easy) Valid Perfect Square</a></h2><ul>
+<li>题目描述：Given a positive integer num, write a function which returns True if num is a perfect square else False.</li>
+<li>思路：二分搜索</li>
+</ul>
+<h2 id="NO-387-easy-First-Unique-Character-in-a-String"><a href="#NO-387-easy-First-Unique-Character-in-a-String" class="headerlink" title="NO.387(easy) First Unique Character in a String"></a><a href="https://leetcode.com/problems/first-unique-character-in-a-string/description/" target="_blank" rel="external">NO.387(easy)</a> First Unique Character in a String</h2><ul>
+<li>题目描述：Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.（找到给定的string的第一个不重复的字符。）</li>
+<li>解题思路：刚看到这个题目，感觉没有什么特别好的解法，除了2个指针遍历的$O(n^2)$的解法，<a href="https://leetcode.com/problems/first-unique-character-in-a-string/discuss/86338/C++-2-solutions" target="_blank" rel="external">解法二</a>是建立哈希表，这样只需遍历一遍 string 和一遍哈希表，<a href="https://leetcode.com/problems/first-unique-character-in-a-string/discuss/86560/C++-56ms-5-lines" target="_blank" rel="external">解法三</a>，建立一个包含26元素的数组，数组中每个数字代表对应的字母的个数，遍历 string 后，遍历数组，返回第一个为1的index。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解法二</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstUniqChar</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt; m;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;c : s) &#123;</div><div class="line">            m[c]++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); i++) &#123;</div><div class="line">            <span class="keyword">if</span> (m[s[i]] == <span class="number">1</span>) <span class="keyword">return</span> i;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//解法三</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstUniqChar</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> alphabet[<span class="number">26</span>] = &#123;<span class="number">0</span>&#125;;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i)&#123;++alphabet[s[i] -<span class="string">'a'</span>];&#125;</div><div class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (i &lt; s.size() &amp;&amp; alphabet[s[i]-<span class="string">'a'</span>] &gt; <span class="number">1</span>) ++i;</div><div class="line">        <span class="keyword">return</span> i == s.size() ? <span class="number">-1</span> : i;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>此外还有个 <a href="https://leetcode.com/problems/first-unique-character-in-a-string/discuss/86351/Python-3-lines-beats-100-(~-60ms" target="_blank" rel="external">Python 解法</a>-!)，感觉很强，在此分享下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">firstUniqChar</span><span class="params">(self, s)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    :type s: str</span></div><div class="line"><span class="string">    :rtype: int</span></div><div class="line"><span class="string">    """</span></div><div class="line">    letters=<span class="string">'abcdefghijklmnopqrstuvwxyz'</span></div><div class="line">    index=[s.index(l) <span class="keyword">for</span> l <span class="keyword">in</span> letters <span class="keyword">if</span> s.count(l) == <span class="number">1</span>]</div><div class="line">    <span class="keyword">return</span> min(index) <span class="keyword">if</span> len(index) &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h2 id="NO-389-easy-Find-the-Difference"><a href="#NO-389-easy-Find-the-Difference" class="headerlink" title="NO.389.(easy) Find the Difference"></a><a href="https://leetcode.com/problems/find-the-difference/description/" target="_blank" rel="external">NO.389.(easy) Find the Difference</a></h2><ul>
+<li>Given two strings s and t which consist of only lowercase letters.String t is generated by random shuffling string s and then add one more letter at a random position.Find the letter that was added in t.</li>
+<li>思路：看讨论区里的，用异或解，或者字符求和后做差。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">char</span> <span class="title">findTheDifference</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> j=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i:s) j=j^i;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i:t) j=j^i;</div><div class="line">        <span class="keyword">return</span> j;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="NO-434-easy-Number-of-Segments-in-a-String"><a href="#NO-434-easy-Number-of-Segments-in-a-String" class="headerlink" title="NO.434(easy). Number of Segments in a String"></a><a href="https://leetcode.com/problems/number-of-segments-in-a-string/description/" target="_blank" rel="external">NO.434(easy). Number of Segments in a String</a></h2><ul>
+<li>题目描述：Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.（计算string中的单词个数）</li>
+<li>解题思路：计算单词间的空格个数。另外看到个挺新颖的<a href="https://leetcode.com/problems/number-of-segments-in-a-string/discuss/91688/2-line-C++-solution-simply-using-stringstream-greatergreater-operator" target="_blank" rel="external">解法</a>，分享下：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//The stringstream &gt;&gt; operator will output strings separated by white spaces until exhausting all strings.</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countSegments</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</div><div class="line">      <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(s)</span></span>; <span class="keyword">int</span> res = <span class="number">0</span>;</div><div class="line">      <span class="keyword">while</span> (ss &gt;&gt; s) ++res; <span class="keyword">return</span> res;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="438-Find-All-Anagrams-in-a-String"><a href="#438-Find-All-Anagrams-in-a-String" class="headerlink" title="438. Find All Anagrams in a String"></a><a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/discuss" target="_blank" rel="external">438. Find All Anagrams in a String</a></h2><ul>
+<li>Given a string s and a non-empty string p, find all the start indices of p’s anagrams in s.Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.</li>
+<li>思路：反正我没想到什么好思路，写了个超复杂的QAQ</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:<span class="comment">//运行时间超过3%的人QAQ</span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findAnagrams(<span class="built_in">string</span> s, <span class="built_in">string</span> p) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sums,results;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt; times;</div><div class="line">        <span class="keyword">int</span> ls=s.size(),lp=p.size();</div><div class="line">        <span class="keyword">if</span>(lp&gt;ls) <span class="keyword">return</span> results;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=ls-lp;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> sum=<span class="number">0</span>,time=<span class="number">0</span>;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;=i+lp<span class="number">-1</span>;j++)</div><div class="line">            &#123;</div><div class="line">                sum+=s[j];</div><div class="line">                time+=(<span class="number">100.0</span>/(s[j]-<span class="string">'a'</span>+<span class="number">1</span>));</div><div class="line">            &#125;</div><div class="line">            sums.push_back(sum);</div><div class="line">            times.push_back(time);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> Psum=<span class="number">0</span>,Ptime=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=lp<span class="number">-1</span>;i++)</div><div class="line">        &#123;</div><div class="line">            Psum+=p[i];</div><div class="line">            Ptime+=<span class="number">100.0</span>/(p[i]-<span class="string">'a'</span>+<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=sums.size()<span class="number">-1</span>;i++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(sums[i]==Psum&amp;&amp;times[i]==Ptime)</div><div class="line">                results.push_back(i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> results;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="443-String-Compression"><a href="#443-String-Compression" class="headerlink" title="443. String Compression"></a><a href="https://leetcode.com/problems/string-compression/description/" target="_blank" rel="external">443. String Compression</a></h2><ul>
+<li><p>题目描述：Given an array of characters, compress it in-place.<br>The length after compression must always be smaller than or equal to the original array.Every element of the array should be a character (not int) of length 1.After you are done modifying the input array in-place, return the new length of the array.Follow up:Could you solve it using only O(1) extra space?（将[“a”,”a”,”b”,”b”,”c”,”c”,”c”] 缩并成 [“a”,”2”,”b”,”2”,”c”,”3”] 形式，要求：在原容器上更改）</p>
+</li>
+<li><p>解题思路：定义3个指针，第一个指向缩并后数组末尾，负责指定下一个需替换的元素，第二、三个指针遍历数组，统计字符个数。看了下讨论区，大家思路都差不多（为什么我的才超过82% QAQ ）。</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:<span class="comment">//Runtime: 8 ms,beat 82.94%</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compress</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&amp; chars)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(chars.size()==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">auto</span> p=chars.begin(),p0=chars.begin();</div><div class="line">        <span class="keyword">char</span> c;</div><div class="line">        <span class="keyword">for</span>(;p0!=chars.end();)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line">            c=*p0;</div><div class="line">            <span class="keyword">auto</span> p1=p0;</div><div class="line">            <span class="keyword">for</span>(;p1!=chars.end();p1++)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span>(*p1!=*p0)</div><div class="line">                &#123;</div><div class="line">                    p0=p1;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    count++;</div><div class="line">            &#125;</div><div class="line">            *p=c;</div><div class="line">            p++;</div><div class="line">            <span class="keyword">if</span>(count&gt;<span class="number">1</span>)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">string</span> s1=to_string(count);</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i:s1)</div><div class="line">                &#123;</div><div class="line">                    *p=i;</div><div class="line">                    p++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(p1==chars.end()) <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        chars.erase(p,chars.end());</div><div class="line">        <span class="keyword">return</span> chars.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="520-easy-Detect-Capital"><a href="#520-easy-Detect-Capital" class="headerlink" title="520.(easy) Detect Capital"></a><a href="https://leetcode.com/problems/detect-capital/description/" target="_blank" rel="external">520.(easy) Detect Capital</a></h2><ul>
+<li><p>题目描述：判断单词是否为Capital，单词为Capital的条件为：</p>
+<ol>
+<li>All letters in this word are capitals, like “USA”.</li>
+<li>All letters in this word are not capitals, like “leetcode”.</li>
+<li>Only the first letter in this word is capital if it has more than one letter, like “Google”.</li>
+</ol>
+</li>
+<li><p>解题思路：统计单词中大写单词的个数。（查看<a href="https://leetcode.com/problems/detect-capital/discuss/99343/6ms-2-lines-C++-solution" target="_blank" rel="external">讨论区</a>发现有 count_if 函数挺好用的）</p>
+<ol>
+<li>std::count(first,last,value)：first是容器的首迭代器，last是容器的末迭代器，value是询问的元素，整个函数返回ｉｎｔ型。count函数的功能是：统计容器中等于value元素的个数。</li>
+<li>std::count_if(first,last,comp) (在comp为true的情况下计数）　或者　count_if(first,last,value,comp) (这个是在comp为true的情况下统计容器中等于value的元素）：first为首迭代器，last为末迭代器，value为要查询的元素，comp为比较bool函数，为true则计数，函数返回型是int。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:<span class="comment">//runtime 15ms;beat 64%</span></div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">detectCapitalUse</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> count=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;i:word)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i&gt;=<span class="string">'A'</span>&amp;&amp;i&lt;=<span class="string">'Z'</span>)</div><div class="line">            &#123;</div><div class="line">                count++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(count==word.size()||(count==<span class="number">1</span>&amp;&amp;word[<span class="number">0</span>]&lt;=<span class="string">'Z'</span>)||count==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="541-easy-Reverse-String-II"><a href="#541-easy-Reverse-String-II" class="headerlink" title="541.(easy) Reverse String II"></a><a href="https://leetcode.com/problems/reverse-string-ii/description/" target="_blank" rel="external">541.(easy) Reverse String II</a></h2><ul>
+<li>题目描述：Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.</li>
+<li>解题思路：用 reverse 翻转吧（这里有个坑，reverse(first,end)，是反转[first,end)，左开右闭，我一开始认为2边都是闭，结果反转得不对，晕）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">reverseStr</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(k&lt;=<span class="number">1</span>) <span class="keyword">return</span> s;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;;i+=(<span class="number">2</span>*k))</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(i+k&lt;=s.size())</div><div class="line">                reverse(s.begin()+i,s.begin()+i+k);</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                reverse(s.begin()+i,s.end());</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="551-easy-Student-Attendance-Record-I"><a href="#551-easy-Student-Attendance-Record-I" class="headerlink" title="551.(easy) Student Attendance Record I"></a><a href="https://leetcode.com/problems/student-attendance-record-i/description/" target="_blank" rel="external">551.(easy) Student Attendance Record I</a></h2><ul>
+<li>题目描述：Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.</li>
+<li>思路：统计L、A个数而已。</li>
+</ul>
+<h2 id="557-easy-Reverse-Words-in-a-String-III"><a href="#557-easy-Reverse-Words-in-a-String-III" class="headerlink" title="557.(easy) Reverse Words in a String III"></a><a href="https://leetcode.com/problems/reverse-words-in-a-string-iii/description/" target="_blank" rel="external">557.(easy) Reverse Words in a String III</a></h2><ul>
+<li>题目描述：You need to return whether the student could be rewarded according to his attendance record.</li>
+<li>思路：挺简单的，找空格而已。</li>
+</ul>
+<h2 id="606-easy-Construct-String-from-Binary-Tree"><a href="#606-easy-Construct-String-from-Binary-Tree" class="headerlink" title="606.(easy) Construct String from Binary Tree"></a><a href="https://leetcode.com/problems/construct-string-from-binary-tree/description/" target="_blank" rel="external">606.(easy) Construct String from Binary Tree</a></h2><ul>
+<li>题目描述：You need to construct a string consists of parenthesis and integers from a binary tree with the preorder traversing way.The null node needs to be represented by empty parenthesis pair “()”. And you need to omit all the empty parenthesis pairs that don’t affect the one-to-one mapping relationship between the string and the original binary tree.（打印二叉树）</li>
+<li>思路：递归做吧，不麻烦</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:<span class="comment">//自己写的有些啰嗦，明明一个函数就可以递归了，偏偏爱写2个</span></div><div class="line">    <span class="function"><span class="built_in">string</span> <span class="title">tree2str</span><span class="params">(TreeNode* t)</span> </span>&#123;</div><div class="line">        <span class="built_in">string</span> tree;</div><div class="line">        <span class="keyword">if</span>(!t) <span class="keyword">return</span> tree;</div><div class="line">        get_tree(t,tree);</div><div class="line">        <span class="keyword">return</span> tree;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">get_tree</span><span class="params">(TreeNode* t,<span class="built_in">string</span> &amp;tree)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        tree+=(to_string(t-&gt;val));</div><div class="line">        <span class="keyword">if</span>(!(t-&gt;left))</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>((t-&gt;right))</div><div class="line">            &#123;</div><div class="line">                tree+=<span class="string">"()("</span>;</div><div class="line">                get_tree(t-&gt;right,tree);</div><div class="line">                tree+=<span class="string">")"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            tree+=<span class="string">"("</span>;</div><div class="line">            get_tree(t-&gt;left,tree);</div><div class="line">            tree+=<span class="string">")"</span>;</div><div class="line">            <span class="keyword">if</span>(t-&gt;right)</div><div class="line">            &#123;</div><div class="line">                tree+=<span class="string">"("</span>;</div><div class="line">                get_tree(t-&gt;right,tree);</div><div class="line">                tree+=<span class="string">")"</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="657-easy-Judge-Route-Circle"><a href="#657-easy-Judge-Route-Circle" class="headerlink" title="657.(easy) Judge Route Circle"></a><a href="https://leetcode.com/problems/judge-route-circle/description/" target="_blank" rel="external">657.(easy) Judge Route Circle</a></h2><ul>
+<li>题目描述：判断机器人是否回到原点</li>
+<li>思路：通过坐标x,y，很简单。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/21/const/" rel="next" title="Const 与指针、引用关系">
+                <i class="fa fa-chevron-left"></i> Const 与指针、引用关系
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Microke" />
+            
+              <p class="site-author-name" itemprop="name">Microke</p>
+              <p class="site-description motion-element" itemprop="description">-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode-刷题总结"><span class="nav-number">1.</span> <span class="nav-text">leetcode 刷题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-easy-Two-Sum"><span class="nav-number">1.1.</span> <span class="nav-text">1.(easy) Two Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-medium-Longest-Substring-Without-Repeating-Characters"><span class="nav-number">1.2.</span> <span class="nav-text">3.(medium) Longest Substring Without Repeating Characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-ZigZag-Conversion"><span class="nav-number">1.3.</span> <span class="nav-text">6. ZigZag Conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="nav-number">1.4.</span> <span class="nav-text">19. Remove Nth Node From End of List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-Swap-Nodes-in-Pairs"><span class="nav-number">1.5.</span> <span class="nav-text">24. Swap Nodes in Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#39-Combination-Sum"><span class="nav-number">1.6.</span> <span class="nav-text">39. Combination Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-Jump-Game"><span class="nav-number">1.7.</span> <span class="nav-text">55. Jump Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#62-Unique-Paths"><span class="nav-number">1.8.</span> <span class="nav-text">62. Unique Paths</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#64-Minimum-Path-Sum"><span class="nav-number">1.9.</span> <span class="nav-text">64. Minimum Path Sum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#202-easy-Happy-Number"><span class="nav-number">1.10.</span> <span class="nav-text">202.(easy) Happy Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#204-easy-Count-Primes"><span class="nav-number">1.11.</span> <span class="nav-text">204.(easy) Count Primes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#231-easy-Power-of-Two"><span class="nav-number">1.12.</span> <span class="nav-text">231.(easy) Power of Two</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#242-easy-Valid-Anagram"><span class="nav-number">1.13.</span> <span class="nav-text">242.(easy) Valid Anagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#326-easy-Power-of-Three"><span class="nav-number">1.14.</span> <span class="nav-text">326.(easy) Power of Three</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#367-easy-Valid-Perfect-Square"><span class="nav-number">1.15.</span> <span class="nav-text">367.(easy) Valid Perfect Square</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NO-387-easy-First-Unique-Character-in-a-String"><span class="nav-number">1.16.</span> <span class="nav-text">NO.387(easy) First Unique Character in a String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NO-389-easy-Find-the-Difference"><span class="nav-number">1.17.</span> <span class="nav-text">NO.389.(easy) Find the Difference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NO-434-easy-Number-of-Segments-in-a-String"><span class="nav-number">1.18.</span> <span class="nav-text">NO.434(easy). Number of Segments in a String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#438-Find-All-Anagrams-in-a-String"><span class="nav-number">1.19.</span> <span class="nav-text">438. Find All Anagrams in a String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#443-String-Compression"><span class="nav-number">1.20.</span> <span class="nav-text">443. String Compression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#520-easy-Detect-Capital"><span class="nav-number">1.21.</span> <span class="nav-text">520.(easy) Detect Capital</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#541-easy-Reverse-String-II"><span class="nav-number">1.22.</span> <span class="nav-text">541.(easy) Reverse String II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#551-easy-Student-Attendance-Record-I"><span class="nav-number">1.23.</span> <span class="nav-text">551.(easy) Student Attendance Record I</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#557-easy-Reverse-Words-in-a-String-III"><span class="nav-number">1.24.</span> <span class="nav-text">557.(easy) Reverse Words in a String III</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#606-easy-Construct-String-from-Binary-Tree"><span class="nav-number">1.25.</span> <span class="nav-text">606.(easy) Construct String from Binary Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#657-easy-Judge-Route-Circle"><span class="nav-number">1.26.</span> <span class="nav-text">657.(easy) Judge Route Circle</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Microke</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
