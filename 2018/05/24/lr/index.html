@@ -116,12 +116,12 @@
 <meta property="og:site_name" content="Microke">
 <meta property="og:description" content="线性回归属于回归问题。所谓回归(regression)，用已知样本对未知公式参数的估计。线性回归(linear regression)：回归的一种，回归函数是一次函数  linear regression线性回归回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/05/24/lr/lr_image/db48c81304317847870d486ba5bb2015.jpg">
-<meta property="og:updated_time" content="2018-05-24T07:10:53.776Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/24/lr/lr/db48c81304317847870d486ba5bb2015.jpg">
+<meta property="og:updated_time" content="2018-05-24T11:44:19.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linear regression">
 <meta name="twitter:description" content="线性回归属于回归问题。所谓回归(regression)，用已知样本对未知公式参数的估计。线性回归(linear regression)：回归的一种，回归函数是一次函数  linear regression线性回归回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为：">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/24/lr/lr_image/db48c81304317847870d486ba5bb2015.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/24/lr/lr/db48c81304317847870d486ba5bb2015.jpg">
 
 
 
@@ -325,7 +325,7 @@
                 
               
 
-              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 15:10:53" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
+              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 19:44:19" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
             
 
             
@@ -378,6 +378,7 @@
 </blockquote>
 <h1 id="linear-regression"><a href="#linear-regression" class="headerlink" title="linear regression"></a>linear regression</h1><h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为： 分数 = 3<em>演员颜值 + 5</em>甜蜜程度 + 2*剧情，那么小明就可以轻松判断出小红喜欢看的是哪一部，该评分公式就是所谓的回归方程，而所乘的系数为回归系数。但现实情况往往是小明并不知道小红的评分公式，但小明可以根据以往和小红一起看电影的情况，去估计出一组回归系数，用于接下来的预测。</p>
 <h2 id="cost-function（如何评判回归系数的好坏？）"><a href="#cost-function（如何评判回归系数的好坏？）" class="headerlink" title="cost function（如何评判回归系数的好坏？）"></a>cost function（如何评判回归系数的好坏？）</h2><p>线性回归方程可表示为：<br>$$\hat y=\omega^Tx+b$$<br>小明根据以往于小红看电影的情况估计出了小红的评分公式，此公式准确意味着用此公式给电影打分，与小红给电影打分基本一致，因此可用 cost function （损失函数）表示模型的好坏，$cost = \sum_{i=1}^{m}(y_i-\hat y_i)^2$，从函数可看出，公式越准确，cost function 越小，cost function 的几何意义为预测值到真实值之间的欧式距离。</p>
+<a id="more"></a>
 <h2 id="minimize-cost-function"><a href="#minimize-cost-function" class="headerlink" title="minimize cost function"></a>minimize cost function</h2><p>如此一来，小明的任务变成了找到一个使 cost function 最小的回归方程，即最小化 cost function，可以通过：</p>
 <ol>
 <li>least-square method（最小二乘法）</li>
@@ -397,7 +398,8 @@
 </ol>
 </li>
 </ol>
-<h4 id="梯度下降法的直观解释"><a href="#梯度下降法的直观解释" class="headerlink" title="梯度下降法的直观解释"></a>梯度下降法的直观解释</h4><p>在设计域中任意选取一初始点，从该点开始寻找下山方向，每走一步，便计算一下该点导数，并继续沿负梯度方向（梯度下降最快方向）走，直到达到极值点为止。<br><img src="/2018/05/24/lr/./lr_image/db48c81304317847870d486ba5bb2015.jpg" alt=""></p>
+<h4 id="梯度下降法的直观解释"><a href="#梯度下降法的直观解释" class="headerlink" title="梯度下降法的直观解释"></a>梯度下降法的直观解释</h4><p>在设计域中任意选取一初始点，从该点开始寻找下山方向，每走一步，便计算一下该点导数，并继续沿负梯度方向（梯度下降最快方向）走，直到达到极值点为止。</p>
+<p><img src="/2018/05/24/lr/./lr/db48c81304317847870d486ba5bb2015.jpg" alt=""></p>
 <p>$\hat{w^*}=$</p>
 <p><a href="http://chuansong.me/n/1100393" target="_blank" rel="external">http://chuansong.me/n/1100393</a></p>
 <p><a href="http://wiki.jikexueyuan.com/project/deep-learning/getting-start.html" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/deep-learning/getting-start.html</a></p>
@@ -438,7 +440,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/23/Backtracking/" rel="next" title="leetcode 之回溯问题">
+              <a href="/2018/05/23/leetcode_Backtracking/" rel="next" title="leetcode 之回溯问题">
                 <i class="fa fa-chevron-left"></i> leetcode 之回溯问题
               </a>
             
@@ -448,7 +450,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/24/static/" rel="prev" title="c++中static的用法详解">
+              <a href="/2018/05/24/c++中static的用法详解/" rel="prev" title="c++中static的用法详解">
                 c++中static的用法详解 <i class="fa fa-chevron-right"></i>
               </a>
             
