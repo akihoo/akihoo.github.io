@@ -280,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/virtual/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/基类派生类与指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
@@ -299,8 +299,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/24/virtual/" itemprop="url">
-                  virtual
+                <a class="post-title-link" href="/2018/05/26/基类派生类与指针/" itemprop="url">
+                  基类派生类与指针
                 </a>
               
             
@@ -326,9 +326,13 @@
                 
               
 
-              <time title="Post created: 2018-05-24 19:19:22" itemprop="dateCreated datePublished" datetime="2018-05-24T19:19:22+08:00">2018-05-24</time>
+              <time title="Post created: 2018-05-26 09:14:05 / Updated at: 09:15:03" itemprop="dateCreated datePublished" datetime="2018-05-26T09:14:05+08:00">2018-05-26</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -341,8 +345,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/24/virtual/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/24/virtual/" itemprop="commentCount"></span>
+                <a href="/2018/05/26/基类派生类与指针/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/26/基类派生类与指针/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,9 +375,25 @@
 
       
         
-          
-            
-          
+          <h1 id="类的指针总结"><a href="#类的指针总结" class="headerlink" title="类的指针总结"></a>类的指针总结</h1><ol>
+<li>基类指针可以指向派生类对象，那么经由该指针只能访问基础类定义的函数（静态联翩）</li>
+<li><p>派生类指针指向基类必须经过强制类型转换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//eg.</span></div><div class="line">B *aa=(B*)<span class="keyword">new</span> A();<span class="comment">//（子类指针指向父类对象地址必须强转才行）</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果基础类和衍生类定义了相同名称的成员函数，那么通过对象指针调用成员函数时，到底调用那个函数要<strong>根据指针的原型</strong>来确定，而不是根据指针实际指向的对象类型确定。</p>
+</li>
+</ol>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><blockquote>
+<p>转载自<a href="https://www.cnblogs.com/rednodel/p/4122781.html" target="_blank" rel="external">https://www.cnblogs.com/rednodel/p/4122781.html</a></p>
+</blockquote>
+<p>简单来说，C++的多态就是靠父类指针指向子类对象+虚函数来实现的。父类指针指向子类对象，可以调用子类从父类继承来的那一部分，但如果父类中声明了virtual，则可以调用子类中的方法，这样就实现了多态。而子类指针指向父类对象，可能会调用到父类中没用的方法，因此这是不对的。<br>至于两类指针的互换是另一个问题。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/26/基类派生类与指针/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -803,7 +823,7 @@
                 
               
 
-              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 19:44:19" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
+              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 19:57:48" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
             
 
             

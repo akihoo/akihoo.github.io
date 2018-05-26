@@ -117,7 +117,7 @@
 <meta property="og:description" content="线性回归属于回归问题。所谓回归(regression)，用已知样本对未知公式参数的估计。线性回归(linear regression)：回归的一种，回归函数是一次函数  linear regression线性回归回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/05/24/lr/lr/db48c81304317847870d486ba5bb2015.jpg">
-<meta property="og:updated_time" content="2018-05-24T11:44:19.895Z">
+<meta property="og:updated_time" content="2018-05-24T11:57:48.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linear regression">
 <meta name="twitter:description" content="线性回归属于回归问题。所谓回归(regression)，用已知样本对未知公式参数的估计。线性回归(linear regression)：回归的一种，回归函数是一次函数  linear regression线性回归回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为：">
@@ -325,7 +325,7 @@
                 
               
 
-              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 19:44:19" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
+              <time title="Post created: 2018-05-24 15:10:06 / Updated at: 19:57:48" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
             
 
             
@@ -385,7 +385,8 @@
 <li>Gradient Descent（梯度下降）</li>
 </ol>
 <h3 id="least-square-method"><a href="#least-square-method" class="headerlink" title="least-square method"></a>least-square method</h3><p>可以将 cost function 对 $w$ 和 $b$ 求导，并令倒数等于0，得到：<br>$$\frac{\partial cost}{\partial w}=2(w\sum_{i=1}^{m}x_i^2-\sum_{i=1}^{m}(y_i-b)x_i)=0$$</p>
-<p>$$\frac{\partial cost}{\partial b}=2(mb-\sum_{i=1}^{m}(y_i-wx_i))=0$$<br>联立求解<br>$$w=\frac{\sum_{i=1}^{m}y_i(x_i-\overline{x})}{\sum_{i=1}^{m}x_{i}^{2}-\frac{1}{m}(\sum_{i=1}^{m}x_i)^2}$$<br>$$b=\frac{1}{m}\sum_{i=1}^{m}(y_i-wx_i)$$<br>对于多元线性函数则有：<br>$$\hat{w}^<em>=arg min(\boldsymbol{y}-\mathbf{X}w^</em>)^T(\boldsymbol{y}-\mathbf{X}w^*)$$</p>
+<p>$$\frac{\partial cost}{\partial b}=2(mb-\sum_{i=1}^{m}(y_i-wx_i))=0$$<br>联立求解<br>$$w=\frac{\sum_{i=1}^{m}y_i(x_i-\overline{x})}{\sum_{i=1}^{m}x_{i}^{2}-\frac{1}{m}(\sum_{i=1}^{m}x_i)^2}$$<br>$$b=\frac{1}{m}\sum_{i=1}^{m}(y_i-wx_i)$$<br>对于多元线性函数则有：</p>
+<p>$$\hat{w}^{<em>}=arg min(\boldsymbol{y}-\mathbf{X}w^{</em>})^T(\boldsymbol{y}-\mathbf{X}w^{*})$$</p>
 <p>对 $w^<em>$ 求导得（<a href="https://blog.csdn.net/monsterhoho/article/details/46753673" target="_blank" rel="external">推导过程见此</a>）<br>$$\frac{\partial cost}{\partial w^</em>}=2\mathbf{X}^T(\mathbf{X}w^<em>-y)$$<br>令上式等于0，当 $\mathbf{X}^T\mathbf{X}$ 为满秩矩阵时，得<br>$$\hat{w^</em>}=(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$$<br>当 $\mathbf{X}^T\mathbf{X}$ 非满秩矩阵时（出现这个情况的原因可能是1.各个特征不独立、有关联；2.特征数量大于所给训练集样本个数），可以求得多个 $\hat{w^*}$ 使误差最小，可以引入正则化的方法。</p>
 <h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><h4 id="梯度下降法基本步骤："><a href="#梯度下降法基本步骤：" class="headerlink" title="梯度下降法基本步骤："></a>梯度下降法基本步骤：</h4><p>最小二乘法实际上只定义了估值函数是方差，真正求解a，b，c的方法是梯度下降法，这是一个枚举型的求解算法，其算法步骤如下：</p>
 <ol>
