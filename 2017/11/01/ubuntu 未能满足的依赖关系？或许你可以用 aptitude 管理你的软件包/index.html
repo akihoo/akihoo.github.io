@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -115,7 +115,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="aptitude 与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具基于大名鼎鼎的APT机制, 整合了 dselect 和 apt-get 的所有功能, 并提供的更多特性,特别是在依赖关系处理上。与 apt-get 不同的是，aptitude在处理依赖问题上更佳一些。举例来说，aptitude在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.blog.csdn.net/20171101211530457?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXNkZF8x/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:updated_time" content="2017-11-02T05:05:33.756Z">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -204,7 +204,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -224,7 +224,7 @@
           
           <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
         
         
@@ -232,7 +232,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
 
       
@@ -318,14 +318,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Post created: 2017-11-01 21:18:55" itemprop="dateCreated datePublished" datetime="2017-11-01T21:18:55+08:00">2017-11-01</time>
+              <time title="创建时间：2017-11-01 21:18:55" itemprop="dateCreated datePublished" datetime="2017-11-01T21:18:55+08:00">2017-11-01</time>
             
 
             
@@ -340,9 +340,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Edited on</span>
+                  <span class="post-meta-item-text">更新于</span>
                 
-                <time title="Updated at: 2017-11-02 13:05:33" itemprop="dateModified" datetime="2017-11-02T13:05:33+08:00">2017-11-02</time>
+                <time title="修改时间：2017-11-02 13:05:33" itemprop="dateModified" datetime="2017-11-02T13:05:33+08:00">2017-11-02</time>
               
             
           </span>
@@ -357,7 +357,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -411,7 +411,7 @@
 </ul>
 <ul>
 <li>: 安裝<ul>
-<li>: 移除<br>_ : 移除 package, 並且將設定檔也移掉(用 - 的話會移除 package 但保留設定檔)<br>= : 保留 -&gt; 如是 testing or unstable，有可能新的 package 有 bug 或是某個功能拿掉 所以我們不想昇級，只要設成 hold 之後，Debian 就不會去更新此 package 了。<br>f : 清除 New Packages 的狀態。<br>[ : 將某一樹狀結構全部展開。<br>] : 將展開的樹狀結構關掉。<br>/ : 搜尋某 package<br>d : 顯示 package 有那些 dependencies(也就是安裝這個 package 之前要先裝那些 packages)<br>r : 有那些 packages 是 depends on 這個 package<br>q : 結束 aptitude enter : 顯示 package 的資訊<br>範例: 3dchess - 3D chess for X11 3 dimensional Chess for X11R6. Three boards, 96 pieces and 26 directions. Priority: optional Section: games Maintainer: Stephen Stafford <a href="mailto:&#98;&#97;&#103;&#x70;&#117;&#115;&#x73;&#64;&#100;&#101;&#x62;&#105;&#97;&#110;&#x2e;&#x6f;&#114;&#103;" target="_blank" rel="external">&#98;&#97;&#103;&#x70;&#117;&#115;&#x73;&#64;&#100;&#101;&#x62;&#105;&#97;&#110;&#x2e;&#x6f;&#114;&#103;</a> Compressed size: 31.4k Uncompressed size: 152k Source Package: 3dchess –\ Depends — libc6 (&gt;= 2.3.1-1) — xaw3dg (&gt;= 1.5-6) — xlibs (&gt; 4.1.0) — Packages which depend on 3dchess –\ Versions i 0.8.1-10</li>
+<li>: 移除<br>_ : 移除 package, 並且將設定檔也移掉(用 - 的話會移除 package 但保留設定檔)<br>= : 保留 -&gt; 如是 testing or unstable，有可能新的 package 有 bug 或是某個功能拿掉 所以我們不想昇級，只要設成 hold 之後，Debian 就不會去更新此 package 了。<br>f : 清除 New Packages 的狀態。<br>[ : 將某一樹狀結構全部展開。<br>] : 將展開的樹狀結構關掉。<br>/ : 搜尋某 package<br>d : 顯示 package 有那些 dependencies(也就是安裝這個 package 之前要先裝那些 packages)<br>r : 有那些 packages 是 depends on 這個 package<br>q : 結束 aptitude enter : 顯示 package 的資訊<br>範例: 3dchess - 3D chess for X11 3 dimensional Chess for X11R6. Three boards, 96 pieces and 26 directions. Priority: optional Section: games Maintainer: Stephen Stafford <a href="mailto:&#x62;&#97;&#x67;&#112;&#x75;&#115;&#x73;&#x40;&#100;&#101;&#98;&#105;&#x61;&#x6e;&#x2e;&#x6f;&#x72;&#x67;" target="_blank" rel="external">&#x62;&#97;&#x67;&#112;&#x75;&#115;&#x73;&#x40;&#100;&#101;&#98;&#105;&#x61;&#x6e;&#x2e;&#x6f;&#x72;&#x67;</a> Compressed size: 31.4k Uncompressed size: 152k Source Package: 3dchess –\ Depends — libc6 (&gt;= 2.3.1-1) — xaw3dg (&gt;= 1.5-6) — xlibs (&gt; 4.1.0) — Packages which depend on 3dchess –\ Versions i 0.8.1-10</li>
 </ul>
 </li>
 </ul>
@@ -527,10 +527,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -555,7 +555,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">21</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
@@ -600,7 +600,7 @@
                       
                     
                     <span class="site-state-item-count">15</span>
-                    <span class="site-state-item-name">Tags</span>
+                    <span class="site-state-item-name">标签</span>
                   
                 </div>
               
@@ -683,7 +683,7 @@
 
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.3.9</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
 
 
 
@@ -691,7 +691,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
 
 
 
