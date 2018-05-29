@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
-<meta name="keywords" content="companies">
+  <meta name="description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018华为软件精英挑战赛">
-<meta property="og:url" content="http://yoursite.com/2018/05/08/2018华为软件精英/index.html">
+<meta property="og:title" content="Regularization">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/Regularization/index.html">
 <meta property="og:site_name" content="Microke">
-<meta property="og:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
+<meta property="og:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-08T09:45:04.088Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/overfitting.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/20140504122926296.png">
+<meta property="og:updated_time" content="2018-05-29T06:22:04.224Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018华为软件精英挑战赛">
-<meta name="twitter:description" content="今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。   代码开源于 github，如果觉得本文对你有帮助的话，请到 github点个赞再走哦！  赛题简介此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见官网。开始看">
+<meta name="twitter:title" content="Regularization">
+<meta name="twitter:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/overfitting.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/08/2018华为软件精英/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/Regularization/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>2018华为软件精英挑战赛 | Microke</title>
+  <title>Regularization | Microke</title>
   
 
 
@@ -281,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/2018华为软件精英/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/Regularization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Microke">
@@ -298,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2018华为软件精英挑战赛
+          <h1 class="post-title" itemprop="name headline">Regularization
               
             
           </h1>
@@ -323,7 +325,7 @@
                 
               
 
-              <time title="Post created: 2018-05-08 15:29:04 / Updated at: 17:45:04" itemprop="dateCreated datePublished" datetime="2018-05-08T15:29:04+08:00">2018-05-08</time>
+              <time title="Post created: 2018-05-29 12:01:02 / Updated at: 14:22:04" itemprop="dateCreated datePublished" datetime="2018-05-29T12:01:02+08:00">2018-05-29</time>
             
 
             
@@ -342,8 +344,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/08/2018华为软件精英/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/08/2018华为软件精英/" itemprop="commentCount"></span>
+                <a href="/2018/05/29/Regularization/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">Comments: </span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/29/Regularization/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,29 +373,21 @@
       
 
       
-        <blockquote>
-<p>今年的华为软件精英挑战赛终于结束了（大佬们去深圳决赛了），当时初赛赛区第5，进了复赛也没能冲进前4（前4进决赛），也算有些遗憾吧。本文梳理下比赛思路，分享下比赛代码。</p>
+        <h1 id="正则化的作用"><a href="#正则化的作用" class="headerlink" title="正则化的作用"></a>正则化的作用</h1><blockquote>
+<p>可参考博客<a href="https://blog.csdn.net/zouxy09/article/details/24971995" target="_blank" rel="external">强烈推荐：zouxy09的专栏</a>、<a href="https://blog.csdn.net/jinping_shi/article/details/52433975" target="_blank" rel="external">阿拉丁吃米粉</a>、<a href="https://blog.csdn.net/wsj998689aa/article/details/39547771" target="_blank" rel="external">迷雾forest</a></p>
 </blockquote>
-<blockquote>
-<p>代码开源于 <a href="https://github.com/akihoo/HW_codecraft_2018" target="_blank" rel="external">github</a>，如果觉得本文对你有帮助的话，请到 <a href="https://github.com/akihoo/HW_codecraft_2018" target="_blank" rel="external">github</a><strong>点个赞</strong>再走哦！</p>
-</blockquote>
-<h1 id="赛题简介"><a href="#赛题简介" class="headerlink" title="赛题简介"></a>赛题简介</h1><p>此次比赛题目是关于利用虚拟机历史申请使用记录来预测未来一周虚拟机的申请情况，并对预测的虚拟机合理分配到服务器上，详见<a href="http://codecraft.devcloud.huaweicloud.com/home/detail" target="_blank" rel="external">官网</a>。开始看到这个题目，以为用机器学习、时间序列来做，后来发现自己太天真。<br><a id="more"></a></p>
-<h1 id="比赛思路"><a href="#比赛思路" class="headerlink" title="比赛思路"></a>比赛思路</h1><h2 id="预测模型"><a href="#预测模型" class="headerlink" title="预测模型"></a>预测模型</h2><p>预测模型试过很多，但很多用心写的代码，不如取平均值。试过的模型有：</p>
-<ul>
-<li>二次指数平滑</li>
-<li>局部加权模型</li>
-<li>线性模型</li>
-<li>Arima模型</li>
-</ul>
-<p>除了模型，还有试了很多去噪方法，试过不同的滑窗方式，比赛还是很累的，特别是辛苦写的代码完全没有作用，这很打击士气。建议大家找好队友，分工合作，这样才不至于中途就放弃了。最后初赛使用二次指数平滑，复赛使用局部加权模型。</p>
-<p>感觉预测算法没什么好讲的，毕竟全靠玄学，都是瞎写一通，再瞎调参，为什么分高也完全不知道。</p>
-<h2 id="放置算法"><a href="#放置算法" class="headerlink" title="放置算法"></a>放置算法</h2><ul>
-<li>放置算法采用动态规划的背包算法，其实贪心算法采用恰当的放置策略已经能取得接近最优解的结果，最后初赛对比了我的python代码和队友的C++代码，最后采用的是队友C++版代码，预测是动态规划，放置是贪心算法。</li>
-<li>由于C++代码主要部分是队友完成，没有队友许可，这里只将自己python版代码开源，此代码初赛可取得235+的成绩。开源代码使用的是二维背包进行，即以优化CPU为例，将CPU作为价值，内存作为重量（限制条件），但这样的问题是很容易产生内存放满了，CPU占比很低的情况。于是加入判断，若放置的服务器放置率小于阈值，则回收此服务器的虚拟机，打散顺序重新放置。</li>
-<li>此放置算法，线下测试了很多情况均可得最优解，后期花了2天移植倒C++版本，但是计算出的结果和python版相差很多，至今不知道原因。</li>
-<li>放置算法的改进：建议使用3维背包，即以CPU和内存作为约束条件，去max(CPU+MEM)，这样代码的运行速度更快，而且效果是一样的。</li>
-<li>关于放置率的提升：根据放置结果，最后一个服务器可能存在放置率不足的情况，可向最后一个添加虚拟机直至放满，或者直接将此虚拟机删除，即通过放置结果修改预测结果，初赛加入此条策略，提高了接近8分，还是挺有效的。</li>
-</ul>
+<a id="more"></a>
+<p>正规方程最终得到的$w^<em>$的参数估计为：<br>$$\hat{w^</em>} =(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$$<br>当 $\mathbf{X}^T\mathbf{X}$ 非满秩矩阵时，则$(\mathbf{X}^T\mathbf{X})^{-1}$趋近于无穷大（实际上不存在），当$\mathbf{X}^T\mathbf{X}$病态时，虽然矩阵有解，输入仅有微小变化，解便会有很大震荡。</p>
+<p>这显然不是一个很好的解，相当于仅在输入数据中加入一点小小噪声，便得到全然不同的解。如下图过拟合，输入仅有小的变化，结果剧烈变化。</p>
+<p><img src="/2018/05/29/Regularization/./Regularization/overfitting.jpg" alt=""><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a></p>
+<p>加入正则化后，公式变为：<br>$$\hat{w^*} =(\mathbf{X}^T\mathbf{X}+\lambda \mathbf{I})^{-1}\mathbf{X}^Ty$$</p>
+<h1 id="L1-与-L2-正则的区别"><a href="#L1-与-L2-正则的区别" class="headerlink" title="L1 与 L2 正则的区别"></a>L1 与 L2 正则的区别</h1><ol>
+<li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
+<li>L2正则假设参数的先验分布是Gaussian分布，可以保证模型的稳定性，也就是参数的值不会太大或太小</li>
+<li>在实际使用中，如果特征是高维稀疏的，则使用L1正则；如果特征是低维稠密的，则使用L2正则。</li>
+</ol>
+<p>L1和L2都是规则化的方式，我们将权值参数以L1或者L2的方式放到代价函数里面去。然后模型就会尝试去最小化这些权值参数。而这个最小化就像一个下坡的过程，L1和L2的差别就在于这个“坡”不同，如下图：L1就是按绝对值函数的“坡”下降的，而L2是按二次函数的“坡”下降。所以实际上在0附近，L1的下降速度比L2的下降速度要快。所以会非常快得降到0。因此L1偏向稀疏特征（可筛选出重要特征），L2主要用于防止过拟合（要求参数越小时，说明模型越简单）。</p>
+<p><img src="/2018/05/29/Regularization/./Regularization/20140504122926296.png" alt=""></p>
 
       
     </div>
@@ -412,12 +406,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/companies/" rel="tag"># companies</a>
-          
-        </div>
-      
 
       
       
@@ -427,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/29/查看 ErrElemExcessDistortion 的 Elements/" rel="next" title="查看 ErrElemExcessDistortion 的 Elements">
-                <i class="fa fa-chevron-left"></i> 查看 ErrElemExcessDistortion 的 Elements
+              <a href="/2018/05/26/基类派生类与指针/" rel="next" title="基类派生类与指针">
+                <i class="fa fa-chevron-left"></i> 基类派生类与指针
               </a>
             
           </div>
@@ -436,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/15/latex/" rel="prev" title="latex 公式语法速查">
-                latex 公式语法速查 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#赛题简介"><span class="nav-number">1.</span> <span class="nav-text">赛题简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比赛思路"><span class="nav-number">2.</span> <span class="nav-text">比赛思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预测模型"><span class="nav-number">2.1.</span> <span class="nav-text">预测模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#放置算法"><span class="nav-number">2.2.</span> <span class="nav-text">放置算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化的作用"><span class="nav-number">1.</span> <span class="nav-text">正则化的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L1-与-L2-正则的区别"><span class="nav-number">2.</span> <span class="nav-text">L1 与 L2 正则的区别</span></a></li></ol></div>
             
 
           </div>
