@@ -113,11 +113,11 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="decision_tree">
 <meta property="og:url" content="http://yoursite.com/2018/05/29/decision-tree/index.html">
-<meta property="og:site_name" content="Microke">
+<meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/05/29/decision-tree/decision-tree/decision_tree.png">
-<meta property="og:updated_time" content="2018-05-29T12:04:53.863Z">
+<meta property="og:updated_time" content="2018-05-29T12:14:21.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="decision_tree">
 <meta name="twitter:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>decision_tree | Microke</title>
+  <title>decision_tree | 微石的碎碎念</title>
   
 
 
@@ -196,7 +196,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Microke</span>
+        <span class="site-title">微石的碎碎念</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -286,13 +286,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/decision-tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Microke">
-      <meta itemprop="description" content="-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
       <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Microke">
+      <meta itemprop="name" content="微石的碎碎念">
     </span>
 
     
@@ -325,7 +325,7 @@
                 
               
 
-              <time title="Post created: 2018-05-29 14:31:57 / Updated at: 20:04:53" itemprop="dateCreated datePublished" datetime="2018-05-29T14:31:57+08:00">2018-05-29</time>
+              <time title="Post created: 2018-05-29 14:31:57 / Updated at: 20:14:21" itemprop="dateCreated datePublished" datetime="2018-05-29T14:31:57+08:00">2018-05-29</time>
             
 
             
@@ -384,6 +384,7 @@
 <li>当前属性集为空或所有样本在所有属性上取值相同，无法划分</li>
 <li>当前节点包含样本集为空。</li>
 </ol>
+<a id="more"></a>
 <p>节点划分伪代码棵表示为：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Generate_decision_tree(samples, attribute_list)&#123;</div><div class="line">创建结点 N；</div><div class="line"><span class="keyword">if</span> samples 都在同一个类C then   <span class="comment">//类标号属性的值均为C，其候选属性值不考虑</span></div><div class="line">    <span class="keyword">return</span> N 作为叶结点，以类C 标记；</div><div class="line"><span class="keyword">if</span> attribut_list 为空 then      </div><div class="line">    <span class="keyword">return</span> N 作为叶结点，标记为 samples 中最普通的类； <span class="comment">//类标号属性值数量最大的那个</span></div><div class="line">选择attribute_list 中具有最高信息增益的属性best_attribute；<span class="comment">//找出最好的划分属性</span></div><div class="line">标记结点 N 为best_attribute；</div><div class="line"><span class="keyword">for</span> each best_attribute 中的未知值a i <span class="comment">//将样本samples按照best_attribute进行划分</span></div><div class="line">    由结点 N 长出一个条件为 best_attribute = a i 的分枝；</div><div class="line">    设si 是samples 中best_attribute = a i 的样本的集合；<span class="comment">//a partition</span></div><div class="line">    <span class="keyword">if</span> si 为空 then</div><div class="line">        加上一个树叶，标记为 samples 中最普通的类；<span class="comment">//从样本中找出类标号数量最多的，作为此节点的标记</span></div><div class="line">    <span class="keyword">else</span> </div><div class="line">        加上一个由 Generate_decision_tree(si,attribute_list–best_attribute)返回的结点；<span class="comment">//对数据子集si,递归调用，此时候选属性已删除best_attribute</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <table>
@@ -640,10 +641,10 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.jpg"
-                alt="Microke" />
+                alt="微石" />
             
-              <p class="site-author-name" itemprop="name">Microke</p>
-              <p class="site-description motion-element" itemprop="description">-吾本贪婪,故而无妄; -吾本逍遥,故而不羁;</p>
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
           </div>
 
           
@@ -772,7 +773,7 @@
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Microke</span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
 
   
 
