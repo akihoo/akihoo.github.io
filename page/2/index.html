@@ -304,6 +304,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/leetcode_Backtracking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/23/leetcode_Backtracking/" itemprop="url">
+                  leetcode 之回溯问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-23 21:36:06" itemprop="dateCreated datePublished" datetime="2018-05-23T21:36:06+08:00">2018-05-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-05-26 10:55:15" itemprop="dateModified" datetime="2018-05-26T10:55:15+08:00">2018-05-26</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/23/leetcode_Backtracking/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/23/leetcode_Backtracking/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。（其实回溯法就是对隐式图的深度优先搜索算法）。 若用回溯法求问题的所有解时，要回溯到根，且根结点的所有可行的子树都要已被搜索遍才结束。 而若使用回溯法求任一个解时，只要搜索到问题的一个解就可以结束。</p>
+<h2 id="主要策略"><a href="#主要策略" class="headerlink" title="主要策略"></a>主要策略</h2><p>保存当前步骤，如果是一个解就输出；维护状态，使搜索路径（含子路径）尽量不重复。必要时，应该对不可能为解的部分进行剪枝(pruning)。</p>
+<h1 id="leetcode例题"><a href="#leetcode例题" class="headerlink" title="leetcode例题"></a>leetcode例题</h1><h2 id="22-Generate-Parentheses"><a href="#22-Generate-Parentheses" class="headerlink" title="22. Generate Parentheses"></a><a href="https://leetcode.com/problems/generate-parentheses/description/" target="_blank" rel="external">22. Generate Parentheses</a></h2><ul>
+<li>给出n个括号的排列组合，Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.[  “((()))”,  “(()())”,  “(())()”,  “()(())”,  “()()()”]</li>
+<li>思路：每个位置都进可以放 ( 或 ) ，但当此位置前没有单独的 ( 时，不能放置 )，建立一个变量记录没有配对的 ( 个数，然后递归求解。</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/23/leetcode_Backtracking/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/leetcode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -367,7 +538,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-05-27 09:18:36" itemprop="dateModified" datetime="2018-05-27T09:18:36+08:00">2018-05-27</time>
+                <time title="修改时间：2018-06-01 09:13:43" itemprop="dateModified" datetime="2018-06-01T09:13:43+08:00">2018-06-01</time>
               
             
           </span>
@@ -1898,176 +2069,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="url">
-                  ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-11-01 21:18:55" itemprop="dateCreated datePublished" datetime="2017-11-01T21:18:55+08:00">2017-11-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2017-11-02 13:05:33" itemprop="dateModified" datetime="2017-11-02T13:05:33+08:00">2017-11-02</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>aptitude 与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具基于大名鼎鼎的APT机制, 整合了 dselect 和 apt-get 的所有功能, 并提供的更多特性,特别是在依赖关系处理上。与 apt-get 不同的是，aptitude在处理依赖问题上更佳一些。举例来说，aptitude在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</p>
-</blockquote>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>安装直接 apt-get 就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install aptitude</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/01/ubuntu 未能满足的依赖关系？或许你可以用 aptitude 管理你的软件包/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2119,7 +2120,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -108,23 +108,27 @@
 
 
 
-  <meta name="description" content="吾本逍遥">
-<meta property="og:type" content="website">
-<meta property="og:title" content="微石的碎碎念">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h_{\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h_{\theta}(y)$。现在，为了计算">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习模型之BP神经网络">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/机器学习模型之BP神经网络/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="吾本逍遥">
+<meta property="og:description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h_{\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h_{\theta}(y)$。现在，为了计算">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/机器学习模型之BP神经网络/机器学习模型之BP神经网络/bp.png">
+<meta property="og:updated_time" content="2018-06-01T01:08:08.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微石的碎碎念">
-<meta name="twitter:description" content="吾本逍遥">
+<meta name="twitter:title" content="机器学习模型之BP神经网络">
+<meta name="twitter:description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h_{\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h_{\theta}(y)$。现在，为了计算">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/31/机器学习模型之BP神经网络/机器学习模型之BP神经网络/bp.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/机器学习模型之BP神经网络/"/>
 
 
 
@@ -134,7 +138,7 @@
   };
 </script>
 
-  <title>归档 | 微石的碎碎念</title>
+  <title>机器学习模型之BP神经网络 | 微石的碎碎念</title>
   
 
 
@@ -181,7 +185,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,7 +254,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
@@ -283,443 +287,231 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/机器学习模型之BP神经网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">机器学习模型之BP神经网络
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-31 15:10:06" itemprop="dateCreated datePublished" datetime="2018-05-31T15:10:06+08:00">2018-05-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-01 09:08:08" itemprop="dateModified" datetime="2018-06-01T09:08:08+08:00">2018-06-01</time>
+              
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 25 篇日志。 继续努力。
-      </span>
-      
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/31/机器学习模型之BP神经网络/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/31/机器学习模型之BP神经网络/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/31/机器学习模型之BP神经网络/" itemprop="url">
-              
-                <span itemprop="name">机器学习模型之BP神经网络</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-31T15:10:06+08:00"
-              content="2018-05-31" >
-          05-31
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/30/两个排序数组的中位数 Median of Two Sorted Arrays/" itemprop="url">
-              
-                <span itemprop="name">leetcode之两个排序数组的中位数 Median of Two Sorted Arrays</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-30T18:39:57+08:00"
-              content="2018-05-30" >
-          05-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/30/C++模板简介/" itemprop="url">
-              
-                <span itemprop="name">C++模板简介</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-30T09:36:45+08:00"
-              content="2018-05-30" >
-          05-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="训练神经网络的步骤"><a href="#训练神经网络的步骤" class="headerlink" title="训练神经网络的步骤"></a>训练神经网络的步骤</h1><p>训练神经网络：</p>
+<ol>
+<li>参数的随机初始化</li>
+<li>利用正向传播方法计算所有的$h_{\theta}(y)$</li>
+<li>编写计算代价函数 $J$ 的代码</li>
+<li>利用反向传播方法计算所有偏导数</li>
+<li>利用数值检验方法检验这些偏导数</li>
+<li>使用优化算法来最小化代价函数</li>
+</ol>
+<p>简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h_{\theta}(y)$。现在，为了计算代价函数的偏导数$\frac{\partial}{\partial\Theta^{(l)}_{ij}}J\left(\Theta\right)$，我们需要采用一种反向传播算法，也就是首先计算最后一层的误差，然后再一层一层反向求出各层的误差，直到倒数第二层。</p>
+<a id="more"></a>
+<h1 id="误差逆传播算法"><a href="#误差逆传播算法" class="headerlink" title="误差逆传播算法"></a>误差逆传播算法</h1><p>以西瓜书为例，如图所示的神经网络：</p>
+<p><img src="/2018/05/31/机器学习模型之BP神经网络/./机器学习模型之BP神经网络/bp.png" alt=""></p>
+<p>对训练样例$(x_k,y_k)$，神经网络输出为$(\hat{y}_1^k,\hat{y}_2^k…\hat{y}_i^k)$，则误差为：</p>
+<p>$$E_k=\frac{1}{2}\sum\limits_{j=1}^l(\hat{y}_j^k-y_j^k)^2$$</p>
+<p>参数更新的公式为：</p>
+<p>$$v \leftarrow v+\Delta v$$</p>
+<p>参数更新过程为：从输出层到输入层依次更新</p>
+<ol>
+<li>$w_{hj}$（隐层到输出层的权重）</li>
+<li>$v_{ij}$（输入层到隐层的权重）</li>
+</ol>
+<p>首先看$w_{hj}$，$\Delta w_{hj}=-\eta \frac{\partial E_k}{\partial w_{hj}}$，具体计算公式许使用链式法则：</p>
+<p>$$\frac{\partial E_k}{\partial w_{hj}}=\frac{\partial E_k}{\partial \hat{y}_j^k}\frac{\partial \hat{y}_j^k}{\partial \beta_j}\frac{\partial \beta_j}{\partial w_{hj}}$$</p>
+<p>根据$\beta_j$的定义，有<br>$$\frac{\partial \beta_j}{\partial w_{hj}}=b_h$$</p>
+<p>激活函数为sigmoidh函数时：<br>$f(x)=\frac{1}{1+e^{-x}}$<br>其导数可用自身表示为<br>$$f^\prime(x)=f(x)(1-f(x))$$<br>令输出层误差为：<br>$$g_j = -\frac{\partial E_k}{\partial \hat{y}_j^k}\frac{\partial \hat{y}_j^k}{\partial \beta_j}=-(\hat{y}_j^k-y_j^k)f^\prime(\beta_j-\theta_j)=\hat{y}_j^k(1-\hat{y}_j^k)(y_j^k-\hat{y}<em>j^k)$$<br>带入链式法则得到（试了下，markdown下好像不能给公式编号）<br>$$\Delta w</em>{hj}=\eta g_j b_h$$<br>类似有<br>$$\theta_j=-\eta g_j$$<br>$$\Delta v_{ih}=\eta e_h x_i$$<br>$$\Delta \gamma_h=-\eta e_h$$</p>
+<p>其中$\eta$代表步长。</p>
+<blockquote>
+<p>有关误差传递的计算可以参考<a href="http://www.cnblogs.com/charlotte77/p/5629865.html" target="_blank" rel="external">Charlotte77</a>、<a href="https://zhuanlan.zhihu.com/p/24801814" target="_blank" rel="external">通俗理解神经网络BP传播算法</a>。更加详细的推导过程可以参考<a href="https://blog.csdn.net/google19890102/article/details/32723459/" target="_blank" rel="external">null的专栏</a>、<a href="https://blog.csdn.net/zb1165048017/article/details/51518347" target="_blank" rel="external">风翼冰舟的博客</a>、<a href="https://www.jianshu.com/p/3d96dbf3f764" target="_blank" rel="external">东皇Amrzs</a></p>
+</blockquote>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/29/C++纯虚函数/" itemprop="url">
-              
-                <span itemprop="name">C++纯虚函数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-29T21:44:45+08:00"
-              content="2018-05-29" >
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/29/decision-tree/" itemprop="url">
-              
-                <span itemprop="name">决策树算法总结（decision_tree）</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-29T14:31:57+08:00"
-              content="2018-05-29" >
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/29/Regularization/" itemprop="url">
-              
-                <span itemprop="name">Regularization</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-29T12:01:02+08:00"
-              content="2018-05-29" >
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/26/基类派生类与指针/" itemprop="url">
-              
-                <span itemprop="name">基类派生类与指针</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-26T09:14:05+08:00"
-              content="2018-05-26" >
-          05-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/24/C++ 重载、重写、隐藏/" itemprop="url">
-              
-                <span itemprop="name">C++ 重载、重写、隐藏</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-24T18:39:57+08:00"
-              content="2018-05-24" >
-          05-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/24/c++中static的用法详解/" itemprop="url">
-              
-                <span itemprop="name">c++中static的用法详解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-24T16:25:07+08:00"
-              content="2018-05-24" >
-          05-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/24/lr/" itemprop="url">
-              
-                <span itemprop="name">linear regression</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-24T15:10:06+08:00"
-              content="2018-05-24" >
-          05-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/两个排序数组的中位数 Median of Two Sorted Arrays/" rel="next" title="leetcode之两个排序数组的中位数 Median of Two Sorted Arrays">
+                <i class="fa fa-chevron-left"></i> leetcode之两个排序数组的中位数 Median of Two Sorted Arrays
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -740,8 +532,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -845,6 +646,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#训练神经网络的步骤"><span class="nav-number">1.</span> <span class="nav-text">训练神经网络的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差逆传播算法"><span class="nav-number">2.</span> <span class="nav-text">误差逆传播算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -992,6 +809,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
 
   
 
