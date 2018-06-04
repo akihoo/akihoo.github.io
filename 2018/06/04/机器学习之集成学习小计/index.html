@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
-<meta name="keywords" content="C++">
+  <meta name="description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ Primer 知识点总结（第三章）">
-<meta property="og:url" content="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/index.html">
+<meta property="og:title" content="集成学习小计">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/机器学习之集成学习小计/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta property="og:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-10T10:51:32.910Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/04/机器学习之集成学习小计/机器学习/Adaboost.png">
+<meta property="og:updated_time" content="2018-06-04T15:52:27.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ Primer 知识点总结（第三章）">
-<meta name="twitter:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta name="twitter:title" content="集成学习小计">
+<meta name="twitter:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/04/机器学习之集成学习小计/机器学习/Adaboost.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/机器学习之集成学习小计/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>C++ Primer 知识点总结（第三章） | 微石的碎碎念</title>
+  <title>集成学习小计 | 微石的碎碎念</title>
   
 
 
@@ -305,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/机器学习之集成学习小计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -322,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++ Primer 知识点总结（第三章）
+          <h1 class="post-title" itemprop="name headline">集成学习小计
               
             
           </h1>
@@ -347,24 +349,12 @@
                 
               
 
-              <time title="创建时间：2017-11-13 14:09:40" itemprop="dateCreated datePublished" datetime="2017-11-13T14:09:40+08:00">2017-11-13</time>
+              <time title="创建时间：2018-06-04 23:49:00 / 修改时间：23:52:27" itemprop="dateCreated datePublished" datetime="2018-06-04T23:49:00+08:00">2018-06-04</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-05-10 18:51:32" itemprop="dateModified" datetime="2018-05-10T18:51:32+08:00">2018-05-10</time>
               
             
           </span>
@@ -378,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/11/13/C++ Primer 知识点总结 （第三章）/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/13/C++ Primer 知识点总结 （第三章）/" itemprop="commentCount"></span>
+                <a href="/2018/06/04/机器学习之集成学习小计/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/04/机器学习之集成学习小计/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -408,147 +398,86 @@
 
       
         <blockquote>
-<p>部分内容转载自<a href="https://www.cnblogs.com/citron/p/6145291.html" target="_blank" rel="external">cnblogs</a>、<a href="https://www.cnblogs.com/danielStudy/p/7127564.html" target="_blank" rel="external">Daniel_z</a></p>
+<p>本文为阅读西瓜书的总结笔记。部分参考<a href="http://izhaoyi.top/2017/07/03/ensemble/" target="_blank" rel="external">懒死骆驼</a></p>
 </blockquote>
-<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ol>
-<li>头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。</li>
+<h1 id="何为集成学习"><a href="#何为集成学习" class="headerlink" title="何为集成学习"></a>何为集成学习</h1><p>集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。</p>
+<h2 id="集成学习的关键"><a href="#集成学习的关键" class="headerlink" title="集成学习的关键"></a>集成学习的关键</h2><p>如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的<strong>多样性与准确性</strong>。</p>
+<p>即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。</p>
+<p>如何产生并结合好而不同的个体学习器是集成学习的<strong>核心</strong>。</p>
+<h2 id="集成学习的分类"><a href="#集成学习的分类" class="headerlink" title="集成学习的分类"></a>集成学习的分类</h2><p>目前集成学习主要可分为2大类，即：</p>
+<ol>
+<li>boosting：弱学习器之间存在强依赖关系，必须串行生成的序列化方法。</li>
+<li>bagging：弱学习器之间不存在强依赖关系，可以并行生成。</li>
 </ol>
+<p>bagging和boosting分别是关注降低方差和降低偏差的两个代表，GDBT的每棵树生成都要比上棵树偏差小。</p>
 <a id="more"></a>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><ol>
-<li>getline(cin , stringname) ：从输入流中读入内容直到读入换行符，保留空白符，但换行符不存入string对象中</li>
-<li>字面值与string：字符字面值和字符串字面值可以隐式转化为string对象</li>
-<li>empty 函数根据 string 是否为空返回布尔值； size_type 表示各自类型的长度或下标，返回无符号整数，类型为 string::size_type</li>
-<li>常用函数：islower(c) c是小写字母时为真；isupper(c) c是大写字母时为真 ； tolower(c) c是大写字母时，输出 c 对应的小写字母，否则原样输出 c ；toupper(c) c是小写字母时，输出 c 对应的大写字母，否则原样输出 c ；</li>
-</ol>
-<h1 id="向量和数组"><a href="#向量和数组" class="headerlink" title="向量和数组"></a>向量和数组</h1><ol>
-<li>下标运算符[]：vector或string的下标运算符可用于访问已存在的元素，而不能用于添加元素。添加元素需使用(+= or append or push_back for string) and (insert or push_back for vector)</li>
-<li>迭代器 end() 指向尾元素的下一位置，不指向具体元素，不能解引用或递增</li>
-<li>复杂数组声明的理解：从数组名字开始按照由内向外的顺序阅读，如int <em>(&amp;a)[10]表示a是对数组引用，该数组包含10个int</em></li>
-<li>数组的缺点：数组的大小是确定不变的，不可以向数组中添加元素，丧失了vectoer的灵活性</li>
-<li>不可以将整个数组赋值给另一个数组，只能逐个元素的拷贝；可以直接将整个vector拷贝给另一个vector</li>
-<li>多维数组初始化：使用花括号的形式，未列出的元素执行默认值初始化</li>
-<li>范围for处理多维数组：除最内层循环外，其他所有循环的控制变量都应该是引用类型，以避免这些数组形式的元素被自动转换成指向数组首元素的指针</li>
-<li>定义和初始化Vector：<ul>
-<li>默认初始化：vector<t> v1;</t></li>
-<li>拷贝初始化：vector<t> v2=v1;</t></li>
-<li>直接初始化：vector<t> v3(v2);</t></li>
-<li>指定含有多个不相同初始值的初始化：vector <t> v4{a,b,c,d};</t></li>
-<li>指定含有多个相同初始值的初始化：vector<t> v5(10,-1);</t></li>
+<h1 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h1><p>首先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本分布进行调整，使得先前基学习器做错的训练样本在后续受到更多的关注，然后基于调整后的样本分布来训练下一个基学习器；如此重复进行，直至基学习器数目达到事先指定的值T,最终将这T个基学习器进行加权组合。</p>
+<p>举个例子：输入数据$(\mathbf{x},\mathbf{y})$，通过一个弱学习器得到 $f_1(\mathbf{x})=\mathbf{y^*}$ ，为了使$f(x) \rightarrow \mathbf{y}$，则可用第二个学习器学习之前学习器的“误差”（不足） $\mathbf{y}-f_1(x)$，即用数据$(\mathbf{x},\mathbf{y}-f_1(x))$训练学习器$f_2(\mathbf{x})$，不停训练下去，直到误差小于一定值或迭代达上限步数。</p>
+<h2 id="代表Adaboost"><a href="#代表Adaboost" class="headerlink" title="代表Adaboost"></a>代表Adaboost</h2><p>首先看Adaboost如何解决集成学习中的关键问题：</p>
+<ol>
+<li>在得到一系列弱分类器后，如何将弱分类器组合成一个强分类器？<ul>
+<li>答：有很多方法，比较基础的是线性加权模型$H(x)=\sum\limits_{t=1}^{T}\alpha_th_t(x)$</li>
 </ul>
 </li>
-<li>定义和初始化数组：<ul>
-<li>int arr[42]   //含有42个整形元素的数组；</li>
-<li>int *arr[10]  //含有10个整型指针的数组</li>
-<li>字符数组也可以使用花括号初始化，但是一定注意后面需要留一个位置给‘\0’<ul>
-<li>char a1[]={‘C’,’+’,’+‘，‘\0’};</li>
-<li>char a2[]=”C++”;  //a2的维度为4；</li>
-<li>char a3[3]=”C++”;//错误：”C++”，这个字符串是4个元素。</li>
-<li>char a4[]={‘C’,’+’，’+’}； //这种定义是允许的，但是后面会有一系列的问题。</li>
-</ul>
-</li>
-<li>不允许将数组的内容拷贝给其他数组作为初始值，也不能用数组为其他数组赋值：<ul>
-<li>int a[]={0,1,2};</li>
-<li>int a2[]=a;   //错误，不允许将一个数组作为初始值给另外一个数组</li>
-<li>a2=a;      //错误，不能把一个数组直接赋值给另外一个数组</li>
-</ul>
-</li>
-<li>理解复杂的数组声明<pre><code>- int *ptrs[10];  //这个数组有10个元素，每个元素都是int指针。
-</code></pre><ul>
-<li>int &amp;refs[10];  //错误，数组里面应该是对象，不能是引用。（引用不占空间）</li>
-<li>int (*Parray)[10]=&arr; //Parray指向一个含有10个int类型的元素的数组。</li>
-<li>int (&amp;arrRef)[10]=arr; //arrRef引用一个含有10个整型元素的数组。</li>
-<li>int *(&amp;arry)[10]=ptrs；//arry引用一个含有10个指向int类型的指针的数组</li>
-<li>//在编译器上试了一下把括号去掉的效果</li>
-<li>int *&amp;array[10]=ptrs;编译器会报错了，报错内容是不允许定义引用的数组。</li>
-<li>继续测试： int **array[10];这样的数组初始化必须是{ptr1,ptr2,ptr3…};</li>
-<li>因此如果对于定义数组，不打括号的话，数组里面的元素应该是数组名字左边的所有声明符加起来。</li>
-<li>书上说，对于数组的理解应该按照由内到外理解。但是按照之前对指针类型的分析，这里可以这样分析。首先看这个数组里面的元素类型是什么：int *ref[10];</li>
-<li>可以这样看（int *）ref[10]；也就是说这个数组里面的元素都是指针。而</li>
-<li>int (*Parray)[10]=&amp;arr；这种类型，首先数组里面的元素是int型的，再看parray它就是一个指针了。指向这个数组。</li>
-</ul>
-</li>
+<li>在每一轮训练中，如何改变训练数据的权值/概率分布？<ul>
+<li>提高那些被前一轮弱分类器错误分类样本的权值，而降低那些被正确分类样本的权值。（让被错误分类的样本得到当前弱分类器更多的关注）</li>
 </ul>
 </li>
 </ol>
-<h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><ol>
-<li><p>assign()//用于赋予新值，assign函数用于将一个字符串的部分内容赋值给另一个string对象</p>
-<ul>
-<li>s2.assign(s1,0,3);//s1 = “hello”，s2的值为“hel”</li>
+<p>Adaboost的核心便在于更新这2个权值，一个是弱分类器结合成强分类器的权值，另一个是训练下一个弱分类器的时，样本所占的权值（分类错误的样本更受关注）。</p>
+<p>算法流程（来自西瓜书）：</p>
+<p><img src="/2018/06/04/机器学习之集成学习小计/./机器学习/Adaboost.png" alt="Adaboost"></p>
+<p>Adaboost算法在每次得到$H_{t-1}$之后对样本分布进行调整，使下一轮的基学习器能够纠正$H_{t-1}$的错误。</p>
+<h1 id="bagging"><a href="#bagging" class="headerlink" title="bagging"></a>bagging</h1><p>bagging方法的基本思想是：使用不同的训练集训练基学习器，可以使学习器差异化，可以采用有放回的抽样方式，可以采样出T个训练集，并训练T个基学习器。对预测输出进行结合时，通常采用投票法，对回归分析则采用简单平均法。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>高效(训练一个bagging集成与训练一个基学习器复杂度同阶)</li>
+<li>与Adaboost不同，bagging可以不经修改地适用于多分类以及回归问题</li>
+<li>包外估计——自助采样过程中剩余的样本可以作为验证集来对泛化性能进行“包外估计”</li>
+<li>当基学习器为决策树时，还可使用包外样本来辅助剪枝，或用于估计决策树中各结点的后验概率以辅助对零训练样本节点的处理。</li>
+<li>当基学习器为神经网络时，可使用包外样本来辅助早停。</li>
+</ol>
+<p>从偏差-方差角度看，Bagging主要关注降低方差，因此它在不剪枝决策树、神经网络等易受样本扰动的学习器上效用更为明显。</p>
+<h2 id="拓展变体：随机森林（rf）"><a href="#拓展变体：随机森林（rf）" class="headerlink" title="拓展变体：随机森林（rf）"></a>拓展变体：随机森林（rf）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>就如同名字一样，rf是以决策树为基学习器的bagging集成，为保持多样性，rf<strong>在决策树的训练过程中引入了随机属性选择</strong>。具体差异为：</p>
+<ol>
+<li>传统决策树在划分节点时，将从当前节点的属性集合（假定有d个属性）中选择一个最优节点划分方式。</li>
+<li>rf的决策树在属性划分时，将从当前节点的属性集合（假定有d个属性）随机选择k个，然后选择一个最优属性。</li>
+</ol>
+<h3 id="与bagging比较"><a href="#与bagging比较" class="headerlink" title="与bagging比较"></a>与bagging比较</h3><ol>
+<li>随机属性选择有助于提升决策树的多样性，但对单个决策树而言性能将会下降（不一定能选择最优属性划分），因此rf初始性能较差。随着个体学习器的增加，rf将收敛到更低的训练误差（相较于传统bagging）</li>
+<li>训练效率更快，因为只对节点的属性子集进行考察。</li>
+</ol>
+<h1 id="结合策略"><a href="#结合策略" class="headerlink" title="结合策略"></a>结合策略</h1><h2 id="学习器结合的好处"><a href="#学习器结合的好处" class="headerlink" title="学习器结合的好处"></a>学习器结合的好处</h2><ol>
+<li>统计的角度：假设空间很大时，可能存在多个假设在训练集上达到同等性能，但学习其可能误选导致泛化性能不佳，结合多个学习器可以减小该风险</li>
+<li>计算的角度：降低陷入糟糕局部极小点的风险</li>
+<li>表示的角度：结合多个学习器可扩大假设空间，对于真实假设在假设空间之外的情形可能学得更好的近似</li>
+</ol>
+<h2 id="结合策略-1"><a href="#结合策略-1" class="headerlink" title="结合策略"></a>结合策略</h2><ol>
+<li>平均法(Averaging)<ol>
+<li>简单平均法</li>
+<li>加权平均法——BMA(贝叶斯模型平均：基于后验概率来为不同模型赋予权重)</li>
+</ol>
+</li>
+<li>投票法(Voting)<ol>
+<li>多数投票法<ul>
+<li>绝对多数投票法：若某标记得票过半数则预测为该标记，否则拒绝预测（可靠性）</li>
+<li>相对多数投票法：预测为得票最多的标记</li>
 </ul>
 </li>
-<li><p>swap() //交换两个字符串的内容</p>
-<ul>
-<li>swap(s1,s2);//s1=”hello”,s2=”world”，swap函数将s1和s2的内容交换，现在s1=”world”,s2=”hello”</li>
-</ul>
-</li>
-<li><p>+=、append()、push_back()//在字符串尾部追加内容,”+=”可追加string对象，字符以及C风格字符串，append函数则可以追加string对象和C风格字符串，push_back函数则只能追加字符</p>
-<ul>
-<li>string s1 = “hello”;</li>
-<li>string s2 = “ world”;</li>
-<li>s1 += s2;//正确，s1的值为”hello world“</li>
-<li>s1 +=”world”;// 正确，s1的值为”hello world”</li>
-<li>s1 +=’c’; //正确，s1的值为”helloc”</li>
-<li>s1.append(s2);//正确，s1的值为”hello world”</li>
-<li>s1.append(“ world”);//正确，s1的值为”hello world”</li>
-<li>s1.append(‘c’);//错误，append函数不支持追加字符</li>
-<li>s1.push_back(s2);//错误</li>
-<li>s1.push_back(“world”);//错误</li>
-<li>s1.push_back(‘c’);//正确</li>
-</ul>
-</li>
-<li><p>insert()//用于插入字符串</p>
-<ul>
-<li>string s1 = “hello”;</li>
-<li>s1.insert(0,”world “);//s1的值为world hello</li>
-</ul>
-</li>
-<li><p>erase()//用于删除字符的</p>
-<ul>
-<li>string str(“This is an example phrase.”);</li>
-<li>string::iterator it;//迭代器</li>
-<li>str.erase(10,8);//str的值为”This is an phrase.”,删除了从位置10开始的8个字符</li>
-<li>it = str.begin()+9;//迭代器位置为9</li>
-<li>str.erase(it);//删除了从it迭代器位置处的一个字符，str=”This is a phrase.”</li>
-<li>str.erase(str.begin()+5,str.end()-7);//删除两个参数之间的所有字符，str=”This phrase.”</li>
+<li>加权投票法</li>
+<li>若按个体学习器输出值类型划分<ul>
+<li>硬投票：预测为0/1</li>
+<li>软投票：相当于对后验概率的一个估计</li>
 </ul>
 </li>
 </ol>
-<ol start="6">
-<li><p>clear()函数和~string()//都是用来删除全部字符的</p>
-<ul>
-<li>str.clear();//删除str的全部字符，此时str为一个空串</li>
-<li>str.~string();//销毁所有字符，释放内存</li>
-</ul>
 </li>
-<li><p>replace()函数，用于替换字符</p>
-<ul>
-<li>string line = “this@ is@ a test string!”;</li>
-<li>line = line.replace(line.find(“@”),1,””);//将line中从find的@位置开始替换一个长度的字符为”” 结果为this is@ a test string!</li>
-</ul>
-</li>
-<li><p>==、！=、&lt;、&lt;=、&gt;、&gt;=、compare()//比较字符串</p>
-</li>
-<li><p>size()函数和length()函数，返回字符串的字符数，从第一个字符到’\0’的长度，\0表示空字符，作为字符串结束符使用，\代表转义字符</p>
-</li>
-<li><p>empty()//判断字符串是否为空</p>
-</li>
+<li>学习法<br> Stacking:先从初始数据集训练出初级学习器，然后生成一个新的数据集用于训练元学习器，在这个新数据集中，初级学习器的输出被当作样例输入特征，而初始样本的标记仍被当作样例标记；一般使用交叉验证法或留一法来用训练初级学习器未使用的样本来产生元学习器的训练样本</li>
 </ol>
-<h1 id="vector-操作"><a href="#vector-操作" class="headerlink" title="vector 操作"></a>vector 操作</h1><ol>
-<li>insert(p, t) //在迭代器p之前插入t元素</li>
-<li>erase(p) //删除p所指元素</li>
-<li>push_back(t) //向尾部添加t元素</li>
-<li>pop_back() //删除末尾元素</li>
-<li>clear() //清空vector</li>
-<li>size() //返回的是vector的大小</li>
-<li>begin()、end() //返回指向开头与末尾后一位的迭代器</li>
-<li>指向常量的开始指针： vec.cbegin(); vec.cend(); //意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</li>
-<li>swap() //交换vector</li>
-<li>元素的访问：vec.front();vec.back();访问首尾元素</li>
-<li>有关算法（需要头文件#include<algorithm>）<ul>
-<li>reverse(vec.begin(),vec.end()); //将元素翻转，即逆序排列！参数为2个迭代器</li>
-<li>sort(vec.begin(),vec.end()); //(默认是按升序排列,即从小到大).</li>
-</ul>
-</algorithm></li>
+<h1 id="多样性的增强方式"><a href="#多样性的增强方式" class="headerlink" title="多样性的增强方式"></a>多样性的增强方式</h1><ol>
+<li>数据样本扰动(给定初始数据集，可从中产生不同的数据子集，再利用不同的数据子集训练出不同的个体学习器，通常基于采样法),适用于不稳定学习器：决策树、神经网络</li>
+<li>输入属性扰动(从初始属性集中抽取若干个属性子集、基于每个属性子集训练一个基学习器（如随机子空间算法），最后结合),适用于包含大量冗余属性的数据</li>
+<li>输出表示扰动(对输出表示进行操纵，比如1、对训练样本的类标记稍作变动（翻转法）  2、对输出表示进行转化，如输出调制法  3、将原任务拆解成多个可同时求解的子任务，如Ecoc法)</li>
+<li>算法参数扰动(随机设置不同的参数，比如 1、负相关法 2、对参数较少的算法，可将其学习过程中某些环节用其他类似方式替代)</li>
 </ol>
 
       
@@ -570,7 +499,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -583,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/13/C++ Primer 知识点总结 （第二章）/" rel="next" title="C++ Primer 知识点总结（第二章）">
-                <i class="fa fa-chevron-left"></i> C++ Primer 知识点总结（第二章）
+              <a href="/2018/06/04/OJ读取输入样例/" rel="next" title="OJ读取输入样例">
+                <i class="fa fa-chevron-left"></i> OJ读取输入样例
               </a>
             
           </div>
@@ -592,10 +521,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/29/查看 ErrElemExcessDistortion 的 Elements/" rel="prev" title="查看 ErrElemExcessDistortion 的 Elements">
-                查看 ErrElemExcessDistortion 的 Elements <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -773,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量和数组"><span class="nav-number">3.</span> <span class="nav-text">向量和数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">4.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-操作"><span class="nav-number">5.</span> <span class="nav-text">vector 操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为集成学习"><span class="nav-number">1.</span> <span class="nav-text">何为集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集成学习的关键"><span class="nav-number">1.1.</span> <span class="nav-text">集成学习的关键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成学习的分类"><span class="nav-number">1.2.</span> <span class="nav-text">集成学习的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boosting"><span class="nav-number">2.</span> <span class="nav-text">boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代表Adaboost"><span class="nav-number">2.1.</span> <span class="nav-text">代表Adaboost</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bagging"><span class="nav-number">3.</span> <span class="nav-text">bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展变体：随机森林（rf）"><span class="nav-number">3.2.</span> <span class="nav-text">拓展变体：随机森林（rf）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">3.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与bagging比较"><span class="nav-number">3.2.2.</span> <span class="nav-text">与bagging比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结合策略"><span class="nav-number">4.</span> <span class="nav-text">结合策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习器结合的好处"><span class="nav-number">4.1.</span> <span class="nav-text">学习器结合的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合策略-1"><span class="nav-number">4.2.</span> <span class="nav-text">结合策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多样性的增强方式"><span class="nav-number">5.</span> <span class="nav-text">多样性的增强方式</span></a></li></ol></div>
             
 
           </div>
