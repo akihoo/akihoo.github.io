@@ -108,25 +108,33 @@
 
 
 
-  <meta name="description" content="在OJ、牛客网上，经常有在线编程题需要读取输入样例,另外可能还需要一定的格式化输出知识，之前一直不太会这方面，此处来汇总一下。  python版python的比较简单，可以直接通过input()语句读取一整行内容，并返回str类型。具体使用如下：123456789101112&amp;gt;&amp;gt;&amp;gt; a = input(&quot;input:&quot;)input:123&amp;gt;&amp;gt;&amp;gt; a&apos;123&apos;&amp;">
-<meta name="keywords" content="-leetcode">
+  <meta name="description" content="本文转载自长安CAE  动力学问题在讨论隐式与显式动力学之前，先讨论一下动力学问题和静力学问题。在求解静力学问题时没有时间的概念，即使在载荷步控制力有Time这个选项，但是这个Time的含义更多的是载荷步。Time前后的求解过程相互没有影响。 动力学问题的特点是施加到结构上的外载荷的大小和方向可能随着时间的变化而发生变化，使结构产生速度和加速度。在用有限元求解静力学问题时主要是求矩阵方程组的问题">
+<meta name="keywords" content="有限元">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OJ读取输入样例">
-<meta property="og:url" content="http://yoursite.com/2018/06/04/OJ读取输入样例/index.html">
+<meta property="og:title" content="【转载】有限元的隐式与显式动力学">
+<meta property="og:url" content="http://yoursite.com/2018/06/09/有限元的隐式与显式动力学/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="在OJ、牛客网上，经常有在线编程题需要读取输入样例,另外可能还需要一定的格式化输出知识，之前一直不太会这方面，此处来汇总一下。  python版python的比较简单，可以直接通过input()语句读取一整行内容，并返回str类型。具体使用如下：123456789101112&amp;gt;&amp;gt;&amp;gt; a = input(&quot;input:&quot;)input:123&amp;gt;&amp;gt;&amp;gt; a&apos;123&apos;&amp;">
+<meta property="og:description" content="本文转载自长安CAE  动力学问题在讨论隐式与显式动力学之前，先讨论一下动力学问题和静力学问题。在求解静力学问题时没有时间的概念，即使在载荷步控制力有Time这个选项，但是这个Time的含义更多的是载荷步。Time前后的求解过程相互没有影响。 动力学问题的特点是施加到结构上的外载荷的大小和方向可能随着时间的变化而发生变化，使结构产生速度和加速度。在用有限元求解静力学问题时主要是求矩阵方程组的问题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-04T15:54:11.898Z">
+<meta property="og:image" content="http://s5.sinaimg.cn/mw690/001PZA97zy716Vq4Ysc24&690">
+<meta property="og:image" content="http://s2.sinaimg.cn/mw690/001PZA97zy716VqzSIV21&690">
+<meta property="og:image" content="http://s12.sinaimg.cn/mw690/001PZA97zy716Vr61V93b&690">
+<meta property="og:image" content="http://s7.sinaimg.cn/mw690/001PZA97zy716VrJKaG76&690">
+<meta property="og:image" content="http://s7.sinaimg.cn/large/001PZA97zy716VsD5WKb6&690">
+<meta property="og:image" content="http://s6.sinaimg.cn/mw690/001PZA97zy716Vtc6Oxa5&690">
+<meta property="og:image" content="http://s15.sinaimg.cn/mw690/001PZA97zy716VuesqO3e&690">
+<meta property="og:updated_time" content="2018-06-09T03:04:33.068Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OJ读取输入样例">
-<meta name="twitter:description" content="在OJ、牛客网上，经常有在线编程题需要读取输入样例,另外可能还需要一定的格式化输出知识，之前一直不太会这方面，此处来汇总一下。  python版python的比较简单，可以直接通过input()语句读取一整行内容，并返回str类型。具体使用如下：123456789101112&amp;gt;&amp;gt;&amp;gt; a = input(&quot;input:&quot;)input:123&amp;gt;&amp;gt;&amp;gt; a&apos;123&apos;&amp;">
+<meta name="twitter:title" content="【转载】有限元的隐式与显式动力学">
+<meta name="twitter:description" content="本文转载自长安CAE  动力学问题在讨论隐式与显式动力学之前，先讨论一下动力学问题和静力学问题。在求解静力学问题时没有时间的概念，即使在载荷步控制力有Time这个选项，但是这个Time的含义更多的是载荷步。Time前后的求解过程相互没有影响。 动力学问题的特点是施加到结构上的外载荷的大小和方向可能随着时间的变化而发生变化，使结构产生速度和加速度。在用有限元求解静力学问题时主要是求矩阵方程组的问题">
+<meta name="twitter:image" content="http://s5.sinaimg.cn/mw690/001PZA97zy716Vq4Ysc24&690">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/04/OJ读取输入样例/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/09/有限元的隐式与显式动力学/"/>
 
 
 
@@ -136,7 +144,7 @@
   };
 </script>
 
-  <title>OJ读取输入样例 | 微石的碎碎念</title>
+  <title>【转载】有限元的隐式与显式动力学 | 微石的碎碎念</title>
   
 
 
@@ -305,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/OJ读取输入样例/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/有限元的隐式与显式动力学/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -322,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OJ读取输入样例
+          <h1 class="post-title" itemprop="name headline">【转载】有限元的隐式与显式动力学
               
             
           </h1>
@@ -347,7 +355,7 @@
                 
               
 
-              <time title="创建时间：2018-06-04 21:49:00 / 修改时间：23:54:11" itemprop="dateCreated datePublished" datetime="2018-06-04T21:49:00+08:00">2018-06-04</time>
+              <time title="创建时间：2018-06-09 10:28:48 / 修改时间：11:04:33" itemprop="dateCreated datePublished" datetime="2018-06-09T10:28:48+08:00">2018-06-09</time>
             
 
             
@@ -366,8 +374,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/04/OJ读取输入样例/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/04/OJ读取输入样例/" itemprop="commentCount"></span>
+                <a href="/2018/06/09/有限元的隐式与显式动力学/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/09/有限元的隐式与显式动力学/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -396,113 +404,34 @@
 
       
         <blockquote>
-<p>在OJ、牛客网上，经常有在线编程题需要读取输入样例,另外可能还需要一定的格式化输出知识，之前一直不太会这方面，此处来汇总一下。</p>
+<p>本文转载自<a href="http://blog.sina.com.cn/s/blog_6465f2ed0102x32u.html" target="_blank" rel="external">长安CAE</a></p>
 </blockquote>
-<h1 id="python版"><a href="#python版" class="headerlink" title="python版"></a>python版</h1><p>python的比较简单，可以直接通过<code>input()</code>语句读取一整行内容，并返回str类型。具体使用如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = input(<span class="string">"input:"</span>)</div><div class="line">input:<span class="number">123</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line"><span class="string">'123'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(a)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">str</span>'&gt;</span></div><div class="line">&gt;&gt;&gt; a = int(input("input:"))</div><div class="line">input:<span class="number">123</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line"><span class="number">123</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(a)</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">int</span>'&gt;</span></div></pre></td></tr></table></figure></p>
+<h1 id="动力学问题"><a href="#动力学问题" class="headerlink" title="动力学问题"></a>动力学问题</h1><p>在讨论隐式与显式动力学之前，先讨论一下动力学问题和静力学问题。在求解静力学问题时没有时间的概念，即使在载荷步控制力有Time这个选项，但是这个Time的含义更多的是载荷步。Time前后的求解过程相互没有影响。</p>
+<p>动力学问题的特点是施加到结构上的外载荷的大小和方向可能随着时间的变化而发生变化，使结构产生速度和加速度。在用有限元求解静力学问题时主要是求矩阵方程组的问题，如下所示，只需要考虑结构的刚度矩阵。</p>
+<p><img src="http://s5.sinaimg.cn/mw690/001PZA97zy716Vq4Ysc24&amp;690" alt="有限元的隐式与显式动力学"></p>
 <a id="more"></a>
-<p>如果一行有多个数字，则会得到类似<code>&#39;1 2 3&#39;</code>的字符串，可以使用<code>split()</code>分解成单个字符，接下来就可以给返回list，或用map函数处理。如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#eg.1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = input(<span class="string">"input:"</span>).split()</div><div class="line">input:<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>]</div><div class="line"><span class="comment">#eg.2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = [int(i) <span class="keyword">for</span> i <span class="keyword">in</span> input(<span class="string">"input:"</span>).split()]</div><div class="line">input:<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"><span class="comment">#eg.3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n, m = map(int, input().split())</div><div class="line"><span class="number">1</span> <span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>n</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>m</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure></p>
-<h1 id="C-版"><a href="#C-版" class="headerlink" title="C++版"></a>C++版</h1><p>C++ 通常使用cin函数读取数据，通常用到的方法有cin&gt;&gt;，cin.get，cin.getline。cin函数在std命名空间中。</p>
-<h2 id="cin-gt-gt"><a href="#cin-gt-gt" class="headerlink" title="cin&gt;&gt;"></a>cin&gt;&gt;</h2><ol>
-<li>cin&gt;&gt;等价于cin.operator&gt;&gt;()，即调用成员函数operator&gt;&gt;()进行读取数据。 </li>
-<li>cin&gt;&gt;会忽略空格、tab或换行这些分隔符,并继续读取下一个字符。</li>
-</ol>
-<h2 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h2><p>scanf函数原型在头文件“stdio.h”，是C语言风格的通用终端格式化输入函数。</p>
-<p>其调用格式为:      scanf(“&lt;格式化字符串&gt;”，&lt;地址表&gt;); 例如：<code>scanf(&quot;%d %d&quot;,&amp;a,&amp;b);</code></p>
-<h1 id="格式化输入输出"><a href="#格式化输入输出" class="headerlink" title="格式化输入输出"></a>格式化输入输出</h1><table>
-<thead>
-<tr>
-<th>格式字符</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%a</td>
-<td style="text-align:center">读入一个浮点值(仅C99有效)</td>
-</tr>
-<tr>
-<td>%A</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%c</td>
-<td style="text-align:center">读入一个字符</td>
-</tr>
-<tr>
-<td>%d</td>
-<td style="text-align:center">读入十进制整数</td>
-</tr>
-<tr>
-<td>%i</td>
-<td style="text-align:center">读入十进制，八进制，十六进制整数</td>
-</tr>
-<tr>
-<td>%o</td>
-<td style="text-align:center">读入八进制整数</td>
-</tr>
-<tr>
-<td>%x</td>
-<td style="text-align:center">读入十六进制整数</td>
-</tr>
-<tr>
-<td>%X</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%s</td>
-<td style="text-align:center">读入一个字符串</td>
-</tr>
-<tr>
-<td>%f</td>
-<td style="text-align:center">读入一个浮点数</td>
-</tr>
-<tr>
-<td>%F</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%e</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%E</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%g</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%G</td>
-<td style="text-align:center">同上</td>
-</tr>
-<tr>
-<td>%p</td>
-<td style="text-align:center">读入一个指针</td>
-</tr>
-<tr>
-<td>%u</td>
-<td style="text-align:center">读入一个无符号十进制整数</td>
-</tr>
-<tr>
-<td>%n</td>
-<td style="text-align:center">至此已读入值的等价字符数</td>
-</tr>
-<tr>
-<td>%[]</td>
-<td style="text-align:center">扫描字符集合</td>
-</tr>
-<tr>
-<td>%%</td>
-<td style="text-align:center">读%符号</td>
-</tr>
-</tbody>
-</table>
-<h2 id="特殊格式"><a href="#特殊格式" class="headerlink" title="特殊格式"></a>特殊格式</h2><p><code>printf(&quot;%4d&quot;,n);//这个4是指输出的空间为4</code><br><code>printf(&quot;%.2f&quot;,n);</code><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">double</span> n=<span class="number">12.3456</span>;</div><div class="line">    <span class="keyword">int</span> n1=<span class="number">123456</span>;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The format of %%8d%%c is: "</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%8d%c"</span>,n1,<span class="string">'\n'</span>);<span class="comment">//这个4是指输出的空间为4</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The format of %%.2f%%c is: "</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%.2f%c"</span>,n,<span class="string">'\n'</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>输出为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">The format of %8d%c is:   123456</div><div class="line">The format of %.2f%c is: 12.35</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>上面这些内容就足够应付OJ系统了，如果还想了解更多cin函数内容，可参考<a href="https://blog.csdn.net/k346k346/article/details/48213811" target="_blank" rel="external">Dablelv的博客专栏</a></p>
-</blockquote>
+<p>当考虑动力响应之后，除了考虑刚度矩阵还需要考虑质量矩阵和阻尼矩阵，分别计入速度和加速度的影响，也即阻尼力和惯性力的作用，因而求解动力学问题的方程可表示为：</p>
+<p><img src="http://s2.sinaimg.cn/mw690/001PZA97zy716VqzSIV21&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>[M]表示质量矩阵，[C]表示阻尼矩阵。上式是动力学的基本方程，属于二阶常微分方程。在静力学与动力学问题中，刚度矩阵是一样的。</p>
+<h1 id="质量矩阵与阻尼矩阵"><a href="#质量矩阵与阻尼矩阵" class="headerlink" title="质量矩阵与阻尼矩阵"></a>质量矩阵与阻尼矩阵</h1><p>我们知道静力学问题的总刚度是由单元刚度集成得到的，同样的，总的质量矩阵和阻尼矩阵也是由单元的质量矩阵和阻尼矩阵集成而来，并且集成方式一样，如下所示，[m]和[c]分别是单元的质量矩阵和阻尼矩阵。</p>
+<p><img src="http://s12.sinaimg.cn/mw690/001PZA97zy716Vr61V93b&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>在动态分析中建立单元特性矩阵仍然采用虚位移原理。</p>
+<p>简单推导如下：</p>
+<p>在动载荷作用下，对于任一瞬时，单元内产生的虚应变能为:</p>
+<p><img src="http://s7.sinaimg.cn/mw690/001PZA97zy716VrJKaG76&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>单元除受动载荷外，还有加速度和速度引起的惯性力和阻尼力的作用，外力所做的虚功为：</p>
+<p><img src="http://s7.sinaimg.cn/large/001PZA97zy716VsD5WKb6&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>其中ρ为材料密度，v是线性阻尼系数，式中，{Pv}、{Ps}、{Pc}分别为作用于单元上的动态体力、动态面力和动态集中力；V为单元面积；A为单元面积。</p>
+<p><img src="http://s6.sinaimg.cn/mw690/001PZA97zy716Vtc6Oxa5&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>式中：</p>
+<p><img src="http://s15.sinaimg.cn/mw690/001PZA97zy716VuesqO3e&amp;690" alt="有限元的隐式与显式动力学"></p>
+<p>分别为单元的刚度矩阵、质量矩阵和阻尼矩阵。</p>
+<p>这里加个注释：单元内的任意一点的位移{d}是通过节点位移插值得到的。</p>
+<h1 id="动力学问题的求解"><a href="#动力学问题的求解" class="headerlink" title="动力学问题的求解"></a>动力学问题的求解</h1><p>隐私求解和显式求解这两个概念相信大家都听的很多，ANSYS的显示动力学LS-DYNA和Abaqus Explict 均是采用显式动力学求解动力问题。</p>
+<p>所谓显式和隐式，是指求解方法的不同，即数学上的出发点不一样。并不是说显式只能求动力学问题，隐式只能求静力学问题，只是求解策略不通。隐式求解和时间无关，采用的是牛顿迭代法（线性问题就直接求解线性代数方程组），因此存在一个迭代收敛问题，不收敛就的不到结果。由于两者解题的出发点，所以一般来说显式用于求解和时间相关的动力学问题。隐式用来求解和时间无关的静力学问题。</p>
+<p>显式求解方法在ANSYS显式动力学采用的是中心差分法，这个方法在求解温度场时用的较多。基本思想是把连续的定解区域用有限个离散点构成的网格来代替，这些离散点称作网格的节点；把连续定解区域上的连续变量的函数用在网格上定义的离散变量函数来近似；把原方程和定解条件中的微商用差商来近似，积分用积分和来近似，于是原微分方程和定解条件就近似地代之以代数方程组，即有限差分方程组，解此方程组就可以得到原问题在离散点上的近似解。然后再利用插值方法便可以从离散解得到定解问题在整个区域上的近似解。</p>
+<p>对于中心差分法，如果知道最初的两个位移，即可一步一步求出之后的位移速度和加速度，从而得到系统的位移速度和加速度时程曲线。</p>
+<p>求解动力学问题的另一种方法是Newmark法，采用这种方法求解属于隐式求解。</p>
 
       
     </div>
@@ -523,7 +452,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/leetcode/" rel="tag"># -leetcode</a>
+            <a href="/tags/有限元/" rel="tag"># 有限元</a>
           
         </div>
       
@@ -536,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/04/nowcoder错题查缺补漏/" rel="next" title="nowcoder错题查缺补漏">
-                <i class="fa fa-chevron-left"></i> nowcoder错题查缺补漏
+              <a href="/2018/06/05/常用排序算法的代码实现/" rel="next" title="常用排序算法代码实现">
+                <i class="fa fa-chevron-left"></i> 常用排序算法代码实现
               </a>
             
           </div>
@@ -545,10 +474,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/04/机器学习之集成学习小计/" rel="prev" title="集成学习小计">
-                集成学习小计 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -730,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python版"><span class="nav-number">1.</span> <span class="nav-text">python版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-版"><span class="nav-number">2.</span> <span class="nav-text">C++版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cin-gt-gt"><span class="nav-number">2.1.</span> <span class="nav-text">cin>></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scanf"><span class="nav-number">2.2.</span> <span class="nav-text">scanf</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#格式化输入输出"><span class="nav-number">3.</span> <span class="nav-text">格式化输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊格式"><span class="nav-number">3.1.</span> <span class="nav-text">特殊格式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动力学问题"><span class="nav-number">1.</span> <span class="nav-text">动力学问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#质量矩阵与阻尼矩阵"><span class="nav-number">2.</span> <span class="nav-text">质量矩阵与阻尼矩阵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动力学问题的求解"><span class="nav-number">3.</span> <span class="nav-text">动力学问题的求解</span></a></li></ol></div>
             
 
           </div>
