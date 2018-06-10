@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="本文转载自鸡啄米并略有改动。  抽象类抽象类可以为某个类族提供统一的操作接口。外部可以透明的使用抽象类的统一接口，而不需要知道到底是调用的抽象类的哪个派生类的成员函数。其实这些也可以通过在基类中定义虚函数来实现，但抽象类跟一般类不同的是，它使用纯虚函数，不需要定义纯虚函数的实现，而且抽象类不能实例化，即不能定义抽象类的对象，只能从它继承出非抽象派生类再实例化。 抽象类的定义抽象类的定义就是，含有">
-<meta name="keywords" content="C++">
+  <meta name="description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。 机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++纯虚函数">
-<meta property="og:url" content="http://yoursite.com/2018/05/29/C++纯虚函数/index.html">
+<meta property="og:title" content="support vector machine">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="本文转载自鸡啄米并略有改动。  抽象类抽象类可以为某个类族提供统一的操作接口。外部可以透明的使用抽象类的统一接口，而不需要知道到底是调用的抽象类的哪个派生类的成员函数。其实这些也可以通过在基类中定义虚函数来实现，但抽象类跟一般类不同的是，它使用纯虚函数，不需要定义纯虚函数的实现，而且抽象类不能实例化，即不能定义抽象类的对象，只能从它继承出非抽象派生类再实例化。 抽象类的定义抽象类的定义就是，含有">
+<meta property="og:description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。 机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-01T01:08:23.640Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/机器学习/支持向量机.png">
+<meta property="og:updated_time" content="2018-06-10T03:09:47.268Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++纯虚函数">
-<meta name="twitter:description" content="本文转载自鸡啄米并略有改动。  抽象类抽象类可以为某个类族提供统一的操作接口。外部可以透明的使用抽象类的统一接口，而不需要知道到底是调用的抽象类的哪个派生类的成员函数。其实这些也可以通过在基类中定义虚函数来实现，但抽象类跟一般类不同的是，它使用纯虚函数，不需要定义纯虚函数的实现，而且抽象类不能实例化，即不能定义抽象类的对象，只能从它继承出非抽象派生类再实例化。 抽象类的定义抽象类的定义就是，含有">
+<meta name="twitter:title" content="support vector machine">
+<meta name="twitter:description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。 机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/机器学习/支持向量机.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/29/C++纯虚函数/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>C++纯虚函数 | 微石的碎碎念</title>
+  <title>support vector machine | 微石的碎碎念</title>
   
 
 
@@ -305,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/C++纯虚函数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -322,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++纯虚函数
+          <h1 class="post-title" itemprop="name headline">support vector machine
               
             
           </h1>
@@ -347,24 +349,12 @@
                 
               
 
-              <time title="创建时间：2018-05-29 21:44:45" itemprop="dateCreated datePublished" datetime="2018-05-29T21:44:45+08:00">2018-05-29</time>
+              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:09:47" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-06-01 09:08:23" itemprop="dateModified" datetime="2018-06-01T09:08:23+08:00">2018-06-01</time>
               
             
           </span>
@@ -378,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/29/C++纯虚函数/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/29/C++纯虚函数/" itemprop="commentCount"></span>
+                <a href="/2018/06/10/机器学习模型之支持向量机/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/10/机器学习模型之支持向量机/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,23 +397,33 @@
       
 
       
-        <blockquote>
-<p>本文转载自<a href="http://www.jizhuomi.com/software/125.html" target="_blank" rel="external">鸡啄米</a>并略有改动。</p>
-</blockquote>
-<h1 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h1><p>抽象类可以为某个类族提供统一的操作接口。外部可以透明的使用抽象类的统一接口，而不需要知道到底是调用的抽象类的哪个派生类的成员函数。其实这些也可以通过在基类中定义虚函数来实现，但抽象类跟一般类不同的是，它使用纯虚函数，不需要定义纯虚函数的实现，而且抽象类不能实例化，即不能定义抽象类的对象，只能从它继承出非抽象派生类再实例化。</p>
-<h1 id="抽象类的定义"><a href="#抽象类的定义" class="headerlink" title="抽象类的定义"></a>抽象类的定义</h1><p>抽象类的定义就是，含有纯虚函数的类。纯虚函数跟一般的虚函数有很大不同。我们下面来了解下纯虚函数。</p>
-<h1 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h1><p>即使有的虚函数在基类中不需要做任何工作，我们也要写出一个空的函数体，这时这个函数体没有什么意义，重要的是此虚函数的原型声明。C++为我们提供了纯虚函数，让我们在这种情况下不用写函数实现，只给出函数原型作为整个类族的统一接口就可以了，函数的实现可以在派生类中给出。</p>
-<p>纯虚函数是在基类中声明的，声明形式为：</p>
-<p>virtual 函数类型 函数名(参数表) = 0;</p>
-<p>大家可以看到，纯虚函数的声明形式与一般虚函数类似，只是最后加了个“=0”。纯虚函数这样声明以后，在基类中就不再给出它的实现了，各个派生类可以根据自己的功能需要定义其实现。</p>
-<a id="more"></a>
-<h1 id="抽象类-1"><a href="#抽象类-1" class="headerlink" title="抽象类"></a>抽象类</h1><p>上面说到，抽象类就是含有纯虚函数的类。抽象类可以为某个类族定义统一的接口，接口的具体实现是在派生类中给出。这种实现就具有多态特性。</p>
-<p>这里要注意的是，抽象类的派生类如果没有实现所有的纯虚函数，只给出了部分纯虚函数的实现，那么这个派生类仍然是抽象类，仍然不能实例化，只有给出了全部纯虚函数的实现，派生类才不再是抽象类并且才可以实例化。</p>
-<p>我们不能声明抽象类的对象，使用抽象类一般是通过声明抽象类的指针或引用，将指针或引用指向派生类的对象，访问派生类的成员。</p>
-<p>程序演示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>           // 抽象类<span class="title">Base</span>的声明</span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">            <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>= <span class="number">0</span>;      <span class="comment">// 纯虚函数成员show</span></div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child0</span> :</span> <span class="keyword">public</span> Base     <span class="comment">// 类Base的公有派生类Child0的声明</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span>    </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Child0::show()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;    <span class="comment">// 虚成员函数show</span></div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child1</span> :</span> <span class="keyword">public</span> Child0   <span class="comment">// 类Child0的公有派生类Child1的声明</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">            <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span>    </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Child1::show()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;    <span class="comment">// 虚成员函数show</span></div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">CallShow</span><span class="params">(Base *pBase)</span>     <span class="comment">// 一般函数，参数为基类指针</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">        pBase-&gt;show();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">        Base *pBase;             <span class="comment">// 声明Base类的指针</span></div><div class="line">        Child0 ch0;                 <span class="comment">// 声明Child0类的对象</span></div><div class="line">        Child1 ch1;                 <span class="comment">// 声明Child1类的对象</span></div><div class="line">        pBase = &amp;ch0;           <span class="comment">// 将Child0类对象ch0的地址赋值给Base类指针pBase</span></div><div class="line">        CallShow(pBase);</div><div class="line">        pBase = &amp;ch1;           <span class="comment">// 将Child1类对象ch1的地址赋值给Base类指针pBase</span></div><div class="line">        CallShow(pBase);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>程序运行结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Child0::show()</div><div class="line">Child1::show()</div></pre></td></tr></table></figure></p>
-<p>这里派生类Child0和Child1的虚函数show并没有使用关键字virtual显式说明，因为Child0和Child1中的虚函数和基类Base中的纯虚函数名称一样，参数和返回值都相同，编译器会自动识别其为虚函数。</p>
-<p>上面的程序中，基类Base是抽象类，为整个类族提供了统一的外部接口。派生类Child0中给出了全部纯虚函数的实现（其实只有一个纯虚函数–show），因此不再是抽象类，可以声明它的对象。Child0的派生类Child1当然也不是抽象类。根据赋值兼容规则，基类Base的指针可以指向派生类Child0和Child1的对象，通过此指针可以访问派生类的成员，这样就实现了多态。</p>
+        <h1 id="支持向量机基本思想"><a href="#支持向量机基本思想" class="headerlink" title="支持向量机基本思想"></a>支持向量机基本思想</h1><p>在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：</p>
+<p><img src="/2018/06/10/机器学习模型之支持向量机/./机器学习/支持向量机.png" alt="支持向量机"></p>
+<p>图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。</p>
+<p>机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持向量机也不例外，优化列示可表示为：</p>
+<ul>
+<li>目标函数： 最大化超平面到正负样本的间隔（$\max{2 \over{||\mathbf{w}||}}$，故可转化为最小化问题$\min{\frac{1}{2}||\mathbf{w}||^2}$）</li>
+<li>约束条件：$y_i(\mathbf{w}\mathbf{x}_i+b)\ge 1$（样本到超平面距离大于等于1，取等于时为支持向量。$y_i$为target，对于而分裂问题简化为<code>[+1 -1]</code>）</li>
+<li>KKT条件：带约束的优化问题可以通过拉格朗日乘子法与KKT条件转化为对偶问题求解，原理可参考<a href="https://blog.csdn.net/on2way/article/details/47729419" target="_blank" rel="external">我爱智能</a>。通过KKT条件，原优化目标转化为：<br>$$L(w,b,\alpha)=||\mathbf{w}||^2+\sum\limits_{i=1}^{N}{\alpha_i h_i(x)}=||\mathbf{w}||^2-\sum\limits_{i=1}^{N}{\alpha_i {y_i}(\mathbf{w}x+b)}-\sum\limits_{i=1}^{N}{\alpha_i}$$<br>令 $L(w,b,\alpha)$ 对 $w$ 和 $b$ 偏导为0得：<br>$$\frac{\partial{L}}{\partial{w}}=w-\sum\limits_{i=1}^{N}{\alpha_i{y_i}{x_i}}=0$$<br>$$\frac{\partial{L}}{\partial{b}}=-\sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>带入$L(w,b,\alpha)$得到对偶问题：<br>$$\max W(\alpha)=-\frac{1}{2}(\sum\limits_{i,j=1}^{N}{\alpha_i{y_i}{\alpha_j}{y_j}{\mathbf{x}<em>i\mathbf{x}</em>{j}^\mathbf{T}}})$$<br>$$s.t.  \sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>$$\alpha_i{\ge}0$$<br>具体证明过程可参考<a href="https://blog.csdn.net/on2way/article/details/47729827" target="_blank" rel="external">我爱智能</a></li>
+</ul>
+<h1 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h1><p>上面描述的都是对于线性可分的情况，如果线性不可分，则可以使用核函数将样本从原始空间映射到高维空间。</p>
+<p>核函数：<br>$$x \rightarrow \phi(x)$$<br>超平面为：<br>$$\mathbf{w}^T\phi(x)+b=0$$<br>对偶问题为：<br>$$\max W(\alpha)=-\frac{1}{2}(\sum\limits_{i,j=1}^{N}{\alpha_i{y_i}{\alpha_j}{y_j}{\phi(x_i)^\mathbf{T}\phi(x_{j})}})$$<br>$$s.t.  \sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>$$\alpha_i{\ge}0$$</p>
+<p>$\phi(x_i)^\mathbf{T}\phi(x_{j})$为对应的高位空间内积，计算起来可能比较困难，于是希望有以下函数：$\kappa(x_i,x_j)=\phi(x_i)^\mathbf{T}\phi(x_{j})$，这样便不用计算高位空间的内积。</p>
+<p>常见核函数：</p>
+<p>高斯核：<br>$$\kappa(x_i,x_j)=\exp(\frac{||x_i-x_j||^2}{\sigma})$$</p>
+<h1 id="处理异常点"><a href="#处理异常点" class="headerlink" title="处理异常点"></a>处理异常点</h1><p>在实际模型使用中，并不能一定找到一个合适的核函数使样本映射到高位空间线性可分，退一步说，即使找到这个核函数，也不能确保该核函数是否过拟合，因此SVM引入松弛变量( $\xi_i\geq 0$ )这一概念，允许样本在一定程度上偏离超平面。加入松弛变量的约束条件变为：<br>$$y_i(w^Tx_i+b)\geq 1\color{red}{-\xi_i}, \quad i=1,\ldots,n$$<br>目标函数变后加入损失项后变为：<br>$$\min \frac{1}{2}|w|^2\color{red}{+C\sum_{i=1}^n \xi_i}$$<br>其中 $C$ 是一个参数，用于控制目标函数中两项（“寻找 margin 最大的超平面”和“保证数据点偏差量最小”）之间的权重。</p>
+<p>转化为对偶规划问题：</p>
+<p>$$\mathcal{L}(w,b,\xi,\alpha,r)=\frac{1}{2}|w|^2+C\sum_{i=1}^n\xi_i-\sum_{i=1}^n\alpha_i(y_i(w^Tx_i+b)-1+\xi_i)-\sum_{i=1}^n r_i\xi_i$$</p>
+<p>让 $\mathcal{L}$ 针对 $w$、$b$ 和 $\xi$ 偏导为0：</p>
+<p>$$\frac{\partial \mathcal{L}}{\partial w}=0 \Rightarrow w=\sum_{i=1}^n \alpha_i y_i x_i$$<br>$$\frac{\partial \mathcal{L}}{\partial b} = 0 \Rightarrow \sum_{i=1}^n \alpha_i y_i = 0$$<br>$$\frac{\partial \mathcal{L}}{\partial \xi_i} = 0 \Rightarrow C-\alpha_i-r_i=0, \quad i=1,\ldots,n$$</p>
+<p>将 $w$ 带回 $\mathcal{L}$ 并化简，优化问题可写为：<br>$$\max_\alpha \sum_{i=1}^n \alpha_i-\color{red}{\frac{1}{2}}\sum_{i,j=1}^n\alpha_i\alpha_jy_iy_j\langle x_i,x_j\rangle$$<br>$$s.t., 0\leq \alpha_i\color{red}\leq C, i=1,\ldots,n$$<br>$$\sum_{i=1}^n\alpha_iy_i = 0$$</p>
+<h1 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h1><p>SMO，Sequential Minimal Optimization：每次选取了两个坐标维度来进行优化，固定欲求的参数之外的所有参数。由于$\sum\limits_{i=1}^{m}\alpha_iy_i = 0$。假如将$\alpha_3, \alpha_4, …, \alpha_m$　固定，那么$\alpha_1, \alpha_2$变成一个一元二次函数。</p>
+<p>下略。</p>
+<p>想了解更多，可参考：</p>
+<ul>
+<li><a href="http://blog.pluskid.org/?p=696" target="_blank" rel="external">支持向量机：Numerical Optimization</a></li>
+<li><a href="http://www.cnblogs.com/pinard/p/6111471.html" target="_blank" rel="external">支持向量机原理(四)SMO算法原理</a></li>
+</ul>
 
       
     </div>
@@ -444,7 +444,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -457,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/29/机器学习模型之决策树/" rel="next" title="决策树算法总结（decision_tree）">
-                <i class="fa fa-chevron-left"></i> 决策树算法总结（decision_tree）
+              <a href="/2018/06/09/有限元的隐式与显式动力学/" rel="next" title="【转载】有限元的隐式与显式动力学">
+                <i class="fa fa-chevron-left"></i> 【转载】有限元的隐式与显式动力学
               </a>
             
           </div>
@@ -466,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/30/C++模板简介/" rel="prev" title="C++模板简介">
-                C++模板简介 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -651,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象类"><span class="nav-number">1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象类的定义"><span class="nav-number">2.</span> <span class="nav-text">抽象类的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纯虚函数"><span class="nav-number">3.</span> <span class="nav-text">纯虚函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象类-1"><span class="nav-number">4.</span> <span class="nav-text">抽象类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#支持向量机基本思想"><span class="nav-number">1.</span> <span class="nav-text">支持向量机基本思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核函数"><span class="nav-number">2.</span> <span class="nav-text">核函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理异常点"><span class="nav-number">3.</span> <span class="nav-text">处理异常点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SMO"><span class="nav-number">4.</span> <span class="nav-text">SMO</span></a></li></ol></div>
             
 
           </div>
