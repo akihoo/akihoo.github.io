@@ -110,25 +110,25 @@
 
   <meta name="description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Regularization">
-<meta property="og:url" content="http://yoursite.com/2018/05/29/Regularization/index.html">
+<meta property="og:title" content="机器学习之正则化">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/overfitting.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/20140504122926296.png">
-<meta property="og:updated_time" content="2018-05-29T06:22:04.224Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/20140504122926296.png">
+<meta property="og:updated_time" content="2018-06-10T03:48:14.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Regularization">
+<meta name="twitter:title" content="机器学习之正则化">
 <meta name="twitter:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/29/Regularization/Regularization/overfitting.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/29/Regularization/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/机器学习之正则化作用/"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>Regularization | 微石的碎碎念</title>
+  <title>机器学习之正则化 | 微石的碎碎念</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/Regularization/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/机器学习之正则化作用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Regularization
+          <h1 class="post-title" itemprop="name headline">机器学习之正则化
               
             
           </h1>
@@ -349,12 +349,24 @@
                 
               
 
-              <time title="创建时间：2018-05-29 12:01:02 / 修改时间：14:22:04" itemprop="dateCreated datePublished" datetime="2018-05-29T12:01:02+08:00">2018-05-29</time>
+              <time title="创建时间：2018-05-29 12:01:02" itemprop="dateCreated datePublished" datetime="2018-05-29T12:01:02+08:00">2018-05-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-10 11:48:14" itemprop="dateModified" datetime="2018-06-10T11:48:14+08:00">2018-06-10</time>
               
             
           </span>
@@ -368,8 +380,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/29/Regularization/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/29/Regularization/" itemprop="commentCount"></span>
+                <a href="/2018/05/29/机器学习之正则化作用/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/29/机器学习之正则化作用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -403,7 +415,7 @@
 <a id="more"></a>
 <p>正规方程最终得到的$w^<em>$的参数估计为：<br>$$\hat{w^</em>} =(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$$<br>当 $\mathbf{X}^T\mathbf{X}$ 非满秩矩阵时，则$(\mathbf{X}^T\mathbf{X})^{-1}$趋近于无穷大（实际上不存在），当$\mathbf{X}^T\mathbf{X}$病态时，虽然矩阵有解，输入仅有微小变化，解便会有很大震荡。</p>
 <p>这显然不是一个很好的解，相当于仅在输入数据中加入一点小小噪声，便得到全然不同的解。如下图过拟合，输入仅有小的变化，结果剧烈变化。</p>
-<p><img src="/2018/05/29/Regularization/./Regularization/overfitting.jpg" alt=""><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a></p>
+<p><img src="/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg" alt=""><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a></p>
 <p>加入正则化后，公式变为：<br>$$\hat{w^*} =(\mathbf{X}^T\mathbf{X}+\lambda \mathbf{I})^{-1}\mathbf{X}^Ty$$</p>
 <h1 id="L1-与-L2-正则的区别"><a href="#L1-与-L2-正则的区别" class="headerlink" title="L1 与 L2 正则的区别"></a>L1 与 L2 正则的区别</h1><ol>
 <li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
@@ -411,7 +423,7 @@
 <li>在实际使用中，如果特征是高维稀疏的，则使用L1正则；如果特征是低维稠密的，则使用L2正则。</li>
 </ol>
 <p>L1和L2都是规则化的方式，我们将权值参数以L1或者L2的方式放到代价函数里面去。然后模型就会尝试去最小化这些权值参数。而这个最小化就像一个下坡的过程，L1和L2的差别就在于这个“坡”不同，如下图：L1就是按绝对值函数的“坡”下降的，而L2是按二次函数的“坡”下降。所以实际上在0附近，L1的下降速度比L2的下降速度要快。所以会非常快得降到0。因此L1偏向稀疏特征（可筛选出重要特征），L2主要用于防止过拟合（要求参数越小时，说明模型越简单）。</p>
-<p><img src="/2018/05/29/Regularization/./Regularization/20140504122926296.png" alt=""></p>
+<p><img src="/2018/05/29/机器学习之正则化作用/Regularization/20140504122926296.png" alt=""></p>
 
       
     </div>
@@ -449,8 +461,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/29/机器学习模型之决策树/" rel="prev" title="决策树算法总结（decision_tree）">
-                决策树算法总结（decision_tree） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/29/机器学习模型之决策树/" rel="prev" title="机器学习模型之决策树">
+                机器学习模型之决策树 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

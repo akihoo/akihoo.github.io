@@ -111,17 +111,17 @@
   <meta name="description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="决策树算法总结（decision_tree）">
+<meta property="og:title" content="机器学习模型之决策树">
 <meta property="og:url" content="http://yoursite.com/2018/05/29/机器学习模型之决策树/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习模型之决策树/decision-tree/decision_tree.png">
-<meta property="og:updated_time" content="2018-05-29T13:01:27.314Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习模型之决策树/decision_tree.png">
+<meta property="og:updated_time" content="2018-06-10T03:46:39.065Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="决策树算法总结（decision_tree）">
+<meta name="twitter:title" content="机器学习模型之决策树">
 <meta name="twitter:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/29/机器学习模型之决策树/decision-tree/decision_tree.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/29/机器学习模型之决策树/decision_tree.png">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>决策树算法总结（decision_tree） | 微石的碎碎念</title>
+  <title>机器学习模型之决策树 | 微石的碎碎念</title>
   
 
 
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">决策树算法总结（decision_tree）
+          <h1 class="post-title" itemprop="name headline">机器学习模型之决策树
               
             
           </h1>
@@ -349,12 +349,24 @@
                 
               
 
-              <time title="创建时间：2018-05-29 14:31:57 / 修改时间：21:01:27" itemprop="dateCreated datePublished" datetime="2018-05-29T14:31:57+08:00">2018-05-29</time>
+              <time title="创建时间：2018-05-29 14:31:57" itemprop="dateCreated datePublished" datetime="2018-05-29T14:31:57+08:00">2018-05-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-10 11:46:39" itemprop="dateModified" datetime="2018-06-10T11:46:39+08:00">2018-06-10</time>
               
             
           </span>
@@ -400,7 +412,7 @@
         <blockquote>
 <p>以下博客是我在学习过程中发现的比较好的博客，可以参考：<a href="https://zhuanlan.zhihu.com/p/27905967" target="_blank" rel="external">机器学习算法实践-决策树(Decision Tree)</a>、<a href="https://blog.csdn.net/july_sun/article/details/53339285" target="_blank" rel="external">July_sun的博客</a>、<a href="https://blog.csdn.net/HerosOfEarth/article/details/52347820" target="_blank" rel="external">HerosOfEarth的博客</a>、<a href="https://blog.csdn.net/u012328159/article/details/70184415" target="_blank" rel="external">天泽28的专栏</a></p>
 </blockquote>
-<h1 id="decision-tree-基本结构"><a href="#decision-tree-基本结构" class="headerlink" title="decision tree 基本结构"></a>decision tree 基本结构</h1><p><img src="/2018/05/29/机器学习模型之决策树/./decision-tree/decision_tree.png" alt=""></p>
+<h1 id="decision-tree-基本结构"><a href="#decision-tree-基本结构" class="headerlink" title="decision tree 基本结构"></a>decision tree 基本结构</h1><p><img src="/2018/05/29/机器学习模型之决策树/decision_tree.png" alt=""></p>
 <p>借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。</p>
 <h1 id="决策树的构建"><a href="#决策树的构建" class="headerlink" title="决策树的构建"></a>决策树的构建</h1><h2 id="节点划分"><a href="#节点划分" class="headerlink" title="节点划分"></a>节点划分</h2><p>一棵决策树包含许多节点，可以通过递归方式产生新节点。递归终止条件为：</p>
 <ol>
@@ -589,8 +601,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/29/Regularization/" rel="next" title="Regularization">
-                <i class="fa fa-chevron-left"></i> Regularization
+              <a href="/2018/05/29/机器学习之正则化作用/" rel="next" title="机器学习之正则化">
+                <i class="fa fa-chevron-left"></i> 机器学习之正则化
               </a>
             
           </div>

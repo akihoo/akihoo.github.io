@@ -111,17 +111,17 @@
   <meta name="description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。">
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="support vector machine">
+<meta property="og:title" content="机器学习模型之支持向量机">
 <meta property="og:url" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/机器学习/支持向量机.png">
-<meta property="og:updated_time" content="2018-06-10T03:26:17.482Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/支持向量机.png">
+<meta property="og:updated_time" content="2018-06-10T03:41:21.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="support vector machine">
+<meta name="twitter:title" content="机器学习模型之支持向量机">
 <meta name="twitter:description" content="支持向量机基本思想在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：  图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/机器学习/支持向量机.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/支持向量机.png">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>support vector machine | 微石的碎碎念</title>
+  <title>机器学习模型之支持向量机 | 微石的碎碎念</title>
   
 
 
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">support vector machine
+          <h1 class="post-title" itemprop="name headline">机器学习模型之支持向量机
               
             
           </h1>
@@ -349,7 +349,7 @@
                 
               
 
-              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:26:17" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
+              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:41:21" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
             
 
             
@@ -398,7 +398,7 @@
 
       
         <h1 id="支持向量机基本思想"><a href="#支持向量机基本思想" class="headerlink" title="支持向量机基本思想"></a>支持向量机基本思想</h1><p>在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：</p>
-<p><img src="/2018/06/10/机器学习模型之支持向量机/./机器学习/支持向量机.png" alt="支持向量机"></p>
+<p><img src="/2018/06/10/机器学习模型之支持向量机/支持向量机.png" alt="支持向量机"></p>
 <p>图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。</p>
 <a id="more"></a>
 <p>机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持向量机也不例外，优化列示可表示为：</p>
