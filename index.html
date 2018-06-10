@@ -350,7 +350,7 @@
                 
               
 
-              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:09:47" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
+              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:26:17" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
             
 
             
@@ -399,36 +399,16 @@
 
       
         
-          
-            <h1 id="支持向量机基本思想"><a href="#支持向量机基本思想" class="headerlink" title="支持向量机基本思想"></a>支持向量机基本思想</h1><p>在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：</p>
+          <h1 id="支持向量机基本思想"><a href="#支持向量机基本思想" class="headerlink" title="支持向量机基本思想"></a>支持向量机基本思想</h1><p>在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：</p>
 <p><img src="/2018/06/10/机器学习模型之支持向量机/./机器学习/支持向量机.png" alt="支持向量机"></p>
 <p>图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。</p>
-<p>机器学习方法到头来都是求解一个最优化问题（比如最小化训练误差），支持向量机也不例外，优化列示可表示为：</p>
-<ul>
-<li>目标函数： 最大化超平面到正负样本的间隔（$\max{2 \over{||\mathbf{w}||}}$，故可转化为最小化问题$\min{\frac{1}{2}||\mathbf{w}||^2}$）</li>
-<li>约束条件：$y_i(\mathbf{w}\mathbf{x}_i+b)\ge 1$（样本到超平面距离大于等于1，取等于时为支持向量。$y_i$为target，对于而分裂问题简化为<code>[+1 -1]</code>）</li>
-<li>KKT条件：带约束的优化问题可以通过拉格朗日乘子法与KKT条件转化为对偶问题求解，原理可参考<a href="https://blog.csdn.net/on2way/article/details/47729419" target="_blank" rel="external">我爱智能</a>。通过KKT条件，原优化目标转化为：<br>$$L(w,b,\alpha)=||\mathbf{w}||^2+\sum\limits_{i=1}^{N}{\alpha_i h_i(x)}=||\mathbf{w}||^2-\sum\limits_{i=1}^{N}{\alpha_i {y_i}(\mathbf{w}x+b)}-\sum\limits_{i=1}^{N}{\alpha_i}$$<br>令 $L(w,b,\alpha)$ 对 $w$ 和 $b$ 偏导为0得：<br>$$\frac{\partial{L}}{\partial{w}}=w-\sum\limits_{i=1}^{N}{\alpha_i{y_i}{x_i}}=0$$<br>$$\frac{\partial{L}}{\partial{b}}=-\sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>带入$L(w,b,\alpha)$得到对偶问题：<br>$$\max W(\alpha)=-\frac{1}{2}(\sum\limits_{i,j=1}^{N}{\alpha_i{y_i}{\alpha_j}{y_j}{\mathbf{x}<em>i\mathbf{x}</em>{j}^\mathbf{T}}})$$<br>$$s.t.  \sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>$$\alpha_i{\ge}0$$<br>具体证明过程可参考<a href="https://blog.csdn.net/on2way/article/details/47729827" target="_blank" rel="external">我爱智能</a></li>
-</ul>
-<h1 id="核函数"><a href="#核函数" class="headerlink" title="核函数"></a>核函数</h1><p>上面描述的都是对于线性可分的情况，如果线性不可分，则可以使用核函数将样本从原始空间映射到高维空间。</p>
-<p>核函数：<br>$$x \rightarrow \phi(x)$$<br>超平面为：<br>$$\mathbf{w}^T\phi(x)+b=0$$<br>对偶问题为：<br>$$\max W(\alpha)=-\frac{1}{2}(\sum\limits_{i,j=1}^{N}{\alpha_i{y_i}{\alpha_j}{y_j}{\phi(x_i)^\mathbf{T}\phi(x_{j})}})$$<br>$$s.t.  \sum\limits_{i=1}^{N}{\alpha_i{y_i}}=0$$<br>$$\alpha_i{\ge}0$$</p>
-<p>$\phi(x_i)^\mathbf{T}\phi(x_{j})$为对应的高位空间内积，计算起来可能比较困难，于是希望有以下函数：$\kappa(x_i,x_j)=\phi(x_i)^\mathbf{T}\phi(x_{j})$，这样便不用计算高位空间的内积。</p>
-<p>常见核函数：</p>
-<p>高斯核：<br>$$\kappa(x_i,x_j)=\exp(\frac{||x_i-x_j||^2}{\sigma})$$</p>
-<h1 id="处理异常点"><a href="#处理异常点" class="headerlink" title="处理异常点"></a>处理异常点</h1><p>在实际模型使用中，并不能一定找到一个合适的核函数使样本映射到高位空间线性可分，退一步说，即使找到这个核函数，也不能确保该核函数是否过拟合，因此SVM引入松弛变量( $\xi_i\geq 0$ )这一概念，允许样本在一定程度上偏离超平面。加入松弛变量的约束条件变为：<br>$$y_i(w^Tx_i+b)\geq 1\color{red}{-\xi_i}, \quad i=1,\ldots,n$$<br>目标函数变后加入损失项后变为：<br>$$\min \frac{1}{2}|w|^2\color{red}{+C\sum_{i=1}^n \xi_i}$$<br>其中 $C$ 是一个参数，用于控制目标函数中两项（“寻找 margin 最大的超平面”和“保证数据点偏差量最小”）之间的权重。</p>
-<p>转化为对偶规划问题：</p>
-<p>$$\mathcal{L}(w,b,\xi,\alpha,r)=\frac{1}{2}|w|^2+C\sum_{i=1}^n\xi_i-\sum_{i=1}^n\alpha_i(y_i(w^Tx_i+b)-1+\xi_i)-\sum_{i=1}^n r_i\xi_i$$</p>
-<p>让 $\mathcal{L}$ 针对 $w$、$b$ 和 $\xi$ 偏导为0：</p>
-<p>$$\frac{\partial \mathcal{L}}{\partial w}=0 \Rightarrow w=\sum_{i=1}^n \alpha_i y_i x_i$$<br>$$\frac{\partial \mathcal{L}}{\partial b} = 0 \Rightarrow \sum_{i=1}^n \alpha_i y_i = 0$$<br>$$\frac{\partial \mathcal{L}}{\partial \xi_i} = 0 \Rightarrow C-\alpha_i-r_i=0, \quad i=1,\ldots,n$$</p>
-<p>将 $w$ 带回 $\mathcal{L}$ 并化简，优化问题可写为：<br>$$\max_\alpha \sum_{i=1}^n \alpha_i-\color{red}{\frac{1}{2}}\sum_{i,j=1}^n\alpha_i\alpha_jy_iy_j\langle x_i,x_j\rangle$$<br>$$s.t., 0\leq \alpha_i\color{red}\leq C, i=1,\ldots,n$$<br>$$\sum_{i=1}^n\alpha_iy_i = 0$$</p>
-<h1 id="SMO"><a href="#SMO" class="headerlink" title="SMO"></a>SMO</h1><p>SMO，Sequential Minimal Optimization：每次选取了两个坐标维度来进行优化，固定欲求的参数之外的所有参数。由于$\sum\limits_{i=1}^{m}\alpha_iy_i = 0$。假如将$\alpha_3, \alpha_4, …, \alpha_m$　固定，那么$\alpha_1, \alpha_2$变成一个一元二次函数。</p>
-<p>下略。</p>
-<p>想了解更多，可参考：</p>
-<ul>
-<li><a href="http://blog.pluskid.org/?p=696" target="_blank" rel="external">支持向量机：Numerical Optimization</a></li>
-<li><a href="http://www.cnblogs.com/pinard/p/6111471.html" target="_blank" rel="external">支持向量机原理(四)SMO算法原理</a></li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/10/机器学习模型之支持向量机/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
