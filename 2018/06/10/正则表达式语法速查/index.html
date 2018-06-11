@@ -108,27 +108,25 @@
 
 
 
-  <meta name="description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
+  <meta name="description" content="前人总结揭开正则表达式的神秘面纱，正则表达式30分钟入门教程，在线测试工具  某些字符   代码 说明     \r 换行   \n 回车   \t 制表符    常用的元字符   代码 说明     . 匹配除换行符以外的任意字符   \w 匹配字母或数字或下划线或汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   ^ 匹配字符串的开始（行的开始）   $">
+<meta name="keywords" content="正则表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习之正则化">
-<meta property="og:url" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/index.html">
+<meta property="og:title" content="正则表达式语法速查">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/正则表达式语法速查/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
+<meta property="og:description" content="前人总结揭开正则表达式的神秘面纱，正则表达式30分钟入门教程，在线测试工具  某些字符   代码 说明     \r 换行   \n 回车   \t 制表符    常用的元字符   代码 说明     . 匹配除换行符以外的任意字符   \w 匹配字母或数字或下划线或汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   ^ 匹配字符串的开始（行的开始）   $">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/20140504122926296.png">
-<meta property="og:updated_time" content="2018-06-10T03:48:14.095Z">
+<meta property="og:updated_time" content="2018-06-11T09:21:09.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习之正则化">
-<meta name="twitter:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg">
+<meta name="twitter:title" content="正则表达式语法速查">
+<meta name="twitter:description" content="前人总结揭开正则表达式的神秘面纱，正则表达式30分钟入门教程，在线测试工具  某些字符   代码 说明     \r 换行   \n 回车   \t 制表符    常用的元字符   代码 说明     . 匹配除换行符以外的任意字符   \w 匹配字母或数字或下划线或汉字   \s 匹配任意的空白符   \d 匹配数字   \b 匹配单词的开始或结束   ^ 匹配字符串的开始（行的开始）   $">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/29/机器学习之正则化作用/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/10/正则表达式语法速查/"/>
 
 
 
@@ -138,7 +136,7 @@
   };
 </script>
 
-  <title>机器学习之正则化 | 微石的碎碎念</title>
+  <title>正则表达式语法速查 | 微石的碎碎念</title>
   
 
 
@@ -307,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/机器学习之正则化作用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/正则表达式语法速查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -324,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习之正则化
+          <h1 class="post-title" itemprop="name headline">正则表达式语法速查
               
             
           </h1>
@@ -349,7 +347,7 @@
                 
               
 
-              <time title="创建时间：2018-05-29 12:01:02" itemprop="dateCreated datePublished" datetime="2018-05-29T12:01:02+08:00">2018-05-29</time>
+              <time title="创建时间：2018-06-10 21:49:00" itemprop="dateCreated datePublished" datetime="2018-06-10T21:49:00+08:00">2018-06-10</time>
             
 
             
@@ -366,7 +364,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-06-10 11:48:14" itemprop="dateModified" datetime="2018-06-10T11:48:14+08:00">2018-06-10</time>
+                <time title="修改时间：2018-06-11 17:21:09" itemprop="dateModified" datetime="2018-06-11T17:21:09+08:00">2018-06-11</time>
               
             
           </span>
@@ -380,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/29/机器学习之正则化作用/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/29/机器学习之正则化作用/" itemprop="commentCount"></span>
+                <a href="/2018/06/10/正则表达式语法速查/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/10/正则表达式语法速查/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,21 +407,206 @@
       
 
       
-        <h1 id="正则化的作用"><a href="#正则化的作用" class="headerlink" title="正则化的作用"></a>正则化的作用</h1><blockquote>
-<p>可参考博客<a href="https://blog.csdn.net/zouxy09/article/details/24971995" target="_blank" rel="external">强烈推荐：zouxy09的专栏</a>、<a href="https://blog.csdn.net/jinping_shi/article/details/52433975" target="_blank" rel="external">阿拉丁吃米粉</a>、<a href="https://blog.csdn.net/wsj998689aa/article/details/39547771" target="_blank" rel="external">迷雾forest</a></p>
+        <blockquote>
+<p>前人总结<a href="http://www.regexlab.com/zh/regref.htm" target="_blank" rel="external">揭开正则表达式的神秘面纱</a>，<a href="https://www.jb51.net/tools/zhengze.html#introduction" target="_blank" rel="external">正则表达式30分钟入门教程</a>，<a href="http://rubular.com/" target="_blank" rel="external">在线测试工具</a></p>
 </blockquote>
-<a id="more"></a>
-<p>正规方程最终得到的$w^<em>$的参数估计为：<br>$$\hat{w^</em>} =(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$$<br>当 $\mathbf{X}^T\mathbf{X}$ 非满秩矩阵时，则$(\mathbf{X}^T\mathbf{X})^{-1}$趋近于无穷大（实际上不存在），当$\mathbf{X}^T\mathbf{X}$病态时，虽然矩阵有解，输入仅有微小变化，解便会有很大震荡。</p>
-<p>这显然不是一个很好的解，相当于仅在输入数据中加入一点小小噪声，便得到全然不同的解。如下图过拟合，输入仅有小的变化，结果剧烈变化。</p>
-<p><img src="/2018/05/29/机器学习之正则化作用/Regularization/overfitting.jpg" alt=""><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a></p>
-<p>加入正则化后，公式变为：<br>$$\hat{w^*} =(\mathbf{X}^T\mathbf{X}+\lambda \mathbf{I})^{-1}\mathbf{X}^Ty$$</p>
-<h1 id="L1-与-L2-正则的区别"><a href="#L1-与-L2-正则的区别" class="headerlink" title="L1 与 L2 正则的区别"></a>L1 与 L2 正则的区别</h1><ol>
-<li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
-<li>L2正则假设参数的先验分布是Gaussian分布，可以保证模型的稳定性，也就是参数的值不会太大或太小</li>
-<li>在实际使用中，如果特征是高维稀疏的，则使用L1正则；如果特征是低维稠密的，则使用L2正则。</li>
-</ol>
-<p>L1和L2都是规则化的方式，我们将权值参数以L1或者L2的方式放到代价函数里面去。然后模型就会尝试去最小化这些权值参数。而这个最小化就像一个下坡的过程，L1和L2的差别就在于这个“坡”不同，如下图：L1就是按绝对值函数的“坡”下降的，而L2是按二次函数的“坡”下降。所以实际上在0附近，L1的下降速度比L2的下降速度要快。所以会非常快得降到0。因此L1偏向稀疏特征（可筛选出重要特征），L2主要用于防止过拟合（要求参数越小时，说明模型越简单）。</p>
-<p><img src="/2018/05/29/机器学习之正则化作用/Regularization/20140504122926296.png" alt=""></p>
+<h1 id="某些字符"><a href="#某些字符" class="headerlink" title="某些字符"></a>某些字符</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:left">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:left">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:left">制表符</td>
+</tr>
+</tbody>
+</table>
+<h1 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:left">匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:left">匹配字母或数字或下划线或汉字</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:left">匹配任意的空白符</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:left">匹配数字</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:left">匹配单词的开始或结束</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:left">匹配字符串的开始（行的开始）</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:left">匹配字符串的结束（行的结束）</td>
+</tr>
+</tbody>
+</table>
+<p>如果想匹配<code>. or ^ or $</code>，需要在前面加上转义字符 <code>\</code> ，如<code>\.</code> 。</p>
+<h2 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">文本</th>
+<th style="text-align:center">正则表达式</th>
+<th style="text-align:center">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">This is Jack</td>
+<td style="text-align:center">\bis\b</td>
+<td style="text-align:center">is</td>
+</tr>
+<tr>
+<td style="text-align:left">This is Jack</td>
+<td style="text-align:center">\sis</td>
+<td style="text-align:center">is([空格]is)</td>
+</tr>
+<tr>
+<td style="text-align:left">good good study</td>
+<td style="text-align:center">^good</td>
+<td style="text-align:center">good（第一个）</td>
+</tr>
+</tbody>
+</table>
+<h1 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">代码/语法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:left">重复<font color="red">零次</font>或更多次（贪心）</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:left">重复<font color="red">一次</font>或更多次 （占有）</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:left">重复零次或一次 （懒惰）</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td style="text-align:left">重复n次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td style="text-align:left">重复n次或更多次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td style="text-align:left">重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>贪婪(贪心) 如”*”字符 贪婪量词会首先匹配整个字符串，尝试匹配时，它会选定尽可能多的内容，如果 失败则回退一个字符，然后再次尝试回退的过程就叫做回溯，它会每次回退一个字符，直到找到匹配的内容或者没有字符可以回退。相比下面两种贪婪量词对资源的消耗是最大的，</li>
+<li>懒惰(勉强) 如 “?”懒惰量词使用另一种方式匹配，它从目标的起始位置开始尝试匹配，每次检查一个字符，并寻找它要匹配的内容，如此循环直到字符结尾处。</li>
+<li>占有如”+” 占有量词会覆盖事个目标字符串，然后尝试寻找匹配内容 ，但它只尝试一次，不会回溯，就好比先抓一把石头，然后从石头中挑出黄金</li>
+</ul>
+<h1 id="自定义指定范围"><a href="#自定义指定范围" class="headerlink" title="自定义指定范围"></a>自定义指定范围</h1><p>使用<code>[]</code>指定范围，可以匹配<code>[]</code>中任意字符。也可在<code>[]</code>中使用 <code>^</code> 符号，匹配除<code>[]</code>之外的任意字符。</p>
+<p>如：</p>
+<ul>
+<li><code>[0-9]</code>效果与\d一致</li>
+<li><code>[ijk]</code>匹配i,j,k</li>
+</ul>
+<h1 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h1><p>使用 <code>|</code> 字符，类似于或，如 <code>0\d{2}-\d{8}|0\d{3}-\d{7}</code>，将匹配满足 <code>0\d{2}-\d{8}</code> 或 <code>0\d{3}-\d{7}</code> 的字符，需要注意的是，匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。</p>
+<h1 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h1><p>使用<code>()</code>进行分组，括号内的值作为子表达式，如：(1234){4}将会匹配到1234123412341234.</p>
+<h1 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h1><table>
+<thead>
+<tr>
+<th style="text-align:center">代码/语法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:left">匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:left">匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:left">匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:left">匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">[^x]</td>
+<td style="text-align:left">匹配除了x以外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[^aeiou]</td>
+<td style="text-align:left">匹配除了aeiou这几个字母以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h1 id="反向引用-1-2…"><a href="#反向引用-1-2…" class="headerlink" title="反向引用 \1, \2…"></a>反向引用 \1, \2…</h1><p>表达式在匹配时，表达式引擎会将小括号 “( )” 包含的表达式所匹配到的字符串记录下来。在获取匹配结果的时候，小括号包含的表达式所匹配到的字符串可以单独获取。这一点，在前面的举例中，已经多次展示了。在实际应用场合中，当用某种边界来查找，而所要获取的内容又不包含边界时，必须使用小括号来指定所要的范围。比如前面的 “<td>(.*?)</td>“。</p>
+<p>\n 表示分组n，即第n个左括号(所包含的内容。</p>
+<p>如：</p>
+<p>源字符串：abcdaabcde</p>
+<p>正则表达式：([ab])\1</p>
+<p>[ab]将匹配字符a或b，当[]匹配到a时，\1==a，当[]匹配到b时，\1==b，此表达式将会匹配aa或bb。</p>
+<p>也可使用<code>?&lt;name&gt;</code>给分组命名，使用<code>\k&lt;name&gt;</code>引用，<code>\b(\w+)\b\s+\1\b</code>可写成<code>\b(?&lt;name&gt;\w+)\b\s\k&lt;name&gt;\b</code>。</p>
+<table>
+<thead>
+<tr>
+<th>代码/语法</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(exp)</td>
+<td style="text-align:center">匹配exp,并捕获文本到自动命名的组里</td>
+</tr>
+<tr>
+<td>(?<name>exp)</name></td>
+<td style="text-align:center">匹配exp,并捕获文本到名称为name的组里，也可以写成(?’name’exp)</td>
+</tr>
+<tr>
+<td>(?:exp)</td>
+<td style="text-align:center">匹配exp,不捕获匹配的文本，也不给此分组分配组号</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -442,6 +625,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
+          
+        </div>
+      
 
       
       
@@ -451,8 +640,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/基类派生类与指针/" rel="next" title="基类派生类与指针">
-                <i class="fa fa-chevron-left"></i> 基类派生类与指针
+              <a href="/2018/06/10/七大查找算法/" rel="next" title="【转载】七大查找算法">
+                <i class="fa fa-chevron-left"></i> 【转载】七大查找算法
               </a>
             
           </div>
@@ -460,10 +649,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/29/机器学习模型之决策树/" rel="prev" title="机器学习模型之决策树">
-                机器学习模型之决策树 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -647,7 +832,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化的作用"><span class="nav-number">1.</span> <span class="nav-text">正则化的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L1-与-L2-正则的区别"><span class="nav-number">2.</span> <span class="nav-text">L1 与 L2 正则的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#某些字符"><span class="nav-number">1.</span> <span class="nav-text">某些字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用的元字符"><span class="nav-number">2.</span> <span class="nav-text">常用的元字符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用实例"><span class="nav-number">2.1.</span> <span class="nav-text">使用实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重复"><span class="nav-number">3.</span> <span class="nav-text">重复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义指定范围"><span class="nav-number">4.</span> <span class="nav-text">自定义指定范围</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分枝条件"><span class="nav-number">5.</span> <span class="nav-text">分枝条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组"><span class="nav-number">6.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反义"><span class="nav-number">7.</span> <span class="nav-text">反义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反向引用-1-2…"><span class="nav-number">8.</span> <span class="nav-text">反向引用 \1, \2…</span></a></li></ol></div>
             
 
           </div>
