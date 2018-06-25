@@ -304,6 +304,439 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/C-map常见用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/25/C-map常见用法/" itemprop="url">
+                  C++map常见用法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-25 20:06:48 / 修改时间：20:08:26" itemprop="dateCreated datePublished" datetime="2018-06-25T20:06:48+08:00">2018-06-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/25/C-map常见用法/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/25/C-map常见用法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>C++中的map，相当于python中的dic，是键-值对的组合，map内部自建一颗红黑树，查找效率为$O(\log n)$，下面将简单介绍map的常见用法。</p>
+<h1 id="map的定义于初始化"><a href="#map的定义于初始化" class="headerlink" title="map的定义于初始化"></a>map的定义于初始化</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m;   #定义<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m;</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(map1); #拷贝构造map1的副本</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(b, e); #通过迭代器拷贝构造<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;T1,T2&gt; m(map1.begin(), map1.end())</div></pre></td></tr></table></figure>
+<h1 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m.insert(pair)</div><div class="line">m.insert(value_type)</div></pre></td></tr></table></figure>
+<p>举个例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">map1.insert(pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;(<span class="number">1</span>, <span class="number">10</span>));</div><div class="line">map1.insert(make_pair(<span class="number">2</span>, <span class="number">20</span>))</div><div class="line">map1.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::value_type (<span class="number">3</span>, <span class="number">30</span>));</div><div class="line"><span class="meta">#insert只能插入不存在元素</span></div></pre></td></tr></table></figure></p>
+<h2 id="通过下标访问"><a href="#通过下标访问" class="headerlink" title="通过下标访问"></a>通过下标访问</h2><p>举个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">map&lt;int,string&gt; map1;</div><div class="line">map1[40]=&quot;ZhangSan&quot;#学号40的是张三</div><div class="line">#在map中使用下标访问不存在的元素将导致在map容器中添加一个新的元素。</div><div class="line">#如果元素已经存在，则原元素被覆盖。</div></pre></td></tr></table></figure></p>
+<h1 id="元素的查找"><a href="#元素的查找" class="headerlink" title="元素的查找"></a>元素的查找</h1><h2 id="count"><a href="#count" class="headerlink" title="count"></a>count</h2><p>map.count(k)将会查找key值k的个数，但是由于map中不存在重复元素，因此只会返回0和1。</p>
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>map.find(k)，返回一个指向k的迭代器，如果k不存在，则返回map.end()</p>
+<h1 id="map的大小"><a href="#map的大小" class="headerlink" title="map的大小"></a>map的大小</h1><p>map.size()，直接用就行，很简单。</p>
+<h1 id="删除元素erase"><a href="#删除元素erase" class="headerlink" title="删除元素erase"></a>删除元素erase</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">m.erase(k) #删除键值为k的对，返回删除的个数</div><div class="line">m.erase(p) #删除迭代器p</div><div class="line">m.erase(b, e) #删除<span class="number">2</span>个迭代器之间的元素</div></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.jb51.net/article/96053.htm" target="_blank" rel="external">脚本之家</a></li>
+</ul>
+<blockquote>
+<p>本文如未明确写明转载，则：</p>
+<p>本文作者： 微石</p>
+<p>版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">CC BY-SA 4.0</a> 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/C++new与malloc区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/25/C++new与malloc区别/" itemprop="url">
+                  C++ new与malloc 区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-25 20:00:48 / 修改时间：20:10:14" itemprop="dateCreated datePublished" datetime="2018-06-25T20:00:48+08:00">2018-06-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/25/C++new与malloc区别/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/25/C++new与malloc区别/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文参考自：<a href="http://blog.csdn.net/linux_ever/article/details/50533149" target="_blank" rel="external">http://blog.csdn.net/linux_ever/article/details/50533149</a></p>
+</blockquote>
+<h1 id="内存分配机制"><a href="#内存分配机制" class="headerlink" title="内存分配机制"></a>内存分配机制</h1><ol>
+<li>栈区（stack）— 由编译器自动分配释放 ，存放函数的参数值，局部变量的值等。其操作方式类似于数据结构中的栈。</li>
+<li>堆区（heap） — 一般由程序员分配释放， 若程序员不释放，程序结束时可能由OS回收 。注意它与数据结构中的堆是两回事，分配方式倒是类似于链表。</li>
+<li>全局区（静态区）（static）—，全局变量和静态变量的存储是放在一块的，初始化的全局变量和静态变量在一块区域， 未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。 - 程序结束后由系统释放。</li>
+<li>文字常量区 —常量字符串就是放在这里的。 程序结束后由系统释放</li>
+<li>程序代码区—存放函数体的二进制代码。</li>
+</ol>
+<h2 id="栈区与堆区的区别："><a href="#栈区与堆区的区别：" class="headerlink" title="栈区与堆区的区别："></a>栈区与堆区的区别：</h2><ol>
+<li><p>堆和栈中的存储内容：栈存局部变量、函数参数等。堆存储使用new、malloc申请的变量等；</p>
+</li>
+<li><p>申请方式：栈内存由系统分配，堆内存由自己申请；</p>
+</li>
+<li><p>申请后系统的响应：栈——只要栈的剩余空间大于所申请空间，系统将为程序提供内存，否则将报异常提示栈溢出。<br>堆——首先应该知道操作系统有一个记录空闲内存地址的链表，当系统收到程序的申请时，会遍历该链表，寻找第一个空间大于所申请空间的堆结点，然后将该结点从空闲结点链表 中删除，并将该结点的空间分配给程序；</p>
+</li>
+<li><p>申请大小的限制：Windows下栈的大小一般是2M，堆的容量较大；</p>
+</li>
+<li><p>申请效率的比较：栈由系统自动分配，速度较快。堆使用new、malloc等分配，较慢；</p>
+</li>
+</ol>
+<p>总结：栈区优势在处理效率，堆区优势在于灵活；</p>
+<h2 id="内存模型：自由区、静态区、动态区；"><a href="#内存模型：自由区、静态区、动态区；" class="headerlink" title="内存模型：自由区、静态区、动态区；"></a>内存模型：自由区、静态区、动态区；</h2><p>根据c/c++对象生命周期不同，c/c++的内存模型有三种不同的内存区域，即：自由存储区，动态区、静态区。</p>
+<p>自由存储区：局部非静态变量的存储区域，即平常所说的栈；</p>
+<p>动态区： 用new ，malloc分配的内存，即平常所说的堆；</p>
+<p>静态区：全局变量，静态变量，字符串常量存在的位置；</p>
+<p>注：代码虽然占内存，但不属于c/c++内存模型的一部分；</p>
+<h1 id="new与malloc区别"><a href="#new与malloc区别" class="headerlink" title="new与malloc区别"></a>new与malloc区别</h1><h2 id="申请的内存所在位置"><a href="#申请的内存所在位置" class="headerlink" title="申请的内存所在位置"></a>申请的内存所在位置</h2><p>new操作符从自由存储区（free store）上为对象动态分配内存空间，而malloc函数从堆上动态分配内存。自由存储区是C++基于new操作符的一个抽象概念，凡是通过new操作符进行内存申请，该内存即为自由存储区。</p>
+<h2 id="返回类型安全性"><a href="#返回类型安全性" class="headerlink" title="返回类型安全性"></a>返回类型安全性</h2><p>new操作符内存分配成功时，返回的是对象类型的指针，类型严格与对象匹配，无须进行类型转换，故new是符合类型安全性的操作符。</p>
+<p>而malloc内存分配成功则是返回void <em> ，需要通过强制类型转换将void</em>指针转换成我们需要的类型。</p>
+<h2 id="内存分配失败时的返回值"><a href="#内存分配失败时的返回值" class="headerlink" title="内存分配失败时的返回值"></a>内存分配失败时的返回值</h2><p>new内存分配失败时，会抛出bac_alloc异常，它不会返回NULL；</p>
+<p>malloc分配内存失败时返回NULL。</p>
+<h2 id="是否需要指定内存大小"><a href="#是否需要指定内存大小" class="headerlink" title="是否需要指定内存大小"></a>是否需要指定内存大小</h2><p>使用new操作符申请内存分配时无须指定内存块的大小，编译器会根据类型信息自行计算，而malloc则需要显式地指出所需内存的尺寸。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span>...&#125;</div><div class="line">A * ptr = <span class="keyword">new</span> A;</div><div class="line">A * ptr = (A *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(A)); <span class="comment">//需要显式指定所需内存大小sizeof(A);</span></div></pre></td></tr></table></figure></p>
+<p>当然了，我这里使用malloc来为我们自定义类型分配内存是不怎么合适的，请看下一条。</p>
+<h2 id="是否调用构造函数-析构函数"><a href="#是否调用构造函数-析构函数" class="headerlink" title="是否调用构造函数/析构函数"></a>是否调用构造函数/析构函数</h2><p>使用new操作符来分配对象内存时会经历三个步骤：</p>
+<pre><code>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。
+第二步：编译器运行相应的构造函数以构造对象，并为其传入初值。
+第三部：对象构造完成后，返回一个指向该对象的指针。
+</code></pre><p>使用delete操作符来释放对象内存时会经历两个步骤：</p>
+<pre><code>第一步：调用对象的析构函数。
+第二步：编译器调用operator delete(或operator delete[])函数释放内存空间。
+</code></pre><p>总之来说，new/delete会调用对象的构造函数/析构函数以完成对象的构造/析构。而malloc则不会。如果你不嫌啰嗦可以看下我的例子：</p>
+<h2 id="对数组的处理"><a href="#对数组的处理" class="headerlink" title="对数组的处理"></a>对数组的处理</h2><p>C++提供了new[]与delete[]来专门处理数组类型:</p>
+<pre><code>A * ptr = new A[10];//分配10个A对象
+</code></pre><p>使用new[]分配的内存必须使用delete[]进行释放：</p>
+<pre><code>delete [] ptr;
+</code></pre><p>new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
+<p>至于malloc，它并知道你在这块内存上要放的数组还是啥别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
+<pre><code>int * ptr = (int *) malloc( sizeof(int) );//分配一个10个int元素的数组
+</code></pre><h2 id="能够直观地重新分配内存"><a href="#能够直观地重新分配内存" class="headerlink" title="能够直观地重新分配内存"></a>能够直观地重新分配内存</h2><p>使用malloc分配的内存后，如果在使用过程中发现内存不足，可以使用realloc函数进行内存重新分配实现内存的扩充。realloc先判断当前的指针所指内存是否有足够的连续空间，如果有，原地扩大可分配的内存地址，并且返回原来的地址指针；如果空间不够，先按照新指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来的内存区域。</p>
+<p>new没有这样直观的配套设施来扩充内存。</p>
+<h1 id="客户处理内存分配不足"><a href="#客户处理内存分配不足" class="headerlink" title="客户处理内存分配不足"></a>客户处理内存分配不足</h1><p>在operator new抛出异常以反映一个未获得满足的需求之前，它会先调用一个用户指定的错误处理函数，这就是new-handler。new_handler是一个指针类型：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="built_in">std</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*new_handler)</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>指向了一个没有参数没有返回值的函数,即为错误处理函数。为了指定错误处理函数，客户需要调用set_new_handler，这是一个声明于的一个标准库函数:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="built_in">std</span></div><div class="line">&#123;</div><div class="line">    <span class="function">new_handler <span class="title">set_new_handler</span><span class="params">(new_handler p )</span> <span class="title">throw</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>set_new_handler的参数为new_handler指针，指向了operator new 无法分配足够内存时该调用的函数。其返回值也是个指针，指向set_new_handler被调用前正在执行（但马上就要发生替换）的那个new_handler函数。</p>
+<p>对于malloc，客户并不能够去编程决定内存不足以分配时要干什么事，只能看着malloc返回NULL。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>将上面所述的10点差别整理成表格：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>new/delete</th>
+<th>malloc/free</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分配内存的位置</td>
+<td>自由存储区</td>
+<td>堆</td>
+</tr>
+<tr>
+<td>内存分配失败返回值</td>
+<td>完整类型指针</td>
+<td>void*</td>
+</tr>
+<tr>
+<td>内存分配失败返回值</td>
+<td>默认抛出异常</td>
+<td>返回NULL</td>
+</tr>
+<tr>
+<td>分配内存的大小</td>
+<td>由编译器根据类型计算得出</td>
+<td>必须显式指定字节数</td>
+</tr>
+<tr>
+<td>处理数组</td>
+<td>有处理数组的new版本new[]</td>
+<td>需要用户计算数组的大小后进行内存分配</td>
+</tr>
+<tr>
+<td>已分配内存的扩充</td>
+<td>无法直观地处理</td>
+<td>使用realloc简单完成</td>
+</tr>
+<tr>
+<td>是否相互调用</td>
+<td>可以，看具体的operator new/delete实现</td>
+<td>不可调用new</td>
+</tr>
+<tr>
+<td>分配内存时内存不足</td>
+<td>客户能够指定处理函数或重新制定分配器</td>
+<td>无法通过用户代码进行处理</td>
+</tr>
+<tr>
+<td>函数重载</td>
+<td>允许</td>
+<td>不允许</td>
+</tr>
+<tr>
+<td>构造函数与析构函数</td>
+<td>调用</td>
+<td>不调用</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/【转载】one-key-kms 部署以及激活win&office教程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1709,326 +2142,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/机器学习模型之支持向量机/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/10/机器学习模型之支持向量机/" itemprop="url">
-                  机器学习模型之支持向量机
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-10 10:10:06 / 修改时间：11:41:21" itemprop="dateCreated datePublished" datetime="2018-06-10T10:10:06+08:00">2018-06-10</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/10/机器学习模型之支持向量机/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/10/机器学习模型之支持向量机/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="支持向量机基本思想"><a href="#支持向量机基本思想" class="headerlink" title="支持向量机基本思想"></a>支持向量机基本思想</h1><p>在n维空间中，可以使用n-1维超平面（可用线性方程 $\mathbf{w^Tx}+b=0$ 来描述）来分类（将n维空间分为2部分），下图以二维空间为例：</p>
-<p><img src="/2018/06/10/机器学习模型之支持向量机/支持向量机.png" alt="支持向量机"></p>
-<p>图中带圆圈标记的政府样本为距离超平面最近的样本点，也称支持向量。用支持向量机分类时有以下约束条件：应尽量去找正负样本正中心的超平面，这样对样本扰动容忍性好。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/10/机器学习模型之支持向量机/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/【转载】有限元的隐式与显式动力学/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/09/【转载】有限元的隐式与显式动力学/" itemprop="url">
-                  【转载】有限元的隐式与显式动力学
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-09 10:28:48 / 修改时间：11:04:33" itemprop="dateCreated datePublished" datetime="2018-06-09T10:28:48+08:00">2018-06-09</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/09/【转载】有限元的隐式与显式动力学/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/09/【转载】有限元的隐式与显式动力学/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自<a href="http://blog.sina.com.cn/s/blog_6465f2ed0102x32u.html" target="_blank" rel="external">长安CAE</a></p>
-</blockquote>
-<h1 id="动力学问题"><a href="#动力学问题" class="headerlink" title="动力学问题"></a>动力学问题</h1><p>在讨论隐式与显式动力学之前，先讨论一下动力学问题和静力学问题。在求解静力学问题时没有时间的概念，即使在载荷步控制力有Time这个选项，但是这个Time的含义更多的是载荷步。Time前后的求解过程相互没有影响。</p>
-<p>动力学问题的特点是施加到结构上的外载荷的大小和方向可能随着时间的变化而发生变化，使结构产生速度和加速度。在用有限元求解静力学问题时主要是求矩阵方程组的问题，如下所示，只需要考虑结构的刚度矩阵。</p>
-<p><img src="http://s5.sinaimg.cn/mw690/001PZA97zy716Vq4Ysc24&amp;690" alt="有限元的隐式与显式动力学"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/09/【转载】有限元的隐式与显式动力学/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2075,7 +2193,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
