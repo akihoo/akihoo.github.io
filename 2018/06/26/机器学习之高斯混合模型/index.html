@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
-<meta name="keywords" content="C++">
+  <meta name="description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gaussian distribution）">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++ Primer 知识点总结（第三章）">
-<meta property="og:url" content="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/index.html">
+<meta property="og:title" content="机器学习之高斯混合模型">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta property="og:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gaussian distribution）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-10T10:51:32.910Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/GMM.png">
+<meta property="og:updated_time" content="2018-06-26T13:46:14.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++ Primer 知识点总结（第三章）">
-<meta name="twitter:description" content="部分内容转载自cnblogs、Daniel_z  命名空间 头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。">
+<meta name="twitter:title" content="机器学习之高斯混合模型">
+<meta name="twitter:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gaussian distribution）">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/GMM.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>C++ Primer 知识点总结（第三章） | 微石的碎碎念</title>
+  <title>机器学习之高斯混合模型 | 微石的碎碎念</title>
   
 
 
@@ -305,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/13/C++ Primer 知识点总结 （第三章）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -322,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++ Primer 知识点总结（第三章）
+          <h1 class="post-title" itemprop="name headline">机器学习之高斯混合模型
               
             
           </h1>
@@ -347,24 +349,12 @@
                 
               
 
-              <time title="创建时间：2017-11-13 14:09:40" itemprop="dateCreated datePublished" datetime="2017-11-13T14:09:40+08:00">2017-11-13</time>
+              <time title="创建时间：2018-06-26 21:38:32 / 修改时间：21:46:14" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-05-10 18:51:32" itemprop="dateModified" datetime="2018-05-10T18:51:32+08:00">2018-05-10</time>
               
             
           </span>
@@ -378,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/11/13/C++ Primer 知识点总结 （第三章）/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/13/C++ Primer 知识点总结 （第三章）/" itemprop="commentCount"></span>
+                <a href="/2018/06/26/机器学习之高斯混合模型/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/26/机器学习之高斯混合模型/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,149 +397,49 @@
       
 
       
-        <blockquote>
-<p>部分内容转载自<a href="https://www.cnblogs.com/citron/p/6145291.html" target="_blank" rel="external">cnblogs</a>、<a href="https://www.cnblogs.com/danielStudy/p/7127564.html" target="_blank" rel="external">Daniel_z</a></p>
-</blockquote>
-<h1 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h1><ol>
-<li>头文件：可将类、全局变量等在头文件中声明，为了防止头文件的重复包含，通常应该使用预处理指令 #define （定义符号）、#ifndef（如果没有定义）、#endif（结束判断）来书写头文件的内容。</li>
-</ol>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。</p>
+<p>参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。</p>
+<p>最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
+<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p>高斯分布（Gaussian distribution）有时也被称为正态分布（normal distribution），是一种在自然界大量的存在的、最为常见的分布形式。<br>其概率密度函数为：<br>$$f\left( x\right) =\dfrac {1}{\sqrt {2\pi }\sigma }\exp \left( -\dfrac {\left( x-\mu \right)^2 }{2\sigma ^{2}}\right)$$<br>如果随机变量服从的正态分布，记作$X\sim N\left( \mu ,\sigma ^{2}\right)$</p>
+<p>可见高斯分布包含两个参数，参数μ表示均值，参数σ表示标准差。</p>
 <a id="more"></a>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><ol>
-<li>getline(cin , stringname) ：从输入流中读入内容直到读入换行符，保留空白符，但换行符不存入string对象中</li>
-<li>字面值与string：字符字面值和字符串字面值可以隐式转化为string对象</li>
-<li>empty 函数根据 string 是否为空返回布尔值； size_type 表示各自类型的长度或下标，返回无符号整数，类型为 string::size_type</li>
-<li>常用函数：islower(c) c是小写字母时为真；isupper(c) c是大写字母时为真 ； tolower(c) c是大写字母时，输出 c 对应的小写字母，否则原样输出 c ；toupper(c) c是小写字母时，输出 c 对应的大写字母，否则原样输出 c ；</li>
+<h1 id="高斯混合模型（GMM）"><a href="#高斯混合模型（GMM）" class="headerlink" title="高斯混合模型（GMM）"></a>高斯混合模型（GMM）</h1><p>高斯混合模型是对高斯模型进行简单的扩展，GMM使用多个高斯分布的组合来刻画数据分布。每个高斯模型就代表了一个类（一个Cluster）。</p>
+<p>混合高斯模型定义为<br>$$p\left( x\right) =\sum ^{k}_{i=1}\pi _{1},p\left( x| K\right)$$</p>
+<p>其中 K 为模型的个数；$π_k$ 为第 k 个高斯的权重；$p(x | k)$ 则为第 k 个高斯概率密度，其均值为$μ_k$，方差为$σ_k$。对此概率密度的估计就是要求出$π_k$、$μ_k$ 和 $σ_k$ 各个变量。当求出$p(x)$的表达式后，求和式的各项的结果就分别代表样本 x 属于各个类的概率。</p>
+<p>既然已经了解模型的定义，如何确定这些参数值？GMM通常使用最大期望（ Expectation Maximum，简称EM）进行参数评估。</p>
+<h1 id="EM算法（Expectation-maximization，期望最大化）"><a href="#EM算法（Expectation-maximization，期望最大化）" class="headerlink" title="EM算法（Expectation maximization，期望最大化）"></a>EM算法（Expectation maximization，期望最大化）</h1><p>EM算法（Expectation-Maximization algorithm）分两步，第一步先求出要估计参数的粗略值，第二步使用第一步的值最大化似然函数。因此要先求出GMM的似然函数。</p>
+<ol>
+<li>定义分量数目K，对每个分量k设置$π_k$，$μ_k$和$Σ<em>k$的初始值，然后计算对数似然函数$p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum</em>{k=1}^K\pi_k \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) $。</li>
+<li>E step：根据当前的$π_k$，$μ_k$和$Σ<em>k$计算后验概率$\gamma(z</em>{nk})$<br>$$\gamma(z_{nk}) = \frac{\pi_k\mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_n, \boldsymbol{\Sigma}<em>n)}{\sum</em>{j=1}^K \pi_j \mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)}$$</li>
+<li>M step ：根据E step中计算的$\gamma(z_{nk})$再计算新的$π_k$，$μ_k$和$Σ_k$<br>$$\boldsymbol{\mu}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N \gamma(z_{nk}) \boldsymbol{x}_n$$</li>
 </ol>
-<h1 id="向量和数组"><a href="#向量和数组" class="headerlink" title="向量和数组"></a>向量和数组</h1><ol>
-<li>下标运算符[]：vector或string的下标运算符可用于访问已存在的元素，而不能用于添加元素。添加元素需使用(+= or append or push_back for string) and (insert or push_back for vector)</li>
-<li>迭代器 end() 指向尾元素的下一位置，不指向具体元素，不能解引用或递增</li>
-<li>复杂数组声明的理解：从数组名字开始按照由内向外的顺序阅读，如int <em>(&amp;a)[10]表示a是对数组引用，该数组包含10个int</em></li>
-<li>数组的缺点：数组的大小是确定不变的，不可以向数组中添加元素，丧失了vectoer的灵活性</li>
-<li>不可以将整个数组赋值给另一个数组，只能逐个元素的拷贝；可以直接将整个vector拷贝给另一个vector</li>
-<li>多维数组初始化：使用花括号的形式，未列出的元素执行默认值初始化</li>
-<li>范围for处理多维数组：除最内层循环外，其他所有循环的控制变量都应该是引用类型，以避免这些数组形式的元素被自动转换成指向数组首元素的指针</li>
-<li>定义和初始化Vector：<ul>
-<li>默认初始化：vector<t> v1;</t></li>
-<li>拷贝初始化：vector<t> v2=v1;</t></li>
-<li>直接初始化：vector<t> v3(v2);</t></li>
-<li>指定含有多个不相同初始值的初始化：vector <t> v4{a,b,c,d};</t></li>
-<li>指定含有多个相同初始值的初始化：vector<t> v5(10,-1);</t></li>
-</ul>
-</li>
-<li>定义和初始化数组：<ul>
-<li>int arr[42]   //含有42个整形元素的数组；</li>
-<li>int *arr[10]  //含有10个整型指针的数组</li>
-<li>字符数组也可以使用花括号初始化，但是一定注意后面需要留一个位置给‘\0’<ul>
-<li>char a1[]={‘C’,’+’,’+‘，‘\0’};</li>
-<li>char a2[]=”C++”;  //a2的维度为4；</li>
-<li>char a3[3]=”C++”;//错误：”C++”，这个字符串是4个元素。</li>
-<li>char a4[]={‘C’,’+’，’+’}； //这种定义是允许的，但是后面会有一系列的问题。</li>
-</ul>
-</li>
-<li>不允许将数组的内容拷贝给其他数组作为初始值，也不能用数组为其他数组赋值：<ul>
-<li>int a[]={0,1,2};</li>
-<li>int a2[]=a;   //错误，不允许将一个数组作为初始值给另外一个数组</li>
-<li>a2=a;      //错误，不能把一个数组直接赋值给另外一个数组</li>
-</ul>
-</li>
-<li>理解复杂的数组声明<pre><code>- int *ptrs[10];  //这个数组有10个元素，每个元素都是int指针。
-</code></pre><ul>
-<li>int &amp;refs[10];  //错误，数组里面应该是对象，不能是引用。（引用不占空间）</li>
-<li>int (*Parray)[10]=&arr; //Parray指向一个含有10个int类型的元素的数组。</li>
-<li>int (&amp;arrRef)[10]=arr; //arrRef引用一个含有10个整型元素的数组。</li>
-<li>int *(&amp;arry)[10]=ptrs；//arry引用一个含有10个指向int类型的指针的数组</li>
-<li>//在编译器上试了一下把括号去掉的效果</li>
-<li>int *&amp;array[10]=ptrs;编译器会报错了，报错内容是不允许定义引用的数组。</li>
-<li>继续测试： int **array[10];这样的数组初始化必须是{ptr1,ptr2,ptr3…};</li>
-<li>因此如果对于定义数组，不打括号的话，数组里面的元素应该是数组名字左边的所有声明符加起来。</li>
-<li>书上说，对于数组的理解应该按照由内到外理解。但是按照之前对指针类型的分析，这里可以这样分析。首先看这个数组里面的元素类型是什么：int *ref[10];</li>
-<li>可以这样看（int *）ref[10]；也就是说这个数组里面的元素都是指针。而</li>
-<li>int (*Parray)[10]=&amp;arr；这种类型，首先数组里面的元素是int型的，再看parray它就是一个指针了。指向这个数组。</li>
-</ul>
-</li>
-</ul>
-</li>
+<p>$$\boldsymbol{\Sigma}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N \gamma(z_{nk}) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new}) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new})^T $$</p>
+<p>$$\pi_k^{new} = \frac{N_k}{N}$$</p>
+<p>其中：<br>$$N_k = \sum_{n=1}^N \gamma(z_{nk})$$</p>
+<ol start="4">
+<li>计算对数似然函数<br>$$\ln p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^N \ln \left{\sum_{k=1}^K \pi_k \mathcal{N}(\boldsymbol{x}_k| \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\right}$$</li>
+<li>检查参数是否收敛或对数似然函数是否收敛，若不收敛，则返回第2步。</li>
 </ol>
-<h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><ol>
-<li><p>assign()//用于赋予新值，assign函数用于将一个字符串的部分内容赋值给另一个string对象</p>
-<ul>
-<li>s2.assign(s1,0,3);//s1 = “hello”，s2的值为“hel”</li>
-</ul>
-</li>
-<li><p>swap() //交换两个字符串的内容</p>
-<ul>
-<li>swap(s1,s2);//s1=”hello”,s2=”world”，swap函数将s1和s2的内容交换，现在s1=”world”,s2=”hello”</li>
-</ul>
-</li>
-<li><p>+=、append()、push_back()//在字符串尾部追加内容,”+=”可追加string对象，字符以及C风格字符串，append函数则可以追加string对象和C风格字符串，push_back函数则只能追加字符</p>
-<ul>
-<li>string s1 = “hello”;</li>
-<li>string s2 = “ world”;</li>
-<li>s1 += s2;//正确，s1的值为”hello world“</li>
-<li>s1 +=”world”;// 正确，s1的值为”hello world”</li>
-<li>s1 +=’c’; //正确，s1的值为”helloc”</li>
-<li>s1.append(s2);//正确，s1的值为”hello world”</li>
-<li>s1.append(“ world”);//正确，s1的值为”hello world”</li>
-<li>s1.append(‘c’);//错误，append函数不支持追加字符</li>
-<li>s1.push_back(s2);//错误</li>
-<li>s1.push_back(“world”);//错误</li>
-<li>s1.push_back(‘c’);//正确</li>
-</ul>
-</li>
-<li><p>insert()//用于插入字符串</p>
-<ul>
-<li>string s1 = “hello”;</li>
-<li>s1.insert(0,”world “);//s1的值为world hello</li>
-</ul>
-</li>
-<li><p>erase()//用于删除字符的</p>
-<ul>
-<li>string str(“This is an example phrase.”);</li>
-<li>string::iterator it;//迭代器</li>
-<li>str.erase(10,8);//str的值为”This is an phrase.”,删除了从位置10开始的8个字符</li>
-<li>it = str.begin()+9;//迭代器位置为9</li>
-<li>str.erase(it);//删除了从it迭代器位置处的一个字符，str=”This is a phrase.”</li>
-<li>str.erase(str.begin()+5,str.end()-7);//删除两个参数之间的所有字符，str=”This phrase.”</li>
-</ul>
-</li>
+<blockquote>
+<ol>
+<li>此部分参考自：<a href="https://blog.csdn.net/jinping_shi/article/details/59613054" target="_blank" rel="external">https://blog.csdn.net/jinping_shi/article/details/59613054</a></li>
+<li>EM算法源码可参考：<a href="https://blog.csdn.net/lihou1987/article/details/70833229" target="_blank" rel="external">https://blog.csdn.net/lihou1987/article/details/70833229</a></li>
 </ol>
-<ol start="6">
-<li><p>clear()函数和~string()//都是用来删除全部字符的</p>
-<ul>
-<li>str.clear();//删除str的全部字符，此时str为一个空串</li>
-<li>str.~string();//销毁所有字符，释放内存</li>
-</ul>
-</li>
-<li><p>replace()函数，用于替换字符</p>
-<ul>
-<li>string line = “this@ is@ a test string!”;</li>
-<li>line = line.replace(line.find(“@”),1,””);//将line中从find的@位置开始替换一个长度的字符为”” 结果为this is@ a test string!</li>
-</ul>
-</li>
-<li><p>==、！=、&lt;、&lt;=、&gt;、&gt;=、compare()//比较字符串</p>
-</li>
-<li><p>size()函数和length()函数，返回字符串的字符数，从第一个字符到’\0’的长度，\0表示空字符，作为字符串结束符使用，\代表转义字符</p>
-</li>
-<li><p>empty()//判断字符串是否为空</p>
-</li>
+</blockquote>
+<h1 id="GMM模型的简单使用"><a href="#GMM模型的简单使用" class="headerlink" title="GMM模型的简单使用"></a>GMM模型的简单使用</h1><p>使用sklearn中的isrs数据集与GMM模型进行简单使用。代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># %matplotlib inline</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></div><div class="line"><span class="comment"># 引入数据集  </span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </div><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris  </div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> mixture</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">  </div><div class="line">iris = load_iris()  </div><div class="line">obs = iris.data</div><div class="line">clf = mixture.GMM(n_components=<span class="number">3</span>)</div><div class="line">clf.fit(obs)</div><div class="line"><span class="comment">#预测</span></div><div class="line">labels = clf.predict(obs) </div><div class="line"><span class="comment">#GMM为无监督学习，因此输出的分类label可能与原lebel不一致</span></div><div class="line"><span class="comment">#以下3行代码将输出的分类label改正，或许在你的电脑上输出的label与我的label也不一致，请自行改正</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(labels)):</div><div class="line">    <span class="keyword">if</span> labels[i]!=<span class="number">2</span>:</div><div class="line">        labels[i]=<span class="number">0</span> <span class="keyword">if</span> labels[i]==<span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span></div><div class="line">X = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]  </div><div class="line">Y = [x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]</div><div class="line">fig, ((ax1, ax2)) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex = <span class="keyword">True</span>, sharey = <span class="keyword">True</span>)</div><div class="line">plt.figure()</div><div class="line">ax1.scatter(X, Y, c=labels, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax1.set_title(<span class="string">'predict'</span>)</div><div class="line">ax2.scatter(X, Y, c=iris.target, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax2.set_title(<span class="string">'target'</span>)</div><div class="line">error=[<span class="number">0</span> <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> labels-iris.target]</div><div class="line">print(<span class="string">"正确率为"</span>,<span class="number">1</span>-sum(error)/len(error))</div></pre></td></tr></table></figure></p>
+<h2 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h2><p><img src="/2018/06/26/机器学习之高斯混合模型/GMM.png" alt=""></p>
+<pre><code>正确率为 0.9066666666666666
+</code></pre><p>从预测结果可看出，黄色与绿色重叠部分存在部分样本分类错误，整体分类准确率为90%。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="https://www.cnblogs.com/wjy-lulu/p/7009038.html" target="_blank" rel="external">https://www.cnblogs.com/wjy-lulu/p/7009038.html</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_69e75efd0102wylw.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_69e75efd0102wylw.html</a></li>
+<li><a href="https://www.cnblogs.com/txg198955/p/4097543.html" target="_blank" rel="external">https://www.cnblogs.com/txg198955/p/4097543.html</a></li>
 </ol>
-<h1 id="vector-操作"><a href="#vector-操作" class="headerlink" title="vector 操作"></a>vector 操作</h1><ol>
-<li>insert(p, t) //在迭代器p之前插入t元素</li>
-<li>erase(p) //删除p所指元素</li>
-<li>push_back(t) //向尾部添加t元素</li>
-<li>pop_back() //删除末尾元素</li>
-<li>clear() //清空vector</li>
-<li>size() //返回的是vector的大小</li>
-<li>begin()、end() //返回指向开头与末尾后一位的迭代器</li>
-<li>指向常量的开始指针： vec.cbegin(); vec.cend(); //意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</li>
-<li>swap() //交换vector</li>
-<li>元素的访问：vec.front();vec.back();访问首尾元素</li>
-<li>有关算法（需要头文件#include<algorithm>）<ul>
-<li>reverse(vec.begin(),vec.end()); //将元素翻转，即逆序排列！参数为2个迭代器</li>
-<li>sort(vec.begin(),vec.end()); //(默认是按升序排列,即从小到大).</li>
-</ul>
-</algorithm></li>
-</ol>
+<blockquote>
+<p>本文如未明确写明转载，则：</p>
+<p>本文作者： 微石</p>
+<p>版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">CC BY-SA 4.0</a> 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>
@@ -570,7 +460,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
         </div>
       
@@ -583,8 +473,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/13/C++ Primer 知识点总结 （第二章）/" rel="next" title="C++ Primer 知识点总结（第二章）">
-                <i class="fa fa-chevron-left"></i> C++ Primer 知识点总结（第二章）
+              <a href="/2018/06/25/C-map常见用法/" rel="next" title="C++map常见用法">
+                <i class="fa fa-chevron-left"></i> C++map常见用法
               </a>
             
           </div>
@@ -592,10 +482,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/29/查看 ErrElemExcessDistortion 的 Elements/" rel="prev" title="查看 ErrElemExcessDistortion 的 Elements">
-                查看 ErrElemExcessDistortion 的 Elements <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -787,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串"><span class="nav-number">2.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量和数组"><span class="nav-number">3.</span> <span class="nav-text">向量和数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串操作"><span class="nav-number">4.</span> <span class="nav-text">字符串操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-操作"><span class="nav-number">5.</span> <span class="nav-text">vector 操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高斯分布"><span class="nav-number">2.</span> <span class="nav-text">高斯分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高斯混合模型（GMM）"><span class="nav-number">3.</span> <span class="nav-text">高斯混合模型（GMM）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EM算法（Expectation-maximization，期望最大化）"><span class="nav-number">4.</span> <span class="nav-text">EM算法（Expectation maximization，期望最大化）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GMM模型的简单使用"><span class="nav-number">5.</span> <span class="nav-text">GMM模型的简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输出结果"><span class="nav-number">5.1.</span> <span class="nav-text">输出结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
