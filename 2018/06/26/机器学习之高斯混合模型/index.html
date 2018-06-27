@@ -117,7 +117,7 @@
 <meta property="og:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gaussian distribution）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/机器学习之高斯混合模型/GMM.png">
-<meta property="og:updated_time" content="2018-06-26T13:46:14.591Z">
+<meta property="og:updated_time" content="2018-06-27T12:06:32.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之高斯混合模型">
 <meta name="twitter:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gaussian distribution）">
@@ -349,12 +349,24 @@
                 
               
 
-              <time title="创建时间：2018-06-26 21:38:32 / 修改时间：21:46:14" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
+              <time title="创建时间：2018-06-26 21:38:32" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-27 20:06:32" itemprop="dateModified" datetime="2018-06-27T20:06:32+08:00">2018-06-27</time>
               
             
           </span>
@@ -404,20 +416,23 @@
 <p>可见高斯分布包含两个参数，参数μ表示均值，参数σ表示标准差。</p>
 <a id="more"></a>
 <h1 id="高斯混合模型（GMM）"><a href="#高斯混合模型（GMM）" class="headerlink" title="高斯混合模型（GMM）"></a>高斯混合模型（GMM）</h1><p>高斯混合模型是对高斯模型进行简单的扩展，GMM使用多个高斯分布的组合来刻画数据分布。每个高斯模型就代表了一个类（一个Cluster）。</p>
-<p>混合高斯模型定义为<br>$$p\left( x\right) =\sum ^{k}_{i=1}\pi _{1},p\left( x| K\right)$$</p>
+<p>混合高斯模型定义为<br>$$p\left( x\right) =\sum ^{k}_{i=1}\pi _{k}p\left( x| k\right)$$</p>
 <p>其中 K 为模型的个数；$π_k$ 为第 k 个高斯的权重；$p(x | k)$ 则为第 k 个高斯概率密度，其均值为$μ_k$，方差为$σ_k$。对此概率密度的估计就是要求出$π_k$、$μ_k$ 和 $σ_k$ 各个变量。当求出$p(x)$的表达式后，求和式的各项的结果就分别代表样本 x 属于各个类的概率。</p>
 <p>既然已经了解模型的定义，如何确定这些参数值？GMM通常使用最大期望（ Expectation Maximum，简称EM）进行参数评估。</p>
 <h1 id="EM算法（Expectation-maximization，期望最大化）"><a href="#EM算法（Expectation-maximization，期望最大化）" class="headerlink" title="EM算法（Expectation maximization，期望最大化）"></a>EM算法（Expectation maximization，期望最大化）</h1><p>EM算法（Expectation-Maximization algorithm）分两步，第一步先求出要估计参数的粗略值，第二步使用第一步的值最大化似然函数。因此要先求出GMM的似然函数。</p>
 <ol>
-<li>定义分量数目K，对每个分量k设置$π_k$，$μ_k$和$Σ<em>k$的初始值，然后计算对数似然函数$p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum</em>{k=1}^K\pi_k \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k) $。</li>
-<li>E step：根据当前的$π_k$，$μ_k$和$Σ<em>k$计算后验概率$\gamma(z</em>{nk})$<br>$$\gamma(z_{nk}) = \frac{\pi_k\mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_n, \boldsymbol{\Sigma}<em>n)}{\sum</em>{j=1}^K \pi_j \mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)}$$</li>
+<li>定义分量数目K，对每个分量k设置$π_k$，$μ_k$和$\Sigma_k$的初始值，然后计算对数似然函数$p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{k=1}^K\pi_k \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$。</li>
+<li>E step：根据当前的$π_k$，$μ_k$和$\Sigma_k$计算后验概率$\gamma(z_{nk})$。</li>
+</ol>
+<p>$$\gamma(z_{nk}) = \frac{\pi_k\mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_n, \boldsymbol{\Sigma} _n)}{\sum _{j=1}^K \pi_j \mathcal{N}(\boldsymbol{x}_n| \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)}$$</p>
+<ol start="3">
 <li>M step ：根据E step中计算的$\gamma(z_{nk})$再计算新的$π_k$，$μ_k$和$Σ_k$<br>$$\boldsymbol{\mu}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N \gamma(z_{nk}) \boldsymbol{x}_n$$</li>
 </ol>
 <p>$$\boldsymbol{\Sigma}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N \gamma(z_{nk}) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new}) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new})^T $$</p>
 <p>$$\pi_k^{new} = \frac{N_k}{N}$$</p>
 <p>其中：<br>$$N_k = \sum_{n=1}^N \gamma(z_{nk})$$</p>
 <ol start="4">
-<li>计算对数似然函数<br>$$\ln p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^N \ln \left{\sum_{k=1}^K \pi_k \mathcal{N}(\boldsymbol{x}_k| \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\right}$$</li>
+<li>计算对数似然函数<br>$$\ln p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\Sigma}) = \sum_{n=1}^N \ln \left[\sum_{k=1}^K \pi_k \mathcal{N}(\boldsymbol{x}_k| \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)\right]$$</li>
 <li>检查参数是否收敛或对数似然函数是否收敛，若不收敛，则返回第2步。</li>
 </ol>
 <blockquote>
@@ -426,7 +441,7 @@
 <li>EM算法源码可参考：<a href="https://blog.csdn.net/lihou1987/article/details/70833229" target="_blank" rel="external">https://blog.csdn.net/lihou1987/article/details/70833229</a></li>
 </ol>
 </blockquote>
-<h1 id="GMM模型的简单使用"><a href="#GMM模型的简单使用" class="headerlink" title="GMM模型的简单使用"></a>GMM模型的简单使用</h1><p>使用sklearn中的isrs数据集与GMM模型进行简单使用。代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># %matplotlib inline</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></div><div class="line"><span class="comment"># 引入数据集  </span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </div><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris  </div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> mixture</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">  </div><div class="line">iris = load_iris()  </div><div class="line">obs = iris.data</div><div class="line">clf = mixture.GMM(n_components=<span class="number">3</span>)</div><div class="line">clf.fit(obs)</div><div class="line"><span class="comment">#预测</span></div><div class="line">labels = clf.predict(obs) </div><div class="line"><span class="comment">#GMM为无监督学习，因此输出的分类label可能与原lebel不一致</span></div><div class="line"><span class="comment">#以下3行代码将输出的分类label改正，或许在你的电脑上输出的label与我的label也不一致，请自行改正</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(labels)):</div><div class="line">    <span class="keyword">if</span> labels[i]!=<span class="number">2</span>:</div><div class="line">        labels[i]=<span class="number">0</span> <span class="keyword">if</span> labels[i]==<span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span></div><div class="line">X = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]  </div><div class="line">Y = [x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]</div><div class="line">fig, ((ax1, ax2)) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex = <span class="keyword">True</span>, sharey = <span class="keyword">True</span>)</div><div class="line">plt.figure()</div><div class="line">ax1.scatter(X, Y, c=labels, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax1.set_title(<span class="string">'predict'</span>)</div><div class="line">ax2.scatter(X, Y, c=iris.target, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax2.set_title(<span class="string">'target'</span>)</div><div class="line">error=[<span class="number">0</span> <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> labels-iris.target]</div><div class="line">print(<span class="string">"正确率为"</span>,<span class="number">1</span>-sum(error)/len(error))</div></pre></td></tr></table></figure></p>
+<h1 id="GMM模型的简单使用"><a href="#GMM模型的简单使用" class="headerlink" title="GMM模型的简单使用"></a>GMM模型的简单使用</h1><p>使用sklearn中的isrs数据集与GMM模型进行简单使用。代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># %matplotlib inline</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></div><div class="line"><span class="comment"># python3.6</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </div><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris  </div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> mixture</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">  </div><div class="line">iris = load_iris()  </div><div class="line">obs = iris.data</div><div class="line">clf = mixture.GMM(n_components=<span class="number">3</span>)</div><div class="line">clf.fit(obs)</div><div class="line"><span class="comment">#预测</span></div><div class="line">labels = clf.predict(obs) </div><div class="line"><span class="comment">#GMM为无监督学习，因此输出的分类label可能与原label不一致</span></div><div class="line"><span class="comment">#以下3行代码将输出的分类label改正，或许在你的电脑上输出的label与我的label也不一致，请自行改正</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(labels)):</div><div class="line">    <span class="keyword">if</span> labels[i]!=<span class="number">2</span>:</div><div class="line">        labels[i]=<span class="number">0</span> <span class="keyword">if</span> labels[i]==<span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span></div><div class="line">X = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]  </div><div class="line">Y = [x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]</div><div class="line"><span class="comment"># 图像可视化</span></div><div class="line">fig, ((ax1, ax2)) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex = <span class="keyword">True</span>, sharey = <span class="keyword">True</span>)</div><div class="line">plt.figure()</div><div class="line">ax1.scatter(X, Y, c=labels, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax1.set_title(<span class="string">'predict'</span>)</div><div class="line">ax2.scatter(X, Y, c=iris.target, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax2.set_title(<span class="string">'target'</span>)</div><div class="line">error=[<span class="number">0</span> <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> labels-iris.target]</div><div class="line">print(<span class="string">"正确率为"</span>,<span class="number">1</span>-sum(error)/len(error))</div></pre></td></tr></table></figure></p>
 <h2 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h2><p><img src="/2018/06/26/机器学习之高斯混合模型/GMM.png" alt=""></p>
 <pre><code>正确率为 0.9066666666666666
 </code></pre><p>从预测结果可看出，黄色与绿色重叠部分存在部分样本分类错误，整体分类准确率为90%。</p>
