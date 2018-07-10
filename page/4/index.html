@@ -304,6 +304,335 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/c++中static的用法详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/c++中static的用法详解/" itemprop="url">
+                  c++中static的用法详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-24 16:25:07 / 修改时间：19:45:09" itemprop="dateCreated datePublished" datetime="2018-05-24T16:25:07+08:00">2018-05-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/24/c++中static的用法详解/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/24/c++中static的用法详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本文转载自 <a href="https://blog.csdn.net/majianfei1023/article/details/45290467" target="_blank" rel="external">https://blog.csdn.net/majianfei1023/article/details/45290467</a></p>
+</blockquote>
+<h1 id="C-语言的-static-关键字有三种（具体来说是两种）用途："><a href="#C-语言的-static-关键字有三种（具体来说是两种）用途：" class="headerlink" title="C 语言的 static 关键字有三种（具体来说是两种）用途："></a>C 语言的 static 关键字有三种（具体来说是两种）用途：</h1><h2 id="1-静态局部变量："><a href="#1-静态局部变量：" class="headerlink" title="1. 静态局部变量："></a>1. 静态局部变量：</h2><p>用于函数体内部修饰变量，这种变量的生存期长于该函数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">()</span></span>&#123;  </div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>; <span class="comment">// note:1  </span></div><div class="line">    <span class="comment">//int i = 1;  // note:2  </span></div><div class="line">    i += <span class="number">1</span>;  </div><div class="line">    <span class="keyword">return</span> i;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>要明白这个用法，我们首先要了解c/c++的内存分布，以及static所在的区间。</p>
+<p>对于一个完整的程序，在内存中的分布情况如下图：　<br>1.栈区： 由编译器自动分配释放，像局部变量，函数参数，都是在栈区。会随着作用于退出而释放空间。<br>3.堆区：程序员分配并释放的区域，像malloc(c),new(c++)<br>3.全局数据区(静态区)：全局变量和静态便令的存储是放在一块的，初始化的全局变量和静态变量在一块区域，未初始化的全局变量和未初始化的静态变量在相邻的另一块区域。程序结束释放。<br>4.代码区</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/24/c++中static的用法详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/机器学习模型之线性回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/24/机器学习模型之线性回归/" itemprop="url">
+                  机器学习模型之线性回归
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-24 15:10:06" itemprop="dateCreated datePublished" datetime="2018-05-24T15:10:06+08:00">2018-05-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-10 11:38:45" itemprop="dateModified" datetime="2018-06-10T11:38:45+08:00">2018-06-10</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/24/机器学习模型之线性回归/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/24/机器学习模型之线性回归/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>线性回归属于回归问题。所谓回归(regression)，用已知样本对未知公式参数的估计。线性回归(linear regression)：回归的一种，回归函数是一次函数</p>
+</blockquote>
+<h1 id="linear-regression"><a href="#linear-regression" class="headerlink" title="linear regression"></a>linear regression</h1><h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><p>回归问题不同于分类，回归的目的使预测目标的数值。以电影为例，内地上映几部爱情电影，小红让小明帮忙从几部电影中买电影票，小明希望买到小红满意的电影，如果已知小红对爱情电影的评分公式可能为： 分数 = 3<em>演员颜值 + 5</em>甜蜜程度 + 2*剧情，那么小明就可以轻松判断出小红喜欢看的是哪一部，该评分公式就是所谓的回归方程，而所乘的系数为回归系数。但现实情况往往是小明并不知道小红的评分公式，但小明可以根据以往和小红一起看电影的情况，去估计出一组回归系数，用于接下来的预测。</p>
+<h2 id="cost-function（如何评判回归系数的好坏？）"><a href="#cost-function（如何评判回归系数的好坏？）" class="headerlink" title="cost function（如何评判回归系数的好坏？）"></a>cost function（如何评判回归系数的好坏？）</h2><p>线性回归方程可表示为：<br>$$\hat y=\omega^Tx+b$$<br>小明根据以往于小红看电影的情况估计出了小红的评分公式，此公式准确意味着用此公式给电影打分，与小红给电影打分基本一致，因此可用 cost function （损失函数）表示模型的好坏，$cost = \sum_{i=1}^{m}(y_i-\hat y_i)^2$，从函数可看出，公式越准确，cost function 越小，cost function 的几何意义为预测值到真实值之间的欧式距离。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/24/机器学习模型之线性回归/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/leetcode_Backtracking/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1728,350 +2057,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/09/UE 实用技巧分享/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/09/UE 实用技巧分享/" itemprop="url">
-                  UE 实用技巧分享
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-11-09 12:31:13" itemprop="dateCreated datePublished" datetime="2017-11-09T12:31:13+08:00">2017-11-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2017-11-17 12:09:24" itemprop="dateModified" datetime="2017-11-17T12:09:24+08:00">2017-11-17</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/09/UE 实用技巧分享/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/09/UE 实用技巧分享/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>无意中登录了<a href="http://www.ultraedit.com/" target="_blank" rel="external">UltraEdit 官网</a>，发现有几张狂拽酷炫的动图，发现原来 UE 功能如此强大，简单学会这几个小技巧，课大大提升工作效率，话不多说，上图：</p>
-<blockquote>
-<p>Multi-caret/multi-select<br><img src="https://www.ultraedit.com/assets/images/_gif/multiselect.mp4.gif" alt="Multi-caret/multi-select"></p>
-<p>Column Mode 列模式<br><img src="https://www.ultraedit.com/assets/images/_gif/column.mp4.gif" alt="Column Mode"></p>
-</blockquote>
-<p>以下是 UE 的一些使用技巧：</p>
-<ol>
-<li>列模式（Alt+C）<br>使用列模式在文档中的任何位置沿Y轴进行直观编辑。使用效果可看动图。</li>
-<li>切换自动换行（Ctrl+W）<br>再也不怕文本太长啦！</li>
-<li>书签（Ctrl+F2 ）<br>Ctrl+F2 可以建立书签，按 F2 可快速切换书签。写完小函数还能快速找回家。</li>
-<li>F3 查找、Ctrl+R 替换<br>UE 的查找与替换是支持正则表达式的</li>
-<li>Ctrl+B 括号匹配<br>有几个括号傻傻分不清？试试这个功能吧。</li>
-<li>Ctrl+E 整行删除</li>
-<li>Ctrl+Enter  插入行命令<br>用来在当前光标位置下面插入一个新行</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/02/LINUX中常用操作命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/02/LINUX中常用操作命令/" itemprop="url">
-                  LINUX中常用操作命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-11-02 12:51:52 / 修改时间：13:04:04" itemprop="dateCreated datePublished" datetime="2017-11-02T12:51:52+08:00">2017-11-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/11/02/LINUX中常用操作命令/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/11/02/LINUX中常用操作命令/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="LINUX中常用操作命令"><a href="#LINUX中常用操作命令" class="headerlink" title="LINUX中常用操作命令"></a>LINUX中常用操作命令</h1><blockquote>
-<p>本文转载自<a href="http://www.daniubiji.cn/archives/25" target="_blank" rel="external">大牛笔记</a></p>
-</blockquote>
-<ul>
-<li>Linux简介及Ubuntu安装</li>
-<li>常见指令</li>
-<li>系统管理命令</li>
-<li>打包压缩相关命令</li>
-<li>关机/重启机器</li>
-<li>Linux管道</li>
-<li>Linux软件包管理</li>
-<li>vim使用</li>
-<li>用户及用户组管理</li>
-<li>文件权限管理</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/02/LINUX中常用操作命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2123,7 +2108,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2184,7 +2169,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
