@@ -112,24 +112,24 @@
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习之模型评估">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/机器学习之模型评估/index.html">
+<meta property="og:url" content="https://akihoo.github.io/2018/07/11/机器学习之模型评估/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/07/11/机器学习之模型评估/ROC.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/11/机器学习之模型评估/error.png">
-<meta property="og:updated_time" content="2018-07-11T07:54:16.315Z">
+<meta property="og:image" content="https://akihoo.github.io/2018/07/11/机器学习之模型评估/ROC.png">
+<meta property="og:image" content="https://akihoo.github.io/2018/07/11/机器学习之模型评估/error.png">
+<meta property="og:updated_time" content="2018-07-11T07:59:01.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之模型评估">
 <meta name="twitter:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/11/机器学习之模型评估/ROC.png">
+<meta name="twitter:image" content="https://akihoo.github.io/2018/07/11/机器学习之模型评估/ROC.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/11/机器学习之模型评估/"/>
+  <link rel="canonical" href="https://akihoo.github.io/2018/07/11/机器学习之模型评估/"/>
 
 
 
@@ -259,6 +259,22 @@
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-导航">
+    <a href="/navigation/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />导航</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
 
       
       
@@ -308,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/机器学习之模型评估/">
+    <link itemprop="mainEntityOfPage" href="https://akihoo.github.io/2018/07/11/机器学习之模型评估/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -350,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2018-07-11 10:39:14 / 修改时间：15:54:16" itemprop="dateCreated datePublished" datetime="2018-07-11T10:39:14+08:00">2018-07-11</time>
+              <time title="创建时间：2018-07-11 10:39:14 / 修改时间：15:59:01" itemprop="dateCreated datePublished" datetime="2018-07-11T10:39:14+08:00">2018-07-11</time>
             
 
             
@@ -405,6 +421,7 @@
 <p>需注意的是，训练/测试集的划分要尽可能保持数据分布的一致性，避免因数据划分过程引入额外的偏差而对最终结果产生影响，例如在分类任务中至少要保持样本的类别比例相似。另一个需注意的问题是，即便在给定训练/测试集的样本比例后，仍存在多种划分方式对初始数据集D进行分割，这些不同的划分将导致不同的训练/测试集，相应的，模型评估的结果也会有差别。因此，单次使用留出法得到的估计结果往往不够稳定可靠，在使用留出法时，一般要采用若干次随机划分、重复进行实验评估后取平均值作为留出法的评估结果。</p>
 <p>另外使用留出法会导致一个窘境：若令训练集S包含绝大多数样本，则训练出的模型可能更接近于用D训练出的模型，但由于T比较小，评估结果可能不够稳定准确；若令测试集T多包含一些样本，则训练集S与D差别更大了，被评估的模型与用D训练出的模型相比可能有较大差别，从而降低了评估结果的保真性（fidelity）。这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。可从“偏差-方差”的角度来理解：测试集小时，评估结果的方差较大；训练集小时，评估结果的偏差较大。</p>
 <p>这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。</p>
+<a id="more"></a>
 <h3 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h3><p>“交叉验证法”（cross validation）先将数据集D划分为k个大小相似的互斥子集，每个子集都尽可能保持数据分布的一致性，即从D中通过分层采样得到。然后，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集；这样就可获得k组训练/测试集，从而可进行k次训练和测试，最终返回的是这k个测试结果的均值。</p>
 <h3 id="留一法"><a href="#留一法" class="headerlink" title="留一法"></a>留一法</h3><p>留一法是交叉验证的一个特例，当数据集中包含M个样本，则则做m折交叉验证（k=M），在绝大多数情况下，留一法中被实际评估的模型与期望评估的用D训练出的模型很相似。因此，留一法的评估结果往往被认为比较准确。然而，留一法的缺点是训练开销非常大。</p>
 <h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>自助法以自助采样法为基础，给定包含m个样本的数据集D，我们对它进行采样产生数据集D’；每次随机从D中挑选一个赝本，将其拷贝放入D’，然后再将该样本放回初始数据集D中，使得该样本在下次采样时仍有可能被采到；这个过程重复执行m次后，就得到了包含m个样本的数据集D’，这就是自助采样的结果。</p>
@@ -412,6 +429,7 @@
 <p>然而，自助法产生的数据集改变了初始数据集的分布，这会引入估计偏差。</p>
 <h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><h3 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h3><blockquote>
 <p>本小节内容总结自：<a href="https://blog.csdn.net/heyongluoyao8/article/details/49429629" target="_blank" rel="external">https://blog.csdn.net/heyongluoyao8/article/details/49429629</a></p>
+</blockquote>
 <ol>
 <li>早停（early stopping）：Early stopping便是一种迭代次数截断的方法来防止过拟合的方法，即在模型对训练数据集迭代收敛之前停止迭代来防止过拟合。Early stopping方法的具体做法是，在每一个Epoch结束时（一个Epoch集为对所有的训练数据的一轮遍历）计算validation data的accuracy，当accuracy不再提高时，就停止训练。</li>
 <li>增大数据集：可通过从数据源头采集更多数据、过采样、复制原有数据并加上随机噪声、根据当前数据集估计数据分布参数，使用该分布产生更多数据等</li>
@@ -423,15 +441,83 @@
 </li>
 <li>Dropout：在神经网络中，有一种方法是通过修改神经网络本身结构来实现的，其名为Dropout。在训练开始时，随机得删除一些（可以设定为一半，也可以为1/3，1/4等）隐藏层神经元，即认为这些神经元不存在，同时保持输入层与输出层神经元的个数不变，然后按照BP学习算法对ANN中的参数进行学习更新（虚线连接的单元不更新，因为认为这些神经元被临时删除了）。这样一次迭代更新便完成了。下一次迭代中，同样随机删除一些神经元，与上次不一样，做随机选择。这样一直进行瑕疵，直至训练结束。 </li>
 </ol>
-</blockquote>
 <h3 id="欠拟合-1"><a href="#欠拟合-1" class="headerlink" title="欠拟合"></a>欠拟合</h3><p>欠拟合较好解决，例如：增加模型迭代次数、增加模型复杂程度、增加样本特征维数等。</p>
 <h1 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h1><h2 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h2><p>错误率和精度是分类任务中最常用的两种性能度量，既适用于二分类任务，也适用于多分类任务。</p>
 <p>错误率是分类错误的样本数占样本总数的比例，精度则是分类正确的样本数占样本总数的比例。</p>
 <h2 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h2><p>这几个指标在信息检索、Web搜索等应用中经常出现，例如在信息检索中，我们经常会关心“检索出的信息中有多少比例是用户感兴趣的”“用户感兴趣的信息中有多少被检索出来了”。“查准率”（precision）与“查全率”（recall）是更为适用于此类需求的性能度量。</p>
-<p>对于二分类问题，可将样例根据其真实类别与学习器预测类别的组合划分为 $TP$ （真正例，true positive）、 $FP$ （假正例，false positive）、 $TN$ （真反例，true negative）、 $FN$ （假反例，false negative）四种情形，令$TP$、$FP$、$TN$、$FN$分别表示其对应的样例数，则显然有$TP+FP+TN+FN=D$.分类结果的“混淆矩阵”（confusion matrix）如下表：<br>真实情况|预测正例|预测反例<br>:-:|:-:|:-:<br>正例|$TP$|$FN$<br>反例|$FP$|$TN$<br>查准率$P$与查全率$R$定义为：<br>$$P={TP\over TP+FP}$$</p>
+<p>对于二分类问题，可将样例根据其真实类别与学习器预测类别的组合划分为 $TP$ （真正例，true positive）、 $FP$ （假正例，false positive）、 $TN$ （真反例，true negative）、 $FN$ （假反例，false negative）四种情形，令$TP$、$FP$、$TN$、$FN$分别表示其对应的样例数，则显然有$TP+FP+TN+FN=D$.分类结果的“混淆矩阵”（confusion matrix）如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">真实情况</th>
+<th style="text-align:center">预测正例</th>
+<th style="text-align:center">预测反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">正例</td>
+<td style="text-align:center">$TP$</td>
+<td style="text-align:center">$FN$</td>
+</tr>
+<tr>
+<td style="text-align:center">反例</td>
+<td style="text-align:center">$FP$</td>
+<td style="text-align:center">$TN$</td>
+</tr>
+</tbody>
+</table>
+<p>查准率$P$与查全率$R$定义为：<br>$$P={TP\over TP+FP}$$</p>
 <p>$$R={TP\over TP+FN}$$<br>F1定义为：<br>$$F1={2\times P\times R\over P+R}={2\times TP\over D+TP-TN}$$<br>其中$D$为样例总数。</p>
 <h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><p>AUC是一个模型评价指标，只能用于二分类模型的评价，AUC是Area under curve的首字母缩写，其值等于ROC曲线下的面积。ROC曲线的x轴是伪阳性率（false positive rate），y轴是真阳性率（true positive rate)。ROC曲线如下图：<br><img src="/2018/07/11/机器学习之模型评估/ROC.png" alt=""></p>
-<p>ROC曲线如何绘制？将大多机器学习模型处理二分类问题都将输出测试样本属于正例的概率，将此概率从大到小排列，得到如下表：<br>ID|正例概率|实际情况<br>:-:|:-:|:-:<br>1|0.85|正例<br>2|0.83|正例<br>3|0.82|正例<br>4|0.81|反例<br>…|…|…<br>999|0.05|反例<br>1000|0.02|正例<br>依次调整阈值使前 $k$ 个样本为正例，分别计算真阳性率与伪阳性率，并在曲线中画点。例如阈值为0.85时（$k=1$），仅有第一个样本分类为正例，则真阳性率为1，伪阳性率为0，因此可以得到左上角的点。当画出所有点后，依次连接成ROC曲线。</p>
+<p>ROC曲线如何绘制？将大多机器学习模型处理二分类问题都将输出测试样本属于正例的概率，将此概率从大到小排列，得到如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">正例概率</th>
+<th style="text-align:center">实际情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.85</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0.83</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0.82</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0.81</td>
+<td style="text-align:center">反例</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+<tr>
+<td style="text-align:center">999</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">反例</td>
+</tr>
+<tr>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">0.02</td>
+<td style="text-align:center">正例</td>
+</tr>
+</tbody>
+</table>
+<p>依次调整阈值使前 $k$ 个样本为正例，分别计算真阳性率与伪阳性率，并在曲线中画点。例如阈值为0.85时（$k=1$），仅有第一个样本分类为正例，则真阳性率为1，伪阳性率为0，因此可以得到左上角的点。当画出所有点后，依次连接成ROC曲线。</p>
 <h1 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h1><p>$$E(f;D)=bias^2(x)+var(x)+\epsilon^2$$<br>泛化误差为偏差方差与噪声之和。</p>
 <ol>
 <li>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。<br>$$bias^2(x)={(\overline{f}(x)-y)^2}$$</li>
