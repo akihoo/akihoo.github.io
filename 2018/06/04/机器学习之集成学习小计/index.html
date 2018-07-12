@@ -112,23 +112,23 @@
 <meta name="keywords" content="ML">
 <meta property="og:type" content="article">
 <meta property="og:title" content="集成学习小计">
-<meta property="og:url" content="https://akihoo.github.io/2018/06/04/机器学习之集成学习小计/index.html">
+<meta property="og:url" content="yoursite.com/2018/06/04/机器学习之集成学习小计/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://akihoo.github.io/2018/06/04/机器学习之集成学习小计/Adaboost.png">
+<meta property="og:image" content="/04/机器学习之集成学习小计/Adaboost.png">
 <meta property="og:updated_time" content="2018-06-10T03:42:00.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="集成学习小计">
 <meta name="twitter:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
-<meta name="twitter:image" content="https://akihoo.github.io/2018/06/04/机器学习之集成学习小计/Adaboost.png">
+<meta name="twitter:image" content="/04/机器学习之集成学习小计/Adaboost.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://akihoo.github.io/2018/06/04/机器学习之集成学习小计/"/>
+  <link rel="canonical" href="yoursite.com/2018/06/04/机器学习之集成学习小计/"/>
 
 
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://akihoo.github.io/2018/06/04/机器学习之集成学习小计/">
+    <link itemprop="mainEntityOfPage" href="yoursite.com/2018/06/04/机器学习之集成学习小计/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -454,7 +454,7 @@
 </ol>
 <p>Adaboost的核心便在于更新这2个权值，一个是弱分类器结合成强分类器的权值，另一个是训练下一个弱分类器的时，样本所占的权值（分类错误的样本更受关注）。</p>
 <p>算法流程（来自西瓜书）：</p>
-<p><img src="/2018/06/04/机器学习之集成学习小计/Adaboost.png" alt="Adaboost"></p>
+<p><img src="/04/机器学习之集成学习小计/Adaboost.png" alt="Adaboost"></p>
 <p>Adaboost算法在每次得到$H_{t-1}$之后对样本分布进行调整，使下一轮的基学习器能够纠正$H_{t-1}$的错误。</p>
 <h1 id="bagging"><a href="#bagging" class="headerlink" title="bagging"></a>bagging</h1><p>bagging方法的基本思想是：使用不同的训练集训练基学习器，可以使学习器差异化，可以采用有放回的抽样方式，可以采样出T个训练集，并训练T个基学习器。对预测输出进行结合时，通常采用投票法，对回归分析则采用简单平均法。</p>
 <h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>

@@ -112,24 +112,24 @@
 <meta name="keywords" content="CFD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CFD湍流模拟">
-<meta property="og:url" content="https://akihoo.github.io/2018/06/16/CFD湍流模拟/index.html">
+<meta property="og:url" content="yoursite.com/2018/06/16/CFD湍流模拟/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="湍流什么是湍流湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://akihoo.github.io/2018/06/16/CFD湍流模拟/湍流求解.png">
-<meta property="og:image" content="https://akihoo.github.io/2018/06/16/CFD湍流模拟/湍流模型.png">
+<meta property="og:image" content="/16/CFD湍流模拟/湍流求解.png">
+<meta property="og:image" content="/16/CFD湍流模拟/湍流模型.png">
 <meta property="og:updated_time" content="2018-06-16T07:57:19.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CFD湍流模拟">
 <meta name="twitter:description" content="湍流什么是湍流湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰">
-<meta name="twitter:image" content="https://akihoo.github.io/2018/06/16/CFD湍流模拟/湍流求解.png">
+<meta name="twitter:image" content="/16/CFD湍流模拟/湍流求解.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://akihoo.github.io/2018/06/16/CFD湍流模拟/"/>
+  <link rel="canonical" href="yoursite.com/2018/06/16/CFD湍流模拟/"/>
 
 
 
@@ -324,7 +324,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://akihoo.github.io/2018/06/16/CFD湍流模拟/">
+    <link itemprop="mainEntityOfPage" href="yoursite.com/2018/06/16/CFD湍流模拟/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -430,7 +430,7 @@
 <li>猝发与拟序结构。这也是近代湍流研究的重大发现，试验表明，在湍流混合层和剪切湍流边界层中存在大尺度的相干结构和猝发现象，说明湍流不是完全无秩序、无内部结构的运动。这促使人们改变了对湍流的某些传统观念。</li>
 </ol>
 <h1 id="湍流的求解方式"><a href="#湍流的求解方式" class="headerlink" title="湍流的求解方式"></a>湍流的求解方式</h1><p>目前湍流的数值模拟方法大致分为:直接模拟法 (DNS)、雷诺时均方程法(RANS)、大涡模拟法(LES)三类。</p>
-<p><img src="/2018/06/16/CFD湍流模拟/湍流求解.png" alt=""></p>
+<p><img src="/16/CFD湍流模拟/湍流求解.png" alt=""></p>
 <h2 id="Reynolds平均法："><a href="#Reynolds平均法：" class="headerlink" title="Reynolds平均法："></a>Reynolds平均法：</h2><p>在这类方程中，将非稳态N-S方程对时间作平均，即把湍流运动看成二个流动的叠加：</p>
 <ul>
 <li>时间平均流动</li>
@@ -475,7 +475,7 @@
 <li>雷诺应力模型（RSM）</li>
 <li>大涡模拟模型（LES）</li>
 </ul>
-<p><img src="/2018/06/16/CFD湍流模拟/湍流模型.png" alt=""></p>
+<p><img src="/16/CFD湍流模拟/湍流模型.png" alt=""></p>
 <h2 id="Spalart-Allmaras-模型"><a href="#Spalart-Allmaras-模型" class="headerlink" title="Spalart-Allmaras 模型"></a>Spalart-Allmaras 模型</h2><ul>
 <li>应用范围：用来解决因湍流动粘滞率而修改的数量方程。</li>
 <li>Spalart-A1lmaras 模型是设计用于航空领域的，主要是墙壁束缚（wal1-bounded）流动，而且已经显示出很好的效果。在透平机械中的应用也愈加广泛。</li>

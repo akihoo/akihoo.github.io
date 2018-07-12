@@ -112,23 +112,23 @@
 <meta name="keywords" content="数据结构与算法,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉树的常见遍历以及面试题总结">
-<meta property="og:url" content="https://akihoo.github.io/2018/06/15/二叉树的常见遍历以及面试题总结/index.html">
+<meta property="og:url" content="yoursite.com/2018/06/15/二叉树的常见遍历以及面试题总结/index.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="本文总结了二叉树的常见遍历方式，以及剪枝offer上的一些有关二叉树的面试题。   前序：中$\rightarrow$左$\rightarrow$右 中序：左$\rightarrow$中$\rightarrow$右 后序：左$\rightarrow$右$\rightarrow$中 层序遍历：第一层$\rightarrow$第二层$\rightarrow$第三层$\rightarrow$第n层（每">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://akihoo.github.io/2018/06/15/二叉树的常见遍历以及面试题总结/后序遍历.png">
+<meta property="og:image" content="/15/二叉树的常见遍历以及面试题总结/后序遍历.png">
 <meta property="og:updated_time" content="2018-06-15T08:57:55.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树的常见遍历以及面试题总结">
 <meta name="twitter:description" content="本文总结了二叉树的常见遍历方式，以及剪枝offer上的一些有关二叉树的面试题。   前序：中$\rightarrow$左$\rightarrow$右 中序：左$\rightarrow$中$\rightarrow$右 后序：左$\rightarrow$右$\rightarrow$中 层序遍历：第一层$\rightarrow$第二层$\rightarrow$第三层$\rightarrow$第n层（每">
-<meta name="twitter:image" content="https://akihoo.github.io/2018/06/15/二叉树的常见遍历以及面试题总结/后序遍历.png">
+<meta name="twitter:image" content="/15/二叉树的常见遍历以及面试题总结/后序遍历.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://akihoo.github.io/2018/06/15/二叉树的常见遍历以及面试题总结/"/>
+  <link rel="canonical" href="yoursite.com/2018/06/15/二叉树的常见遍历以及面试题总结/"/>
 
 
 
@@ -323,7 +323,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://akihoo.github.io/2018/06/15/二叉树的常见遍历以及面试题总结/">
+    <link itemprop="mainEntityOfPage" href="yoursite.com/2018/06/15/二叉树的常见遍历以及面试题总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -492,7 +492,7 @@
 <li>题目描述：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</li>
 <li>这题开始没有一点思路，后来想了想后续遍历地特点才知道怎么写，后续遍历地遍历顺序是：左右中，因此数组最末尾就是树的根节点，前面一段分别是左子树、右子树，而左子树的末尾是左子树的根节点，右子树的末尾是右子树的根节点，因此可以递归求解了。如下图所示：</li>
 </ul>
-<p><img src="/2018/06/15/二叉树的常见遍历以及面试题总结/后序遍历.png" alt=""></p>
+<p><img src="/15/二叉树的常见遍历以及面试题总结/后序遍历.png" alt=""></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">VerifySquenceOfBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sequence)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> len=sequence.size();</div><div class="line">        <span class="keyword">if</span>(len&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        <span class="keyword">return</span> judger(sequence,<span class="number">0</span>,len<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">judger</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;sequence,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(left==right) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        <span class="keyword">int</span> root=sequence[right];</div><div class="line">        <span class="keyword">int</span> mid=left<span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=left;i&lt;right;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(sequence[i]&lt;root)</div><div class="line">                mid=i;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=mid+<span class="number">1</span>;i&lt;right;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(sequence[i]&lt;root)</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(mid==left<span class="number">-1</span>)</div><div class="line">            <span class="keyword">return</span> judger(sequence,mid+<span class="number">1</span>,right<span class="number">-1</span>);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(mid==right<span class="number">-1</span>)</div><div class="line">            <span class="keyword">return</span> judger(sequence,left,mid);</div><div class="line">        <span class="keyword">return</span> judger(sequence,left,mid)&amp;&amp;judger(sequence,mid+<span class="number">1</span>,right<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h2 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a>树的子结构</h2><ul>
 <li>题目描述:输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）</li>
