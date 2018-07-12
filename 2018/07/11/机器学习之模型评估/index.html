@@ -118,7 +118,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="/11/机器学习之模型评估/ROC.png">
 <meta property="og:image" content="/11/机器学习之模型评估/error.png">
-<meta property="og:updated_time" content="2018-07-12T02:14:50.794Z">
+<meta property="og:updated_time" content="2018-07-12T06:47:40.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之模型评估">
 <meta name="twitter:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-12 10:14:50" itemprop="dateModified" datetime="2018-07-12T10:14:50+08:00">2018-07-12</time>
+                <time title="修改时间：2018-07-12 14:47:40" itemprop="dateModified" datetime="2018-07-12T14:47:40+08:00">2018-07-12</time>
               
             
           </span>
@@ -548,10 +548,6 @@
 <h2 id="Bagging和Boosting"><a href="#Bagging和Boosting" class="headerlink" title="Bagging和Boosting"></a>Bagging和Boosting</h2><p>Bagging是通过重采样的方法来得到不同的模型，假设模型独立则有：<br>$$E(\frac{\sum _ iE(X _ i)}{n})=E(X _ i)$$<br>$$Var(\frac{\sum _ iVar(X _ i)}{n})=\frac{1}{n}Var(X _ i)$$<br>Bagging主要可以降低的是方差。 </p>
 <p>而Boosting每一次都关注使得整理的loss减少，很显然可以降低bias。</p>
 <p>此部分可参考：<a href="https://www.zhihu.com/question/26760839" target="_blank" rel="external">https://www.zhihu.com/question/26760839</a></p>
-<blockquote>
-<p>本文作者： 微石</p>
-<p>版权声明： 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="external">CC BY-SA 4.0</a> 许可协议。转载请注明出处！</p>
-</blockquote>
 
       
     </div>
@@ -564,6 +560,35 @@
     <div>
           
             
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/07/11/机器学习之模型评估/">机器学习之模型评估</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年07月11日 - 10:07</p>
+  <p><span>最后更新:</span>2018年07月12日 - 14:07</p>
+  <p><span>原始链接:</span><a href="/2018/07/11/机器学习之模型评估/" title="机器学习之模型评估">akihoo.github.io/2018/07/11/机器学习之模型评估/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/2018/07/11/机器学习之模型评估/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
           
     </div>
     
@@ -598,10 +623,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/12/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -682,7 +703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
