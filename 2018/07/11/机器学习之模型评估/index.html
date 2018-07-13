@@ -116,13 +116,15 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg">
 <meta property="og:image" content="/11/机器学习之模型评估/ROC.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg">
 <meta property="og:image" content="/11/机器学习之模型评估/error.png">
-<meta property="og:updated_time" content="2018-07-12T06:47:40.089Z">
+<meta property="og:updated_time" content="2018-07-13T02:12:02.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之模型评估">
 <meta name="twitter:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
-<meta name="twitter:image" content="/11/机器学习之模型评估/ROC.png">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg">
 
 
 
@@ -383,7 +385,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-12 14:47:40" itemprop="dateModified" datetime="2018-07-12T14:47:40+08:00">2018-07-12</time>
+                <time title="修改时间：2018-07-13 10:12:02" itemprop="dateModified" datetime="2018-07-13T10:12:02+08:00">2018-07-13</time>
               
             
           </span>
@@ -489,8 +491,7 @@
 </table>
 <p>查准率$P$与查全率$R$定义为：<br>$$P={TP\over TP+FP}$$</p>
 <p>$$R={TP\over TP+FN}$$<br>F1定义为：<br>$$F1={2\times P\times R\over P+R}={2\times TP\over D+TP-TN}$$<br>其中$D$为样例总数。</p>
-<h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><p>AUC是一个模型评价指标，只能用于二分类模型的评价，AUC是Area under curve的首字母缩写，其值等于ROC曲线下的面积。ROC曲线的x轴是伪阳性率（false positive rate），y轴是真阳性率（true positive rate)。ROC曲线如下图：<br><img src="/11/机器学习之模型评估/ROC.png" alt=""></p>
-<p>ROC曲线如何绘制？将大多机器学习模型处理二分类问题都将输出测试样本属于正例的概率，将此概率从大到小排列，得到如下表：</p>
+<h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><p>AUC是一个模型评价指标，只能用于二分类模型的评价，AUC是Area under curve的首字母缩写，其值等于ROC曲线下的面积。ROC曲线的x轴是伪阳性率（false positive rate），y轴是真阳性率（true positive rate)。ROC曲线如下图：<br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg" alt="机器学习之模型评估/ROC.png"><br><img src="/11/机器学习之模型评估/ROC.png" alt=""><br>ROC曲线如何绘制？将大多机器学习模型处理二分类问题都将输出测试样本属于正例的概率，将此概率从大到小排列，得到如下表：</p>
 <table>
 <thead>
 <tr>
@@ -544,7 +545,7 @@
 <li>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。<br>$$var(x)=\mathbb{E}_D\big[(f(x;D)-\overline{f}(x))^2\big]$$</li>
 <li>噪声则表达了在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度。<br>$$\epsilon^2=\mathbb{E}_D\big[(y_D-y)^2\big]$$</li>
 </ol>
-<h2 id="偏差方差窘境"><a href="#偏差方差窘境" class="headerlink" title="偏差方差窘境"></a>偏差方差窘境</h2><p><img src="/11/机器学习之模型评估/error.png" alt=""><br>假如学习算法训练不足时，此时学习器的拟合能力不够强，这个时候偏差主导了算法的泛化能力。随着训练的进行，学习器的拟合能力逐渐增强，偏差逐渐减小，但此时通过不同数据学习得到的学习器就可能会有较大的偏差，即此时的方差会主导模型的泛化能力。若学习进一步进行，学习器就可能学到数据集所独有的特征，而这些特征对于其它的数据是不适用的，这个时候就是发生了过拟合。</p>
+<h2 id="偏差方差窘境"><a href="#偏差方差窘境" class="headerlink" title="偏差方差窘境"></a>偏差方差窘境</h2><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg" alt="机器学习之模型评估/error.png"><br><img src="/11/机器学习之模型评估/error.png" alt=""><br>假如学习算法训练不足时，此时学习器的拟合能力不够强，这个时候偏差主导了算法的泛化能力。随着训练的进行，学习器的拟合能力逐渐增强，偏差逐渐减小，但此时通过不同数据学习得到的学习器就可能会有较大的偏差，即此时的方差会主导模型的泛化能力。若学习进一步进行，学习器就可能学到数据集所独有的特征，而这些特征对于其它的数据是不适用的，这个时候就是发生了过拟合。</p>
 <h2 id="Bagging和Boosting"><a href="#Bagging和Boosting" class="headerlink" title="Bagging和Boosting"></a>Bagging和Boosting</h2><p>Bagging是通过重采样的方法来得到不同的模型，假设模型独立则有：<br>$$E(\frac{\sum _ iE(X _ i)}{n})=E(X _ i)$$<br>$$Var(\frac{\sum _ iVar(X _ i)}{n})=\frac{1}{n}Var(X _ i)$$<br>Bagging主要可以降低的是方差。 </p>
 <p>而Boosting每一次都关注使得整理的loss减少，很显然可以降低bias。</p>
 <p>此部分可参考：<a href="https://www.zhihu.com/question/26760839" target="_blank" rel="external">https://www.zhihu.com/question/26760839</a></p>
@@ -569,7 +570,7 @@
   <p><span>本文标题:</span><a href="/2018/07/11/机器学习之模型评估/">机器学习之模型评估</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年07月11日 - 10:07</p>
-  <p><span>最后更新:</span>2018年07月12日 - 14:07</p>
+  <p><span>最后更新:</span>2018年07月13日 - 10:07</p>
   <p><span>原始链接:</span><a href="/2018/07/11/机器学习之模型评估/" title="机器学习之模型评估">akihoo.github.io/2018/07/11/机器学习之模型评估/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/2018/07/11/机器学习之模型评估/"  aria-label="复制成功！"></i></span>
   </p>
