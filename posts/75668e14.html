@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="类的指针总结 基类指针可以指向派生类对象，那么经由该指针只能访问基础类定义的函数（静态联翩） 派生类指针指向基类必须经过强制类型转换 12//eg.B *aa=(B*)new A();//（子类指针指向父类对象地址必须强转才行）  如果基础类和衍生类定义了相同名称的成员函数，那么通过对象指针调用成员函数时，到底调用那个函数要根据指针的原型来确定，而不是根据指针实际指向的对象类型确定。   原理 转">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++基类派生类与指针">
+<meta property="og:url" content="akihoo.github.io/posts/75668e14.html">
+<meta property="og:site_name" content="微石的碎碎念">
+<meta property="og:description" content="类的指针总结 基类指针可以指向派生类对象，那么经由该指针只能访问基础类定义的函数（静态联翩） 派生类指针指向基类必须经过强制类型转换 12//eg.B *aa=(B*)new A();//（子类指针指向父类对象地址必须强转才行）  如果基础类和衍生类定义了相同名称的成员函数，那么通过对象指针调用成员函数时，到底调用那个函数要根据指针的原型来确定，而不是根据指针实际指向的对象类型确定。   原理 转">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-12T06:40:43.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++基类派生类与指针">
+<meta name="twitter:description" content="类的指针总结 基类指针可以指向派生类对象，那么经由该指针只能访问基础类定义的函数（静态联翩） 派生类指针指向基类必须经过强制类型转换 12//eg.B *aa=(B*)new A();//（子类指针指向父类对象地址必须强转才行）  如果基础类和衍生类定义了相同名称的成员函数，那么通过对象指针调用成员函数时，到底调用那个函数要根据指针的原型来确定，而不是根据指针实际指向的对象类型确定。   原理 转">
+
+
+
+
+
+
+  <link rel="canonical" href="akihoo.github.io/posts/75668e14.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>C++基类派生类与指针 | 微石的碎碎念</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微石的碎碎念</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-导航">
+    <a href="/navigation/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />导航</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+<iframe src="https://cloud.mokeyjay.com/pixiv" frameborder="0"  style="width:240px; height:380px;"></iframe></div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/75668e14.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++基类派生类与指针
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-26 09:14:05" itemprop="dateCreated datePublished" datetime="2018-05-26T09:14:05+08:00">2018-05-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-12 14:40:43" itemprop="dateModified" datetime="2018-07-12T14:40:43+08:00">2018-07-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/75668e14.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/75668e14.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="类的指针总结"><a href="#类的指针总结" class="headerlink" title="类的指针总结"></a>类的指针总结</h1><ol>
+<li>基类指针可以指向派生类对象，那么经由该指针只能访问基础类定义的函数（静态联翩）</li>
+<li><p>派生类指针指向基类必须经过强制类型转换</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//eg.</span></div><div class="line">B *aa=(B*)<span class="keyword">new</span> A();<span class="comment">//（子类指针指向父类对象地址必须强转才行）</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>如果基础类和衍生类定义了相同名称的成员函数，那么通过对象指针调用成员函数时，到底调用那个函数要<strong>根据指针的原型</strong>来确定，而不是根据指针实际指向的对象类型确定。</p>
+</li>
+</ol>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><blockquote>
+<p>转载自<a href="https://www.cnblogs.com/rednodel/p/4122781.html" target="_blank" rel="external">https://www.cnblogs.com/rednodel/p/4122781.html</a></p>
+</blockquote>
+<p>简单来说，C++的多态就是靠父类指针指向子类对象+虚函数来实现的。父类指针指向子类对象，可以调用子类从父类继承来的那一部分，但如果父类中声明了virtual，则可以调用子类中的方法，这样就实现了多态。而子类指针指向父类对象，可能会调用到父类中没用的方法，因此这是不对的。<br>至于两类指针的互换是另一个问题。</p>
+<a id="more"></a>
+<p>例如:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="keyword">int</span> aa;</div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">b</span>:</span><span class="keyword">public</span> a</div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        <span class="keyword">int</span> bb;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从内存的来看:</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th style="text-align:center">int 类型大小</th>
+<th style="text-align:center">int 类型大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td style="text-align:center">aa数据</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>b</td>
+<td style="text-align:center">aa数据（继承而来）</td>
+<td style="text-align:center">bb数据</td>
+</tr>
+</tbody>
+</table>
+<p>\uparrow<br>当定义一个基类类型的指针时：a *p；这时，这个指针指向的是a类型的数据<br>当p指针指向派生类的时候，因为p是a类型的指针，所以*p只解释为a类型数据的长度，即</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th style="text-align:center">int 类型大小</th>
+<th style="text-align:center">int 类型大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td style="text-align:center">aa数据</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td>b</td>
+<td style="text-align:center">aa数据（继承而来）</td>
+<td style="text-align:center">bb数据</td>
+</tr>
+<tr>
+<td>*p$\rightarrow$a</td>
+<td style="text-align:center">$\uparrow$</td>
+<td style="text-align:center">NULL</td>
+</tr>
+</tbody>
+</table>
+<p>因此，当基类的指针（P）指向派生类的时候，只能操作派生类中从基类中继承过来的数据。<br>指向派生类的指针，因为内存空间比基类长，会导致严重了后果，所以不允许派生类的指针指向基类。而基类的指针可以指向派生类。</p>
+<p>C++的多态性能解决基类指针不能操作派生类的数据成员的问题。</p>
+<p>另外从上代码可看出，aa与bb存放在不同的地址，类似于函数的隐藏，我在<a href="https://www.zhihu.com/question/31345300" target="_blank" rel="external">知乎</a>上发现这段代码，也可以很好的说明这个问题：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>&#123;</span></div><div class="line">  <span class="keyword">public</span>:</div><div class="line">    A()&#123;</div><div class="line">      a = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span><span class="keyword">public</span> A&#123;</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">    B()&#123;</div><div class="line">      a = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  B* pb = <span class="keyword">new</span> B();</div><div class="line">  A* pa = pb;</div><div class="line"></div><div class="line">  <span class="built_in">printf</span>(<span class="string">"a in B is: %d\n"</span>, pb-&gt;a);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"a in A is: %d\n"</span>, pa-&gt;a);</div><div class="line"></div><div class="line">  <span class="built_in">printf</span>(<span class="string">"value of pb is: %p\n"</span>, pb);</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"value of pa is: %p\n"</span>, pa);</div><div class="line"></div><div class="line">  <span class="built_in">printf</span>(<span class="string">"address of pb-&gt;a is: %p\n"</span>, &amp;(pb-&gt;a));</div><div class="line">  <span class="built_in">printf</span>(<span class="string">"address of pa-&gt;a is: %p\n"</span>, &amp;(pa-&gt;a));</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">运行输出:</span></div><div class="line"><span class="comment">a in B is: 1</span></div><div class="line"><span class="comment">a in A is: 0</span></div><div class="line"><span class="comment">value of pb is: 0x7fa97ac04b20</span></div><div class="line"><span class="comment">value of pa is: 0x7fa97ac04b20</span></div><div class="line"><span class="comment">address of pb-&gt;a is: 0x7fa97ac04b24</span></div><div class="line"><span class="comment">address of pa-&gt;a is: 0x7fa97ac04b20</span></div><div class="line"><span class="comment"></span></div><div class="line"><span class="comment">作者：刘项</span></div><div class="line"><span class="comment">链接：https://www.zhihu.com/question/31345300/answer/51536945</span></div><div class="line"><span class="comment">来源：知乎</span></div><div class="line"><span class="comment">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span></div><div class="line"><span class="comment">*/</span></div></pre></td></tr></table></figure></p>
+<p>以下现象：</p>
+<ol>
+<li>输出中的第1行和第2行。确实如题主所说，pb-&gt;a是1，pa-&gt;a是0。这应该没有任何疑问。</li>
+<li>输出中的第3行和第4行。可以看出来，pb和pa的值完全一样（指向同一个地址）。</li>
+<li>输出中的第5行和第6行。pb-&gt;a和pa-&gt;a的地址不一样。</li>
+</ol>
+<p>以下解释：</p>
+<ol>
+<li>父类中的a和子类中的a是两个不同的变量。</li>
+<li>p-&gt;a的地址是p的值加上a的偏移量。</li>
+<li>父类的属性一般比较靠前，父类中的a的偏移量为0，子类中的a的偏移量为4。</li>
+<li>如果p是父类的指针，p-&gt;a的地址等于p的值加上0。如果p是子类的指针，p-&gt;a的地址等于p的值加上4。</li>
+</ol>
+<h1 id="类型兼容性原则"><a href="#类型兼容性原则" class="headerlink" title="类型兼容性原则　"></a>类型兼容性原则　</h1><p>类型兼容规则是指在需要基类对象的任何地方，都可以使用公有派生类的对象来替代。通过公有继承，派生类得到了基类中除构造函数、析构函数之外的所有成员。这样，公有派生类实际就具备了基类的所有功能，凡是基类能解决的问题，公有派生类都可以解决。类型兼容规则中所指的替代包括以下情况：</p>
+<ol>
+<li>子类对象可以当作父类对象使用</li>
+<li>子类对象可以直接赋值给父类对象</li>
+<li>子类对象可以直接初始化父类对象</li>
+<li>父类指针可以直接指向子类对象</li>
+<li>父类引用可以直接引用子类对象</li>
+</ol>
+<h1 id="函数隐藏与多态原理"><a href="#函数隐藏与多态原理" class="headerlink" title="函数隐藏与多态原理"></a>函数隐藏与多态原理</h1><h2 id="函数隐藏"><a href="#函数隐藏" class="headerlink" title="函数隐藏"></a>函数隐藏</h2><p>在派生类中可以通过定义与基类相同函数名的方式将基类的函数隐藏，通过子类对象或者在子类内部只能访问子类的同名成员，但是父类的成员仍然存在。这便是函数隐藏机制。</p>
+<h2 id="多态（覆盖）"><a href="#多态（覆盖）" class="headerlink" title="多态（覆盖）"></a>多态（覆盖）</h2><p>多态：就是根据实际的对象类型决定函数调用语句的具体调用目标。总结一句话就是，同样的调用语句有多种不同的表现形态。</p>
+<p>父类中用virtual关键字定义虚函数后，可在子类定义相同函数名的函数，<strong>当父类指针指向子类对象时，此时子类对象中的父类的虚函数表指针所指的虚函数表中的父类重写虚函数的地址被改写为子类的重写虚函数的地址，所以此时父类指针访问子类中父类的虚函数表时，找到的要调用的同名虚函数是子类的同名虚函数地址；所以父类指针调用子类的重写的同名虚函数；</strong></p>
+<p><strong>虚函数重写（覆盖）的实质就是重写父类虚函数表中的父类虚函数地址；</strong></p>
+<h2 id="多态的实现——虚函数表"><a href="#多态的实现——虚函数表" class="headerlink" title="多态的实现——虚函数表"></a>多态的实现——虚函数表</h2><blockquote>
+<p>有关虚函数表具体原理，可以查看以下博客：<a href="https://www.cnblogs.com/vipchenwei/p/7466018.html?utm_source=debugrun&amp;utm_medium=referral" target="_blank" rel="external"><br>看雪。</a>、<a href="https://blog.csdn.net/castle_kao/article/details/71024411" target="_blank" rel="external">castle_kao的博客</a>、<a href="https://www.cnblogs.com/hushpa/p/5707475.html" target="_blank" rel="external">Jim’sBlog</a></p>
+</blockquote>
+<p>虚函数表的大概总结：</p>
+<ol>
+<li>有虚函数的类才有虚函数表。</li>
+<li>虚函数表实质是一个指针数组，里面存的是虚函数的函数指针。</li>
+<li>当类中声明虚函数时，创建对象时，编译器会在类中生成一个虚函数表</li>
+<li>虚函数表是一个存储类成员函数指针的数据结构</li>
+<li>虚函数表是由编译器自动生成与维护的，virtual成员函数会被编译器放入虚函数表中</li>
+<li>如果调用是虚函数，就根据不同对象的vptr指针找属于自己的函数。而且父类对象和子类对象都会有vptr指针，传入对象不同，编译器会根据vptr指针，到属于自己虚函数表中找自己的函数。即：vptr—&gt;虚函数表——&gt;函数的入口地址，从而实现了迟绑定(在运行的时候，才会去判断)。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+            
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/75668e14.html">C++基类派生类与指针</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年05月26日 - 09:05</p>
+  <p><span>最后更新:</span>2018年07月12日 - 14:07</p>
+  <p><span>原始链接:</span><a href="/posts/75668e14.html" title="C++基类派生类与指针">akihoo.github.io/posts/75668e14.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/75668e14.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/184ef247.html" rel="next" title="C++ 重载、重写、隐藏">
+                <i class="fa fa-chevron-left"></i> C++ 重载、重写、隐藏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/16d5eb1f.html" rel="prev" title="机器学习之正则化">
+                机器学习之正则化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="微石" />
+            
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类的指针总结"><span class="nav-number">1.</span> <span class="nav-text">类的指针总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类型兼容性原则"><span class="nav-number">3.</span> <span class="nav-text">类型兼容性原则　</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数隐藏与多态原理"><span class="nav-number">4.</span> <span class="nav-text">函数隐藏与多态原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数隐藏"><span class="nav-number">4.1.</span> <span class="nav-text">函数隐藏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态（覆盖）"><span class="nav-number">4.2.</span> <span class="nav-text">多态（覆盖）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态的实现——虚函数表"><span class="nav-number">4.3.</span> <span class="nav-text">多态的实现——虚函数表</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

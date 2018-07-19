@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集成学习小计">
+<meta property="og:url" content="akihoo.github.io/posts/3906b830.html">
+<meta property="og:site_name" content="微石的碎碎念">
+<meta property="og:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/3906b830.html机器学习之集成学习小计/Adaboost.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80ytq90wj30iw09uq4h.jpg">
+<meta property="og:updated_time" content="2018-07-13T02:25:13.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="集成学习小计">
+<meta name="twitter:description" content="本文为阅读西瓜书的总结笔记。部分参考懒死骆驼  何为集成学习集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。 集成学习的关键如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的多样性与准确性。 即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。 如何产生并结合好而不同的个体学习器是集">
+<meta name="twitter:image" content="/3906b830.html机器学习之集成学习小计/Adaboost.png">
+
+
+
+
+
+
+  <link rel="canonical" href="akihoo.github.io/posts/3906b830.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>集成学习小计 | 微石的碎碎念</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微石的碎碎念</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-导航">
+    <a href="/navigation/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />导航</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+<iframe src="https://cloud.mokeyjay.com/pixiv" frameborder="0"  style="width:240px; height:380px;"></iframe></div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/3906b830.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">集成学习小计
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-04 23:49:00" itemprop="dateCreated datePublished" datetime="2018-06-04T23:49:00+08:00">2018-06-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-13 10:25:13" itemprop="dateModified" datetime="2018-07-13T10:25:13+08:00">2018-07-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/3906b830.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/3906b830.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文为阅读西瓜书的总结笔记。部分参考<a href="http://izhaoyi.top/2017/07/03/ensemble/" target="_blank" rel="external">懒死骆驼</a></p>
+</blockquote>
+<h1 id="何为集成学习"><a href="#何为集成学习" class="headerlink" title="何为集成学习"></a>何为集成学习</h1><p>集成学习通过构建并结合多个学习器来完成学习任务。先训练一组个体学习器，再通过策略将其结合起来。</p>
+<h2 id="集成学习的关键"><a href="#集成学习的关键" class="headerlink" title="集成学习的关键"></a>集成学习的关键</h2><p>如何使多个学习器的结合比单一学习器性能优越？关键在于学习器的<strong>多样性与准确性</strong>。</p>
+<p>即个体学习器需要有一定的准确性，不能太坏，同时又需要有多样性，个体之间要有差异。但多样性与准确性往往相互冲突。</p>
+<p>如何产生并结合好而不同的个体学习器是集成学习的<strong>核心</strong>。</p>
+<h2 id="集成学习的分类"><a href="#集成学习的分类" class="headerlink" title="集成学习的分类"></a>集成学习的分类</h2><p>目前集成学习主要可分为2大类，即：</p>
+<ol>
+<li>boosting：弱学习器之间存在强依赖关系，必须串行生成的序列化方法。</li>
+<li>bagging：弱学习器之间不存在强依赖关系，可以并行生成。</li>
+</ol>
+<p>bagging和boosting分别是关注降低方差和降低偏差的两个代表，GDBT的每棵树生成都要比上棵树偏差小。</p>
+<a id="more"></a>
+<h1 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h1><p>首先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本分布进行调整，使得先前基学习器做错的训练样本在后续受到更多的关注，然后基于调整后的样本分布来训练下一个基学习器；如此重复进行，直至基学习器数目达到事先指定的值T,最终将这T个基学习器进行加权组合。</p>
+<p>举个例子：输入数据$(\mathbf{x},\mathbf{y})$，通过一个弱学习器得到 $f_1(\mathbf{x})=\mathbf{y^*}$ ，为了使$f(x) \rightarrow \mathbf{y}$，则可用第二个学习器学习之前学习器的“误差”（不足） $\mathbf{y}-f_1(x)$，即用数据$(\mathbf{x},\mathbf{y}-f_1(x))$训练学习器$f_2(\mathbf{x})$，不停训练下去，直到误差小于一定值或迭代达上限步数。</p>
+<h2 id="代表Adaboost"><a href="#代表Adaboost" class="headerlink" title="代表Adaboost"></a>代表Adaboost</h2><p>首先看Adaboost如何解决集成学习中的关键问题：</p>
+<ol>
+<li>在得到一系列弱分类器后，如何将弱分类器组合成一个强分类器？<ul>
+<li>答：有很多方法，比较基础的是线性加权模型$H(x)=\sum\limits_{t=1}^{T}\alpha_th_t(x)$</li>
+</ul>
+</li>
+<li>在每一轮训练中，如何改变训练数据的权值/概率分布？<ul>
+<li>提高那些被前一轮弱分类器错误分类样本的权值，而降低那些被正确分类样本的权值。（让被错误分类的样本得到当前弱分类器更多的关注）</li>
+</ul>
+</li>
+</ol>
+<p>Adaboost的核心便在于更新这2个权值，一个是弱分类器结合成强分类器的权值，另一个是训练下一个弱分类器的时，样本所占的权值（分类错误的样本更受关注）。</p>
+<p>算法流程（来自西瓜书）：</p>
+<p><img src="/3906b830.html机器学习之集成学习小计/Adaboost.png" alt="Adaboost"><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80ytq90wj30iw09uq4h.jpg" alt=""></p>
+<p>Adaboost算法在每次得到$H_{t-1}$之后对样本分布进行调整，使下一轮的基学习器能够纠正$H_{t-1}$的错误。</p>
+<h1 id="bagging"><a href="#bagging" class="headerlink" title="bagging"></a>bagging</h1><p>bagging方法的基本思想是：使用不同的训练集训练基学习器，可以使学习器差异化，可以采用有放回的抽样方式，可以采样出T个训练集，并训练T个基学习器。对预测输出进行结合时，通常采用投票法，对回归分析则采用简单平均法。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>高效(训练一个bagging集成与训练一个基学习器复杂度同阶)</li>
+<li>与Adaboost不同，bagging可以不经修改地适用于多分类以及回归问题</li>
+<li>包外估计——自助采样过程中剩余的样本可以作为验证集来对泛化性能进行“包外估计”</li>
+<li>当基学习器为决策树时，还可使用包外样本来辅助剪枝，或用于估计决策树中各结点的后验概率以辅助对零训练样本节点的处理。</li>
+<li>当基学习器为神经网络时，可使用包外样本来辅助早停。</li>
+</ol>
+<p>从偏差-方差角度看，Bagging主要关注降低方差，因此它在不剪枝决策树、神经网络等易受样本扰动的学习器上效用更为明显。</p>
+<h2 id="拓展变体：随机森林（rf）"><a href="#拓展变体：随机森林（rf）" class="headerlink" title="拓展变体：随机森林（rf）"></a>拓展变体：随机森林（rf）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>就如同名字一样，rf是以决策树为基学习器的bagging集成，为保持多样性，rf<strong>在决策树的训练过程中引入了随机属性选择</strong>。具体差异为：</p>
+<ol>
+<li>传统决策树在划分节点时，将从当前节点的属性集合（假定有d个属性）中选择一个最优节点划分方式。</li>
+<li>rf的决策树在属性划分时，将从当前节点的属性集合（假定有d个属性）随机选择k个，然后选择一个最优属性。</li>
+</ol>
+<h3 id="与bagging比较"><a href="#与bagging比较" class="headerlink" title="与bagging比较"></a>与bagging比较</h3><ol>
+<li>随机属性选择有助于提升决策树的多样性，但对单个决策树而言性能将会下降（不一定能选择最优属性划分），因此rf初始性能较差。随着个体学习器的增加，rf将收敛到更低的训练误差（相较于传统bagging）</li>
+<li>训练效率更快，因为只对节点的属性子集进行考察。</li>
+</ol>
+<h1 id="结合策略"><a href="#结合策略" class="headerlink" title="结合策略"></a>结合策略</h1><h2 id="学习器结合的好处"><a href="#学习器结合的好处" class="headerlink" title="学习器结合的好处"></a>学习器结合的好处</h2><ol>
+<li>统计的角度：假设空间很大时，可能存在多个假设在训练集上达到同等性能，但学习其可能误选导致泛化性能不佳，结合多个学习器可以减小该风险</li>
+<li>计算的角度：降低陷入糟糕局部极小点的风险</li>
+<li>表示的角度：结合多个学习器可扩大假设空间，对于真实假设在假设空间之外的情形可能学得更好的近似</li>
+</ol>
+<h2 id="结合策略-1"><a href="#结合策略-1" class="headerlink" title="结合策略"></a>结合策略</h2><ol>
+<li>平均法(Averaging)<ol>
+<li>简单平均法</li>
+<li>加权平均法——BMA(贝叶斯模型平均：基于后验概率来为不同模型赋予权重)</li>
+</ol>
+</li>
+<li>投票法(Voting)<ol>
+<li>多数投票法<ul>
+<li>绝对多数投票法：若某标记得票过半数则预测为该标记，否则拒绝预测（可靠性）</li>
+<li>相对多数投票法：预测为得票最多的标记</li>
+</ul>
+</li>
+<li>加权投票法</li>
+<li>若按个体学习器输出值类型划分<ul>
+<li>硬投票：预测为0/1</li>
+<li>软投票：相当于对后验概率的一个估计</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>学习法<br> Stacking:先从初始数据集训练出初级学习器，然后生成一个新的数据集用于训练元学习器，在这个新数据集中，初级学习器的输出被当作样例输入特征，而初始样本的标记仍被当作样例标记；一般使用交叉验证法或留一法来用训练初级学习器未使用的样本来产生元学习器的训练样本</li>
+</ol>
+<h1 id="多样性的增强方式"><a href="#多样性的增强方式" class="headerlink" title="多样性的增强方式"></a>多样性的增强方式</h1><ol>
+<li>数据样本扰动(给定初始数据集，可从中产生不同的数据子集，再利用不同的数据子集训练出不同的个体学习器，通常基于采样法),适用于不稳定学习器：决策树、神经网络</li>
+<li>输入属性扰动(从初始属性集中抽取若干个属性子集、基于每个属性子集训练一个基学习器（如随机子空间算法），最后结合),适用于包含大量冗余属性的数据</li>
+<li>输出表示扰动(对输出表示进行操纵，比如1、对训练样本的类标记稍作变动（翻转法）  2、对输出表示进行转化，如输出调制法  3、将原任务拆解成多个可同时求解的子任务，如Ecoc法)</li>
+<li>算法参数扰动(随机设置不同的参数，比如 1、负相关法 2、对参数较少的算法，可将其学习过程中某些环节用其他类似方式替代)</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+            
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/3906b830.html">集成学习小计</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年06月04日 - 23:06</p>
+  <p><span>最后更新:</span>2018年07月13日 - 10:07</p>
+  <p><span>原始链接:</span><a href="/posts/3906b830.html" title="集成学习小计">akihoo.github.io/posts/3906b830.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/3906b830.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/5ad569e3.html" rel="next" title="OJ读取输入样例">
+                <i class="fa fa-chevron-left"></i> OJ读取输入样例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/65b6ff79.html" rel="prev" title="常用排序算法代码实现">
+                常用排序算法代码实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="微石" />
+            
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为集成学习"><span class="nav-number">1.</span> <span class="nav-text">何为集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集成学习的关键"><span class="nav-number">1.1.</span> <span class="nav-text">集成学习的关键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集成学习的分类"><span class="nav-number">1.2.</span> <span class="nav-text">集成学习的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boosting"><span class="nav-number">2.</span> <span class="nav-text">boosting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代表Adaboost"><span class="nav-number">2.1.</span> <span class="nav-text">代表Adaboost</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bagging"><span class="nav-number">3.</span> <span class="nav-text">bagging</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓展变体：随机森林（rf）"><span class="nav-number">3.2.</span> <span class="nav-text">拓展变体：随机森林（rf）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">3.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与bagging比较"><span class="nav-number">3.2.2.</span> <span class="nav-text">与bagging比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结合策略"><span class="nav-number">4.</span> <span class="nav-text">结合策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习器结合的好处"><span class="nav-number">4.1.</span> <span class="nav-text">学习器结合的好处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合策略-1"><span class="nav-number">4.2.</span> <span class="nav-text">结合策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多样性的增强方式"><span class="nav-number">5.</span> <span class="nav-text">多样性的增强方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

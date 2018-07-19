@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="湍流什么是湍流湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰">
+<meta name="keywords" content="CFD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CFD湍流模拟">
+<meta property="og:url" content="akihoo.github.io/posts/c1e1c12d.html">
+<meta property="og:site_name" content="微石的碎碎念">
+<meta property="og:description" content="湍流什么是湍流湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/c1e1c12d.htmlCFD湍流模拟/湍流求解.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft81cf55z5j30pv0dl76m.jpg">
+<meta property="og:image" content="/c1e1c12d.htmlCFD湍流模拟/湍流模型.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft81cfe9s7j30nm0h7dox.jpg">
+<meta property="og:updated_time" content="2018-07-13T02:38:44.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CFD湍流模拟">
+<meta name="twitter:description" content="湍流什么是湍流湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰">
+<meta name="twitter:image" content="/c1e1c12d.htmlCFD湍流模拟/湍流求解.png">
+
+
+
+
+
+
+  <link rel="canonical" href="akihoo.github.io/posts/c1e1c12d.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CFD湍流模拟 | 微石的碎碎念</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微石的碎碎念</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-导航">
+    <a href="/navigation/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />导航</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+<iframe src="https://cloud.mokeyjay.com/pixiv" frameborder="0"  style="width:240px; height:380px;"></iframe></div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/c1e1c12d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CFD湍流模拟
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-16 15:46:32" itemprop="dateCreated datePublished" datetime="2018-06-16T15:46:32+08:00">2018-06-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-13 10:38:44" itemprop="dateModified" datetime="2018-07-13T10:38:44+08:00">2018-07-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/c1e1c12d.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/c1e1c12d.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="湍流"><a href="#湍流" class="headerlink" title="湍流"></a>湍流</h1><h2 id="什么是湍流"><a href="#什么是湍流" class="headerlink" title="什么是湍流"></a>什么是湍流</h2><p>湍流是流体的一种流动状态。当流速很小时，流体分层流动，互不混合，称为层流，也称为稳流或片流；逐渐增加流速，流体的流线开始出现波浪状的摆动，摆动的频率及振幅随流速的增加而增加，此种流况称为过渡流；当流速增加到很大时，流线不再清楚可辨，流场中有许多小漩涡，层流被破坏，相邻流层间不但有滑动，还有混合。这时的流体作不规则运动，有垂直于流管轴线方向的分速度产生，这种运动称为湍流，又称为乱流、扰流或紊流。</p>
+<p>湍流是在大雷诺数下发生的，雷诺数较小时，黏滞力对流场的影响大于惯性力，流场中流速的扰动会因黏滞力而衰减，流体流动稳定，为层流；反之，若雷诺数较大时，惯性力对流场的影响大于黏滞力，流体流动较不稳定，流速的微小变化容易发展、增强，形成紊乱、不规则的湍流流场。</p>
+<a id="more"></a>
+<h2 id="湍流的主要特征"><a href="#湍流的主要特征" class="headerlink" title="湍流的主要特征"></a>湍流的主要特征</h2><ol>
+<li>不规则性（Irregularity）。这是所有湍流的特性，从动力学的观点来看，湍流必定是不可预测的，研究湍流大多是用统计的方法。</li>
+<li>扩散性（Diffusivity）。这是湍流的另一个重要性质，它加速流体混合，增加动量、热、质量交换的速率。如果某种流动虽然是随机的，但是它在周围的流体中不出现扩散现象，那么肯定不是满流，例如喷气式飞机的尾迹。端流具有比分子运动强得多的扩散能力。</li>
+<li>大雷诺数（Large peynolds numbers）。湍流是一种在大雷诺数条件下才出现的现象，Re越高，层流流动变得不稳定而出现湍流。随机性和非线性特性使湍流方程的求解相当棘手。</li>
+<li>三维涡旋脉动（Three-dimensional vorticity fluctuations）。满流是以高频脉动涡旋为特征的有旋三维运动，因此，涡旋动力学在湍流种类中起着至关重要的作用。如果速度脉动是二维的，涡旋脉动将不能保持。涡旋拉伸是不可能存在于二维的，例如大气中二维的龙卷风不是湍流运动；</li>
+<li>耗散性（Dissipation）。湍流运动由于分子粘性作用总要耗散能量，只有不断从外部供给能量，湍流才能维持.随机运动，比如重力波、声波都不是湍流，因为它们的粘性耗散很小。随机波和湍流的本质区别是有无耗散。</li>
+<li>连续性（Continuum）。端流是一种连续介质的运动现象，即使最小尺度的湍流也远远大于任何的分子长度尺寸，因此满足连续介质力学的基本规律，例如N-8方程。</li>
+<li>流动特性（Flowcharacteristics）。满流不是流体的特性，而是流体运动的特质，它的主要特点不是由分子控制的。不同的流体其满流特征（依赖于外部条件，如边界条件和初始条件）往往也不一样，例如边界层湍流与尾迹湍流，所以工程上很难对端流进行统一的模式处理，但是湍流的一些本质特征是普适的，寻找这些普遍规律正是满流理论研究的中心任务；</li>
+<li>记忆特性（相关性）。湍流运动在不同的时刻或空间不同点上并不是独立的，而是有相互关联，但这种关联随着时间间隔或空间距离的增大而变小，最后趋近于零；</li>
+<li>间歇性。内间歇：充分发展的满流场中某些物理量（特别是高阶统计量）并不是在空间（或时间）的没一点上都存在的，即有奇异性。外间歇：指湍流区与非湍流区边界的时空不确定性，例如积云与蓝天之间的界面。间歇现象是近代湍流研究的重大发现之一，目前是湍流理论研究的前沿课题；</li>
+<li>猝发与拟序结构。这也是近代湍流研究的重大发现，试验表明，在湍流混合层和剪切湍流边界层中存在大尺度的相干结构和猝发现象，说明湍流不是完全无秩序、无内部结构的运动。这促使人们改变了对湍流的某些传统观念。</li>
+</ol>
+<h1 id="湍流的求解方式"><a href="#湍流的求解方式" class="headerlink" title="湍流的求解方式"></a>湍流的求解方式</h1><p>目前湍流的数值模拟方法大致分为:直接模拟法 (DNS)、雷诺时均方程法(RANS)、大涡模拟法(LES)三类。</p>
+<p><img src="/c1e1c12d.htmlCFD湍流模拟/湍流求解.png" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft81cf55z5j30pv0dl76m.jpg" alt=""></p>
+<h2 id="Reynolds平均法："><a href="#Reynolds平均法：" class="headerlink" title="Reynolds平均法："></a>Reynolds平均法：</h2><p>在这类方程中，将非稳态N-S方程对时间作平均，即把湍流运动看成二个流动的叠加：</p>
+<ul>
+<li>时间平均流动</li>
+<li>瞬时脉动流动</li>
+</ul>
+<p>所得的时均的N-S方程中包含了脉动量乘积的时均值等未知量，称为Reynolds应力，它包括了六个未知量。显然方程的个数小于未知量的个数。要让方程封闭，必须作出假设。</p>
+<h2 id="直接模拟法-DNS"><a href="#直接模拟法-DNS" class="headerlink" title="直接模拟法 (DNS)"></a>直接模拟法 (DNS)</h2><p>不用任何湍流模型，直接数值求解完整的三维非定常的N-S方程组；计算包括脉动运动在内的湍流所有瞬时流动量在三维流场中的时间演变；方程本身是精确的，不含任何认为假设和经验常数，仅有的误差只是由数值方法引入的误差。</p>
+<p>直接数值模拟是研究湍流的利器，它不需引入任何湍流模型，能够精确计算湍流场中每一瞬时丰富的流动信息。它的优点：</p>
+<ol>
+<li>方程本身是精确的，不含任何认为假设和经验常数，仅有的误差只是由数值方法引入的误差；</li>
+<li>数值模拟可以提供每一瞬间所有流动量在流场上的全部信息。<br>特别有意义的是能提供很多在实验上目前还无法测量的量，这就可以用直接数值模拟的结果来检验各种湍流模型；</li>
+<li>可描写湍流中各种尺度的涡结构的时间演变。辅以计算机图形显示，可获得湍流结构的清晰与生动的流动显示。<br>但它要求有很高的时间和空间分辨率，能够同时捕捉到流场中最大尺度和最小尺度的结构，所以计算量非常庞大。到目前为止，国际上大多数的直接模拟仅仅停留在对较低雷诺数、较简单几何条件和边界条件的湍流流动的研究上。<h2 id="大涡模拟"><a href="#大涡模拟" class="headerlink" title="大涡模拟"></a>大涡模拟</h2>大涡模拟是介于直接模拟法与雷诺时均平均法之间的一种湍流数值模拟方法。在大涡模拟中, 流动的大尺度涡运动进行直接求解, 小尺度涡通过亚格子模式进行模拟，要实现这种方法，有两个重要步骤必须完成：<ol>
+<li>首先是建立一种数学滤波函数，从湍流瞬时运动中将尺度比滤波函数尺度小的涡滤掉，从而分解出描述大涡模拟场的运动方程，目前，常用的滤波函数有: <ul>
+<li>Deardorff 的盒式滤波函数; </li>
+<li>傅里叶截断滤波函数; </li>
+<li>高斯型滤波函数。</li>
+</ul>
+</li>
+<li>其次，是压格子尺度模型的建立：建立合理的亚格子尺度模型是大涡模拟方法的关键问题。通常亚格子尺度模型可以分为三类:涡粘性模型、相似性模型、混合模型。大涡模拟在计算时间和计算费用方面是优于直接数值模拟的，在信息完整性方面优于雷诺平均模型，缺点是计算时间还是比较长，随着计算机处理能力的提高，这个缺点逐步被克服。</li>
+</ol>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LES与RANS的区别|LES|RANS<br>|—|:-:|:-:<br>过滤脉动对象|空间上进行过滤，只滤去小涡脉动保留大涡脉动，得到瞬时速度|时间上取平均，抹去涡团在时间上的脉动值，得到平均速度<br>涡团尺度分辨能力|取决于网格分辨率，远远小于RANS所能求解的尺度|取决于所采用的湍流模型并非网格尺寸的函数<br>边界条件|初始条件必须包含对满流脉动在时间空间上足够的分辨率，匹配时间步长和网格尺寸|只需要边界上的时均信息<br>数值精度|网格越精细时间步长越小，其数值扩散越小，数值越精确|与网格密度无关，精度低于LES</p>
+<h2 id="直接数值模拟（DNS）"><a href="#直接数值模拟（DNS）" class="headerlink" title="直接数值模拟（DNS）"></a>直接数值模拟（DNS）</h2><ul>
+<li>理论上，所有湍流（和层流/转换）都可以通过求解完全的Navier-Stokes方程进行数值求解</li>
+<li>求解整个尺度谱，无模型要求</li>
+<li>计算代价过大！对工业流动并不实际<h2 id="大涡模拟（LES）类模型"><a href="#大涡模拟（LES）类模型" class="headerlink" title="大涡模拟（LES）类模型"></a>大涡模拟（LES）类模型</h2></li>
+<li>求解空间平均的N-S方程</li>
+<li>直接模拟大的涡，而比网格小的涡通过模型模化-较DNS计算代价小，但是对大多数运用来说，计算资源及计算代价依然较高<h2 id="雷诺平均Navier-Stokes（RANS）模型"><a href="#雷诺平均Navier-Stokes（RANS）模型" class="headerlink" title="雷诺平均Navier-Stokes（RANS）模型"></a>雷诺平均Navier-Stokes（RANS）模型</h2></li>
+<li>求解时均的Navier-Stokes方程</li>
+<li>在RANS中模拟湍流的所有长度尺度<ul>
+<li>多种模型可以选用</li>
+</ul>
+</li>
+<li>对工业流动计算，这是最为广泛采用的方法</li>
+</ul>
+<h1 id="湍流模型在fluent中的应用"><a href="#湍流模型在fluent中的应用" class="headerlink" title="湍流模型在fluent中的应用"></a>湍流模型在fluent中的应用</h1><h2 id="湍流模型选取的准则"><a href="#湍流模型选取的准则" class="headerlink" title="湍流模型选取的准则"></a>湍流模型选取的准则</h2><p>流体是否可压、建立特殊的可行的问题、精度的要求、计算机的能力、时间的限制。为了选择最好的模型，你需要了解不同条件的适用范围和限制。</p>
+<h2 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h2><ul>
+<li>Spalart-Allmaras 模型；</li>
+<li>k-s模型；</li>
+<li>k-o模型；</li>
+<li>雷诺应力模型（RSM）</li>
+<li>大涡模拟模型（LES）</li>
+</ul>
+<p><img src="/c1e1c12d.htmlCFD湍流模拟/湍流模型.png" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft81cfe9s7j30nm0h7dox.jpg" alt=""></p>
+<h2 id="Spalart-Allmaras-模型"><a href="#Spalart-Allmaras-模型" class="headerlink" title="Spalart-Allmaras 模型"></a>Spalart-Allmaras 模型</h2><ul>
+<li>应用范围：用来解决因湍流动粘滞率而修改的数量方程。</li>
+<li>Spalart-A1lmaras 模型是设计用于航空领域的，主要是墙壁束缚（wal1-bounded）流动，而且已经显示出很好的效果。在透平机械中的应用也愈加广泛。</li>
+<li>在湍流模型中利用Boussinesq逼近，中心问题是怎样计算漩涡粘度。</li>
+<li>Spalart-A1lmaras模型是相对简单的单方程模型，只需求解湍流粘性的输运方程，不需要求解当地剪切层厚度的长度尺度；由于没有考虑长度尺度的变化，这对一些流动尺度变换比较大的流动问题不太适合；比如平板射流问题，从有壁面影响流动突然变化到自由剪切流，流场尺度变化明显等问题。</li>
+<li>Spalart-A1lmaras模型中的输运变量在近壁处的梯度要比k-E中的小，这使得该模型对网格粗糙带来数值误差不太敏感。</li>
+<li>Spalart-A1lmaras模型不能断定它适用于所有的复杂的工程流体。例如不能依靠它去预测均匀衰退各向同性湍流。</li>
+</ul>
+<h2 id="k-varepsilon-模型–标准的-k-varepsilon-模型（SKE）："><a href="#k-varepsilon-模型–标准的-k-varepsilon-模型（SKE）：" class="headerlink" title="$k-\varepsilon$ 模型–标准的$k-\varepsilon$模型（SKE）："></a>$k-\varepsilon$ 模型–标准的$k-\varepsilon$模型（SKE）：</h2><ul>
+<li>最简单的完整湍流模型是两个方程的模型，要解两个变量，速度和长度尺度。</li>
+<li>在FLUENT中，标准k-a模型自从被Launder and Spalding提出之后，就变成工程流场计算中主要的工具了。适用范围广、经济、合理的精度。</li>
+<li>它是个半经验的公式，是从实验现象中总结出来的。</li>
+<li>湍动能输运方程是通过精确的方程推导得到，耗散率方程是通过物理推理，数学上模拟相似原型方程得到的。</li>
+<li>应用范围：该模型假设流动为完全湍流，分子粘性的影响可以忽略，此标准K-E模型只适合完全湍流的流动过程模拟。</li>
+<li>SKE 是工业应用中最广泛使用的模型<ul>
+<li>模型参数通过试验数据校验过，如管流、平板流等</li>
+<li>对大多数应用有很好的稳定性和合理的精度</li>
+<li>包括适用于压缩性、浮力、燃烧等子模型</li>
+</ul>
+</li>
+<li>SKE局限性：<ul>
+<li>对有大的压力梯度、强分离流、强旋流和大曲率流动，模拟精度不够。</li>
+<li>难以准确模拟出射流的传播-对有大的应变区域（如近分离点），模拟的k偏大</li>
+</ul>
+</li>
+</ul>
+<h2 id="修正的-k-varepsilon-模型"><a href="#修正的-k-varepsilon-模型" class="headerlink" title="修正的$k-\varepsilon$模型"></a>修正的$k-\varepsilon$模型</h2><ul>
+<li>标准的$k-\varepsilon$二方程模型假定湍流粘性系数是各向同性的，当它用于强旋流、弯曲壁面或弯曲流线流动时，会产生一定的失真。如$RNG\ k-\varepsilon$模型和$Realizable\ k-\varepsilon$模型。</li>
+<li>标准的$k-\varepsilon$模型能很好地模拟一般的湍流，$RNG\ k-\varepsilon$模型用于处理高应变率及流线弯曲程度较大的流动，$Realizable\ k-\varepsilon$模型在含有射流和混合流的自由流动、管道内流动、边界层流动以及带有分离的流动时具有优势。</li>
+<li>在Fluent中，二方程模型还使用了k-w模型（w为湍流时间尺度的倒数）。</li>
+</ul>
+<h2 id="RNG-k-varepsilon-模型（Renormalization-Group）"><a href="#RNG-k-varepsilon-模型（Renormalization-Group）" class="headerlink" title="$RNG\ k-\varepsilon$模型（Renormalization Group）"></a>$RNG\ k-\varepsilon$模型（Renormalization Group）</h2><ul>
+<li>$RNG\ k-\varepsilon$模型来源于严格的统计技术。它和标准$k-\varepsilon$模型很相似，但是有以下改进：</li>
+</ul>
+<ol>
+<li>RNG模型在=方程中加了一个条件，有效的改善了精度。</li>
+<li>考虑到了湍流漩涡，提高了在这方面的精度。</li>
+<li>RNG理论为湍流Prandtl数提供了一个解析公式，然而标准k-E模型使用的是用户提供的常数。</li>
+<li>标准k-e模型是一种高雷诺数的模型，RNG理论提供了一个考虑低雷诺数流动粘性的解析公式。这些公式的作用取决于正确的对待近壁区域。</li>
+</ol>
+<ul>
+<li>这些特点使得RNGk-e模型比标准k-e模型在更广泛的流动中有更高的可信度和精度。</li>
+</ul>
+<h2 id="Realizable-k-varepsilon-模型（RKE）"><a href="#Realizable-k-varepsilon-模型（RKE）" class="headerlink" title="$Realizable\ k-\varepsilon$模型（RKE）"></a>$Realizable\ k-\varepsilon$模型（RKE）</h2><p>术语“realizable”，意味着模型要确保在雷诺压力中要有数学约束，湍流的连续性。<br>为湍流粘性增加了一个公式。耗散率增加了新的传输方程，这个方程来源于一个为层流速度波动而作的精确方程。<br>应用范围：</p>
+<ol>
+<li>可实现的k-c模型直接的好处是对于平板和圆柱射流的发散比率的更精确的预测。而且它对于旋转流动、强逆压梯度的边界层流动、流动分离和二次流有很好的表现。</li>
+<li>可实现的k-e模型和RNGk-c模型都显现出比标准k-c模型在强流线弯曲、漩涡和旋转有更好的表现。由于带旋流修正的k-c模型是新出现的模型，所以现在还没有确凿的证据表明它比RNGk-=模型有更好的表现。但是最初的研究表明可实现的k-e模型在所有k-a模型中流动分离和复杂二次流有很好的作用。</li>
+<li>该模型适合的流动类型比较广泛，包括有旋均匀剪切流，自由流（射流和混合层），腔道流动和边界层流动。对以上流动过程模拟结果都比标准k-=模型的结果好，特别是可再现k-e模型对圆口射流和平板射流模拟中，能给出较好的射流扩张。</li>
+</ol>
+<p>模型评价：<br>可实现的k-c模型的一个不足是在主要计算旋转和静态流动区域时不能提供自然的湍流粘度，这是因为可实现的k-c模型在定义湍流粘度时考虑了平均旋度的影响。这种额外的旋转影响已经在单一旋转参考系中得到证实，而且表现要好于标准k-c模型。由于这些修改，把它应用于多重参考系统中需要注意。</p>
+<h2 id="雷诺应力模型（RSM）"><a href="#雷诺应力模型（RSM）" class="headerlink" title="雷诺应力模型（RSM）"></a>雷诺应力模型（RSM）</h2><p>回忆一下涡粘模型的局限性：</p>
+<ul>
+<li>应力-应变的线性关系导致在应力输运重要的情况下预测不准，如非平衡流动、分离流和回流等</li>
+<li>不能考虑由于流线曲度引起的额外应力作用，如旋转、大的偏转流动等</li>
+<li>当湍流是高度各向异性、有三维效应时表现较差<br>为了克服上述缺点，通过平均速度脉动的乘积，导出六个独立的雷诺应力分量输运方程</li>
+<li>RSM适合于高度各向异性流，三维流等，但计算代价大</li>
+<li>目前RSMs并不总是优于涡粘模型</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://wenku.baidu.com/view/30e76106b84ae45c3a358c5f.html" target="_blank" rel="external">https://wenku.baidu.com/view/30e76106b84ae45c3a358c5f.html</a></li>
+<li><a href="https://wenku.baidu.com/view/d2aa5e0a50e2524de4187e80.html" target="_blank" rel="external">https://wenku.baidu.com/view/d2aa5e0a50e2524de4187e80.html</a></li>
+<li><a href="https://max.book118.com/html/2016/0718/48471841.shtm" target="_blank" rel="external">https://max.book118.com/html/2016/0718/48471841.shtm</a></li>
+<li><a href="https://max.book118.com/html/2017/0509/105606281.shtm" target="_blank" rel="external">https://max.book118.com/html/2017/0509/105606281.shtm</a></li>
+<li><a href="https://max.book118.com/html/2017/0712/121853406.shtm" target="_blank" rel="external">https://max.book118.com/html/2017/0712/121853406.shtm</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+            
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/c1e1c12d.html">CFD湍流模拟</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年06月16日 - 15:06</p>
+  <p><span>最后更新:</span>2018年07月13日 - 10:07</p>
+  <p><span>原始链接:</span><a href="/posts/c1e1c12d.html" title="CFD湍流模拟">akihoo.github.io/posts/c1e1c12d.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/c1e1c12d.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CFD/" rel="tag"># CFD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/47f04b2c.html" rel="next" title="二叉树的常见遍历以及面试题总结">
+                <i class="fa fa-chevron-left"></i> 二叉树的常见遍历以及面试题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/b9ca181f.html" rel="prev" title="【转载】one-key-kms 部署以及激活win-office教程">
+                【转载】one-key-kms 部署以及激活win-office教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="微石" />
+            
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#湍流"><span class="nav-number">1.</span> <span class="nav-text">湍流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是湍流"><span class="nav-number">1.1.</span> <span class="nav-text">什么是湍流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#湍流的主要特征"><span class="nav-number">1.2.</span> <span class="nav-text">湍流的主要特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#湍流的求解方式"><span class="nav-number">2.</span> <span class="nav-text">湍流的求解方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reynolds平均法："><span class="nav-number">2.1.</span> <span class="nav-text">Reynolds平均法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接模拟法-DNS"><span class="nav-number">2.2.</span> <span class="nav-text">直接模拟法 (DNS)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大涡模拟"><span class="nav-number">2.3.</span> <span class="nav-text">大涡模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接数值模拟（DNS）"><span class="nav-number">2.5.</span> <span class="nav-text">直接数值模拟（DNS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大涡模拟（LES）类模型"><span class="nav-number">2.6.</span> <span class="nav-text">大涡模拟（LES）类模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#雷诺平均Navier-Stokes（RANS）模型"><span class="nav-number">2.7.</span> <span class="nav-text">雷诺平均Navier-Stokes（RANS）模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#湍流模型在fluent中的应用"><span class="nav-number">3.</span> <span class="nav-text">湍流模型在fluent中的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#湍流模型选取的准则"><span class="nav-number">3.1.</span> <span class="nav-text">湍流模型选取的准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#overview"><span class="nav-number">3.2.</span> <span class="nav-text">overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spalart-Allmaras-模型"><span class="nav-number">3.3.</span> <span class="nav-text">Spalart-Allmaras 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-varepsilon-模型–标准的-k-varepsilon-模型（SKE）："><span class="nav-number">3.4.</span> <span class="nav-text">$k-\varepsilon$ 模型–标准的$k-\varepsilon$模型（SKE）：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修正的-k-varepsilon-模型"><span class="nav-number">3.5.</span> <span class="nav-text">修正的$k-\varepsilon$模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNG-k-varepsilon-模型（Renormalization-Group）"><span class="nav-number">3.6.</span> <span class="nav-text">$RNG\ k-\varepsilon$模型（Renormalization Group）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Realizable-k-varepsilon-模型（RKE）"><span class="nav-number">3.7.</span> <span class="nav-text">$Realizable\ k-\varepsilon$模型（RKE）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#雷诺应力模型（RSM）"><span class="nav-number">3.8.</span> <span class="nav-text">雷诺应力模型（RSM）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
