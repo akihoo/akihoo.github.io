@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gau">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之高斯混合模型">
+<meta property="og:url" content="akihoo.github.io/posts/f1703e5d.html">
+<meta property="og:site_name" content="微石的碎碎念">
+<meta property="og:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gau">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/f1703e5d.html机器学习之高斯混合模型/GMM.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80wbseatj30b807naan.jpg">
+<meta property="og:updated_time" content="2018-07-19T03:39:03.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之高斯混合模型">
+<meta name="twitter:description" content="前言极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。 参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。 最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。 高斯分布高斯分布（Gau">
+<meta name="twitter:image" content="/f1703e5d.html机器学习之高斯混合模型/GMM.png">
+
+
+
+
+
+
+  <link rel="canonical" href="akihoo.github.io/posts/f1703e5d.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习之高斯混合模型 | 微石的碎碎念</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微石的碎碎念</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/f1703e5d.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习之高斯混合模型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-26 21:38:32" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/f1703e5d.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/f1703e5d.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。</p>
+<p>参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。</p>
+<p>最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
+<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p>高斯分布（Gaussian distribution）有时也被称为正态分布（normal distribution），是一种在自然界大量的存在的、最为常见的分布形式。<br>其概率密度函数为：<br>$$f\left( x\right) =\dfrac {1}{\sqrt {2\pi }\sigma }\exp \left( -\dfrac {\left( x-\mu \right)^2 }{2\sigma ^{2}}\right)$$<br>如果随机变量服从的正态分布，记作$X\sim N\left( \mu ,\sigma ^{2}\right)$</p>
+<p>可见高斯分布包含两个参数，参数μ表示均值，参数σ表示标准差。</p>
+<a id="more"></a>
+<h1 id="高斯混合模型（GMM）"><a href="#高斯混合模型（GMM）" class="headerlink" title="高斯混合模型（GMM）"></a>高斯混合模型（GMM）</h1><p>高斯混合模型是对高斯模型进行简单的扩展，GMM使用多个高斯分布的组合来刻画数据分布。每个高斯模型就代表了一个类（一个Cluster）。</p>
+<p>混合高斯模型定义为<br>$$p\left( x\right) =\sum ^{k}_{i=1}\pi _{k}p\left( x{\rm{|}}{\theta _k}\right)$$</p>
+<p>其中 K 为模型的个数；$π_k$ 为第 k 个高斯的权重；$p(x {\rm{|}}{\theta _k})$ 则为第 k 个高斯概率密度，其均值为$μ_k$，方差为$σ_k$。对此概率密度的估计就是要求出 $π_k$、$μ_k$ 和 $σ_k$ 各个变量。当求出$p(x)$的表达式后，求和式的各项的结果就分别代表样本 x 属于各个类的概率。</p>
+<p>对于一个高斯分布，我们可以使用极大似然估计来估计 $μ_k$ 和 $σ_k$，但问题是存在很多高斯分布，我们空有许多样本点，却无法知道 $π_k$ （我们需要使用GMM模型对样本分类，因此不知道每个样本属于哪个类，自然也就不知道类的权重 $π_k$）。那么究竟如何进行参数估计呢？GMM通常使用最大期望（ Expectation Maximum，简称EM）进行参数评估。</p>
+<h1 id="EM算法（Expectation-maximization，期望最大化）"><a href="#EM算法（Expectation-maximization，期望最大化）" class="headerlink" title="EM算法（Expectation maximization，期望最大化）"></a>EM算法（Expectation maximization，期望最大化）</h1><p>引入一个二进制向量指标$s = { {s_k}} {\rm{,}}\;k = 1{\rm{,}}2{\rm{,}} \cdots {\rm{,}}K$来代表$x$属于哪个集群<br>$$s_k = 1\ \ if\ x\ belong\ to\ k_{th}\ pattern\ ,otherwire\ 0  $$</p>
+<p>这里$p({s_{k}} = 1) = {w_k}$，是$x$ 的先验概率，模型可改写为：<br>$$p(x) = \sum \limits^K _ {k = 1}  p({s_{k}} = 1)p(x{\rm{|}}{\theta _k})$$</p>
+<p>后验概率分布$p({s_{nk}} = 1{\rm{|}}x)$  可以通过贝叶斯推断如下计算</p>
+<p>EM算法（Expectation-Maximization algorithm）分两步，第一步先求出要估计参数的粗略值，第二步使用第一步的值最大化似然函数。因此要先求出GMM的似然函数。</p>
+<ol>
+<li>定义分量数目K，对每个分量k设置$π_k$，$μ_k$和$\sigma_k$的初始值，然后计算对数似然函数$p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\sigma}) = \sum_{k=1}^K\pi_k \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}_k, \boldsymbol{\sigma}_k)$。</li>
+<li>E step：根据当前的$π_k$，$μ_k$和$\sigma_k$计算后验概率$p({s_{nk}} = 1{\rm{|}}x)$。</li>
+</ol>
+<p>$$p({s_{nk}} = 1{\rm{|}}x) = \frac{\pi_ k\mathcal{N}(\boldsymbol{x}_ n| \boldsymbol{\mu}_ n, \boldsymbol{\sigma} _ n)}{\sum _{j=1}^K \pi _ j \mathcal{N}(\boldsymbol{x} _ n| \boldsymbol{\mu} _ j, \boldsymbol{\sigma} _ j)}$$</p>
+<ol start="3">
+<li>M step ：根据E step中计算的$p({s_{nk}} = 1{\rm{|}}x)$再计算新的$π_k$，$μ_k$和$\sigma_k$<br>$$\boldsymbol{\mu}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N p({s_{nk}} = 1{\rm{|}}x) \boldsymbol{x}_n$$</li>
+</ol>
+<p>$$\boldsymbol{\sigma}_k^{new} = \frac{1}{N_k} \sum_{n=1}^N p({s_{nk}} = 1{\rm{|}}x) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new}) (\boldsymbol{x}_n - \boldsymbol{\mu}_k^{new})^T $$</p>
+<p>$$\pi_k^{new} = \frac{N_k}{N}$$</p>
+<p>注：以上3式为分别为似然函数对$π_k$，$μ_k$和$\sigma_k$求导并令倒数为0得到。</p>
+<p>其中：<br>$$N_k = \sum_{n=1}^N p({s_{nk}} = 1{\rm{|}}x)$$</p>
+<ol start="4">
+<li>计算对数似然函数<br>$$\ln p(\boldsymbol{x}|\boldsymbol{\pi}, \boldsymbol{\mu}, \boldsymbol{\sigma}) = \sum_{n=1}^N \ln \left[\sum_{k=1}^K \pi_k \mathcal{N}(\boldsymbol{x}_k| \boldsymbol{\mu}_k, \boldsymbol{\sigma}_k)\right]$$</li>
+<li>检查参数是否收敛或对数似然函数是否收敛，若不收敛，则返回第2步。</li>
+</ol>
+<blockquote>
+<ol>
+<li>此部分参考自：<a href="https://blog.csdn.net/jinping_shi/article/details/59613054" target="_blank" rel="external">https://blog.csdn.net/jinping_shi/article/details/59613054</a></li>
+<li>EM算法源码可参考：<a href="https://blog.csdn.net/lihou1987/article/details/70833229" target="_blank" rel="external">https://blog.csdn.net/lihou1987/article/details/70833229</a></li>
+<li>有关EM算法的通俗解释（推荐）：<a href="https://www.jianshu.com/p/1121509ac1dc" target="_blank" rel="external">https://www.jianshu.com/p/1121509ac1dc</a></li>
+<li><a href="https://blog.csdn.net/livecoldsun/article/details/40833829" target="_blank" rel="external">https://blog.csdn.net/livecoldsun/article/details/40833829</a></li>
+</ol>
+</blockquote>
+<h1 id="GMM模型的简单使用"><a href="#GMM模型的简单使用" class="headerlink" title="GMM模型的简单使用"></a>GMM模型的简单使用</h1><p>使用sklearn中的isrs数据集与GMM模型进行简单使用。代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># %matplotlib inline</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></div><div class="line"><span class="comment"># python3.6</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </div><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris  </div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> mixture</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </div><div class="line">  </div><div class="line">iris = load_iris()  </div><div class="line">obs = iris.data</div><div class="line">clf = mixture.GMM(n_components=<span class="number">3</span>)</div><div class="line">clf.fit(obs)</div><div class="line"><span class="comment">#预测</span></div><div class="line">labels = clf.predict(obs) </div><div class="line"><span class="comment">#GMM为无监督学习，因此输出的分类label可能与原label不一致</span></div><div class="line"><span class="comment">#以下3行代码将输出的分类label改正，或许在你的电脑上输出的label与我的label也不一致，请自行改正</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(labels)):</div><div class="line">    <span class="keyword">if</span> labels[i]!=<span class="number">2</span>:</div><div class="line">        labels[i]=<span class="number">0</span> <span class="keyword">if</span> labels[i]==<span class="number">1</span> <span class="keyword">else</span> <span class="number">1</span></div><div class="line">X = [x[<span class="number">0</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]  </div><div class="line">Y = [x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> obs]</div><div class="line"><span class="comment"># 图像可视化</span></div><div class="line">fig, ((ax1, ax2)) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, sharex = <span class="keyword">True</span>, sharey = <span class="keyword">True</span>)</div><div class="line">plt.figure()</div><div class="line">ax1.scatter(X, Y, c=labels, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax1.set_title(<span class="string">'predict'</span>)</div><div class="line">ax2.scatter(X, Y, c=iris.target, s=<span class="number">40</span>, cmap=<span class="string">'viridis'</span>)</div><div class="line">ax2.set_title(<span class="string">'target'</span>)</div><div class="line">error=[<span class="number">0</span> <span class="keyword">if</span> i==<span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span> <span class="keyword">for</span> i <span class="keyword">in</span> labels-iris.target]</div><div class="line">print(<span class="string">"正确率为"</span>,<span class="number">1</span>-sum(error)/len(error))</div></pre></td></tr></table></figure></p>
+<h2 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h2><p><img src="/f1703e5d.html机器学习之高斯混合模型/GMM.png" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80wbseatj30b807naan.jpg" alt=""></p>
+<pre><code>正确率为 0.9066666666666666
+</code></pre><p>从预测结果可看出，黄色与绿色重叠部分存在部分样本分类错误，整体分类准确率为90%。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="https://www.cnblogs.com/wjy-lulu/p/7009038.html" target="_blank" rel="external">https://www.cnblogs.com/wjy-lulu/p/7009038.html</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_69e75efd0102wylw.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_69e75efd0102wylw.html</a></li>
+<li><a href="https://www.cnblogs.com/txg198955/p/4097543.html" target="_blank" rel="external">https://www.cnblogs.com/txg198955/p/4097543.html</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+            
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/f1703e5d.html">机器学习之高斯混合模型</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年06月26日 - 21:06</p>
+  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>原始链接:</span><a href="/posts/f1703e5d.html" title="机器学习之高斯混合模型">akihoo.github.io/posts/f1703e5d.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/f1703e5d.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/1669902a.html" rel="next" title="C++map常见用法">
+                <i class="fa fa-chevron-left"></i> C++map常见用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/1ecc272.html" rel="prev" title="机器学习模型之逻辑回归">
+                机器学习模型之逻辑回归 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="微石" />
+            
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高斯分布"><span class="nav-number">2.</span> <span class="nav-text">高斯分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高斯混合模型（GMM）"><span class="nav-number">3.</span> <span class="nav-text">高斯混合模型（GMM）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EM算法（Expectation-maximization，期望最大化）"><span class="nav-number">4.</span> <span class="nav-text">EM算法（Expectation maximization，期望最大化）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GMM模型的简单使用"><span class="nav-number">5.</span> <span class="nav-text">GMM模型的简单使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输出结果"><span class="nav-number">5.1.</span> <span class="nav-text">输出结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

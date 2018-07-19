@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之模型评估">
+<meta property="og:url" content="akihoo.github.io/posts/712a0b5b.html">
+<meta property="og:site_name" content="微石的碎碎念">
+<meta property="og:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg">
+<meta property="og:image" content="/712a0b5b.html机器学习之模型评估/ROC.png">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg">
+<meta property="og:image" content="/712a0b5b.html机器学习之模型评估/error.png">
+<meta property="og:updated_time" content="2018-07-19T03:39:03.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习之模型评估">
+<meta name="twitter:description" content="过拟合与欠拟合过拟合（over-fitting）过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。 欠拟合欠拟合值机器学习模型并没有将样本的一般性质学好。 模型评估使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。 留出法“留出法”（hold-o">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="akihoo.github.io/posts/712a0b5b.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习之模型评估 | 微石的碎碎念</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">微石的碎碎念</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+    <a href="/sitemap.xml" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/712a0b5b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习之模型评估
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-11 10:39:14" itemprop="dateCreated datePublished" datetime="2018-07-11T10:39:14+08:00">2018-07-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/712a0b5b.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/712a0b5b.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="过拟合与欠拟合"><a href="#过拟合与欠拟合" class="headerlink" title="过拟合与欠拟合"></a>过拟合与欠拟合</h1><h2 id="过拟合（over-fitting）"><a href="#过拟合（over-fitting）" class="headerlink" title="过拟合（over-fitting）"></a>过拟合（over-fitting）</h2><p>过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。</p>
+<h2 id="欠拟合"><a href="#欠拟合" class="headerlink" title="欠拟合"></a>欠拟合</h2><p>欠拟合值机器学习模型并没有将样本的一般性质学好。</p>
+<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h2><p>使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。</p>
+<h3 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h3><p>“留出法”（hold-out）直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T。在S上训练出模型后，用T来评估其测试误差，作为对泛化误差的估计。</p>
+<p>需注意的是，训练/测试集的划分要尽可能保持数据分布的一致性，避免因数据划分过程引入额外的偏差而对最终结果产生影响，例如在分类任务中至少要保持样本的类别比例相似。另一个需注意的问题是，即便在给定训练/测试集的样本比例后，仍存在多种划分方式对初始数据集D进行分割，这些不同的划分将导致不同的训练/测试集，相应的，模型评估的结果也会有差别。因此，单次使用留出法得到的估计结果往往不够稳定可靠，在使用留出法时，一般要采用若干次随机划分、重复进行实验评估后取平均值作为留出法的评估结果。</p>
+<p>另外使用留出法会导致一个窘境：若令训练集S包含绝大多数样本，则训练出的模型可能更接近于用D训练出的模型，但由于T比较小，评估结果可能不够稳定准确；若令测试集T多包含一些样本，则训练集S与D差别更大了，被评估的模型与用D训练出的模型相比可能有较大差别，从而降低了评估结果的保真性（fidelity）。这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。可从“偏差-方差”的角度来理解：测试集小时，评估结果的方差较大；训练集小时，评估结果的偏差较大。</p>
+<p>这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。</p>
+<a id="more"></a>
+<h3 id="交叉验证"><a href="#交叉验证" class="headerlink" title="交叉验证"></a>交叉验证</h3><p>“交叉验证法”（cross validation）先将数据集D划分为k个大小相似的互斥子集，每个子集都尽可能保持数据分布的一致性，即从D中通过分层采样得到。然后，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集；这样就可获得k组训练/测试集，从而可进行k次训练和测试，最终返回的是这k个测试结果的均值。</p>
+<h3 id="留一法"><a href="#留一法" class="headerlink" title="留一法"></a>留一法</h3><p>留一法是交叉验证的一个特例，当数据集中包含M个样本，则则做m折交叉验证（k=M），在绝大多数情况下，留一法中被实际评估的模型与期望评估的用D训练出的模型很相似。因此，留一法的评估结果往往被认为比较准确。然而，留一法的缺点是训练开销非常大。</p>
+<h3 id="自助法"><a href="#自助法" class="headerlink" title="自助法"></a>自助法</h3><p>自助法以自助采样法为基础，给定包含m个样本的数据集D，我们对它进行采样产生数据集D’；每次随机从D中挑选一个赝本，将其拷贝放入D’，然后再将该样本放回初始数据集D中，使得该样本在下次采样时仍有可能被采到；这个过程重复执行m次后，就得到了包含m个样本的数据集D’，这就是自助采样的结果。</p>
+<p>自助法在数据集较小、难以有效划分训练/测试集时很有用；此外，自助法能从初始数据集中产生多个不同的训练集，这对集成学习等方法有很大的好处。</p>
+<p>然而，自助法产生的数据集改变了初始数据集的分布，这会引入估计偏差。</p>
+<h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><h3 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h3><blockquote>
+<p>本小节内容总结自：<a href="https://blog.csdn.net/heyongluoyao8/article/details/49429629" target="_blank" rel="external">https://blog.csdn.net/heyongluoyao8/article/details/49429629</a></p>
+</blockquote>
+<ol>
+<li>早停（early stopping）：Early stopping便是一种迭代次数截断的方法来防止过拟合的方法，即在模型对训练数据集迭代收敛之前停止迭代来防止过拟合。Early stopping方法的具体做法是，在每一个Epoch结束时（一个Epoch集为对所有的训练数据的一轮遍历）计算validation data的accuracy，当accuracy不再提高时，就停止训练。</li>
+<li>增大数据集：可通过从数据源头采集更多数据、过采样、复制原有数据并加上随机噪声、根据当前数据集估计数据分布参数，使用该分布产生更多数据等</li>
+<li>减小特征维度</li>
+<li>正则化：正则化方法是指在进行目标函数或代价函数优化时，在目标函数或代价函数后面加上一个正则项，一般有L1正则与L2正则等。<ul>
+<li>正则项是为了降低模型的复杂度，从而避免模型区过分拟合训练数据，包括噪声与异常点（outliers）。从另一个角度上来讲，正则化即是假设模型参数服从先验概率，即为模型参数添加先验，只是不同的正则化方式的先验分布是不一样的。这样就规定了参数的分布，使得模型的复杂度降低（试想一下，限定条件多了，是不是模型的复杂度降低了呢），这样模型对于噪声与异常点的抗干扰性的能力增强，从而提高模型的泛化能力。还有个解释便是，从贝叶斯学派来看：加了先验，在数据少的时候，先验知识可以防止过拟合；从频率学派来看：正则项限定了参数的取值，从而提高了模型的稳定性，而稳定性强的模型不会过拟合，即控制模型空间。 </li>
+<li>另外一个角度，过拟合从直观上理解便是，在对训练数据进行拟合时，需要照顾到每个点，从而使得拟合函数波动性非常大，即方差大。在某些小区间里，函数值的变化性很剧烈，意味着函数在某些小区间里的导数值的绝对值非常大，由于自变量的值在给定的训练数据集中的一定的，因此只有系数足够大，才能保证导数的绝对值足够大。</li>
+</ul>
+</li>
+<li>Dropout：在神经网络中，有一种方法是通过修改神经网络本身结构来实现的，其名为Dropout。在训练开始时，随机得删除一些（可以设定为一半，也可以为1/3，1/4等）隐藏层神经元，即认为这些神经元不存在，同时保持输入层与输出层神经元的个数不变，然后按照BP学习算法对ANN中的参数进行学习更新（虚线连接的单元不更新，因为认为这些神经元被临时删除了）。这样一次迭代更新便完成了。下一次迭代中，同样随机删除一些神经元，与上次不一样，做随机选择。这样一直进行瑕疵，直至训练结束。 </li>
+</ol>
+<h3 id="欠拟合-1"><a href="#欠拟合-1" class="headerlink" title="欠拟合"></a>欠拟合</h3><p>欠拟合较好解决，例如：增加模型迭代次数、增加模型复杂程度、增加样本特征维数等。</p>
+<h1 id="性能度量"><a href="#性能度量" class="headerlink" title="性能度量"></a>性能度量</h1><h2 id="错误率与精度"><a href="#错误率与精度" class="headerlink" title="错误率与精度"></a>错误率与精度</h2><p>错误率和精度是分类任务中最常用的两种性能度量，既适用于二分类任务，也适用于多分类任务。</p>
+<p>错误率是分类错误的样本数占样本总数的比例，精度则是分类正确的样本数占样本总数的比例。</p>
+<h2 id="查准率、查全率与F1"><a href="#查准率、查全率与F1" class="headerlink" title="查准率、查全率与F1"></a>查准率、查全率与F1</h2><p>这几个指标在信息检索、Web搜索等应用中经常出现，例如在信息检索中，我们经常会关心“检索出的信息中有多少比例是用户感兴趣的”“用户感兴趣的信息中有多少被检索出来了”。“查准率”（precision）与“查全率”（recall）是更为适用于此类需求的性能度量。</p>
+<p>对于二分类问题，可将样例根据其真实类别与学习器预测类别的组合划分为 $TP$ （真正例，true positive）、 $FP$ （假正例，false positive）、 $TN$ （真反例，true negative）、 $FN$ （假反例，false negative）四种情形，令$TP$、$FP$、$TN$、$FN$分别表示其对应的样例数，则显然有$TP+FP+TN+FN=D$.分类结果的“混淆矩阵”（confusion matrix）如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">真实情况</th>
+<th style="text-align:center">预测正例</th>
+<th style="text-align:center">预测反例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">正例</td>
+<td style="text-align:center">$TP$</td>
+<td style="text-align:center">$FN$</td>
+</tr>
+<tr>
+<td style="text-align:center">反例</td>
+<td style="text-align:center">$FP$</td>
+<td style="text-align:center">$TN$</td>
+</tr>
+</tbody>
+</table>
+<p>查准率$P$与查全率$R$定义为：<br>$$P={TP\over TP+FP}$$</p>
+<p>$$R={TP\over TP+FN}$$<br>F1定义为：<br>$$F1={2\times P\times R\over P+R}={2\times TP\over D+TP-TN}$$<br>其中$D$为样例总数。</p>
+<h2 id="ROC与AUC"><a href="#ROC与AUC" class="headerlink" title="ROC与AUC"></a>ROC与AUC</h2><p>AUC是一个模型评价指标，只能用于二分类模型的评价，AUC是Area under curve的首字母缩写，其值等于ROC曲线下的面积。ROC曲线的x轴是伪阳性率（false positive rate），y轴是真阳性率（true positive rate)。ROC曲线如下图：<br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j93rnwj30j80aitc6.jpg" alt="机器学习之模型评估/ROC.png"><br><img src="/712a0b5b.html机器学习之模型评估/ROC.png" alt=""><br>ROC曲线如何绘制？将大多机器学习模型处理二分类问题都将输出测试样本属于正例的概率，将此概率从大到小排列，得到如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID</th>
+<th style="text-align:center">正例概率</th>
+<th style="text-align:center">实际情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0.85</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0.83</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0.82</td>
+<td style="text-align:center">正例</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0.81</td>
+<td style="text-align:center">反例</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+</tr>
+<tr>
+<td style="text-align:center">999</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">反例</td>
+</tr>
+<tr>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">0.02</td>
+<td style="text-align:center">正例</td>
+</tr>
+</tbody>
+</table>
+<p>依次调整阈值使前 $k$ 个样本为正例，分别计算真阳性率与伪阳性率，并在曲线中画点。例如阈值为0.85时（$k=1$），仅有第一个样本分类为正例，则真阳性率为1，伪阳性率为0，因此可以得到左上角的点。当画出所有点后，依次连接成ROC曲线。</p>
+<h1 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h1><p>$$E(f;D)=bias^2(x)+var(x)+\epsilon^2$$<br>泛化误差为偏差方差与噪声之和。</p>
+<ol>
+<li>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。<br>$$bias^2(x)={(\overline{f}(x)-y)^2}$$</li>
+<li>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。<br>$$var(x)=\mathbb{E}_D\big[(f(x;D)-\overline{f}(x))^2\big]$$</li>
+<li>噪声则表达了在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度。<br>$$\epsilon^2=\mathbb{E}_D\big[(y_D-y)^2\big]$$</li>
+</ol>
+<h2 id="偏差方差窘境"><a href="#偏差方差窘境" class="headerlink" title="偏差方差窘境"></a>偏差方差窘境</h2><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg" alt="机器学习之模型评估/error.png"><br><img src="/712a0b5b.html机器学习之模型评估/error.png" alt=""><br>假如学习算法训练不足时，此时学习器的拟合能力不够强，这个时候偏差主导了算法的泛化能力。随着训练的进行，学习器的拟合能力逐渐增强，偏差逐渐减小，但此时通过不同数据学习得到的学习器就可能会有较大的偏差，即此时的方差会主导模型的泛化能力。若学习进一步进行，学习器就可能学到数据集所独有的特征，而这些特征对于其它的数据是不适用的，这个时候就是发生了过拟合。</p>
+<h2 id="Bagging和Boosting"><a href="#Bagging和Boosting" class="headerlink" title="Bagging和Boosting"></a>Bagging和Boosting</h2><p>Bagging是通过重采样的方法来得到不同的模型，假设模型独立则有：<br>$$E(\frac{\sum _ iE(X _ i)}{n})=E(X _ i)$$<br>$$Var(\frac{\sum _ iVar(X _ i)}{n})=\frac{1}{n}Var(X _ i)$$<br>Bagging主要可以降低的是方差。 </p>
+<p>而Boosting每一次都关注使得整理的loss减少，很显然可以降低bias。</p>
+<p>此部分可参考：<a href="https://www.zhihu.com/question/26760839" target="_blank" rel="external">https://www.zhihu.com/question/26760839</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+            
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/posts/712a0b5b.html">机器学习之模型评估</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
+  <p><span>发布时间:</span>2018年07月11日 - 10:07</p>
+  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>原始链接:</span><a href="/posts/712a0b5b.html" title="机器学习之模型评估">akihoo.github.io/posts/712a0b5b.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/712a0b5b.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/461acaa3.html" rel="next" title="机器学习竞赛大杀器-xgboost">
+                <i class="fa fa-chevron-left"></i> 机器学习竞赛大杀器-xgboost
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/7ca61767.html" rel="prev" title="使用python在文本文件中添加特定内容">
+                使用python在文本文件中添加特定内容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="微石" />
+            
+              <p class="site-author-name" itemprop="name">微石</p>
+              <p class="site-description motion-element" itemprop="description">吾本逍遥</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/akihoo/" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:xfyuu1@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#过拟合与欠拟合"><span class="nav-number">1.</span> <span class="nav-text">过拟合与欠拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过拟合（over-fitting）"><span class="nav-number">1.1.</span> <span class="nav-text">过拟合（over-fitting）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欠拟合"><span class="nav-number">1.2.</span> <span class="nav-text">欠拟合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型评估"><span class="nav-number">1.3.</span> <span class="nav-text">模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#留出法"><span class="nav-number">1.3.1.</span> <span class="nav-text">留出法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉验证"><span class="nav-number">1.3.2.</span> <span class="nav-text">交叉验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#留一法"><span class="nav-number">1.3.3.</span> <span class="nav-text">留一法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自助法"><span class="nav-number">1.3.4.</span> <span class="nav-text">自助法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方式"><span class="nav-number">1.4.</span> <span class="nav-text">解决方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#过拟合"><span class="nav-number">1.4.1.</span> <span class="nav-text">过拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欠拟合-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">欠拟合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能度量"><span class="nav-number">2.</span> <span class="nav-text">性能度量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#错误率与精度"><span class="nav-number">2.1.</span> <span class="nav-text">错误率与精度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查准率、查全率与F1"><span class="nav-number">2.2.</span> <span class="nav-text">查准率、查全率与F1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROC与AUC"><span class="nav-number">2.3.</span> <span class="nav-text">ROC与AUC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#偏差与方差"><span class="nav-number">3.</span> <span class="nav-text">偏差与方差</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#偏差方差窘境"><span class="nav-number">3.1.</span> <span class="nav-text">偏差方差窘境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bagging和Boosting"><span class="nav-number">3.2.</span> <span class="nav-text">Bagging和Boosting</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">微石</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.3.9</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.2.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: 'j0BO2jEqJeAlI7OmNgO3u6c8-gzGzoHsz',
+        appKey: 'G3iYBi1UqmHMjy8QxLeFaRpB',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
