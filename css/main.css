@@ -1888,7 +1888,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #96916e;
+  background: #4ffcff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3154,4 +3154,35 @@ ul.breadcrumb li+li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+.post-body p a,
+.post-body li a {
+  color: #0593d3;
+  border-bottom: none;
+  border-bottom: 1px solid #0593d3;
+}
+.post-body p a:hover,
+.post-body li a:hover {
+  color: #fc6423;
+  border-bottom: none;
+  border-bottom: 1px solid #fc6423;
+}
+@media screen and (min-width: 1200px) {
+  body {
+    background-image: url("https://www.xwboke.cn/api/api.php");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+  #footer a {
+    color: #eee;
+  }
+}
+.header-inner {
+  opacity: 0.8;
+}
+.main-inner {
+  background: #fff;
+  opacity: 0.8;
 }
