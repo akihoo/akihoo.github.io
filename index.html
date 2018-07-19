@@ -320,6 +320,1194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/07/19/机器学习之模型整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/机器学习之模型整理/" itemprop="url">
+                  机器学习之模型整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-19 10:44:45 / 修改时间：10:15:48" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/19/机器学习之模型整理/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/19/机器学习之模型整理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。</p>
+</blockquote>
+<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="模型总结"><a href="#模型总结" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。</li>
+<li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
+<li>损失函数：极大似然函数 ： $L_\theta\left(x\right )= \prod <em>{i=1}^{m}h</em>\theta(x^{i};\theta )^{y{i}}*(1-h_\theta(x^{i};\theta))^{1-y^{i}}$</li>
+<li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
+<li>优点：<ol>
+<li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
+<li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
+<li>实现简单，分类时计算量非常小，速度快，存储资源低</li>
+<li>可解释性强：线性回归的参数取值反应特征的强弱。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>准确性不高，容易过拟合</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须线性可分；</li>
+</ol>
+</li>
+<li><a href="https://www.zhihu.com/question/26726794" target="_blank" rel="external">适用场景</a>：<ol>
+<li>是否支持大规模数据：支持，并且有分布式实现</li>
+<li>特征维度：可以很高</li>
+<li>是否有 Online 算法:有（<a href="https://www.zhihu.com/question/28025036/answer/107297334" target="_blank" rel="external">参考自</a>）</li>
+<li>特征处理：支持数值型数据，类别型类型</li>
+<li>预估问题场景（如推荐、广告系统中的点击率预估，转化率预估等）</li>
+<li>分类场景（如用户画像中的标签预测，判断内容是否具有商业价值，判断点击作弊等</li>
+</ol>
+</li>
+<li>多分类问题：<ol>
+<li>对k个类别的分类，建立k个二元分类器</li>
+<li>将逻辑回归推广到多元逻辑回归（Multinomial Logistic Regression），模型使用softmax对概率建模，$P(y=i|x, \theta) = \dfrac{e^{\theta_i^T x}}{\sum_j^K{e^{\theta_j^T x}}}$，其中决策函数为$y^* = argmax_i P(y=i|x,\theta)$，损失函数为$J(\theta)=-\dfrac{1}{N} \sum_i^N \sum_j^K {1[y_i=j] \log{\dfrac{e^{\theta_i^T x}}{\sum {e^{\theta_k^T x}}}}}$</li>
+<li>如何选择：如果如果类别之间互斥，则使用softmax.如果类别间有联系，则选用k个二元分类器。</li>
+</ol>
+</li>
+<li>模型比较：<ol>
+<li>与线性回归比较：<ul>
+<li>相同点：都是广义线性模型</li>
+<li>不同点：<ol>
+<li>经典线性模型的优化目标函数是最小二乘，而逻辑回归则是似然函数</li>
+<li>线性回归输出连续值，分布范围在整个实数域。逻辑回归通过sigmoid函数将预测值限定为[0,1]间，输出值代表真实标记概率，因而对于这类问题来说，逻辑回归的鲁棒性比线性回归的要好。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">与svm比较</a>，<a href="https://www.zhihu.com/question/26768865" target="_blank" rel="external">答案2</a><ul>
+<li>相同点：<ol>
+<li>LR和SVM都可以处理分类问题，且一般都用于处理线性可分的二分类问题（在改进的情况下可以处理多分类问题） </li>
+</ol>
+</li>
+<li>不同点：<ol>
+<li>LR是参数模型，SVM是非参数模型。</li>
+<li>逻辑回归采用的是Logistical Loss，SVM采用的是hinge loss.这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。</li>
+<li>SVM的处理方法是只考虑Support Vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。 </li>
+<li>逻辑回归相对来说模型更简单，好理解，特别是大规模线性分类时比较方便。而SVM的理解和优化相对来说复杂一些，只需要计算与少数几个支持向量的距离,这个在进行复杂核函数计算时优势很明显,能够大大简化模型和计算。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>与感知机比较<ul>
+<li>相同点：<ol>
+<li>都是线性分类模型，原始模型都只能处理二分类问题</li>
+<li>模型的形式相似(都是在线性模型外通过联系函数映射到另外的空间，只不过感知机是符号函数，LR是sigmoid(或者说Logistic)函数)</li>
+<li>训练方法都是使用梯度下降法</li>
+</ol>
+</li>
+<li>不同点：<ol>
+<li>LR输出为仅是概率的值，而感知机输出为1/-1<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2></li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">https://www.jianshu.com/p/4a3c5e34d0f8</a></li>
+<li><a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">http://www.cnblogs.com/ModifyRong/p/7739955.html</a></li>
+<li><a href="https://akihoo.github.io/2018/06/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">https://akihoo.github.io/2018/06/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</a></li>
+<li><a href="https://www.jianshu.com/p/d792279a30bc" target="_blank" rel="external">https://www.jianshu.com/p/d792279a30bc</a></li>
+<li><a href="http://izhaoyi.top/2017/09/03/model-pre/" target="_blank" rel="external">http://izhaoyi.top/2017/09/03/model-pre/</a></li>
+<li><a href="https://www.cnblogs.com/arachis/p/LR.html" target="_blank" rel="external">https://www.cnblogs.com/arachis/p/LR.html</a></li>
+</ol>
+<h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><h2 id="模型总结-1"><a href="#模型总结-1" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：SVM是一个面向数据的分类算法，它的目标是为确定一个分类超平面，使不同的数据分隔开的同时,不同样例点到分割超平面的距离尽可能大。线性支持向量机通过最大化硬间隔得到线性分类器，当样本近似线性可分时通过最大化软间隔得到线性分类器，当样本线性不可分时可通过核函数及软间隔得到非线性分类器。</li>
+<li>基本思想：求解能正确划分训练样本并且其几何间隔最大化的超平面。</li>
+<li>间隔：<ol>
+<li>函数间隔：$y_i(w\cdot x_i+b)$ 表示分类预测的确信程度,其中$y_i$表示分类是否正确</li>
+<li>几何间隔：$\dfrac{y_i(w \cdot x_i+b)}{||w||}$,其中$||w||$为w的L2范数，几何间隔为函数间隔对超平面法向量加上一定约束，不会因为参数比例的改变而改变</li>
+</ol>
+</li>
+<li>损失函数：折叶损失（hinge loss）$L=\sum\limits_{i=1}^n(0,1-wx_iy_i)$ 常用替代损失函数，通常具有较好的数学性质，比如凸的连续函数且是0/1损失函数的上界。作用是最小化经验分类错误</li>
+<li>算法推倒：<strong>硬间隔最大化（几何间隔）—学习的对偶问题—软间隔最大化（引入松弛变量）—非线性支持向量机（核技巧）</strong></li>
+<li>为何转化对偶问题：参考<a href="https://blog.csdn.net/cppjava_/article/details/68060439" target="_blank" rel="external">[1]</a>，<a href="http://izhaoyi.top/2017/09/03/model-pre/" target="_blank" rel="external">[2]</a><ol>
+<li>对偶问题往往更加容易求解(结合拉格朗日和kkt条件)，以前新来的要分类的样本首先根据$w$和$b$做一次线性运算，然后看求的结果是大于0还是小于0,来判断正例还是负例。现在有了$\alpha_i$，我们不需要求出$w$，只需将新来的样本和训练数据中的所有样本做内积和即可。那有人会说，与前面所有的样本都做运算是不是太耗时了？其实不然，我们从KKT条件中得到，只有支持向量的$\alpha_i&gt;0$，其他情况$\alpha_i=0$。因此，我们只需求新来的样本和支持向量的内积，然后运算即可。</li>
+<li>可以很自然的引用核函数（拉格朗日表达式里面有内积，而核函数也是通过内积进行映射的）</li>
+<li>目前处理的模型严重依赖于数据集的维度d，如果维度d太高就会严重提升运算时间；</li>
+<li>对偶问题事实上把SVM从依赖d个维度转变到依赖N个数据点，考虑到在最后计算时只有支持向量才有意义，所以这个计算量实际上比N小很多。</li>
+</ol>
+</li>
+<li>为何引入核函数：<ol>
+<li>当样本在原始空间线性不可分时，可将样本从原始空间映射到一个更高维的特征空间，使得样本在这个特征空间内线性可分。</li>
+<li>在核函数给定的条件下，可利用解线性分类问题的方法求解非线性分类问题的支持向量机；学习是隐式地在特征空间进行的，不需要显式地定义特征空间和映射函数</li>
+<li>实际应用中，常依赖于领域知识直接选择核函数，其有效性通过实验验证</li>
+</ol>
+</li>
+<li>核函数性质：$K(x,y)=&lt;ϕ(x),ϕ(y)&gt;$，即在特征空间的内积等于它们在原始样本空间中通过核函数K计算的结果。</li>
+<li>常用<a href="https://akihoo.github.io/2018/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">核函数</a>有:<ol>
+<li>线性核函数：$\kappa(x,x_i) = x \cdot x_i$ 简单，速度快，但是需要线性可分</li>
+<li>多项式核函数：$\kappa(x, x_i) = ((x\cdot x_i) + 1)^d$ 比线性核拟合程度更强，知道具体的维度，但是高次容易出现数值不稳定，参数选择比较多。</li>
+<li>高斯(RBF)核函数：$\kappa(x, x_i) = exp(-\dfrac{||x - x_i||^2}{\delta^2})$ 拟合能力最强，但是要注意过拟合问题。不过只有一个参数需要调整。</li>
+<li>sigmoid核函数：$\kappa(x, x_i) = tanh(\eta&lt;x, x_i&gt; + \theta)$</li>
+</ol>
+</li>
+<li>优缺点：<ol>
+<li>优点：可实现非线性分类、可用于分类与回归，低泛化误差，易解释</li>
+<li>缺点：对参数和核函数的选择比较敏感；对大规模数据训练比较困难。</li>
+</ol>
+</li>
+<li>SMO：SMO算法是支持向量机学习的一种快速算法，其特点是不断的将原二次规划问题分解为只有两个变量的二次规划问题，并对子问题进行解析求解，直到所有变量满足KKT条件为止，这样通过启发式的方法得到原二次规划问题的最优解，因为子问题有解析解，所以每次计算子问题都很快，虽然计算子问题次数很多，但在总体上还是高效的</li>
+<li>多分类问题：<ol>
+<li>一对多方法：每一次把某个样本定为正样本，其余样本作为负样本。<ul>
+<li>优点：每个优化问题规模小，分类器少，分类速度快；</li>
+<li>缺点：每一个分类器都说它属于它那一类—分类重叠；每一个分类器都说它不是它那一类—不可分类现象。</li>
+</ul>
+</li>
+<li>一对一方法：每次选一个类的样本作正类样本，负类样本则变成只选一个类。<ul>
+<li>优点:不会出现分类重叠现象。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>应用场景：在文本分类，图像分类，生物序列分析和生物数据挖掘，手写字符识别等领域有很多的应用</li>
+<li>回归问题：目标函数：$min\bigg(\dfrac{1}{2}||w||^2_2+C\sum\mathit{l}_\epsilon\left(f\left(x_i\right)-y_i\right)\bigg)$，其中C为正则项，$\mathit{l}_\epsilon(x)$为$\epsilon$不敏感损失。<h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2></li>
+<li><a href="https://blog.csdn.net/cppjava_/article/details/68060439" target="_blank" rel="external">https://blog.csdn.net/cppjava_/article/details/68060439</a></li>
+<li><a href="https://blog.csdn.net/szlcw1/article/details/52259668" target="_blank" rel="external">https://blog.csdn.net/szlcw1/article/details/52259668</a></li>
+<li><a href="https://akihoo.github.io/2018/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/">https://akihoo.github.io/2018/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA/</a></li>
+<li><a href="http://izhaoyi.top/2017/09/03/model-pre/" target="_blank" rel="external">http://izhaoyi.top/2017/09/03/model-pre/</a></li>
+<li><a href="https://blog.csdn.net/v_july_v/article/details/7624837" target="_blank" rel="external">https://blog.csdn.net/v_july_v/article/details/7624837</a></li>
+</ol>
+<h1 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h1><h2 id="模型总结-2"><a href="#模型总结-2" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：决策树是一种分类和回归的基本模型，是一系列if-then决策规则的集合，该集合是决策树上的所有从根节点到叶节点的路径的集合。</li>
+<li>决策树的构建：<ol>
+<li>决策树的学习本质上就是从训练数据集中归纳出一组分类规则，使它与训练数据矛盾较小的同时具有较强的泛化能力。</li>
+<li>决策树的损失函数通常是正则化的极大似然函数，学习的策略是以损失函数为目标函数的最小化。</li>
+<li>由于这个最小化问题是一个NP完全问题，现实中，我们通常采用启发式算法来递归地选择最优特征及对数据集进行分割,直到所有子集基本被正确分类为止。为了使防止过拟合，还可搭配一定的剪枝策略，使模型有更好的泛化能力。</li>
+<li>总结而言，决策树构建分为三步：特征选择、模型生成、决策树的剪枝</li>
+</ol>
+</li>
+<li>节点划分（通常采用信息增益、信息增益比、基尼指数进行最优特征选择）：<ol>
+<li>熵（entropy）: $\mathrm{entropy}(D) = -\sum\limits_{i=1}^n P_i\log_2 P_i$  熵是表示随机变量不确定性的度量。熵越大，随机变量的不确定性就越大。</li>
+<li>条件熵：$\mathrm{entropy}(D,A) = \sum\limits_{i=1}^k \dfrac {D_{A_i}}{D} \log_2D_{A_i}$ 定义为X给定的条件下Y的条件概率分布的熵对X的数学期望。</li>
+<li>信息增益：$\mathrm{gain}(D,A) = \mathrm{entropy}(D) - \mathrm{entropy}(D,A)$ 特征A对训练数据集D的信息增益g（D，A），定义为集合D的经验熵H(D)与特征A给定条件下D的经验条件熵H(D|A)之差</li>
+<li>信息增益率：$\mathrm{gainrate}(D,A) = \dfrac{\mathrm{gain}(D,A)}{\mathrm{entropy}(D,A)}$ 特征A对训练数据集D的信息增益比定义为信息增益g(D,A)与训练数据集D关于特征A的值的熵Ha(D)之比</li>
+<li>基尼指数：$\mathrm{gini}(D) = \sum_{i=1}^n p_k (1-p_k)$ 基尼指数反应了从数据集D中随机抽取两个样本，其类别标记不一致的概率，因此，gini(D)越小，则数据集D的纯度越高。</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/xwchao2014/article/details/47979167" target="_blank" rel="external">常见模型</a>：<ol>
+<li>ID3：该算法是以信息论为基础，以信息熵和信息增益度为衡量标准，从而实现对数据的归纳分类。ID3算法缺点是往往偏向于选择取值较多的属性，而且不能处理具有连续值的属性，也不能处理具有缺失数据的属性。</li>
+<li>C4.5：使用的是增益率的划分方法，是ID3的一个改进，具有较高的准确率且可以处理连续属性。可以在构造树的过程中进行剪枝，能够完成对连续属性的离散化处理；能够对不完整数据进行处理。</li>
+<li>CART：使用基尼指数的划分准则；通过在每个步骤最大限度降低不纯洁度，CART能够处理孤立点以及能够对空缺值进行处理。 树划分的终止条件：1、节点达到完全纯度； 2、树的深度达到用户所要深度 3、节点中样本的数量属于用户指定的个数；</li>
+</ol>
+</li>
+<li>对缺失值的处理(以ID4.5为例)：<ol>
+<li>信息增益率将按照缺失比例进行折减</li>
+<li>缺失样本将分别进入所有子节点，缺失值样本所占比重将根据子节点样本权重来下调</li>
+</ol>
+</li>
+<li>剪枝策略：由于根据训练数据生成的决策树往往过于复杂，导致泛华能力比较弱，所以，实际的决策树学习中，会将已生成的决策树进行简化，以提高其泛华能力，这一过程叫做剪枝。<ol>
+<li>预减枝：<ol>
+<li>预剪枝即提前终止树的生长。</li>
+<li>预剪枝方式为：指定结点所包含的最小样本数目；指定树的高度或者深度；当划分节点不能带来泛化能力提升，则停止划分。（如何判断泛化能力提升提升与否？可以将一部分数据当作测试集。）</li>
+<li>特点：预剪枝使得决策树的很多分支都没有展开,这不仅降低了过拟合风险，还显著减少时间开销。但另一方面，有些分支的当前划分虽不能提升泛化性能、甚至可能导致泛化性能暂时下降，但在其基础上进行的后续划分却有可能导致性能显著提高。预剪枝基于“贪心”本质禁止这些分支展开，给预剪枝决策树带来了欠拟含的风险。</li>
+</ol>
+</li>
+<li>后剪枝：<ol>
+<li>后剪枝将在决策树构造完成后进行剪枝。剪枝的过程将依次对内部节点进行检查，判断如果将该节点下子树删除，验证集精度是否会提高。如果验证集精度提高，则进行剪枝策略。否则不变。</li>
+<li>后剪枝决策树通常比预剪枝决策树保留了更多的分支。一般情形下，后剪枝决策树的欠拟合风险很小，泛化性能往往优于预剪枝决策树。但后剪枝过程是在生成完全决策树之后进行的，并且要自底向上地对树中的所有非叶结点进行逐一考察，因此其训练时间开销比未剪枝决策树和预剪枝决策树都要大得多。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>处理连续值方法：<ol>
+<li>对连续特征进行排序$[A_1,A_2,…,A_n]$</li>
+<li>依次选取2个$A_i,A_{i-1}$取中间的一个点$a(A_{i}&lt;a&lt;A_{i-1})$，则数据集可以分为小于a与大于a两个部分（即将连续的特征离散化，可以理解为将质量特征转化为大小特征，只有大西瓜与小西瓜2种状态），计算a的信息增益率。</li>
+<li>不断循环执行(2)步骤，计算得到的最大信息增益率作为该特征的信息增益率，最大的信息增益率对应的a即为该节点分裂依据。</li>
+</ol>
+</li>
+<li>模型优缺点：<ol>
+<li>优点：<ol>
+<li>生成的决策树很直观。</li>
+<li>基本不需要预处理，不需要提前归一化，处理缺失值。</li>
+<li>可以处理多维度输出的分类问题。</li>
+<li>可以交叉验证的剪枝来选择模型，从而提高泛化能力。</li>
+<li>对于异常点的容错能力好，健壮性高。</li>
+<li>既可以处理离散值也可以处理连续值。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>决策树算法非常容易过拟合，导致泛化能力不强。可以通过设置节点最少样本数量和限制决策树深度来改进。</li>
+<li>决策树会因为样本发生一点点的改动，就会导致树结构的剧烈改变。这个可以通过集成学习之类的方法解决。</li>
+<li>寻找最优的决策树是一个NP难的问题，我们一般是通过启发式方法，容易陷入局部最优。可以通过集成学习之类的方法来改善。</li>
+<li>有些比较复杂的关系，决策树很难学习，比如异或。这个就没有办法了，一般这种关系可以换神经网络分类方法来解决。</li>
+<li>如果某些特征的样本比例过大，生成决策树容易偏向于这些特征。这个可以通过调节样本权重来改善。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.jianshu.com/p/fb97b21aeb1d" target="_blank" rel="external">https://www.jianshu.com/p/fb97b21aeb1d</a></li>
+<li><a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/">https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/</a></li>
+<li><a href="https://www.cnblogs.com/pinard/p/6053344.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6053344.html</a></li>
+</ol>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><h2 id="模型总结-3"><a href="#模型总结-3" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：基于贝叶斯定理，通过特征独立假设，计算后验概率分布的分类模型。</li>
+<li>何为朴素：利用贝叶斯定理求解联合概率P(XY)时，需要计算条件概率P(X|Y)。在计算P(X|Y)时，朴素贝叶斯做了一个很强的条件独立假设（当Y确定时，X的各个分量取值之间相互独立），即$P(X1=x1,X2=x2|Y=yk) = P(X1=x1|Y=yk)*P(X2=x2|Y=yk)$。</li>
+<li>为什么属性独立性假设在实际情况中很难成立，但朴素贝叶斯仍能取得较好的效果：<ol>
+<li>对于分类任务来说，只要各类别的条件概率排序正确、无需精准概率值即可导致正确分类；</li>
+<li>如果属性间依赖对所有类别影响相同，或依赖关系的影响能相互抵消，则属性条件独立性假设在降低计算开销的同时不会对性能产生负面影响。</li>
+</ol>
+</li>
+<li>在估计条件概率P(X|Y)时出现概率为0的情况怎么办:使用Laplace修正（Laplace修正实际上假设属性与类别均匀分布，在朴素贝叶斯学习过程种额外引入数据的先验），具体做法是对没类别下所有划分的计数加1。</li>
+<li>优缺点：<ol>
+<li>优点：<ol>
+<li>对小规模的数据表现很好，适合多分类任务，适合增量式训练。</li>
+<li>对缺失数据不太敏感，算法也比较简单，常用于文本分类。</li>
+<li>朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>对输入数据的表达形式很敏感（离散、连续，值极大极小之类的）。</li>
+<li>模型假设属性之间相互独立，这个假设在实际应用中往往是不成立的，在属性个数比较多或者属性之间相关性较大时，分类效果不好(可考虑使用半朴素贝叶斯)。</li>
+<li>需要知道先验概率，且先验概率很多时候取决于假设，假设的模型可以有很多种，因此在某些时候会由于假设的先验模型的原因导致预测效果不佳。</li>
+<li>由于我们是通过先验和数据来决定后验的概率从而决定分类，所以分类决策存在一定的错误率。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>朴素贝叶斯与LR的区别：<ol>
+<li>朴素贝叶斯是生成模型，根据已有样本进行贝叶斯估计学习出先验概率P(Y)和条件概率P(X|Y)，进而求出联合分布概率P(XY),最后利用贝叶斯定理求解P(Y|X)。</li>
+<li>而LR是判别模型，根据极大化对数似然函数直接求出条件概率P(Y|X)；</li>
+<li>朴素贝叶斯是基于很强的条件独立假设（在已知分类Y的条件下，各个特征变量取值是相互独立的），而LR则对此没有要求；朴素贝叶斯适用于数据集少的情景，而LR适用于大规模数据集。</li>
+</ol>
+</li>
+</ol>
+<h2 id="参考资料-3"><a href="#参考资料-3" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://blog.csdn.net/jingyi130705008/article/details/79464740" target="_blank" rel="external">https://blog.csdn.net/jingyi130705008/article/details/79464740</a></li>
+<li><a href="https://blog.csdn.net/qq_34896915/article/details/75040686" target="_blank" rel="external">https://blog.csdn.net/qq_34896915/article/details/75040686</a></li>
+<li><a href="https://www.cnblogs.com/pinard/p/6069267.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6069267.html</a></li>
+<li><a href="https://blog.csdn.net/sz464759898/article/details/44342923" target="_blank" rel="external">https://blog.csdn.net/sz464759898/article/details/44342923</a></li>
+</ol>
+<h1 id="kmeans"><a href="#kmeans" class="headerlink" title="kmeans"></a>kmeans</h1><ol>
+<li>简介：k近邻算法是无监督聚类算法，是基本的分类、回归算法。k-means就是把空间内点，分成K类。最大化簇间距离，最小化簇内距离。用均值来代表类中心，并用于衡量与新点的距离。</li>
+<li>有监督学习和无监督学习的区别：、<ol>
+<li>监督学习：对具有标记的训练样本进行学习，以尽可能对训练样本集外的数据进行分类预测。（LR,SVM,BP,RF,GBRT）</li>
+<li>无监督学习：对未标记的样本进行训练学习，比发现这些样本中的结构知识。(KMeans,DL)</li>
+</ol>
+</li>
+<li>基本要素：k值的选择、距离度量及分类决策规则。</li>
+<li>算法过程<ol>
+<li>初始化：随机初始化每个类别的质心</li>
+<li>计算每个点到各个质心的距离，并把点归到最近的质心的类</li>
+<li>重新计算已经得到的各个类的质心</li>
+<li>迭代2~3步，直到没有点变更所属类别，算法收敛</li>
+</ol>
+</li>
+<li>k值的选择：<ol>
+<li>依据一个合适得类簇指标，如平均直径等，只要我们假设的类簇的数目等于或者高于真实的类簇的数目时，该指标上升会很缓慢，而一旦试图得到少于真实数目的类簇时，该指标会急剧上升。</li>
+<li>首先采用层次凝聚算法决定结果的大致数目，并找到一个初始聚类，然后用迭代重定位来改进该聚类。</li>
+</ol>
+</li>
+<li>初始质心的选取：<ol>
+<li>层次聚类或者Canopy预处理，选择质心。</li>
+<li>选择批次距离尽可能远的K个点：随机地选择第一个点，或取所有点的质心作为第一个点。然后，对于每个后继初始质心，选择离已经选取过的初始质心最远的点。</li>
+</ol>
+</li>
+<li>优缺点：<ol>
+<li>优点：  <ol>
+<li>经典聚类算法，算法简单、快速</li>
+<li>处理大数据集的时候，该算法可以保证较好的伸缩性和高效率</li>
+<li>当簇近似高斯分布的时候，聚类效果不错</li>
+</ol>
+</li>
+<li>缺点:<ol>
+<li>K值是用户给定的的，在进行数据处理前，K值是未知的，不同的K值得到的结果也不一样；</li>
+<li>对初始簇中心点是敏感的</li>
+<li>不适合发现非凸形状的簇或者大小差别较大的簇</li>
+<li>特殊值、离群值对模型的影响比较大</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>距离度量：一般采用欧式距离。<ol>
+<li>为什么不用曼哈顿距离：曼哈顿距离只计算水平或垂直距离，有维度的限制。另一方面，欧氏距离可用于任何空间的距离计算问题。因为，数据点可以存在于任何空间，欧氏距离是更可行的选择。</li>
+</ol>
+</li>
+<li>停止迭代准则：达到最大迭代次数、簇中心点变化率、最小平方误差</li>
+<li>优化方法：使用kd树或者ball tree，将所有的观测实例构建成一颗kd树，之前每个聚类中心都是需要和每个观测点做依次距离计算，现在这些聚类中心根据kd树只需要计算附近的一个局部区域即可</li>
+<li>与GMM对比：<ol>
+<li>相同点：<ol>
+<li>都对初始值敏感</li>
+<li>都需要定义簇数K</li>
+</ol>
+</li>
+<li>不同点<ol>
+<li>需要计算的参数不同：k-means是簇心位置；GMM是各个高斯分布的参数</li>
+<li>计算目标参数的方法不同：k-means是计算当前簇中所有元素的位置的均值；GMM是基于概率的算法，是通过计算似然函数的最大值实现分布参数的求解的。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="参考资料-4"><a href="#参考资料-4" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">https://www.jianshu.com/p/4a3c5e34d0f8</a></li>
+<li><a href="https://akihoo.github.io/2018/07/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/">https://akihoo.github.io/2018/07/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/</a></li>
+<li><a href="https://blog.csdn.net/LuckyJune34/article/details/54668530" target="_blank" rel="external">https://blog.csdn.net/LuckyJune34/article/details/54668530</a></li>
+<li><a href="https://blog.csdn.net/loveliuzz/article/details/78783773" target="_blank" rel="external">https://blog.csdn.net/loveliuzz/article/details/78783773</a></li>
+<li><a href="https://www.cnblogs.com/nolonely/p/7309252.html" target="_blank" rel="external">https://www.cnblogs.com/nolonely/p/7309252.html</a></li>
+<li><a href="https://www.cnblogs.com/zjutzz/p/5083623.html" target="_blank" rel="external">https://www.cnblogs.com/zjutzz/p/5083623.html</a></li>
+</ol>
+<h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><h2 id="模型总结-4"><a href="#模型总结-4" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：人工神经元通过一定的结构组织起来，就可以构成人工神经元网络。最常见的神经网络一般称为多层前馈神经网络，除了输入和输出层，中间隐藏层的个数被称为神经网络的层数。BP算法是训练神经网络中最著名的算法，其本质是梯度下降和链式法则。神经元网络对信息处理的快速性和强有力的学习记忆功能是由其大规模的并行工作方式、非线性处理、网络结构的可变性等固有结构特性决定的。</li>
+<li>Backpropagation(误差逆传播)：<strong>重要</strong>需要会推导<ol>
+<li>基本思想：计算出输出与标签间的损失函数值，然后计算其相对于每个神经元的梯度，根据梯度方向更新权值。</li>
+</ol>
+</li>
+<li>误差函数：均方误差</li>
+<li>为什么引入激励函数：因为如果不用非线性激励函数，每一层都是上一层的线性函数，无论神经网络多少层，输出都是输入的线性组合，与只有一个隐藏层效果一样。相当于多层感知机了。所以引入非线性激励函数，深层网络就变得有意义了，可以逼近任意函数。</li>
+<li><a href="https://blog.csdn.net/u013146742/article/details/51986575" target="_blank" rel="external">常见的激励函数</a>：<ol>
+<li>sigmoid ( $y = (1 + \exp(-x))^{-1}$ ) ：将输出实值压缩到0-1之间。 <ol>
+<li>缺点：（输入非常大或非常小的时候）容易梯度消失；sigmoid函数是非0均值的，下一层的神经元将从上一层神经元得到的非0 均值的信号作为输入，再结合w计算梯度，始终都是正的。（不是关于原点对称）。计算exp比较耗时。</li>
+</ol>
+</li>
+<li>Tanh ( $y = {\exp(x) - \exp(-x)\over {\exp(x) + \exp(-x)}}$ ) ：Tanh 激活函数使得输出与输入的关系能保持非线性单调上升和下降关系，比sigmoid 函数延迟了饱和期（即导数接近0），对神经网路的容错性好，计算速度比sigmoid快。 </li>
+<li>Relu（修正线性单元）$y = max(0,x)$ ReLu使得网络可以自行引入稀疏性，在没做预训练情况下，以ReLu为激活的网络性能优于其它激活函数。<ol>
+<li>好处：收敛快，求梯度简单。计算复杂度低，不需要进行指数运算；具有稀疏特性（relu函数在负半区的导数为0 ，所以一旦神经元激活值进入负半区，那么梯度就会为0，也就是说这个神经元不会经历训练，即所谓的稀疏性）。</li>
+<li>缺点：ReLU的输出不是zero-centered；Dead  ReLU  Problem（神经元坏死现象）：某些神经元可能永远不会被激活，导致相应参数永远不会被更新（在负数部分，梯度为0）。产生这种现象的两个原因：参数初始化问题；learning  rate太高导致在训练过程中参数更新太大。 解决方法：采用Xavier初始化方法，以及避免将learning  rate设置太大或使用adagrad等自动调节learning  rate的算法。ReLU不会对数据做幅度压缩，所以数据的幅度会随着模型层数的增加不断扩张。</li>
+</ol>
+</li>
+<li>Leaky ReLU($f(x) = \mathbb{1}(x &lt; 0) (\alpha x) + \mathbb{1}(x&gt;=0) (x)$)：解决了神经死亡问题</li>
+<li>Relu与sigmoid对比：sigmoid反向传播求误差梯度时，求导计算量很大，而relu求导简单；对于深层网络，sigmoid反向传播时，在sigmoid接近饱和区时，变换太缓慢，导数趋0，从而无法完成深层网络的训练；Relu会使一部分神经元的输出为0，造成了网络的稀疏性，并且减少了参数的相互依存关系，缓解了过拟合问题。</li>
+<li>Sigmoid 和 ReLU 比较：sigmoid 的梯度消失问题，ReLU 的导数就不存在这样的问题，</li>
+<li><a href="https://blog.csdn.net/woaidapaopao/article/details/77806273?locationnum=9&amp;fps=1" target="_blank" rel="external">各激活函数图像可参考</a>，<a href="https://blog.csdn.net/not_guy/article/details/78749509" target="_blank" rel="external">参考2</a></li>
+</ol>
+</li>
+<li>梯度消失：这本质上是由于激活函数的选择导致的， 最简单的sigmoid函数为例，在函数的两端梯度求导结果非常小（饱和区），导致后向传播过程中由于多次用到激活函数的导数值使得整体的乘积梯度结果变得越来越小，也就出现了梯度消失的现象。 </li>
+<li>梯度爆炸：同理，出现在激活函数处在激活区，而且权重W过大的情况下。但是梯度爆炸不如梯度消失出现的机会多。 </li>
+<li>解决过拟合：<ol>
+<li>数据集增强，获取更多的数据，创建更多的数据；</li>
+<li>使用合适的模型：网络结构简单化，正则化；提前终止</li>
+<li>结合多种模型：dropout，bagging，boosting</li>
+</ol>
+</li>
+<li>dropout：在每一次迭代训练中随机的选择一定的单元进行隐藏，因此每一次迭代的模型都是不同的，每一个神经元都不能过度依赖于另一个神经元，因此增强了模型的鲁棒性。 </li>
+<li><a href="https://blog.csdn.net/chengl920828/article/details/69946881/" target="_blank" rel="external">神经网络优缺点</a>:<ol>
+<li>优点：<ol>
+<li>自学习和自适应能力强：能够通过学习自动提取输出、输出数据间的“合理规则”，并自适应的将学习内容记忆于网络的权值中。（可以利用神经网络中某一层的输出当做是数据的另一种表达，从而可以将其认为是经过神经网络学习到的特征。）</li>
+<li>有很强的非线性拟合能力，可映射任意复杂的非线性关系，而且学习规则简单，便于计算机实现。</li>
+<li>泛化能力强</li>
+<li>容错能力强：BP神经网络在其局部的或者部分的神经元受到破坏后对全局的训练结果不会造成很大的影响，也就是说即使系统在受到局部损伤时还是可以正常工作的。</li>
+</ol>
+</li>
+<li>缺陷：<ol>
+<li>随着网络层数的加深，优化函数越来越容易陷入局部最优解，并且这个“陷阱”越来越偏离真正的全局最优，利用有限数据训练的深层网络，性能还不如浅层网络。</li>
+<li>随着网络层数增加，梯度消失现象越来越严重，（一般指sigmoid函数，反向传播时，每传递一层，梯度衰减为原来的1/4。层数一多，梯度指数衰减后，底层基本接收不到有效的训练信号。）</li>
+<li>算法收敛慢</li>
+<li>网络结构不统一：网络结构的选择至今尚无一种统一而完整的理论指导，而网络的结构直接影响网络的逼近能力及推广性质。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>无监督逐层训练：预训练：每次训练一层隐结点。训练时将上一层隐结点的输出作为输入，而本层隐结点的输出作为 下一层隐结点的输入。在预训练结束后，再对整个网络进行微调训练。</li>
+</ol>
+<h2 id="参考资料-5"><a href="#参考资料-5" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://blog.csdn.net/qq_34896915/article/details/73565045" target="_blank" rel="external">https://blog.csdn.net/qq_34896915/article/details/73565045</a></li>
+<li><a href="https://blog.csdn.net/zhouhong0284/article/details/79836249" target="_blank" rel="external">https://blog.csdn.net/zhouhong0284/article/details/79836249</a></li>
+<li><a href="https://akihoo.github.io/2018/05/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8BBP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">https://akihoo.github.io/2018/05/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8BBP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</a></li>
+<li><a href="https://blog.csdn.net/xwd18280820053/article/details/76026523" target="_blank" rel="external">https://blog.csdn.net/xwd18280820053/article/details/76026523</a></li>
+<li><a href="https://blog.csdn.net/tyhj_sf/article/details/54983858" target="_blank" rel="external">https://blog.csdn.net/tyhj_sf/article/details/54983858</a></li>
+</ol>
+<h1 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><ol>
+<li>简介：集成学习的目的是通过结合多个基学习器的预测结果来改善单个学习器的泛化能力和鲁棒性。根据个体学习器的生成方式，目前的集成学习方法大致分为两大类：即个体学习器之间存在强依赖关系、必须串行生成的序列化方法，以及个体学习器间不存在强依赖关系、可同时生成的并行化方法；前者的代表就是Boosting，后者的代表是Bagging和“随机森林”（Random Forest）。</li>
+<li>分类：<ol>
+<li>Bagging：Bagging方法中每一个基学习器的数据来源，都是将整体样本和所有特征进行一种有放回的抽取。每个基学习器在“不同”的数据集中学习出一个模型，最后的预测结果通过所有基学习器共同决定。分类问题采用投票的方式，回归问题采用平均值的方式。代表：随机森林</li>
+<li>Boosting：用所有的数据去训练基学习器，每一个基学习器相互依赖，基于前面所有的学习器的结果，学习他们与真实值之间的残差，集中关注预测出错的地方，来形成一个新的学习器。是一种串行的学习方式。代表：AdaBoost、GDBT</li>
+</ol>
+</li>
+<li>Bagging和Boosting的区别：<ol>
+<li>样本选择：<ol>
+<li>Bagging： 训练集是在原始集中有放回选取的，从原始集中选出的各轮训练集之间是独立的。</li>
+<li>Boosting：每一轮的训练集不变，只是训练集中每个样例在分类器中的权重发生变化。而权值是根据上一轮的分类结果进行调整。</li>
+</ol>
+</li>
+<li>样例权重：<ol>
+<li>Bagging： 使用均匀取样，每个样例的权重相等。</li>
+<li>Boosting：根据错误率不断调整样例的权值，错误率越大则权重越大。</li>
+</ol>
+</li>
+<li>预测函数：<ol>
+<li>Bagging： 所有预测函数的权重相等。</li>
+<li>Boosting：每个弱分类器都有相应的权重，对于分类误差小的分类器会有更大的权重。</li>
+</ol>
+</li>
+<li>并行计算：<ol>
+<li>Bagging： 各个预测函数可以并行生成。</li>
+<li>Boosting：各个预测函数只能顺序生成，因为后一个模型参数需要前一轮模型的结果。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">bagging是减少variance，而boosting是减少bias</a>？<ol>
+<li>Bagging 通过再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，所以是降低模型的 variance. Bagging 比如 Random Forest 这种先天并行的算法都有这个效果。</li>
+<li>Boosting 根据基学习器表现，对训练样本进行调整，使得之前分类错误的样本后续更受关注，用改变后的样本学习下一个分类器。重复学习T个分类器，T个分类器的结果加权得到最终结果。例子比如 Adaptive Boosting.</li>
+</ol>
+</li>
+<li>优缺点：<ol>
+<li>bagging：<ol>
+<li>优点<ul>
+<li>高效(训练一个bagging集成与训练一个基学习器复杂度同阶)</li>
+<li>与Adaboost不同，bagging可以不经修改地适用于多分类以及回归问题</li>
+<li>包外估计——自助采样过程中剩余的样本可以作为验证集来对泛化性能进行“包外估计”</li>
+<li>当基学习器为决策树时，还可使用包外样本来辅助剪枝，或用于估计决策树中各结点的后验概率以辅助对零训练样本节点的处理。</li>
+<li>当基学习器为神经网络时，可使用包外样本来辅助早停。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>在某些噪音比较大的样本集上，RF模型容易陷入过拟合。</li>
+<li>取值划分比较多的特征容易对RF的决策产生更大的影响，从而影响拟合的模型的效果。 <h3 id="参考资料-6"><a href="#参考资料-6" class="headerlink" title="参考资料"></a>参考资料</h3></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/wongleetion/article/details/79748591" target="_blank" rel="external">https://blog.csdn.net/wongleetion/article/details/79748591</a></li>
+<li><a href="https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/">https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/</a></li>
+<li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">https://www.zhihu.com/question/26760839/answer/33963551</a></li>
+</ol>
+<h2 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h2><ol>
+<li>GDBT简介：gdbt是一种boosting算法，通过多轮迭代,每轮迭代产生一个弱分类器，每个分类器在上一轮分类器的残差基础上进行训练，最终组成的强分类与回归模型。</li>
+<li>GDBT部分面试总结：<a href="https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702" target="_blank" rel="external">https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702</a></li>
+<li><a href="https://blog.csdn.net/LeYOUNGER/article/details/78771791" target="_blank" rel="external">传统Boosting 与 GradientBoost</a>:<ol>
+<li>原始的Boost算法是在算法开始的时候，为每一个样本赋上一个权重值，初始的时候，大家都是一样重要的。在之后的学习过程种，增加分错的点的权重，减少分对的点的权重，这样使得某些点如果老是被分错，那么就会被“严重关注”，也就被赋上一个很高的权重。、</li>
+<li>Gradient Boost与传统的Boost的区别是，每一次的计算是为了减少上一次的残差(residual)，而为了消除残差，我们可以在残差减少的梯度(Gradient)方向上建立一个新的模型。</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/jackmcgradylee/article/details/77778001" target="_blank" rel="external">简述GBDT与XGBoost的区别</a>:<ol>
+<li>传统GBDT以CART作为基分类器，xgboost还支持线性分类器</li>
+<li>传统GBDT在优化时只用到一阶导数信息，xgboost则对代价函数进行了二阶泰勒展开，同时用到了一阶和二阶导数。</li>
+<li>xgboost在代价函数里加入了正则项，用于控制模型的复杂度。正则项里包含了树的叶子节点个数、每个叶子节点上输出的score的L2模的平方和。</li>
+<li>XGB的权重衰减:xgboost在进行完一次迭代后，会将叶子节点的权重乘上该系数，主要是为了削弱每棵树的影响，让后面有更大的学习空间。实际应用中，一般把eta设置得小一点，然后迭代次数设置得大一点。</li>
+<li>XGB支持列抽样:xgboost借鉴了随机森林的做法，支持列抽样，不仅能降低过拟合，还能减少计算，这也是xgboost异于传统gbdt的一个特性。对缺失值的处理。对于特征的值有缺失的样本，xgboost可以自动学习出它的分裂方向。</li>
+<li>xgboost工具支持并行。</li>
+</ol>
+</li>
+<li>LightGBM相对XGBoost的改进参考:<a href="https://zhuanlan.zhihu.com/p/25308051" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/25308051</a> ，<a href="http://msra.cn/zh-cn/news/blogs/2017/01/lightgbm-20170105.aspx，http://izhaoyi.top/2017/08/02/model-cmp/" target="_blank" rel="external">http://msra.cn/zh-cn/news/blogs/2017/01/lightgbm-20170105.aspx，http://izhaoyi.top/2017/08/02/model-cmp/</a></li>
+<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">为什么XGBoost要用泰勒展开，优势在哪里？</a> XGBoost使用了一阶和二阶偏导, 二阶导数有利于梯度下降的更快更准. 使用泰勒展开取得二阶倒数形式, 可以在不选定损失函数具体形式的情况下用于算法优化分析.本质上也就把损失函数的选取和模型算法优化/参数选择分开了. 这种去耦合增加了XGBoost的适用性。</li>
+</ol>
+<h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><h2 id="梯度类"><a href="#梯度类" class="headerlink" title="梯度类"></a>梯度类</h2><p>梯度类算法是求解优化问题种最常见的优化算法，梯度类算法以负梯度方向为搜索方向的，通过不断迭代逐渐逼近最优值。<br>$$\theta_i = \theta_i - \alpha\frac{\partial}{\partial\theta_i}J(\theta_0, \theta_1…, \theta_n)$$</p>
+<h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><ul>
+<li>优缺点：</li>
+</ul>
+<ol>
+<li>选择一个合理的学习速率很难。如果学习速率过小，则会导致收敛速度很慢。如果学习速率过大，那么其会阻碍收敛，即在极值点附近会振荡。</li>
+<li>模型所有的参数每次更新都是使用相同的学习速率。如果数据特征是稀疏的或者每个特征有着不同的取值统计特征与空间，那么便不能在每次更新中每个参数使用相同的学习速率，那些很少出现的特征应该使用一个相对较大的学习速率。</li>
+<li>初值依赖，容易陷入那些局部最优点中。<h3 id="批量梯度下降-Batch-graduebt-descent"><a href="#批量梯度下降-Batch-graduebt-descent" class="headerlink" title="批量梯度下降(Batch graduebt descent)"></a>批量梯度下降(Batch graduebt descent)</h3>批量梯度下降算法使用整个训练集计算目标函数的梯度并更新参数θ,因为每更新一次参数就需要计算整个数据集，所以批量梯度下降算法十分缓慢而且难以存放在内存中计算，更致命的是，使用批量梯度下降的算法无法在线更新。<h3 id="随机梯度下降-Stochatic-gradient-decent，-SGD"><a href="#随机梯度下降-Stochatic-gradient-decent，-SGD" class="headerlink" title="随机梯度下降(Stochatic gradient decent， SGD)"></a>随机梯度下降(Stochatic gradient decent， SGD)</h3>与批量梯度下降方法不同，随机梯度下降方法一次只使用一个样本进行目标函数梯度计算，SGD计算非常快并且适合线上更新模型。但是，由于随机梯度下降法一次迭代一个样本，导致迭代方向变化很大，不能很快的收敛到局部最优解。<h3 id="小批量梯度下降法（Mini-batch-Gradient-Descent）"><a href="#小批量梯度下降法（Mini-batch-Gradient-Descent）" class="headerlink" title="小批量梯度下降法（Mini-batch Gradient Descent）"></a>小批量梯度下降法（Mini-batch Gradient Descent）</h3>小批量梯度下降结合了批量梯度下降和随机梯度下降的优点，它一次以小批量的训练数据计算目标函数的权重并更新参数。这个算法比SGD增加了一次更新使用的训练数据量，使得目标函数收敛得更加平稳；可以使用矩阵操作对每批数据进行计算，大大提升了算法的效率。<h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3>SGD方法的一个缺点是其更新方向完全依赖于当前batch计算出的梯度，因而十分不稳定。Momentum算法会观察历史梯度$v_{t−1}$，若当前梯度的方向与历史梯度一致（表明当前样本不太可能为异常点），则会增强这个方向的梯度，若当前梯度与历史梯方向不一致，则梯度会衰减。类似于动量概念。这样一来，可以在一定程度上增加稳定性，从而学习地更快，并且还有一定摆脱局部最优的能力：<br>$$v_{t} = \gamma \cdot v_{t-1}  + \alpha \cdot \triangledown_\Theta J(\Theta )$$<br>$$\Theta = \Theta-v_{t}$$</li>
+</ol>
+<h3 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h3><p>Adagrad算法能够在训练中自动的对learning rate进行调整，对于出现频率较低参数采用较大的α更新；相反，对于出现频率较高的参数采用较小的α更新。因此，Adagrad非常适合处理稀疏数据。</p>
+<h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>Adam(Adaptive Moment Estimation)是另一种自适应学习率的方法。它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。Adam的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。</p>
+<h3 id="参考资料-7"><a href="#参考资料-7" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://www.cnblogs.com/pinard/p/5970503.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/5970503.html</a></li>
+<li><a href="https://blog.csdn.net/bupt_wx/article/details/52761751" target="_blank" rel="external">https://blog.csdn.net/bupt_wx/article/details/52761751</a></li>
+<li><a href="https://blog.csdn.net/u010089444/article/details/76725843" target="_blank" rel="external">https://blog.csdn.net/u010089444/article/details/76725843</a></li>
+</ol>
+<h2 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h2><p>牛顿法迭代公式为：<br>$$x_{n+1}=x_{n}-\frac{\nabla f(x_n)}{\nabla^2 f(x_n)}$$</p>
+<ol>
+<li>简介牛顿法用目标函数的二阶泰勒展开近似该目标函数，通过求解这个二次函数的极小值来求解凸优化的搜索方向。</li>
+<li>优缺点：<ol>
+<li>优点从：收敛速度快。从几何上说，牛顿法就是用一个二次曲面去拟合你当前所处位置的局部曲面，而梯度下降法是用一个平面去拟合当前的局部曲面，通常情况下，二次曲面的拟合会比平面更好，所以牛顿法选择的下降路径会更符合真实的最优下降路径</li>
+<li>缺点：牛顿法每一步都需要求解目标函数的Hessian矩阵的逆矩阵，计算比较复杂。（改进：拟牛顿法）</li>
+</ol>
+</li>
+</ol>
+<h3 id="参考资料-8"><a href="#参考资料-8" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://blog.csdn.net/wtq1993/article/details/51607040" target="_blank" rel="external">https://blog.csdn.net/wtq1993/article/details/51607040</a></li>
+<li><a href="https://www.jianshu.com/p/f00715396c7b" target="_blank" rel="external">https://www.jianshu.com/p/f00715396c7b</a></li>
+</ol>
+<h2 id="拟牛顿法"><a href="#拟牛顿法" class="headerlink" title="拟牛顿法"></a>拟牛顿法</h2><p>拟牛顿法的本质思想是改善牛顿法每次需要求解复杂的Hessian矩阵的逆矩阵的缺陷，它使用正定矩阵来近似Hessian矩阵的逆，从而简化了运算的复杂度。</p>
+<h2 id="重要知识点"><a href="#重要知识点" class="headerlink" title="重要知识点"></a>重要知识点</h2><ol>
+<li><a href="http://blog.sina.com.cn/s/blog_1442877660102wru5.html" target="_blank" rel="external">牛顿法和梯度下降法有什么不同</a><ol>
+<li>梯度下降法用目标函数的一阶偏导、以负梯度方向作为搜索方向，只考虑目标函数在迭代点的局部性质；</li>
+<li>牛顿法同时考虑了目标函数的一、二阶偏导数，考虑了梯度变化趋势，因而能更合适的确定搜索方向加快收敛，但牛顿法也存在以下缺点：1)对目标函数有严格要求，必须有连续的一、二阶偏导数，海森矩阵必须正定；2)计算量大，除梯度外，还需计算二阶偏导矩阵及其逆矩阵。</li>
+</ol>
+</li>
+<li><a href="https://ask.julyedu.com/question/85251" target="_blank" rel="external">梯度下降法找到的一定是下降最快的方向么？ </a><ol>
+<li>梯度下降法并不是下降最快的方向，它只是目标函数在当前的点的切平面（当然高维问题不能叫平面）上下降最快的方向。在practical implementation中，牛顿方向（考虑海森矩阵）才一般被认为是下降最快的方向，可以达到superlinear的收敛速度。</li>
+</ol>
+</li>
+</ol>
+<h1 id="机器学习基础"><a href="#机器学习基础" class="headerlink" title="机器学习基础"></a>机器学习基础</h1><h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ol>
+<li>特征选择和降维<ol>
+<li>特征选择：原有特征选择出子集，不改变原来的特征空间，包括以下方法：<ol>
+<li>过滤式（Filter方法）：过滤式方法先对数据集进行特征选择，然后再训练学习器，特征选择过程与后续学习器无关</li>
+<li>包裹式（Wrapper方法）：包裹式特征选择直接把最终将要使用的学习器的性能作为特征子集的评价准则。</li>
+<li>嵌入式（Embedded方法）：在学习器训练过程中自动地进行了特征选择。主要方法：正则化</li>
+</ol>
+</li>
+<li>降维：将原有的特征重组成为包含信息更多的特征，改变了原有的特征空间。主要包括：<ol>
+<li>主成分分析算法（PCA）：PCA是最常用的线性降维方法，它的目标是通过某种线性投影，将高维的数据映射到低维的空间中表示，并期望在所投影的维度上数据的方差最大，以此使用较少的数据维度，同时保留住较多的原数据点的特性。</li>
+<li>LDA：LDA是为了使得降维后的数据点尽可能地容易被区分，即同类的数据点尽可能的接近（within class），不同类的数据点尽可能的分开（between class）</li>
+<li>局部线性嵌入 （LLE）：是一种非线性降维算法，它能够使降维后的数据较好地保持原有 流形结构 。</li>
+<li>Laplacian Eigenmaps 拉普拉斯特征映射：它的直观思想是希望相互间有关系的点（在图中相连的点）在降维后的空间中尽可能的靠近。Laplacian Eigenmaps可以反映出数据内在的流形结构。</li>
+<li>参考资料：<a href="http://blog.csdn.net/xbinworld?viewmode=contents" target="_blank" rel="external">http://blog.csdn.net/xbinworld?viewmode=contents</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>过拟合：模型在训练集表现好，在真实数据表现不好，即模型的泛化能力不够。从另外一个方面来讲，模型在达到经验损失最小的时候，模型复杂度较高，结构风险没有达到最优。可以通过以下方式解决：<ol>
+<li>降维、特征选择</li>
+<li>正则化</li>
+<li>早停</li>
+<li>增加训练样本</li>
+<li>交叉验证</li>
+<li>dropout</li>
+</ol>
+</li>
+<li><a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%AD%A3%E5%88%99%E5%8C%96%E4%BD%9C%E7%94%A8/">正则化</a>：正则化是在模型求解目标函数时引入约束项，用于控制模型的复杂度。换种说法：正则化等价于结构风险最小化，通过在经验风险后面加上表示模型复杂度的正则化项或惩罚项，达到选择经验风险和结构风险都较小的模型的目的。比较常用的是L1正则与L2正则。<ol>
+<li>L1 与 L2 正则的区别:<ol>
+<li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
+<li>L2正则假设参数的先验分布是Gaussian分布，可以保证模型的稳定性，也就是参数的值不会太大或太小</li>
+<li>在实际使用中，如果特征是高维稀疏的，则使用L1正则；如果特征是低维稠密的，则使用L2正则。</li>
+</ol>
+</li>
+<li>为何L1产生稀疏特征：L1和L2都是规则化的方式，我们将权值参数以L1或者L2的方式放到代价函数里面去。然后模型就会尝试去最小化这些权值参数。而这个最小化就像一个下坡的过程，L1和L2的差别就在于这个“坡”不同，如下图：L1就是按绝对值函数的“坡”下降的，而L2是按二次函数的“坡”下降。所以实际上在0附近，L1的下降速度比L2的下降速度要快。所以会非常快得降到0。因此L1偏向稀疏特征（可筛选出重要特征）。</li>
+</ol>
+</li>
+<li>有监督学习和无监督学习：<ol>
+<li>有监督学习：对具有概念标记（分类）的训练样本进行学习，以尽可能对训练样本集外的数据进行标记（分类）预测。如：决策树、神经网络、线性回归等。</li>
+<li>无监督学习：对没有概念标记（分类）的训练样本进行学习，以发现训练样本集中的结构性知识。这里，所有的标记（分类）是未知的。因此，训练样本的岐义性高。聚类就是典型的无监督学习。</li>
+</ol>
+</li>
+<li><a href="https://www.cnblogs.com/zeze/p/7047630.html" target="_blank" rel="external">判别模型与生成模型</a>：<ol>
+<li>区别：<ol>
+<li>判别模型：寻找不同类别之间的最优分类面，反映的是异类数据之间的差异，估计的是条件概率分布: $P(y|x)$。</li>
+<li>生成模型：对后验概率建模，从统计的角度表示数据的分布情况，能够反映同类数据本身的相似度，估计的是联合概率分布（joint probability distribution: P(x, y)</li>
+</ol>
+</li>
+<li>优缺点：<ol>
+<li>判别模型：<ol>
+<li>优点：<ol>
+<li>分类边界更灵活，比使用纯概率方法或生产模型得到的更高级。</li>
+<li>能清晰的分辨出多类或某一类与其他类之间的差异特征</li>
+<li>在聚类、viewpoint changes, partial occlusion and scale variations中的效果较好</li>
+<li>适用于较多类别的识别</li>
+<li>判别模型的性能比生成模型要简单，比较容易学习</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>不能反映训练数据本身的特性。能力有限，可以告诉你的是1还是2，但没有办法把整个场景描述出来。</li>
+<li>黑盒操作: 变量间的关系不清楚，不可视</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>生成模型：<ol>
+<li>优点：<ol>
+<li>实际上带的信息要比判别模型丰富</li>
+<li>研究单类问题比判别模型灵活性强</li>
+<li>模型可以通过增量学习得到</li>
+<li>能用于数据不完整（missing data）情况</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>学习和计算过程比较复杂</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>常见模型：<ol>
+<li>判别模型： 线性回归、对数回归、线性判别分析、支持向量机、 boosting、条件随机场、神经网络等</li>
+<li>生成模型：隐马尔科夫模型、朴素贝叶斯模型、高斯混合模型、 LDA</li>
+</ol>
+</li>
+</ol>
+</li>
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/07/16/C++Python字符串处理合集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/16/C++Python字符串处理合集/" itemprop="url">
+                  C++Python字符串处理合集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-16 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-16T10:44:45+08:00">2018-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-18 09:49:10" itemprop="dateModified" datetime="2018-07-18T09:49:10+08:00">2018-07-18</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/16/C++Python字符串处理合集/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/16/C++Python字符串处理合集/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="char"><a href="#char" class="headerlink" title="char"></a>char</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> a,b[<span class="number">10</span>]; <span class="comment">//定义字符变量a与字符数组b</span></div><div class="line"><span class="keyword">char</span> c[]=<span class="string">"hello,world"</span>,d[]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//字符数组的初始化，未指明数组长度，且数组中没有终止符，数组末尾将生成终止符\0，代表字符串结束,此时sizeof=strlen+1</span></div><div class="line"><span class="keyword">char</span> e[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>&#125;; <span class="comment">//初始化数据小于指定长度，剩余部分自动填充终止符</span></div><div class="line"><span class="keyword">char</span> f[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//初始化数据大于指定长度，超过部分将被丢弃，此时数组中不含终止符，可能回造成不可预期的后果</span></div></pre></td></tr></table></figure>
+<h2 id="长度计算"><a href="#长度计算" class="headerlink" title="长度计算"></a>长度计算</h2><ol>
+<li>strlen：strlen函数只计算可见的字符，从字符串开头到第一个终止符为止</li>
+<li>sizeof：计算整个数组长度</li>
+</ol>
+<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><h3 id="strcmp-st1-st2"><a href="#strcmp-st1-st2" class="headerlink" title="strcmp(st1,st2)"></a>strcmp(st1,st2)</h3><p>比较2个字符串，设这两个字符串为str1，str2：</p>
+<ol>
+<li>若str1==str2，则返回零； </li>
+<li>若str1 &gt; str2，则返回正数； </li>
+<li>若str1&lt; str2，则返回负数。</li>
+<li>==,&gt;,&lt;,是通过比较对应位置字符的ASCII码大小实现。<h3 id="strncmp-st1-st2-n"><a href="#strncmp-st1-st2-n" class="headerlink" title="strncmp(st1,st2,n)"></a>strncmp(st1,st2,n)</h3>把st1,st2的前n个进行比较。  </li>
+</ol>
+<h2 id="附加"><a href="#附加" class="headerlink" title="附加"></a>附加</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">strcat</span>(st1,st2); <span class="comment">//st1,st2所指内存区域不可以重叠,且st1必须有足够的空间来容纳st2的字符串。</span></div><div class="line">返回指向st1的指针。</div><div class="line"><span class="built_in">strncat</span>(st1,st2,n); <span class="comment">//n表示连接上st2的前n个给st1，在最后不要加'\0'。</span></div></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/smf0504/article/details/52055971" target="_blank" rel="external">C\C++中strcat（）函数</a></p>
+<h2 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">strcpy</span>(st1,st2);  <span class="comment">//定义函数：char *strcpy(char *dest, const char *src);strcpy()会将参数src 字符串拷贝至参数dest 所指的地址。返回参数dest 的字符串起始地址。</span></div><div class="line"><span class="comment">//如果参数 dest 所指的内存空间不够大，可能会造成缓冲溢出(buffer Overflow)的错误情况，在编写程序时请特别留意，或者用strncpy()来取代。</span></div><div class="line"></div><div class="line"><span class="built_in">strncpy</span>(st1,st2,n); <span class="comment">//n表示复制st2的前n个给st1，在最后要加'\0'。</span></div></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/okawari_richi/article/details/57411796" target="_blank" rel="external">strcpy源码详解</a></p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">where = <span class="built_in">strchr</span>(st,ch) <span class="comment">//查找字符，查找字符串s中首次出现字符c的位置,返回首次出现c的位置的指针，如果s中不存在c则返回NULL。</span></div><div class="line">where = <span class="built_in">strspn</span>(st1,st2); <span class="comment">//查找字符串。strspn() 从参数 st1 字符串的开头计算连续的字符，而这些字符都完全是 st2 所指字符串中的字符。简单的说，若 strspn() 返回的数值为n，则代表字符串 st1 开头连续有 n 个字符都是属于字符串 st2 内的字符。  </span></div><div class="line"><span class="comment">//返回值：返回字符串 st1 开头连续包含字符串 st2 内的字符数目。所以，如果 st1 所包含的字符都属于 st2，那么返回 st1 的长度；如果 st1 的第一个字符不属于 st2，那么返回 0。</span></div><div class="line">where = <span class="built_in">strstr</span>(st1,st2);  <span class="comment">//strstr(str1,str2) 函数用于判断字符串str2是否是str1的子串。如果是，则该函数返回str2在str1中首次出现的地址；否则，返回NULL。</span></div></pre></td></tr></table></figure>
+<h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><p>string是C++标准库的一个重要的部分，想使用string首先要在头文件当中加入&lt; string &gt; 。</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">string st1(st2),st3=st4,st5("hello"),st5="hello",st6=string(10,'c'),st7(10,'c');//拷贝初始化</div><div class="line"></div><div class="line"><span class="comment">//通过字符数组初始化</span></div><div class="line"><span class="keyword">char</span> cs[]=<span class="string">"HelloWorld"</span>;</div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">st8</span><span class="params">(cs)</span></span>;<span class="comment">//复制字符串cs内容</span></div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">st9</span><span class="params">(cs,n)</span></span>;<span class="comment">//复制字符串cs前n个字符</span></div><div class="line"></div><div class="line"><span class="comment">//通过string初始化</span></div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">st10</span><span class="params">(st11,n)</span></span>;<span class="comment">//复制字符串st11第n位到结尾的字符</span></div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">st12</span><span class="params">(st11,n1,n2)</span></span>;<span class="comment">//从st11[n1]，向后拷贝n2个字符</span></div></pre></td></tr></table></figure>
+<h2 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">s.substr(pos1,n)<span class="comment">//返回字符串位置为pos1后面的n个字符组成的串</span></div><div class="line">s.substr(pos1)<span class="comment">//返回字符串位置为pos1到结尾的串</span></div></pre></td></tr></table></figure>
+<p>注意substr没有迭代器作为参数的操作</p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>insert()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//s.insert(pos,str)//在s的pos位置插入str</span></div><div class="line"><span class="comment">//s.insert(pos,str,a,n)在s的pos位置插入str中插入位置a到后面的n个字符</span></div><div class="line"><span class="comment">//s.insert(pos,cstr,n)//在pos位置插入cstr字符串从开始到后面的n个字符</span></div><div class="line"><span class="comment">//s.insert(pos,cstr)在s的pos位置插入cstr</span></div><div class="line"><span class="comment">//s.insert(pos,n,ch)在s.pos位置上面插入n个ch</span></div><div class="line"><span class="comment">//s.insert(s.it,ch)在s的it指向位置前面插入一个字符ch，返回新插入的位置的迭代器</span></div><div class="line"><span class="comment">//s.insert(s.it,n,ch)//在s的it所指向位置的前面插入n个ch</span></div><div class="line"><span class="comment">//s.insert(it,str.ita,str.itb)在it所指向的位置的前面插入[ita,itb)的字符串</span></div></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>erase()</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">str.erase (<span class="number">10</span>,<span class="number">8</span>); <span class="comment">//直接指定删除的字符串位置第十个后面的8个字符</span></div><div class="line">str.erase (str.begin()+<span class="number">9</span>);  <span class="comment">//删除迭代器指向的字符</span></div><div class="line">str.erase (str.begin()+<span class="number">5</span>, str.end()<span class="number">-9</span>);  <span class="comment">//删除迭代器范围的字符</span></div></pre></td></tr></table></figure>
+<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><h3 id=""><a href="#" class="headerlink" title="+="></a>+=</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">st1=st2+st3</div></pre></td></tr></table></figure>
+<h3 id="append"><a href="#append" class="headerlink" title="append"></a>append</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接追加一个str2的字符串</span></div><div class="line">str.append(str2);</div><div class="line"><span class="comment">//后面追加str3第6个字符开始的3个字符串</span></div><div class="line">str.append(str3,<span class="number">6</span>,<span class="number">3</span>);</div><div class="line"><span class="comment">//追加字符串形参的前5个字符</span></div><div class="line">str.append(<span class="string">"dots are cool"</span>,<span class="number">5</span>);</div><div class="line"><span class="comment">//直接添加</span></div><div class="line">str.append(<span class="string">"here: "</span>);</div><div class="line"><span class="comment">//添加10个'.'</span></div><div class="line">str.append(<span class="number">10u</span>,<span class="string">'.'</span>);</div><div class="line"><span class="comment">//添加str3迭代器范围的字符串</span></div><div class="line">str.append(str3.begin()+<span class="number">8</span>,str3.end());</div></pre></td></tr></table></figure>
+<h2 id="替换-replace"><a href="#替换-replace" class="headerlink" title="替换(replace())"></a>替换(replace())</h2><p>支持整数寻址或迭代器<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">str.replace(pos1,n1,str3,pos2,n2);<span class="comment">//str中第pos1个字符以及后面的n1个字符用str3的第pos2个字符以及后面的n2个字符代替，pos与n可省略</span></div><div class="line">str.replace(it1,it2,str4);<span class="comment">//可使用迭代器</span></div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">eg:</span></div><div class="line"><span class="comment">str.replace(str.begin()+8,str.begin()+14,"is coolness",7);</span></div><div class="line"><span class="comment">str.replace(8,6,"a shorty",7);</span></div><div class="line"><span class="comment">*/</span></div></pre></td></tr></table></figure></p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><p>assign,可使用整数与迭代器寻址</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str.assign(str1,pos1,n1);<span class="comment">//str1中第pos1个字符以及后面的n1个字符赋值给str，pos与n可省略</span></div><div class="line">str.assign(it1,it2);<span class="comment">//可使用迭代器,将迭代器范围内赋值给str</span></div></pre></td></tr></table></figure>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>find函数主要是查找一个字符串是否在调用的字符串中出现过，查找成功时返回所在位置，失败返回string::npos的值。rfind作用与find类似，但是rfind为从后往前查找。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str.find(str1, pos, n)<span class="comment">//str中pos位置开始，查找str1前n个字符，pos与n默认可省略</span></div><div class="line"><span class="comment">// eg. found=str.find("needles are small",found+1,6);</span></div></pre></td></tr></table></figure></p>
+<h3 id="find-…-of函数"><a href="#find-…-of函数" class="headerlink" title="find_….of函数:"></a>find_….of函数:</h3><ol>
+<li>find_first_of(args) 查找args中任何一个字符第一次出现的位置</li>
+<li>find_last_of(args) 最后一个出现的位置</li>
+<li>find_fist_not_of(args) 查找第一个不在args中的字符</li>
+<li>find_last_not_of 查找最后一个不在args中出现的字符</li>
+</ol>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><p>compare函数类似strcmp函数,如果两个字符串相等，那么返回0，调用对象大于参数返回1，小于返回-1。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">str.compare(pos1,n1,str3,pos2,n2);<span class="comment">//str中第pos1个字符以及后面的n1个字符与str3的第pos2个字符以及后面的n2个字符比较，pos与n默认可省略</span></div><div class="line"><span class="comment">// eg. str1.compare(6,5,"apple") == 0</span></div></pre></td></tr></table></figure></p>
+<p>也可直接使用 &gt;,&lt;，== 进行比较。</p>
+<h2 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">to_string(val)</td>
+<td>把val转换成string</td>
+</tr>
+<tr>
+<td style="text-align:center">stoi(s,p,b)</td>
+<td>把字符串s从p开始转换成b进制的int</td>
+</tr>
+<tr>
+<td style="text-align:center">stol(s,p,b)</td>
+<td>long</td>
+</tr>
+<tr>
+<td style="text-align:center">stoul(s,p,b)</td>
+<td>unsigned long</td>
+</tr>
+<tr>
+<td style="text-align:center">stoll(s,p,b)</td>
+<td>long long</td>
+</tr>
+<tr>
+<td style="text-align:center">stoull(s,p,b)</td>
+<td>unsigned long long</td>
+</tr>
+<tr>
+<td style="text-align:center">stof(s,p)</td>
+<td>float</td>
+</tr>
+<tr>
+<td style="text-align:center">stod(s,p)</td>
+<td>double</td>
+</tr>
+<tr>
+<td style="text-align:center">stold(s,p)</td>
+<td>long double</td>
+</tr>
+</tbody>
+</table>
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><p>明确：对字符串的操作方法都不会改变原来字符串的值</p>
+<ol>
+<li>去掉空格和特殊符号</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">name.strip()  <span class="comment">#去掉空格和换行符</span></div><div class="line">name.strip(<span class="string">'xx'</span>) <span class="comment"># 去掉某个字符串</span></div><div class="line">name.lstrip()  <span class="comment">#去掉左边的空格和换行符</span></div><div class="line">name.rstrip()  <span class="comment">#去掉右边的空格和换行符</span></div></pre></td></tr></table></figure>
+<ol start="2">
+<li>字符串的搜索和替换</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">name.count(<span class="string">'x'</span>)  <span class="comment">#查找某个字符在字符串里面出现的次数</span></div><div class="line">name.capitalize()  <span class="comment">#首字母大写</span></div><div class="line">name.center(n,<span class="string">'-'</span>)  <span class="comment"># 把字符串放中间，两边用- 补齐</span></div><div class="line">name.find(<span class="string">'x'</span>)   <span class="comment">#找到这个字符返回下标，多个时返回第一个；不存在的字符返回-1</span></div><div class="line">name.index(<span class="string">'x'</span>) <span class="comment">#找到这个字符返回下标，多个时返回第一个；不存在的字符报错</span></div><div class="line">name.replace(oldstr, newstr) <span class="comment"># 字符串替换</span></div><div class="line">name.format() <span class="comment">#字符串格式化</span></div><div class="line">name.format_map(d) <span class="comment"># 字符串格式化，传进去的是一个字典</span></div></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>字符串的测试和替换函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">S.startswith(prefix[,start[,end]]) </div><div class="line"><span class="comment">#是否以prefix开头 </span></div><div class="line">S.endswith(suffix[,start[,end]]) </div><div class="line"><span class="comment">#以suffix结尾 </span></div><div class="line">S.isalnum() </div><div class="line"><span class="comment">#是否全是字母和数字，并至少有一个字符 </span></div><div class="line">S.isalpha() <span class="comment">#是否全是字母，并至少有一个字符 </span></div><div class="line">S.isdigit() <span class="comment">#是否全是数字，并至少有一个字符 </span></div><div class="line">S.isspace() <span class="comment">#是否全是空白字符，并至少有一个字符 </span></div><div class="line">S.islower() <span class="comment">#S中的字母是否全是小写 </span></div><div class="line">S.isupper() <span class="comment">#S中的字母是否便是大写 </span></div><div class="line">S.istitle() <span class="comment">#S是否是首字母大写的</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串的分割</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">name.split()  <span class="comment">#默认是按照空格分割</span></div><div class="line">name.split(<span class="string">','</span>)   <span class="comment">#按照逗号分割</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>连接字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">','</span>.join(slit) <span class="comment">#用逗号连接slit 变成一个字符串，slit 可以是字符，列表，字典（可迭代的对象）int 类型不能被连接</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://blog.csdn.net/tengfei461807914/article/details/52203202" target="_blank" rel="external">https://blog.csdn.net/tengfei461807914/article/details/52203202</a></li>
+<li><a href="https://www.cnblogs.com/lidabo/p/3487043.html" target="_blank" rel="external">https://www.cnblogs.com/lidabo/p/3487043.html</a></li>
+<li><a href="https://www.cnblogs.com/chendai21/p/8137285.html" target="_blank" rel="external">https://www.cnblogs.com/chendai21/p/8137285.html</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/07/15/git版本回退/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/15/git版本回退/" itemprop="url">
+                  git版本回退
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-15 16:25:07" itemprop="dateCreated datePublished" datetime="2018-07-15T16:25:07+08:00">2018-07-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-16 10:00:13" itemprop="dateModified" datetime="2018-07-16T10:00:13+08:00">2018-07-16</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/15/git版本回退/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/15/git版本回退/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>由于多电脑使用一个版本仓库，经常出现版本冲突的情况，错误提示<code>error: Your local changes to &#39;example.py&#39; would be overwritten by merge. Aborting.Please, commit your changes or stash them before you can merge.</code>，然后本次我的错误commit导致问题一直没解决，于是直接使用版本回退功能解决问题。</p>
+</blockquote>
+<h1 id="版本回退-git-reset"><a href="#版本回退-git-reset" class="headerlink" title="版本回退 git reset"></a>版本回退 <code>git reset</code></h1><p>使用<code>git reset commit_id</code>可以将版本号回到指定版本，<code>commit_id</code>如何指定？可以使用以下方法：</p>
+<h2 id="commit-id"><a href="#commit-id" class="headerlink" title="commit_id"></a><code>commit_id</code></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><code>git log</code></h3><p>通过用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。此方法一半适用与比较回退版本较少情况，因为<code>git bash</code>里输出的信息太多，不方便查看。</p>
+<p><code>git log -n</code>可查看最近n此提交，<code>git log</code>状态下按q键可退出。</p>
+<h3 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a><code>HEAD</code></h3><p>在<code>git</code>中，<code>HEAD</code>指向当前版本，上一版本<code>HEAD^</code>，上上版本<code>HEAD^^</code>，依次类推，也可使用<code>HEAD~n</code>来回退n个版本。</p>
+<h3 id="git-GUI"><a href="#git-GUI" class="headerlink" title="git GUI"></a><code>git GUI</code></h3><p>可在<code>git GUI</code>中点击菜单上的 repository – visualize master’s History/visualize all branch History 查看历史版本。</p>
+<h2 id="git-reset参数"><a href="#git-reset参数" class="headerlink" title="git reset参数"></a><code>git reset</code>参数</h2><p><code>git reset</code>参数在<code>git reset</code>后输入，比如<code>git reset --hard commit_id</code></p>
+<h3 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a><code>mixed</code></h3><p>将本地版本库的头指针全部重置到指定版本，且会重置暂存区，即这次提交之后的所有变更都移动到未暂存阶段</p>
+<h3 id="soft"><a href="#soft" class="headerlink" title="soft"></a><code>soft</code></h3><p>软回退表示将本地版本库的头指针全部重置到指定版本，且将这次提交之后的所有变更都移动到暂存区</p>
+<h3 id="hard"><a href="#hard" class="headerlink" title="hard"></a><code>hard</code></h3><p>将本地版本库的头指针全部重置到指定版本，也会重置暂存区，并且会将工作区代码也回退到这个版本</p>
+<h2 id="追加提交"><a href="#追加提交" class="headerlink" title="追加提交"></a>追加提交</h2><p>回退版本之后可以使用<code>git commit --amend</code>进行追加提交，优点是不会产生新的<code>commit-id</code>，</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/07/13/leetcode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1505,527 +2693,11 @@ tags:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/06/30/机器学习模型之逻辑回归/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/30/机器学习模型之逻辑回归/" itemprop="url">
-                  机器学习模型之逻辑回归
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-30 10:10:06" itemprop="dateCreated datePublished" datetime="2018-06-30T10:10:06+08:00">2018-06-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-12 14:40:44" itemprop="dateModified" datetime="2018-07-12T14:40:44+08:00">2018-07-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/30/机器学习模型之逻辑回归/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/30/机器学习模型之逻辑回归/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><p>如何使用线型模型进行分类操作？我们希望可以使用一个映射函数将线型模型的回归值用于分类问题（即只输出两个类别）。最简单的映射函数便是阶跃函数，但阶跃函数在x=0处不连续，因此需要另一个函数替代。</p>
-<h1 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h1><p>$$y = \dfrac{1}{1 + e^{-x}}$$<br>把 $ (-\infty, \infty)$ 的取值范围(用$x$表示)映射到$(0,1)$范围内，同时连续且任意阶可导。</p>
-<blockquote>
-<p>拓展：为什么要使用sigmoid函数做激活函数？：<a href="https://blog.csdn.net/cloud_xiaobai/article/details/72152480" target="_blank" rel="external">https://blog.csdn.net/cloud_xiaobai/article/details/72152480</a></p>
-</blockquote>
-<p>将sigmoid函数代入线型回归方程中<br>$$y=\omega^Tx+b$$<br>可得：<br>$$y=\dfrac{1}{1 + e^{-(\omega^Tx+b)}}$$<br>上式可变为<br>$$\ln{\frac{y}{1-y}}=\omega^Tx+b$$<br>若将$y$视为样本$x$作为正例的可能性，则$1-y$是其反例可能性，两者的比值称为“几率”（odds），反映了$x$作为正例的相对可能性。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/30/机器学习模型之逻辑回归/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/06/26/机器学习之高斯混合模型/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/机器学习之高斯混合模型/" itemprop="url">
-                  机器学习之高斯混合模型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-26 21:38:32" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-13 10:24:39" itemprop="dateModified" datetime="2018-07-13T10:24:39+08:00">2018-07-13</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/26/机器学习之高斯混合模型/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/26/机器学习之高斯混合模型/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。</p>
-<p>参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。</p>
-<p>最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
-<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p>高斯分布（Gaussian distribution）有时也被称为正态分布（normal distribution），是一种在自然界大量的存在的、最为常见的分布形式。<br>其概率密度函数为：<br>$$f\left( x\right) =\dfrac {1}{\sqrt {2\pi }\sigma }\exp \left( -\dfrac {\left( x-\mu \right)^2 }{2\sigma ^{2}}\right)$$<br>如果随机变量服从的正态分布，记作$X\sim N\left( \mu ,\sigma ^{2}\right)$</p>
-<p>可见高斯分布包含两个参数，参数μ表示均值，参数σ表示标准差。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/26/机器学习之高斯混合模型/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/2018/06/25/C-map常见用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/25/C-map常见用法/" itemprop="url">
-                  C++map常见用法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-25 20:06:48" itemprop="dateCreated datePublished" datetime="2018-06-25T20:06:48+08:00">2018-06-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-12 14:40:44" itemprop="dateModified" datetime="2018-07-12T14:40:44+08:00">2018-07-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/25/C-map常见用法/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/25/C-map常见用法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>C++中的map，相当于python中的dic，是键-值对的组合，map内部自建一颗红黑树，查找效率为$O(\log n)$，下面将简单介绍map的常见用法。</p>
-<h1 id="map的定义于初始化"><a href="#map的定义于初始化" class="headerlink" title="map的定义于初始化"></a>map的定义于初始化</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m;   #定义<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m;</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(map1); #拷贝构造map1的副本</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(b, e); #通过迭代器拷贝构造<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;T1,T2&gt; m(map1.begin(), map1.end())</div></pre></td></tr></table></figure>
-<h1 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m.insert(pair)</div><div class="line">m.insert(value_type)</div></pre></td></tr></table></figure>
-<p>举个例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">map1.insert(pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;(<span class="number">1</span>, <span class="number">10</span>));</div><div class="line">map1.insert(make_pair(<span class="number">2</span>, <span class="number">20</span>))</div><div class="line">map1.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::value_type (<span class="number">3</span>, <span class="number">30</span>));</div><div class="line"><span class="meta">#insert只能插入不存在元素</span></div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/25/C-map常见用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2072,7 +2744,7 @@ tags:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2135,7 +2807,9 @@ tags:
                     
                       
                     
-                    <span class="site-state-item-count">24</span>
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
