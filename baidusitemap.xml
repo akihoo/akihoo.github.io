@@ -4,6 +4,176 @@
 
     
   <url>
+    <loc>akihoo.github.io/posts/47f04b2c.html</loc>
+    <lastmod>2018-07-19T09:11:07.840Z</lastmod>
+    <data>
+        <display>
+        <title>二叉树的常见遍历以及面试题总结</title>
+        <pubTime>2018-06-15T01:14:05.000Z</pubTime>
+        
+        <tag>数据结构与算法</tag>
+         
+        <tag>面试</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/c1e1c12d.html</loc>
+    <lastmod>2018-07-19T09:10:11.434Z</lastmod>
+    <data>
+        <display>
+        <title>CFD湍流模拟</title>
+        <pubTime>2018-06-16T07:46:32.000Z</pubTime>
+        
+        <tag>CFD</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/48cd5d7a.html</loc>
+    <lastmod>2018-07-19T09:09:44.267Z</lastmod>
+    <data>
+        <display>
+        <title>百行Python代码教你认识遗传算法</title>
+        <pubTime>2018-06-12T01:33:57.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/80fbaff1.html</loc>
+    <lastmod>2018-07-19T09:09:18.115Z</lastmod>
+    <data>
+        <display>
+        <title>latex 公式语法速查</title>
+        <pubTime>2018-05-15T11:21:24.792Z</pubTime>
+        
+        <tag>latex</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/f1703e5d.html</loc>
+    <lastmod>2018-07-19T09:08:46.912Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之高斯混合模型</title>
+        <pubTime>2018-06-26T13:38:32.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/3906b830.html</loc>
+    <lastmod>2018-07-19T09:08:39.845Z</lastmod>
+    <data>
+        <display>
+        <title>集成学习小计</title>
+        <pubTime>2018-06-04T15:49:00.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/712a0b5b.html</loc>
+    <lastmod>2018-07-19T09:08:09.693Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之模型评估</title>
+        <pubTime>2018-07-11T02:39:14.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/16d5eb1f.html</loc>
+    <lastmod>2018-07-19T09:07:34.544Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之正则化</title>
+        <pubTime>2018-05-29T04:01:02.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/76466336.html</loc>
+    <lastmod>2018-07-19T09:06:40.889Z</lastmod>
+    <data>
+        <display>
+        <title>BP神经网络小节</title>
+        <pubTime>2018-05-31T07:10:06.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/461acaa3.html</loc>
+    <lastmod>2018-07-19T09:04:09.815Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习竞赛大杀器-xgboost</title>
+        <pubTime>2018-07-10T07:55:28.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>akihoo.github.io/posts/d7d8d208.html</loc>
     <lastmod>2018-07-19T09:02:41.772Z</lastmod>
     <data>
@@ -110,21 +280,6 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/48cd5d7a.html</loc>
-    <lastmod>2018-07-19T03:39:03.165Z</lastmod>
-    <data>
-        <display>
-        <title>百行Python代码教你认识遗传算法</title>
-        <pubTime>2018-06-12T01:33:57.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/4fdf7389.html</loc>
     <lastmod>2018-07-19T03:39:03.156Z</lastmod>
     <data>
@@ -159,23 +314,6 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/461acaa3.html</loc>
-    <lastmod>2018-07-19T03:39:03.154Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习竞赛大杀器-xgboost</title>
-        <pubTime>2018-07-10T07:55:28.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/1ecc272.html</loc>
     <lastmod>2018-07-19T03:39:03.151Z</lastmod>
     <data>
@@ -193,97 +331,12 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/76466336.html</loc>
-    <lastmod>2018-07-19T03:39:03.148Z</lastmod>
-    <data>
-        <display>
-        <title>BP神经网络小节</title>
-        <pubTime>2018-05-31T07:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/f1703e5d.html</loc>
-    <lastmod>2018-07-19T03:39:03.147Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之高斯混合模型</title>
-        <pubTime>2018-06-26T13:38:32.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/16d5eb1f.html</loc>
-    <lastmod>2018-07-19T03:39:03.146Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之正则化</title>
-        <pubTime>2018-05-29T04:01:02.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/3906b830.html</loc>
-    <lastmod>2018-07-19T03:39:03.145Z</lastmod>
-    <data>
-        <display>
-        <title>集成学习小计</title>
-        <pubTime>2018-06-04T15:49:00.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/b7143dc.html</loc>
     <lastmod>2018-07-19T03:39:03.144Z</lastmod>
     <data>
         <display>
         <title>机器学习之聚类</title>
         <pubTime>2018-07-01T03:16:51.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/712a0b5b.html</loc>
-    <lastmod>2018-07-19T03:39:03.141Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之模型评估</title>
-        <pubTime>2018-07-11T02:39:14.000Z</pubTime>
         
         <tag>ML</tag>
          
@@ -339,25 +392,6 @@
         <pubTime>2018-07-19T02:44:45.000Z</pubTime>
         
         <tag>blog</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/47f04b2c.html</loc>
-    <lastmod>2018-07-19T03:39:03.131Z</lastmod>
-    <data>
-        <display>
-        <title>二叉树的常见遍历以及面试题总结</title>
-        <pubTime>2018-06-15T01:14:05.000Z</pubTime>
-        
-        <tag>数据结构与算法</tag>
-         
-        <tag>面试</tag>
          
          
            
@@ -556,23 +590,6 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/80fbaff1.html</loc>
-    <lastmod>2018-07-19T03:39:03.102Z</lastmod>
-    <data>
-        <display>
-        <title>latex 公式语法速查</title>
-        <pubTime>2018-05-15T11:21:24.792Z</pubTime>
-        
-        <tag>latex</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/8d04a03b.html</loc>
     <lastmod>2018-07-19T03:39:03.101Z</lastmod>
     <data>
@@ -725,23 +742,6 @@
         <pubTime>2017-11-02T04:51:52.719Z</pubTime>
         
         <tag>Ubuntu</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/c1e1c12d.html</loc>
-    <lastmod>2018-07-19T03:39:03.089Z</lastmod>
-    <data>
-        <display>
-        <title>CFD湍流模拟</title>
-        <pubTime>2018-06-16T07:46:32.000Z</pubTime>
-        
-        <tag>CFD</tag>
          
          
            

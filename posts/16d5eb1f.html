@@ -114,15 +114,13 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="/16d5eb1f.html机器学习之正则化作用/overfitting.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811brif7j30k00eugm2.jpg">
-<meta property="og:image" content="/16d5eb1f.html机器学习之正则化作用/20140504122926296.png">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811vxbllj30ex0bz3zb.jpg">
-<meta property="og:updated_time" content="2018-07-19T03:39:03.146Z">
+<meta property="og:updated_time" content="2018-07-19T09:07:34.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之正则化">
 <meta name="twitter:description" content="正则化的作用 可参考博客强烈推荐：zouxy09的专栏、阿拉丁吃米粉、迷雾forest">
-<meta name="twitter:image" content="/16d5eb1f.html机器学习之正则化作用/overfitting.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811brif7j30k00eugm2.jpg">
 
 
 
@@ -375,7 +373,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-19 17:07:34" itemprop="dateModified" datetime="2018-07-19T17:07:34+08:00">2018-07-19</time>
               
             
           </span>
@@ -432,7 +430,7 @@
 <a id="more"></a>
 <p>正规方程最终得到的$w^ <em> $的参数估计为：<br>$$\hat{w^ </em> } =(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Ty$$<br>当 $\mathbf{X}^T\mathbf{X}$ 非满秩矩阵时，则$(\mathbf{X}^T\mathbf{X})^{-1}$趋近于无穷大（实际上不存在），当$\mathbf{X}^T\mathbf{X}$病态时，虽然矩阵有解，输入仅有微小变化，解便会有很大震荡。</p>
 <p>这显然不是一个很好的解，相当于仅在输入数据中加入一点小小噪声，便得到全然不同的解。如下图过拟合，输入仅有小的变化，结果剧烈变化。</p>
-<p><img src="/16d5eb1f.html机器学习之正则化作用/overfitting.jpg" alt=""><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811brif7j30k00eugm2.jpg" alt=""></p>
+<p><a href="https://www.zhihu.com/question/20924039/answer/240037674" target="_blank" rel="external">过拟合</a><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811brif7j30k00eugm2.jpg" alt=""></p>
 <p>加入正则化后，公式变为：<br>$$\hat{w^ * } =(\mathbf{X}^T\mathbf{X}+\lambda \mathbf{I})^{-1}\mathbf{X}^Ty$$</p>
 <h1 id="L1-与-L2-正则的区别"><a href="#L1-与-L2-正则的区别" class="headerlink" title="L1 与 L2 正则的区别"></a>L1 与 L2 正则的区别</h1><ol>
 <li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
@@ -440,7 +438,7 @@
 <li>在实际使用中，如果特征是高维稀疏的，则使用L1正则；如果特征是低维稠密的，则使用L2正则。</li>
 </ol>
 <p>L1和L2都是规则化的方式，我们将权值参数以L1或者L2的方式放到代价函数里面去。然后模型就会尝试去最小化这些权值参数。而这个最小化就像一个下坡的过程，L1和L2的差别就在于这个“坡”不同，如下图：L1就是按绝对值函数的“坡”下降的，而L2是按二次函数的“坡”下降。所以实际上在0附近，L1的下降速度比L2的下降速度要快。所以会非常快得降到0。因此L1偏向稀疏特征（可筛选出重要特征），L2主要用于防止过拟合（要求参数越小时，说明模型越简单）。</p>
-<p><img src="/16d5eb1f.html机器学习之正则化作用/20140504122926296.png" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811vxbllj30ex0bz3zb.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft811vxbllj30ex0bz3zb.jpg" alt=""></p>
 
       
     </div>
@@ -462,7 +460,7 @@
   <p><span>本文标题:</span><a href="/posts/16d5eb1f.html">机器学习之正则化</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年05月29日 - 12:05</p>
-  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>最后更新:</span>2018年07月19日 - 17:07</p>
   <p><span>原始链接:</span><a href="/posts/16d5eb1f.html" title="机器学习之正则化">akihoo.github.io/posts/16d5eb1f.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/16d5eb1f.html"  aria-label="复制成功！"></i></span>
   </p>
