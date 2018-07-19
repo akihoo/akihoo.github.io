@@ -5,13 +5,30 @@
     
   <url>
     <loc>akihoo.github.io/2018/07/19/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2018-07-19T02:52:17.008Z</lastmod>
+    <lastmod>2018-07-19T03:12:39.336Z</lastmod>
     <data>
         <display>
         <title>【转载】如何正确的选择图床</title>
         <pubTime>2018-07-19T02:44:45.000Z</pubTime>
         
         <tag>blog</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/2018/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2018-07-19T03:12:38.031Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之模型整理</title>
+        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
+        
+        <tag>ML</tag>
          
          
            
@@ -48,23 +65,6 @@
         <tag>C++</tag>
          
         <tag>python</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/2018/07/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%A8%A1%E5%9E%8B%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2018-07-19T02:27:24.797Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之模型整理</title>
-        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
-        
-        <tag>ML</tag>
          
          
            
