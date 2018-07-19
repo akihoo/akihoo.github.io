@@ -259,14 +259,6 @@
         
         
           
-          <li class="menu-item menu-item-navigation">
-    <a href="/navigation/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />导航</a>
-  </li>
-        
-        
-        
-          
           <li class="menu-item menu-item-sitemap">
     <a href="/sitemap.xml" rel="section">
       <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
@@ -2068,18 +2060,13 @@
       
         
           
-          
-此博客用来总结牛客网刷题过程中一些错题，特别是一些自己没有搞懂的、模糊的知识点。会尽量按照知识点来分类。
+            <blockquote>
+<p>此博客用来总结牛客网刷题过程中一些错题，特别是一些自己没有搞懂的、模糊的知识点。会尽量按照知识点来分类。</p>
+</blockquote>
+<h1 id="const"><a href="#const" class="headerlink" title="const"></a>const</h1><h2 id="NO-1"><a href="#NO-1" class="headerlink" title="NO.1"></a>NO.1</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//以下程序输出是____。</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line">    <span class="keyword">int</span> * p = (<span class="keyword">int</span> *)(&amp;a);</div><div class="line">    *p = <span class="number">20</span>;</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"a = "</span>&lt;&lt;a&lt;&lt;<span class="string">", *p = "</span>&lt;&lt;*p&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//答案：a = 10, *p = 20</span></div></pre></td></tr></table></figure>
+<p>在C++中，a作用域下在C++中所有的常量a在预编译阶段就已经做了类似于宏替换的工作，所以输出的是它的常量值，尽管a所对应的内存地址上的值已经发生改变，但还是输出常量值。</p>
 
-constNO.1123456789101112//以下程序输出是____。#include &lt;iostream&gt;using namespace std;int main(void)&#123;    const int a = 10;    int * p = (int *)(&amp;a);    *p = 20;    cout&lt;&lt;"a = "&lt;&lt;a&lt;&lt;", *p = "&lt;&lt;*p&lt;&lt;endl;    retu
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/585b7684.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
