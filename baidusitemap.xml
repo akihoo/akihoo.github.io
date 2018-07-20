@@ -3,6 +3,58 @@
 
 
     
+    
+  <url>
+    <loc>akihoo.github.io/posts/1ecc272.html</loc>
+    <lastmod>2018-07-20T00:58:58.507Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习模型之逻辑回归</title>
+        <pubTime>2018-06-30T02:10:06.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/d7d8d208.html</loc>
+    <lastmod>2018-07-20T00:58:58.506Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习模型之支持向量机</title>
+        <pubTime>2018-06-10T02:10:06.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/a45772c3.html</loc>
+    <lastmod>2018-07-20T00:58:58.505Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之模型整理</title>
+        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
   <url>
     <loc>akihoo.github.io/posts/a926dcd5.html</loc>
     <lastmod>2018-07-19T09:20:14.770Z</lastmod>
@@ -191,23 +243,6 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/d7d8d208.html</loc>
-    <lastmod>2018-07-19T09:02:41.772Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习模型之支持向量机</title>
-        <pubTime>2018-06-10T02:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/b8c5a83b.html</loc>
     <lastmod>2018-07-19T09:01:46.250Z</lastmod>
     <data>
@@ -231,23 +266,6 @@
         <display>
         <title>机器学习模型之决策树</title>
         <pubTime>2018-05-29T06:31:57.848Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/a45772c3.html</loc>
-    <lastmod>2018-07-19T08:47:04.491Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之模型整理</title>
-        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
         
         <tag>ML</tag>
          
@@ -322,23 +340,6 @@
         <pubTime>2017-11-29T03:37:54.195Z</pubTime>
         
         <tag>ABAQUS</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/1ecc272.html</loc>
-    <lastmod>2018-07-19T03:39:03.151Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习模型之逻辑回归</title>
-        <pubTime>2018-06-30T02:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
          
          
            

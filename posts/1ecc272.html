@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="逻辑回归如何使用线型模型进行分类操作？我们希望可以使用一个映射函数将线型模型的回归值用于分类问题（即只输出两个类别）。最简单的映射函数便是阶跃函数，但阶跃函数在x=0处不连续，因此需要另一个函数替代。 sigmoid函数$$y = \dfrac{1}{1 + e^{-x}}$$把 $ (-\infty, \infty)$ 的取值范围(用$x$表示)映射到$(0,1)$范围内，同时连续且任意阶可导。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-19T03:39:03.151Z">
+<meta property="og:updated_time" content="2018-07-20T00:58:58.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习模型之逻辑回归">
 <meta name="twitter:description" content="逻辑回归如何使用线型模型进行分类操作？我们希望可以使用一个映射函数将线型模型的回归值用于分类问题（即只输出两个类别）。最简单的映射函数便是阶跃函数，但阶跃函数在x=0处不连续，因此需要另一个函数替代。 sigmoid函数$$y = \dfrac{1}{1 + e^{-x}}$$把 $ (-\infty, \infty)$ 的取值范围(用$x$表示)映射到$(0,1)$范围内，同时连续且任意阶可导。">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-20 08:58:58" itemprop="dateModified" datetime="2018-07-20T08:58:58+08:00">2018-07-20</time>
               
             
           </span>
@@ -429,8 +429,8 @@
 <p>将sigmoid函数代入线型回归方程中<br>$$y=\omega^Tx+b$$<br>可得：<br>$$y=\dfrac{1}{1 + e^{-(\omega^Tx+b)}}$$<br>上式可变为<br>$$\ln{\frac{y}{1-y}}=\omega^Tx+b$$<br>若将$y$视为样本$x$作为正例的可能性，则$1-y$是其反例可能性，两者的比值称为“几率”（odds），反映了$x$作为正例的相对可能性。</p>
 <a id="more"></a>
 <h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>计算后验概率<br>$$p(y=1|x) = \dfrac{e^{(\omega^Tx+b)}}{1 + e^{(\omega^Tx+b)}}$$<br>$$p(y=0|x) = \dfrac{1}{1 + e^{(\omega^Tx+b)}}$$<br>通过极大似然估计 $w$ 和 $b$ ，似然函数可写作：<br>$$L(w,b)=\prod_{i=1}^{n}p(y^{(i)}|x^{(i)};w,b)$$<br>（何为似然函数？对上式简单说来，似然函数是参数$w$的函数，它的值是一个可能性，代表在相应参数$w$下，随机抽取n个样本点且这n个样本恰好是给定数据集$(x_1,x_2 … x_n$的概率）</p>
-<p>则对数似然为：<br>$$l(w,b)=\ln L(w,b)=\sum_{i=1}^{n}p(y^{(i)}|x^{(i)};w,b)$$</p>
-<p>我们希望分类准确，即令每个样本属于其真实标记的概率越大越好。<br>$$l(\beta)=\sum_{i=1}^{n}\bigg(-y_i\beta^\mathbf{T}\mathbf{\hat{x}}_i+\ln(1+e^{\beta^\mathbf{T}\mathbf{\hat{x}}_i})\bigg)$$</p>
+<p>则对数似然为：<br>$$l(w,b)=\ln L(w,b)=\sum_{i=1}^{n}\ln p(y^{(i)}|x^{(i)};w,b)$$</p>
+<p>我们希望分类准确，即令每个样本属于其真实标记的概率越大越好。令$\beta=(w;b)$，则有：<br>$$l(\beta)=\sum_{i=1}^{n}\bigg(-y_i\beta^\mathbf{T}\mathbf{\hat{x}}_i+\ln(1+e^{\beta^\mathbf{T}\mathbf{\hat{x}}_i})\bigg)$$</p>
 <h1 id="逻辑回归的推广"><a href="#逻辑回归的推广" class="headerlink" title="逻辑回归的推广"></a>逻辑回归的推广</h1><p>上面介绍的逻辑斯谛回归模型是二项分类模型，用于二类分类。可以将其推广为多项逻辑斯谛回归模型（multi-nominal logistic regression model），用于多分类问题。<br>$$p(y=k|x) = \dfrac{e^{(\omega_k^Tx+b)}}{1 + e^{(\omega_k^Tx+b)}},k=1,2,3\cdots,K-1$$<br>$$p(y=K|x) = \dfrac{1}{1 + e^{(\omega_k^Tx+b)}}$$</p>
 <h1 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h1><h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ol>
 <li>处理大数据时，效率高，伸缩性好。</li>
@@ -466,7 +466,7 @@
   <p><span>本文标题:</span><a href="/posts/1ecc272.html">机器学习模型之逻辑回归</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年06月30日 - 10:06</p>
-  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>最后更新:</span>2018年07月20日 - 08:07</p>
   <p><span>原始链接:</span><a href="/posts/1ecc272.html" title="机器学习模型之逻辑回归">akihoo.github.io/posts/1ecc272.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/1ecc272.html"  aria-label="复制成功！"></i></span>
   </p>
