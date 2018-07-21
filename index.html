@@ -472,6 +472,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a45772c3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/a45772c3.html" itemprop="url">
+                  机器学习之模型整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-19 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-21 14:07:49" itemprop="dateModified" datetime="2018-07-21T14:07:49+08:00">2018-07-21</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/a45772c3.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/a45772c3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。</p>
+</blockquote>
+<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="模型总结"><a href="#模型总结" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。</li>
+<li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
+<li>损失函数：极大似然函数 ： $L _ \theta\left(x\right )= \prod _ {i=1}^{m}h _ \theta(x^{i};\theta )^{y{i}}*(1-h _\theta(x^{i};\theta))^{1-y^{i}}$</li>
+<li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
+<li>优点：<ol>
+<li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
+<li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
+<li>实现简单，分类时计算量非常小，速度快，存储资源低</li>
+<li>可解释性强：线性回归的参数取值反应特征的强弱。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>准确性不高，容易过拟合</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须线性可分；</li>
+</ol>
+</li>
+<li><a href="https://www.zhihu.com/question/26726794" target="_blank" rel="external">适用场景</a>：<ol>
+<li>是否支持大规模数据：支持，并且有分布式实现</li>
+<li>特征维度：可以很高</li>
+<li>是否有 Online 算法:有（<a href="https://www.zhihu.com/question/28025036/answer/107297334" target="_blank" rel="external">参考自</a>）</li>
+<li>特征处理：支持数值型数据，类别型类型</li>
+<li>预估问题场景（如推荐、广告系统中的点击率预估，转化率预估等）</li>
+<li>分类场景（如用户画像中的标签预测，判断内容是否具有商业价值，判断点击作弊等
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/a45772c3.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/10a4d630.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -577,200 +771,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/10a4d630.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a45772c3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/a45772c3.html" itemprop="url">
-                  机器学习之模型整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-19 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-20 08:58:58" itemprop="dateModified" datetime="2018-07-20T08:58:58+08:00">2018-07-20</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/a45772c3.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/a45772c3.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。</p>
-</blockquote>
-<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="模型总结"><a href="#模型总结" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
-<li>简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。</li>
-<li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
-<li>损失函数：极大似然函数 ： $L _ \theta\left(x\right )= \prod _ {i=1}^{m}h _ \theta(x^{i};\theta )^{y{i}}*(1-h _\theta(x^{i};\theta))^{1-y^{i}}$</li>
-<li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
-<li>优点：<ol>
-<li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
-<li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
-<li>实现简单，分类时计算量非常小，速度快，存储资源低</li>
-<li>可解释性强：线性回归的参数取值反应特征的强弱。</li>
-</ol>
-</li>
-<li>缺点：<ol>
-<li>准确性不高，容易过拟合</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须线性可分；</li>
-</ol>
-</li>
-<li><a href="https://www.zhihu.com/question/26726794" target="_blank" rel="external">适用场景</a>：<ol>
-<li>是否支持大规模数据：支持，并且有分布式实现</li>
-<li>特征维度：可以很高</li>
-<li>是否有 Online 算法:有（<a href="https://www.zhihu.com/question/28025036/answer/107297334" target="_blank" rel="external">参考自</a>）</li>
-<li>特征处理：支持数值型数据，类别型类型</li>
-<li>预估问题场景（如推荐、广告系统中的点击率预估，转化率预估等）</li>
-<li>分类场景（如用户画像中的标签预测，判断内容是否具有商业价值，判断点击作弊等
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/a45772c3.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

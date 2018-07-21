@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。  逻辑回归模型总结 简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。 基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$ 损失">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-20T00:58:58.505Z">
+<meta property="og:updated_time" content="2018-07-21T06:07:49.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之模型整理">
 <meta name="twitter:description" content="马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。  逻辑回归模型总结 简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。 基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$ 损失">
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-20 08:58:58" itemprop="dateModified" datetime="2018-07-20T08:58:58+08:00">2018-07-20</time>
+                <time title="修改时间：2018-07-21 14:07:49" itemprop="dateModified" datetime="2018-07-21T14:07:49+08:00">2018-07-21</time>
               
             
           </span>
@@ -588,12 +588,12 @@
 <li>CART：使用基尼指数的划分准则；通过在每个步骤最大限度降低不纯洁度，CART能够处理孤立点以及能够对空缺值进行处理。 树划分的终止条件：1、节点达到完全纯度； 2、树的深度达到用户所要深度 3、节点中样本的数量属于用户指定的个数；</li>
 </ol>
 </li>
-<li>对缺失值的处理(以ID4.5为例)：<ol>
+<li>对缺失值的处理(以c4.5为例)：<ol>
 <li>信息增益率将按照缺失比例进行折减</li>
 <li>缺失样本将分别进入所有子节点，缺失值样本所占比重将根据子节点样本权重来下调</li>
 </ol>
 </li>
-<li>剪枝策略：由于根据训练数据生成的决策树往往过于复杂，导致泛华能力比较弱，所以，实际的决策树学习中，会将已生成的决策树进行简化，以提高其泛华能力，这一过程叫做剪枝。<ol>
+<li>剪枝策略：由于根据训练数据生成的决策树往往过于复杂，导致泛化能力比较弱，所以，实际的决策树学习中，会将已生成的决策树进行简化，以提高其泛能力，这一过程叫做剪枝。<ol>
 <li>预减枝：<ol>
 <li>预剪枝即提前终止树的生长。</li>
 <li>预剪枝方式为：指定结点所包含的最小样本数目；指定树的高度或者深度；当划分节点不能带来泛化能力提升，则停止划分。（如何判断泛化能力提升提升与否？可以将一部分数据当作测试集。）</li>
@@ -636,7 +636,7 @@
 </ol>
 <h2 id="参考资料-2"><a href="#参考资料-2" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a href="https://www.jianshu.com/p/fb97b21aeb1d" target="_blank" rel="external">https://www.jianshu.com/p/fb97b21aeb1d</a></li>
-<li><a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/">https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/</a></li>
+<li><a href="http://akihoo.github.io/posts/8e9de4f1.html">http://akihoo.github.io/posts/8e9de4f1.html</a></li>
 <li><a href="https://www.cnblogs.com/pinard/p/6053344.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6053344.html</a></li>
 </ol>
 <h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><h2 id="模型总结-3"><a href="#模型总结-3" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
@@ -710,7 +710,7 @@
 </ol>
 </li>
 <li>缺点:<ol>
-<li>K值是用户给定的的，在进行数据处理前，K值是未知的，不同的K值得到的结果也不一样；</li>
+<li>K值是用户给定的，在进行数据处理前，K值是未知的，不同的K值得到的结果也不一样；</li>
 <li>对初始簇中心点是敏感的</li>
 <li>不适合发现非凸形状的簇或者大小差别较大的簇</li>
 <li>特殊值、离群值对模型的影响比较大</li>
@@ -723,7 +723,7 @@
 </ol>
 </li>
 <li>停止迭代准则：达到最大迭代次数、簇中心点变化率、最小平方误差</li>
-<li>优化方法：使用kd树或者ball tree，将所有的观测实例构建成一颗kd树，之前每个聚类中心都是需要和每个观测点做依次距离计算，现在这些聚类中心根据kd树只需要计算附近的一个局部区域即可</li>
+<li>优化方法：在数据量较大，并且每个数据的特征维度较高的情况下，执行Kmeans聚类将是极为耗费代价的。因为，每一次聚类过程都是需要计算整个数据空间的。使用kd树或者ball tree，将所有的观测实例构建成一颗kd树，之前每个聚类中心都是需要和每个观测点做依次距离计算，现在这些聚类中心根据kd树只需要计算附近的一个局部区域即可</li>
 <li>与GMM对比：<ol>
 <li>相同点：<ol>
 <li>都对初始值敏感</li>
@@ -740,7 +740,7 @@
 </ol>
 <h2 id="参考资料-4"><a href="#参考资料-4" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">https://www.jianshu.com/p/4a3c5e34d0f8</a></li>
-<li><a href="https://akihoo.github.io/2018/07/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/">https://akihoo.github.io/2018/07/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%81%9A%E7%B1%BB/</a></li>
+<li><a href="https://akihoo.github.io/posts/b7143dc.html">https://akihoo.github.io/posts/b7143dc.html</a></li>
 <li><a href="https://blog.csdn.net/LuckyJune34/article/details/54668530" target="_blank" rel="external">https://blog.csdn.net/LuckyJune34/article/details/54668530</a></li>
 <li><a href="https://blog.csdn.net/loveliuzz/article/details/78783773" target="_blank" rel="external">https://blog.csdn.net/loveliuzz/article/details/78783773</a></li>
 <li><a href="https://www.cnblogs.com/nolonely/p/7309252.html" target="_blank" rel="external">https://www.cnblogs.com/nolonely/p/7309252.html</a></li>
@@ -748,13 +748,13 @@
 </ol>
 <h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><h2 id="模型总结-4"><a href="#模型总结-4" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
 <li>简介：人工神经元通过一定的结构组织起来，就可以构成人工神经元网络。最常见的神经网络一般称为多层前馈神经网络，除了输入和输出层，中间隐藏层的个数被称为神经网络的层数。BP算法是训练神经网络中最著名的算法，其本质是梯度下降和链式法则。神经元网络对信息处理的快速性和强有力的学习记忆功能是由其大规模的并行工作方式、非线性处理、网络结构的可变性等固有结构特性决定的。</li>
-<li>Backpropagation(误差逆传播)：<strong>重要</strong>需要会推导<ol>
+<li>Backpropagation(误差逆传播)：<strong>重要</strong>需要会<a href="https://akihoo.github.io/posts/76466336.html">推导</a><ol>
 <li>基本思想：计算出输出与标签间的损失函数值，然后计算其相对于每个神经元的梯度，根据梯度方向更新权值。</li>
 </ol>
 </li>
 <li>误差函数：均方误差</li>
 <li>为什么引入激励函数：因为如果不用非线性激励函数，每一层都是上一层的线性函数，无论神经网络多少层，输出都是输入的线性组合，与只有一个隐藏层效果一样。相当于多层感知机了。所以引入非线性激励函数，深层网络就变得有意义了，可以逼近任意函数。</li>
-<li><a href="https://blog.csdn.net/u013146742/article/details/51986575" target="_blank" rel="external">常见的激励函数</a>：<ol>
+<li><a href="https://blog.csdn.net/u013146742/article/details/51986575" target="_blank" rel="external">常见的激励函数</a>,<a href="https://blog.csdn.net/u011584941/article/details/71534828" target="_blank" rel="external">参考链接2</a>：<ol>
 <li>sigmoid ( $y = (1 + \exp(-x))^{-1}$ ) ：将输出实值压缩到0-1之间。 <ol>
 <li>缺点：（输入非常大或非常小的时候）容易梯度消失；sigmoid函数是非0均值的，下一层的神经元将从上一层神经元得到的非0 均值的信号作为输入，再结合w计算梯度，始终都是正的。（不是关于原点对称）。计算exp比较耗时。</li>
 </ol>
@@ -802,7 +802,7 @@
 <h2 id="参考资料-5"><a href="#参考资料-5" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
 <li><a href="https://blog.csdn.net/qq_34896915/article/details/73565045" target="_blank" rel="external">https://blog.csdn.net/qq_34896915/article/details/73565045</a></li>
 <li><a href="https://blog.csdn.net/zhouhong0284/article/details/79836249" target="_blank" rel="external">https://blog.csdn.net/zhouhong0284/article/details/79836249</a></li>
-<li><a href="https://akihoo.github.io/2018/05/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8BBP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">https://akihoo.github.io/2018/05/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8BBP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</a></li>
+<li><a href="https://akihoo.github.io/posts/76466336.html">https://akihoo.github.io/posts/76466336.html</a></li>
 <li><a href="https://blog.csdn.net/xwd18280820053/article/details/76026523" target="_blank" rel="external">https://blog.csdn.net/xwd18280820053/article/details/76026523</a></li>
 <li><a href="https://blog.csdn.net/tyhj_sf/article/details/54983858" target="_blank" rel="external">https://blog.csdn.net/tyhj_sf/article/details/54983858</a></li>
 </ol>
@@ -861,7 +861,7 @@
 </ol>
 </li>
 <li><a href="https://blog.csdn.net/wongleetion/article/details/79748591" target="_blank" rel="external">https://blog.csdn.net/wongleetion/article/details/79748591</a></li>
-<li><a href="https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/">https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/</a></li>
+<li><a href="https://akihoo.github.io/posts/3906b830.html">https://akihoo.github.io/posts/3906b830.html</a></li>
 <li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">https://www.zhihu.com/question/26760839/answer/33963551</a></li>
 </ol>
 <h2 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h2><ol>
@@ -952,7 +952,7 @@
 <li>dropout</li>
 </ol>
 </li>
-<li><a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%AD%A3%E5%88%99%E5%8C%96%E4%BD%9C%E7%94%A8/">正则化</a>：正则化是在模型求解目标函数时引入约束项，用于控制模型的复杂度。换种说法：正则化等价于结构风险最小化，通过在经验风险后面加上表示模型复杂度的正则化项或惩罚项，达到选择经验风险和结构风险都较小的模型的目的。比较常用的是L1正则与L2正则。<ol>
+<li><a href="https://akihoo.github.io/posts/16d5eb1f.html">正则化</a>：正则化是在模型求解目标函数时引入约束项，用于控制模型的复杂度。换种说法：正则化等价于结构风险最小化，通过在经验风险后面加上表示模型复杂度的正则化项或惩罚项，达到选择经验风险和结构风险都较小的模型的目的。比较常用的是L1正则与L2正则。<ol>
 <li>L1 与 L2 正则的区别:<ol>
 <li>L1正则假设参数的先验分布是Laplace分布，可以保证模型的稀疏性，也就是某些参数等于0；</li>
 <li>L2正则假设参数的先验分布是Gaussian分布，可以保证模型的稳定性，也就是参数的值不会太大或太小</li>
@@ -1042,7 +1042,7 @@
   <p><span>本文标题:</span><a href="/posts/a45772c3.html">机器学习之模型整理</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年07月19日 - 10:07</p>
-  <p><span>最后更新:</span>2018年07月20日 - 08:07</p>
+  <p><span>最后更新:</span>2018年07月21日 - 14:07</p>
   <p><span>原始链接:</span><a href="/posts/a45772c3.html" title="机器学习之模型整理">akihoo.github.io/posts/a45772c3.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/a45772c3.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -1087,8 +1087,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/1584f721.html" rel="next" title="C++Python字符串处理合集">
-                <i class="fa fa-chevron-left"></i> C++Python字符串处理合集
+              <a href="/posts/10a4d630.html" rel="next" title="【转载】如何正确的选择图床">
+                <i class="fa fa-chevron-left"></i> 【转载】如何正确的选择图床
               </a>
             
           </div>
@@ -1097,8 +1097,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/10a4d630.html" rel="prev" title="【转载】如何正确的选择图床">
-                【转载】如何正确的选择图床 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/20a77595.html" rel="prev" title="【转载】Hexo - 修改永久链接的默认格式">
+                【转载】Hexo - 修改永久链接的默认格式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

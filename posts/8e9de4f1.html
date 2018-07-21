@@ -117,7 +117,7 @@
 <meta property="og:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80qaco6bj309l09nq3c.jpg">
-<meta property="og:updated_time" content="2018-07-19T08:59:22.866Z">
+<meta property="og:updated_time" content="2018-07-21T01:14:24.238Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习模型之决策树">
 <meta name="twitter:description" content="以下博客是我在学习过程中发现的比较好的博客，可以参考：机器学习算法实践-决策树(Decision Tree)、July_sun的博客、HerosOfEarth的博客、天泽28的专栏  decision tree 基本结构 借用西瓜书中西瓜问题的一棵决策树，观察可知，决策树主要由若干节点（包括根节点、叶节点、内部节点等）组成。每个内部节点都表示某个属性，叶子节点表示判别结果。 决策树的构建节点划分">
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 16:59:22" itemprop="dateModified" datetime="2018-07-19T16:59:22+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-21 09:14:24" itemprop="dateModified" datetime="2018-07-21T09:14:24+08:00">2018-07-21</time>
               
             
           </span>
@@ -477,20 +477,20 @@
 <h2 id="常见决策树模型的节点划分方式"><a href="#常见决策树模型的节点划分方式" class="headerlink" title="常见决策树模型的节点划分方式"></a>常见决策树模型的节点划分方式</h2><h3 id="ID3：信息增益"><a href="#ID3：信息增益" class="headerlink" title="ID3：信息增益"></a>ID3：信息增益</h3><p>信息熵是度量样本集合纯度最常用的一种指标<br>$$entropy(D) = -\sum\limits_{i=1}^n P_ilog_2 P_i$$<br>其中D为数据集，$i$为数据集$D$的可能分类标签,$P_i$为该标签的概率。信息熵就是平均而言一个事件发生得到的信息量大小，也就是信息量的期望值。(明天会下雨的信息熵远大于明天太阳会升起（后面那是废话吧）)</p>
 <p>条件熵：<br>$$entropy(D,A) = \sum_{i=1}^k \frac {D_{A_i}}{D} log_2D_{A_i}$$<br>其中A表示约束特征，k表示A特征的种类。条件熵$H(Y|X)$表示在已知随机变量$X$的条件下随机变量$Y$的不确定性。</p>
 <p>信息增益:<br>$$gain(D,A) = entropy(D) - entropy(D,A)$$</p>
-<h4 id="ID3：信息增益的缺点"><a href="#ID3：信息增益的缺点" class="headerlink" title="ID3：信息增益的缺点"></a>ID3：信息增益的缺点</h4><p>信息增益准则对可取值数目较多的属性有所偏好，比如将样本编号作为特征，则该特征的信息增益远大于其他特征。为此提出了改进的ID4.5模型。</p>
+<h4 id="ID3：信息增益的缺点"><a href="#ID3：信息增益的缺点" class="headerlink" title="ID3：信息增益的缺点"></a>ID3：信息增益的缺点</h4><p>信息增益准则对可取值数目较多的属性有所偏好，比如将样本编号作为特征，则该特征的信息增益远大于其他特征。为此提出了改进的c4.5模型。</p>
 <p>ID3的主要缺点：</p>
 <ul>
 <li>用信息增益选择属性时偏向选择取值多的属性</li>
 <li>输入变量必须是分类变量（连续变量必须离散化）</li>
 <li>无法处理空值</li>
 </ul>
-<h3 id="ID4-5：信息增益率"><a href="#ID4-5：信息增益率" class="headerlink" title="ID4.5：信息增益率"></a>ID4.5：信息增益率</h3><p>ID4.5以信息增益率为节点划分指标：<br>$$gainrate(D,A) = \frac{gain(D,A)}{entropy(D,A)}$$</p>
-<p>ID4.5对ID3主要改进在于：</p>
+<h3 id="c4-5：信息增益率"><a href="#c4-5：信息增益率" class="headerlink" title="c4.5：信息增益率"></a>c4.5：信息增益率</h3><p>c4.5以信息增益率为节点划分指标：<br>$$gainrate(D,A) = \frac{gain(D,A)}{entropy(D,A)}$$</p>
+<p>c4.5对ID3主要改进在于：</p>
 <ul>
 <li>克服了用信息增益选择属性时偏向选择取值多的属性的不足；</li>
 <li>在树构造过程中进行剪枝；</li>
 <li>能够完成对连续属性的离散化处理；</li>
-<li>能够对不完整数据进行处理。<h4 id="ID4-5：信息增益率的缺点"><a href="#ID4-5：信息增益率的缺点" class="headerlink" title="ID4.5：信息增益率的缺点"></a>ID4.5：信息增益率的缺点</h4>信息增益率对数目较少的属性有偏好。</li>
+<li>能够对不完整数据进行处理。<h4 id="c4-5：信息增益率的缺点"><a href="#c4-5：信息增益率的缺点" class="headerlink" title="c4.5：信息增益率的缺点"></a>c4.5：信息增益率的缺点</h4>信息增益率对数目较少的属性有偏好。</li>
 </ul>
 <h3 id="CART：基尼指数或"><a href="#CART：基尼指数或" class="headerlink" title="CART：基尼指数或"></a>CART：基尼指数或</h3><p>对于分类树的损失函数为基尼指数:<br>$$gini(D) = \sum_{i=1}^n p_k (1-p_k)$$</p>
 <p>$gini(D)$反应了从数据集D中随机抽取两个样本，其类别标记不一致的概率，因此，$gini(D)$越小，则数据集$D$的纯度越高。</p>
@@ -557,13 +557,13 @@
 </tr>
 </tbody>
 </table>
-<p>ID4.5对ID3d额改进之一便是加入离散特征的处理方式（二分法），主要步骤为：</p>
+<p>c4.5对ID3d额改进之一便是加入离散特征的处理方式（二分法），主要步骤为：</p>
 <ol>
 <li>对连续特征进行排序$[A_1,A_2,…,A_n]$</li>
 <li>依次选取2个质量值$A_i,A_{i-1}$取中间的一个点$a(A_{i}&lt;a&lt;A_{i-1})$，则数据集可以分为小于$a$与大于$a$两个部分（即将连续的特征离散化，可以理解为将质量特征转化为大小特征，只有大西瓜与小西瓜2中状态），计算$a$的信息增益率。</li>
 <li>不断循环执行(2)步骤，计算得到的最大信息增益率作为该特征的信息增益率，最大的信息增益率对应的a即为该节点分裂依据。</li>
 </ol>
-<h2 id="决策树对缺失值的处理"><a href="#决策树对缺失值的处理" class="headerlink" title="决策树对缺失值的处理"></a>决策树对缺失值的处理</h2><p>以ID4.5为例，决策树对缺失值的处理分为2个方面：</p>
+<h2 id="决策树对缺失值的处理"><a href="#决策树对缺失值的处理" class="headerlink" title="决策树对缺失值的处理"></a>决策树对缺失值的处理</h2><p>以c4.5为例，决策树对缺失值的处理分为2个方面：</p>
 <ol>
 <li>有缺失值的情况下如何计算信息增益率？（即如何选择分裂属性）</li>
 <li>分裂完成后，含缺失值样本f分类（进入子节点）？</li>
@@ -605,7 +605,7 @@
   <p><span>本文标题:</span><a href="/posts/8e9de4f1.html">机器学习模型之决策树</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年05月29日 - 14:05</p>
-  <p><span>最后更新:</span>2018年07月19日 - 16:07</p>
+  <p><span>最后更新:</span>2018年07月21日 - 09:07</p>
   <p><span>原始链接:</span><a href="/posts/8e9de4f1.html" title="机器学习模型之决策树">akihoo.github.io/posts/8e9de4f1.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/8e9de4f1.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -861,7 +861,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#decision-tree-基本结构"><span class="nav-number">1.</span> <span class="nav-text">decision tree 基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树的构建"><span class="nav-number">2.</span> <span class="nav-text">决策树的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点划分"><span class="nav-number">2.1.</span> <span class="nav-text">节点划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见决策树模型的节点划分方式"><span class="nav-number">2.2.</span> <span class="nav-text">常见决策树模型的节点划分方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3：信息增益"><span class="nav-number">2.2.1.</span> <span class="nav-text">ID3：信息增益</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID3：信息增益的缺点"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">ID3：信息增益的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ID4-5：信息增益率"><span class="nav-number">2.2.2.</span> <span class="nav-text">ID4.5：信息增益率</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID4-5：信息增益率的缺点"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">ID4.5：信息增益率的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CART：基尼指数或"><span class="nav-number">2.2.3.</span> <span class="nav-text">CART：基尼指数或</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树对连续值的处理"><span class="nav-number">2.3.</span> <span class="nav-text">决策树对连续值的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树对缺失值的处理"><span class="nav-number">2.4.</span> <span class="nav-text">决策树对缺失值的处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#剪枝-pruning-方式解决过拟合"><span class="nav-number">3.</span> <span class="nav-text">剪枝(pruning)方式解决过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预剪枝-prepruning"><span class="nav-number">3.1.</span> <span class="nav-text">预剪枝  prepruning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预剪枝特点"><span class="nav-number">3.1.1.</span> <span class="nav-text">预剪枝特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后剪枝"><span class="nav-number">3.2.</span> <span class="nav-text">后剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后剪枝特点"><span class="nav-number">3.2.1.</span> <span class="nav-text">后剪枝特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后剪枝算法"><span class="nav-number">3.2.2.</span> <span class="nav-text">后剪枝算法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#decision-tree-基本结构"><span class="nav-number">1.</span> <span class="nav-text">decision tree 基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树的构建"><span class="nav-number">2.</span> <span class="nav-text">决策树的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#节点划分"><span class="nav-number">2.1.</span> <span class="nav-text">节点划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见决策树模型的节点划分方式"><span class="nav-number">2.2.</span> <span class="nav-text">常见决策树模型的节点划分方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ID3：信息增益"><span class="nav-number">2.2.1.</span> <span class="nav-text">ID3：信息增益</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID3：信息增益的缺点"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">ID3：信息增益的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c4-5：信息增益率"><span class="nav-number">2.2.2.</span> <span class="nav-text">c4.5：信息增益率</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c4-5：信息增益率的缺点"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">c4.5：信息增益率的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CART：基尼指数或"><span class="nav-number">2.2.3.</span> <span class="nav-text">CART：基尼指数或</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树对连续值的处理"><span class="nav-number">2.3.</span> <span class="nav-text">决策树对连续值的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#决策树对缺失值的处理"><span class="nav-number">2.4.</span> <span class="nav-text">决策树对缺失值的处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#剪枝-pruning-方式解决过拟合"><span class="nav-number">3.</span> <span class="nav-text">剪枝(pruning)方式解决过拟合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预剪枝-prepruning"><span class="nav-number">3.1.</span> <span class="nav-text">预剪枝  prepruning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预剪枝特点"><span class="nav-number">3.1.1.</span> <span class="nav-text">预剪枝特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后剪枝"><span class="nav-number">3.2.</span> <span class="nav-text">后剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后剪枝特点"><span class="nav-number">3.2.1.</span> <span class="nav-text">后剪枝特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后剪枝算法"><span class="nav-number">3.2.2.</span> <span class="nav-text">后剪枝算法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

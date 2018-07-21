@@ -3,6 +3,58 @@
 
 
     
+  <url>
+    <loc>akihoo.github.io/posts/a45772c3.html</loc>
+    <lastmod>2018-07-21T06:07:49.115Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习之模型整理</title>
+        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/76466336.html</loc>
+    <lastmod>2018-07-21T03:04:19.580Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习模型之BP神经网络</title>
+        <pubTime>2018-05-31T07:10:06.000Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>akihoo.github.io/posts/8e9de4f1.html</loc>
+    <lastmod>2018-07-21T01:14:24.238Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习模型之决策树</title>
+        <pubTime>2018-05-29T06:31:57.848Z</pubTime>
+        
+        <tag>ML</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>akihoo.github.io/posts/1ecc272.html</loc>
@@ -28,23 +80,6 @@
         <display>
         <title>机器学习模型之支持向量机</title>
         <pubTime>2018-06-10T02:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/a45772c3.html</loc>
-    <lastmod>2018-07-20T00:58:58.505Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习之模型整理</title>
-        <pubTime>2018-07-19T02:44:45.000Z</pubTime>
         
         <tag>ML</tag>
          
@@ -209,23 +244,6 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/76466336.html</loc>
-    <lastmod>2018-07-19T09:06:40.889Z</lastmod>
-    <data>
-        <display>
-        <title>BP神经网络小节</title>
-        <pubTime>2018-05-31T07:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>akihoo.github.io/posts/461acaa3.html</loc>
     <lastmod>2018-07-19T09:04:09.815Z</lastmod>
     <data>
@@ -249,23 +267,6 @@
         <display>
         <title>机器学习模型之线性回归</title>
         <pubTime>2018-05-24T07:10:06.000Z</pubTime>
-        
-        <tag>ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/8e9de4f1.html</loc>
-    <lastmod>2018-07-19T08:59:22.866Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习模型之决策树</title>
-        <pubTime>2018-05-29T06:31:57.848Z</pubTime>
         
         <tag>ML</tag>
          
@@ -943,7 +944,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>
