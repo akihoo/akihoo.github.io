@@ -108,27 +108,27 @@
 
 
 
-  <meta name="description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h _ {\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h _ {\theta}(y)$。现在，">
-<meta name="keywords" content="ML">
+  <meta name="description" content="前馈网络与普通机器学习里的神经网络比较类似，因此本博客没做深入总结，具体可以参考之前博客。  简介之前我们已经学习过了基础的神经网络模型，深度学习的深层神经网络所谓的深度，就是相较于普通神经网络的单隐层，深层神经网络模型往往有着更加复杂、更多的隐层关系，我们知道单隐层神经网络相当于一次非线性变换，而深层模型则相当于使用到三个或更多次非线性变换的更复杂的非线性回归模型，而前馈则意味着模型的输出与模">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习模型之BP神经网络">
-<meta property="og:url" content="akihoo.github.io/posts/76466336.html">
+<meta property="og:title" content="深度学习之前馈网络">
+<meta property="og:url" content="akihoo.github.io/posts/e8a24270.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h _ {\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h _ {\theta}(y)$。现在，">
+<meta property="og:description" content="前馈网络与普通机器学习里的神经网络比较类似，因此本博客没做深入总结，具体可以参考之前博客。  简介之前我们已经学习过了基础的神经网络模型，深度学习的深层神经网络所谓的深度，就是相较于普通神经网络的单隐层，深层神经网络模型往往有着更加复杂、更多的隐层关系，我们知道单隐层神经网络相当于一次非线性变换，而深层模型则相当于使用到三个或更多次非线性变换的更复杂的非线性回归模型，而前馈则意味着模型的输出与模">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80p2z9roj30fc08bjts.jpg">
-<meta property="og:updated_time" content="2018-07-21T03:04:19.580Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjmy2prkqj30d7071jrl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjqgnkvdnj30nq09yjv7.jpg">
+<meta property="og:updated_time" content="2018-07-23T05:53:10.743Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习模型之BP神经网络">
-<meta name="twitter:description" content="训练神经网络的步骤训练神经网络：  参数的随机初始化 利用正向传播方法计算所有的$h _ {\theta}(y)$ 编写计算代价函数 $J$ 的代码 利用反向传播方法计算所有偏导数 利用数值检验方法检验这些偏导数 使用优化算法来最小化代价函数  简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h _ {\theta}(y)$。现在，">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80p2z9roj30fc08bjts.jpg">
+<meta name="twitter:title" content="深度学习之前馈网络">
+<meta name="twitter:description" content="前馈网络与普通机器学习里的神经网络比较类似，因此本博客没做深入总结，具体可以参考之前博客。  简介之前我们已经学习过了基础的神经网络模型，深度学习的深层神经网络所谓的深度，就是相较于普通神经网络的单隐层，深层神经网络模型往往有着更加复杂、更多的隐层关系，我们知道单隐层神经网络相当于一次非线性变换，而深层模型则相当于使用到三个或更多次非线性变换的更复杂的非线性回归模型，而前馈则意味着模型的输出与模">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjmy2prkqj30d7071jrl.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="akihoo.github.io/posts/76466336.html"/>
+  <link rel="canonical" href="akihoo.github.io/posts/e8a24270.html"/>
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>机器学习模型之BP神经网络 | 微石的碎碎念</title>
+  <title>深度学习之前馈网络 | 微石的碎碎念</title>
   
 
 
@@ -315,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/76466336.html">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/e8a24270.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -332,7 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习模型之BP神经网络
+          <h1 class="post-title" itemprop="name headline">深度学习之前馈网络
               
             
           </h1>
@@ -357,24 +357,12 @@
                 
               
 
-              <time title="创建时间：2018-05-31 15:10:06" itemprop="dateCreated datePublished" datetime="2018-05-31T15:10:06+08:00">2018-05-31</time>
+              <time title="创建时间：2018-07-23 09:25:29 / 修改时间：13:53:10" itemprop="dateCreated datePublished" datetime="2018-07-23T09:25:29+08:00">2018-07-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-21 11:04:19" itemprop="dateModified" datetime="2018-07-21T11:04:19+08:00">2018-07-21</time>
               
             
           </span>
@@ -388,8 +376,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/76466336.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/76466336.html" itemprop="commentCount"></span>
+                <a href="/posts/e8a24270.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/e8a24270.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,52 +413,43 @@
       
 
       
-        <h1 id="训练神经网络的步骤"><a href="#训练神经网络的步骤" class="headerlink" title="训练神经网络的步骤"></a>训练神经网络的步骤</h1><p>训练神经网络：</p>
-<ol>
-<li>参数的随机初始化</li>
-<li>利用正向传播方法计算所有的$h _ {\theta}(y)$</li>
-<li>编写计算代价函数 $J$ 的代码</li>
-<li>利用反向传播方法计算所有偏导数</li>
-<li>利用数值检验方法检验这些偏导数</li>
-<li>使用优化算法来最小化代价函数</li>
-</ol>
-<p>简单来说即是：正向传播信号，反向传播误差。通过正向传播方法，我们从第一层开始正向一层一层进行计算，直到最后一层的$h _ {\theta}(y)$。现在，为了计算代价函数的偏导数$\frac{\partial}{\partial\Theta^{(l)} _ {ij}}J\left(\Theta\right)$，我们需要采用一种反向传播算法，也就是首先计算最后一层的误差，然后再一层一层反向求出各层的误差，直到倒数第二层。</p>
-<a id="more"></a>
-<h1 id="误差逆传播算法"><a href="#误差逆传播算法" class="headerlink" title="误差逆传播算法"></a>误差逆传播算法</h1><p>以西瓜书为例，如图所示的神经网络：</p>
-<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80p2z9roj30fc08bjts.jpg" alt=""></p>
-<p>对训练样例$(x _ k,y _ k)$，神经网络输出为$(\hat{y} _ 1^k,\hat{y} _ 2^k \cdots \hat{y} _ i^k)$，则误差为：</p>
-<p>$$E _ k=\frac{1}{2}\sum\limits _ {j=1}^l(\hat{y} _ j^k-y _ j^k)^2$$</p>
-<p>参数更新的公式为：</p>
-<p>$$v \leftarrow v+\Delta v$$</p>
-<p>参数更新过程为：从输出层到输入层依次更新</p>
-<ol>
-<li>$w _ {hj}$ ：隐层到输出层的权重</li>
-<li>$\theta _ j$ ： 输出层阈值</li>
-<li>$v _ {ij}$ ： 输入层到隐层的权重</li>
-<li>$\gamma_i$ ： 隐层阈值</li>
-</ol>
-<p>下面将简单介绍公式推导过程中出现的参数：</p>
-<ol>
-<li>$x _ i$：输入层第i个输入神经元的输出</li>
-<li>$\hat{y} _ j$：输出层第j个输出神经元的输出</li>
-<li>$b _ h$：隐层第h个隐层神经元的输出</li>
-<li>$\alpha _ h$：隐层第h个隐层神经元的输入</li>
-<li>$\beta _ j$：输出层第j个输出神经元的输入</li>
-<li>$\theta _ j$：输出层第j个输出神经元的阈值</li>
-<li>$\gamma _ h$：隐层第h个隐层神经元的阈值</li>
-<li>$\eta$：神经网络步长</li>
-</ol>
-<p>首先看$w _ {hj}$，$\Delta w _ {hj}=-\eta \dfrac{\partial E _ k}{\partial w _ {hj}}$，具体计算公式使用链式法则：</p>
-<p>$$\frac{\partial E _ k}{\partial w _ {hj}}=\frac{\partial E _ k}{\partial \hat{y} _ j^k}\frac{\partial \hat{y} _ j^k}{\partial \beta _ j}\frac{\partial \beta _ j}{\partial w _ {hj}}$$</p>
-<p>根据$\beta _ j$的定义，有<br>$$\frac{\partial \beta _ j}{\partial w _ {hj}}=b _ h$$</p>
-<p>激活函数为sigmoidh函数时：<br>$$f(x)=\frac{1}{1+e^{-x}}$$<br>其导数可用自身表示为<br>$$f^\prime(x)=f(x)(1-f(x))$$<br>令输出层误差为：<br>$$g _ j = -\frac{\partial E _ k}{\partial \hat{y} _ j^k}\frac{\partial \hat{y} _ j^k}{\partial \beta _ j}=-(\hat{y}  _ j^k-y  _ j^k)f^\prime(\beta _ j-\theta _ j)=\hat{y} _ j^k(1-\hat{y} _ j^k)(y _ j^k-\hat{y} _ j^k)$$<br>带入链式法则得到（试了下，markdown下好像不能给公式编号）<br>$$\Delta w _ {hj}=\eta g _ j b _ h$$<br>类似有<br>$$\theta _ j=-\eta g _ j$$<br>$$\Delta v _ {ih}=\eta e _ h x _ i$$<br>$$\Delta \gamma _ h=-\eta e _ h$$</p>
-<p>其中$\eta$代表步长。</p>
-<p>$$e _ h=-\dfrac{\partial E _ k }{\partial b _ h}\cdot \dfrac{\partial b _ h}{\partial \alpha _ h}=-\sum\limits _ {j=1}^{l}\dfrac{\partial E _ k }{\partial \beta _ j}\cdot \dfrac{\partial \beta _ j}{\partial b _ h}f’(\alpha _ h-\gamma_h)=b _ h(1-b_h)\sum\limits _ {j=1}^l w _ {hj}g _ j$$<br>(注：隐层到输出层的参数更新时，每个权重$w _ {hj}$仅影响一个输出$y _ j$，而输入层到隐层的参数更新时，每个权重$v _ {ih}$只影响一个隐层$b _ h$，而这个$b _ h$将影响到所有的输出$y _ i$，因此$e _ h$中有个求和的符号。)</p>
-<p>下面将简单进行推导：<br>$$\frac{\partial E}{\partial v _ {ih}}=\sum\limits_{k=0}^{l}\bigg(\frac{\partial E}{\partial \hat{y} _ k}\frac{\partial \hat{y} _ k}{\partial \beta _ k}\frac{\partial \beta _ k}{\partial b _ h}\bigg)\cdot\frac{\partial b _ h}{\partial \alpha _ h}\frac{\partial \alpha _ h}{\partial v _ {ih}}$$<br>链式公式路径为输出层输出→输出层输入→隐层输出→隐层输入→输入层到隐层权重$v _ {ih}$，其中设计输出层的参数需要考虑所有神经元，因此需要求和。</p>
-<p>分析公式中成份，其中<br>$$\frac{\partial E}{\partial \hat{y} _ j}\frac{\partial \hat{y} _ j}{\partial \beta _ j}= g _ j$$<br>$$\beta _ k=\sum\limits _ {i=0}^l b_h w _ {hi} \rightarrow \frac{\partial \beta _ k}{\partial b _ h}=w _ {hk}$$<br>$$b _ h=f(\alpha _ h - \theta _ h) \rightarrow \frac{\partial b _ h }{\partial \alpha _ h}=b _ h (1-b _ h)$$<br>$$\alpha _ h=\sum\limits _ {i=0}^d x _ i v _ {ih} \rightarrow \frac{\partial \alpha _ k}{\partial v _ {kh}}=v _ {kh}$$<br>连乘即可得到最终答案。</p>
-<blockquote>
-<p>有关误差传递的计算可以参考<a href="http://www.cnblogs.com/charlotte77/p/5629865.html" target="_blank" rel="external">Charlotte77</a>、<a href="https://zhuanlan.zhihu.com/p/24801814" target="_blank" rel="external">通俗理解神经网络BP传播算法</a>。更加详细的推导过程可以参考<a href="https://blog.csdn.net/google19890102/article/details/32723459/" target="_blank" rel="external">null的专栏</a>、<a href="https://blog.csdn.net/zb1165048017/article/details/51518347" target="_blank" rel="external">风翼冰舟的博客</a>、<a href="https://www.jianshu.com/p/3d96dbf3f764" target="_blank" rel="external">东皇Amrzs</a></p>
+        <blockquote>
+<p>前馈网络与普通机器学习里的<a href="https://akihoo.github.io/posts/76466336.html">神经网络</a>比较类似，因此本博客没做深入总结，具体可以参考之前博客。</p>
 </blockquote>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>之前我们已经学习过了基础的神经网络模型，深度学习的深层神经网络所谓的深度，就是相较于普通神经网络的单隐层，深层神经网络模型往往有着更加复杂、更多的隐层关系，我们知道单隐层神经网络相当于一次非线性变换，而深层模型则相当于使用到三个或更多次非线性变换的更复杂的非线性回归模型，而前馈则意味着模型的输出与模型的本市没有反馈连接（如果有反馈，则次网络称为循环神经网络）。假设第一、第二、第三隐层对应的非线性变换为$f^{(1)},f^{(2)},f^{(3)}$，则这3层隐层相互连接将形成$f(x)=f^{(3)}(f^{(2)}(f^{(1)}(x)))$，为了书写、计算的方便，之后我们将学习如何用有向图来表示这个网络。</p>
+<h1 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h1><p>大多数现代神经网络采用极大似然训练，代价函数为负的对数似然。<br>$$J(\theta) = -\mathbb{E} _ {\mathbf{x, y} \sim \hat{p} _ \text{data}} \log p _ \text{model}(y \mid x)$$</p>
+<h1 id="输出单元"><a href="#输出单元" class="headerlink" title="输出单元"></a>输出单元</h1><ol>
+<li>线性单元</li>
+<li>softmax单元</li>
+<li>sigmoid单元</li>
+</ol>
+<h1 id="隐层单元"><a href="#隐层单元" class="headerlink" title="隐层单元"></a>隐层单元</h1><ol>
+<li>整流线性单元</li>
+<li>logistic sigmoid与双曲正切函数 </li>
+</ol>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><p>架构（architecture）一词是指网络的整体结构：它应该具有多少单元，以及这些单元应该如何连接。</p>
+<ol>
+<li>网络越深，泛化能力越强，但越难优化</li>
+<li>深度和宽度折中</li>
+<li>理想的架构需要不断实验<h2 id="万能近似性质和深度"><a href="#万能近似性质和深度" class="headerlink" title="万能近似性质和深度"></a>万能近似性质和深度</h2>一个前馈神经网络如果具有线性输出层和至少一层具有任何一种“挤压”性质的激活函数（例如logistic sigmoid激活函数）的隐藏层，只要给予网络足够数量的隐藏单元，它可以以任意的精度来近似任何从一个有限维空间到另一个有限维空间的Borel可测函数。 前馈网络的导数也可以任意好地来近似函数的导数。</li>
+</ol>
+<p>在神经网络框架中，更深的神经网络远远比大模型尺寸的单层网络好得多，这说明神经网络中应该用许多简单的函数组成，而尽量不用复杂庞大的单模型。</p>
+<h1 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>使用更精确的计算图（computational graph）可以更精确地描述反向传播算法。以下是计算图的基本规则：</p>
+<ol>
+<li>在计算图中，我们使用节点来表示变量。变量可以是标量、向量、矩阵、张量、或者甚至是另一类型的变量。</li>
+<li>我们通过有向边代表一个操作，操作是指一个或多个变量的简单函数。我们可以通过将多个操作复合在一起来描述更为复杂的函数。</li>
+</ol>
+<p>下面为计算图示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjmy2prkqj30d7071jrl.jpg" alt=""></p>
+<p>其中图(a)代表$z=x\times y$的计算图，(b)代表用于逻辑回归预测$\hat{y} = \sigma(x^\top w + b)$的图，$u^{(1)},u^{(2)}$代表计算过程中出现的中间变量。</p>
+<h2 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a>微积分</h2><p>使用计算图可以很方便地对反向传播算法地微积分进行计算。</p>
+<h3 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h3><p>例如上图(b)计算图，如果需要计算$\frac{\partial \hat{y}}{\partial x}$，则可沿$x\rightarrow \hat{y}$的有向边路径，依次求偏微分$\frac{\partial \hat{y}}{\partial u^{(2)}}$,$\frac{\partial u^{(2)}}{\partial u^{(1)}}$,$\frac{\partial u^{(1)}}{\partial x}$，然后依据链式法则依次相乘即可得到需要的$\frac{\partial \hat{y}}{\partial x}$。</p>
+<h3 id="例二："><a href="#例二：" class="headerlink" title="例二："></a>例二：</h3><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjqgnkvdnj30nq09yjv7.jpg" alt=""></p>
+<p>有如下函数：</p>
+<p>$$y=xe^{x^2}$$</p>
+<p>求$\frac{\partial y}{\partial x}$，则沿有向边依次计算偏导得到上图中绿色部分。以最右边2个绿色参数为例，箭头代表的操作为点乘，则表达式为 $y=u\times x$ ，依次对变量$u,x$做偏导得$\frac{\partial y}{\partial u}=x,\frac{\partial y}{\partial x}=u$，将结果写在对应得有向边即可。最后将沿不同路径得到得$\frac{\partial y}{\partial x}$相加起来即是最后结果。</p>
+<h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p>深度前馈网络反向传播与<a href="https://akihoo.github.io/posts/76466336.html">神经网络</a>中类似，差别仅在层数更多，计算叫复杂（使用矩阵之间的偏导），在此不多做介绍。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/av9770302/?p=3" target="_blank" rel="external">https://www.bilibili.com/video/av9770302/?p=3</a></p>
 
       
     </div>
@@ -489,12 +468,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/posts/76466336.html">机器学习模型之BP神经网络</a></p>
+  <p><span>本文标题:</span><a href="/posts/e8a24270.html">深度学习之前馈网络</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
-  <p><span>发布时间:</span>2018年05月31日 - 15:05</p>
-  <p><span>最后更新:</span>2018年07月21日 - 11:07</p>
-  <p><span>原始链接:</span><a href="/posts/76466336.html" title="机器学习模型之BP神经网络">akihoo.github.io/posts/76466336.html</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/76466336.html"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年07月23日 - 09:07</p>
+  <p><span>最后更新:</span>2018年07月23日 - 13:07</p>
+  <p><span>原始链接:</span><a href="/posts/e8a24270.html" title="深度学习之前馈网络">akihoo.github.io/posts/e8a24270.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/e8a24270.html"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -522,12 +501,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
-          
-        </div>
-      
 
       
       
@@ -537,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/3e60c6a7.html" rel="next" title="leetcode之两个排序数组的中位数 Median of Two Sorted Arrays">
-                <i class="fa fa-chevron-left"></i> leetcode之两个排序数组的中位数 Median of Two Sorted Arrays
+              <a href="/posts/26e8d9eb.html" rel="next" title="SQL基础">
+                <i class="fa fa-chevron-left"></i> SQL基础
               </a>
             
           </div>
@@ -547,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/585b7684.html" rel="prev" title="nowcoder错题查缺补漏">
-                nowcoder错题查缺补漏 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/70c5fe1c.html" rel="prev" title="牛客网2017校招真题在线编程.md">
+                牛客网2017校招真题在线编程.md <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -750,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#训练神经网络的步骤"><span class="nav-number">1.</span> <span class="nav-text">训练神经网络的步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#误差逆传播算法"><span class="nav-number">2.</span> <span class="nav-text">误差逆传播算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">2.</span> <span class="nav-text">代价函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出单元"><span class="nav-number">3.</span> <span class="nav-text">输出单元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隐层单元"><span class="nav-number">4.</span> <span class="nav-text">隐层单元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#架构设计"><span class="nav-number">5.</span> <span class="nav-text">架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能近似性质和深度"><span class="nav-number">5.1.</span> <span class="nav-text">万能近似性质和深度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算图"><span class="nav-number">6.</span> <span class="nav-text">计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-1"><span class="nav-number">6.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微积分"><span class="nav-number">6.2.</span> <span class="nav-text">微积分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例一："><span class="nav-number">6.2.1.</span> <span class="nav-text">例一：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例二："><span class="nav-number">6.2.2.</span> <span class="nav-text">例二：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向传播"><span class="nav-number">6.3.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

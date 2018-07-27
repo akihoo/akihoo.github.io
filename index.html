@@ -312,6 +312,585 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/847b3d41.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/847b3d41.html" itemprop="url">
+                  深度学习之tensorflow计算图
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-27 10:44:45 / 修改时间：16:06:05" itemprop="dateCreated datePublished" datetime="2018-07-27T10:44:45+08:00">2018-07-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/847b3d41.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/847b3d41.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p> 之前的章节说到使用计算图可以很方便地计算偏导数，可大大加快神经网络逆传播地速度，tensorflow作为常用地深度学习库，本质上来说也是一个构建计算图与执行计算图的过程，下面我们将来学习在tensorflow中如何构建计算图。</p>
+</blockquote>
+<h1 id="图的节点"><a href="#图的节点" class="headerlink" title="图的节点"></a>图的节点</h1><h2 id="节点的初始化"><a href="#节点的初始化" class="headerlink" title="节点的初始化"></a>节点的初始化</h2><p>计算图分为节点与操作2部分，其中节点对应为变量（如常量、矢量、矩阵、张量等），而在tensorflow中，我们可以通过 <a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/constant" target="_blank" rel="external">constant</a>  或 <a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Variable" target="_blank" rel="external">variable</a> 来建立节点。（注意：节点中并不保存数据，而是保存运算结果的引用）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 节点的初始化</span></div><div class="line">tf.constant(</div><div class="line">    value,</div><div class="line">    dtype=<span class="keyword">None</span>,</div><div class="line">    shape=<span class="keyword">None</span>,</div><div class="line">    name=<span class="string">'Const'</span>,</div><div class="line">    verify_shape=<span class="keyword">False</span></div><div class="line">)</div><div class="line">tf.Variable(</div><div class="line">    initial_value=<span class="keyword">None</span>,</div><div class="line">    trainable=<span class="keyword">True</span>,</div><div class="line">    collections=<span class="keyword">None</span>,</div><div class="line">    validate_shape=<span class="keyword">True</span>,</div><div class="line">    caching_device=<span class="keyword">None</span>,</div><div class="line">    name=<span class="keyword">None</span>,</div><div class="line">    variable_def=<span class="keyword">None</span>,</div><div class="line">    dtype=<span class="keyword">None</span>,</div><div class="line">    expected_shape=<span class="keyword">None</span>,</div><div class="line">    import_scope=<span class="keyword">None</span>,</div><div class="line">    constraint=<span class="keyword">None</span></div><div class="line">)</div></pre></td></tr></table></figure>
+<p>其中<code>constant</code>用于生成常数张量，而<code>Variable</code>生成变量张量，<code>Variable()</code>时需要指定初始值（也可指定初始形状），初始化后变量的形状和类型是固定的，如要更改形状，则必须使用<code>assign</code>操作且<code>validate_shape=False</code>，在运行其他操作前，必须对变量初始化，最简单的操作是使用<code>tf.global_variables_initializer()</code>进行全局初始化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 初始化变量</span></div><div class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>], dtype=np.int32)</div><div class="line">w = tf.Variable([<span class="number">1</span>,<span class="number">2</span>])</div><div class="line">y = tf.add(w,a)</div><div class="line">init_op = tf.initialize_all_variables()</div><div class="line">sess = tf.Session()</div><div class="line">sess.run(init_op)</div><div class="line"></div><div class="line">w_new = tf.assign(w,y) <span class="comment"># 将y的值赋给w</span></div><div class="line">sess.run(w_new)</div><div class="line"></div><div class="line"><span class="comment"># tensorflow中有很多辅助函数来创建高阶张量</span></div><div class="line"><span class="comment"># 参考https://www.tensorflow.org/versions/master/api_guides/python/constant_op#Constant_Value_Tensors</span></div><div class="line"><span class="comment"># 2x2 全零矩阵</span></div><div class="line">tf.zeros([<span class="number">2</span>, <span class="number">2</span>])</div><div class="line"><span class="comment"># 为1的向量</span></div><div class="line">tf.ones([<span class="number">6</span>])</div><div class="line"><span class="comment"># 3x3x3张量,服从0~10的均匀分布</span></div><div class="line">tf.random_uniform([<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>], minval=<span class="number">0</span>, maxval=<span class="number">10</span>)</div><div class="line"><span class="comment"># 服从0均值,标准差为2的正太分布</span></div><div class="line">tf.random_normal([<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">2.0</span>)</div></pre></td></tr></table></figure>
+<h2 id="节点的数据类型"><a href="#节点的数据类型" class="headerlink" title="节点的数据类型"></a>节点的数据类型</h2><p>创建节点时，如果未显示指定节点数据类型，则tf会根据python原生数据类型进行推断，推断过程不一定靠谱，建议自行指定数据类型。tf中的数据类型与numpy中的数据类型是兼容的，可以直接将np数组传入tf的计算图进行计算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.array([<span class="number">1</span>, <span class="number">2</span>], dtype=np.int32)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.array([<span class="number">3</span>, <span class="number">4</span>], dtype=np.int32)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = tf.add(a, b)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sess = tf.Session()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sess.run(c)</div><div class="line">array([<span class="number">4</span>, <span class="number">6</span>])</div></pre></td></tr></table></figure>
+<p>tf中常用的<a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/DType" target="_blank" rel="external">数据类型</a>如下：</p>
+<ul>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/float16" target="_blank" rel="external"><code>tf.float16</code></a>: 16-bit half-precision floating-point.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/float32" target="_blank" rel="external"><code>tf.float32</code></a>: 32-bit single-precision floating-point.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/double" target="_blank" rel="external"><code>tf.float64</code></a>: 64-bit double-precision floating-point.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/bfloat16" target="_blank" rel="external"><code>tf.bfloat16</code></a>: 16-bit truncated floating-point.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/complex64" target="_blank" rel="external"><code>tf.complex64</code></a>: 64-bit single-precision complex.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/complex128" target="_blank" rel="external"><code>tf.complex128</code></a>: 128-bit double-precision complex.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/int16" target="_blank" rel="external"><code>tf.int16</code></a>: 16-bit signed integer.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/int32" target="_blank" rel="external"><code>tf.int32</code></a>: 32-bit signed integer.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/int64" target="_blank" rel="external"><code>tf.int64</code></a>: 64-bit signed integer.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/bool" target="_blank" rel="external"><code>tf.bool</code></a>: Boolean.</li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/string" target="_blank" rel="external"><code>tf.string</code></a>: String.</li>
+</ul>
+<h1 id="图的操作"><a href="#图的操作" class="headerlink" title="图的操作"></a>图的操作</h1><p>操作代表张量的计算，它以零或更多张量对象作为输入，并产生零或多个张量对象作为输出。该类型将由python节点构造器产生(比如<a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/matmul" target="_blank" rel="external"><code>tf.matmul</code></a> )或 <a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Graph#create_op" target="_blank" rel="external"><code>tf.Graph.create_op</code></a>，并且需要使用<a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Session#run" target="_blank" rel="external"><code>tf.Session.run</code></a> 来执行操作。</p>
+<p>tf中常用的<a href="https://www.tensorflow.org/versions/master/api_guides/python/math_ops#Arithmetic_Operators" target="_blank" rel="external">算术运算符</a>如下：</p>
+<ul>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/add" target="_blank" rel="external"><code>tf.add</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/subtract" target="_blank" rel="external"><code>tf.subtract</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/multiply" target="_blank" rel="external"><code>tf.multiply</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/add_n" target="_blank" rel="external"><code>tf.add_n</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/abs" target="_blank" rel="external"><code>tf.abs</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/negative" target="_blank" rel="external"><code>tf.negative</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/square" target="_blank" rel="external"><code>tf.square</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/sqrt" target="_blank" rel="external"><code>tf.sqrt</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/pow" target="_blank" rel="external"><code>tf.pow</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/exp" target="_blank" rel="external"><code>tf.exp</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/log" target="_blank" rel="external"><code>tf.log</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/cos" target="_blank" rel="external"><code>tf.cos</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/sin" target="_blank" rel="external"><code>tf.sin</code></a></li>
+<li><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/tan" target="_blank" rel="external"><code>tf.tan</code></a></li>
+</ul>
+<p>另外tf也进行了运算符的重载，如<code>tf.add(a,b)</code>与<code>a+b</code>等价。</p>
+<h1 id="图与会话"><a href="#图与会话" class="headerlink" title="图与会话"></a>图与会话</h1><h2 id="图"><a href="#图" class="headerlink" title="图"></a>图</h2><p><a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Graph" target="_blank" rel="external">图</a>包含一组tf操作对象，它们代表计算单元、张量对象、表示操作之间流动的数据单元。</p>
+<p>在tensorflow库在被加载的时候,它会自动创建一个Graph对象,并把它作为默认的数据流图。我们也可以通过<code>tf.Graph()</code>创建新图，不同图是数据隔离的哦。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">g = tf.Graph()</div><div class="line"><span class="keyword">with</span> g.as_default():</div><div class="line">  <span class="comment"># Define operations and tensors in `g`.</span></div><div class="line">  <span class="comment"># 向指定图添加张量或运算</span></div><div class="line">  c = tf.constant(<span class="number">30.0</span>)</div><div class="line">  <span class="keyword">assert</span> c.graph <span class="keyword">is</span> g</div><div class="line"></div><div class="line"><span class="comment">##也可以使用tf.get_default_graph()获得默认图，也可在基础上加入节点或子图</span></div><div class="line">g1 = tf.get_default_graph()</div><div class="line">c = tf.constant(<span class="number">4.0</span>)</div><div class="line"><span class="keyword">assert</span> c.graph <span class="keyword">is</span> tf.get_default_graph()</div></pre></td></tr></table></figure>
+<h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><p>会话对象(<a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Session" target="_blank" rel="external"><code>tf.Session</code></a>)封装执行操作对象的环境。<code>Session.run()</code>后需要使用<code>Session.close()</code>释放会话关联的所有资源</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Using the `close()` method.</span></div><div class="line">sess = tf.Session()</div><div class="line">sess.run(...)</div><div class="line">sess.close()</div><div class="line"></div><div class="line"><span class="comment"># Using the context manager.</span></div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">  sess.run(...)</div><div class="line"></div><div class="line"><span class="comment"># 以下命令等价</span></div><div class="line">result = tf.add(a,b)</div><div class="line">result.eval(session=sess)</div><div class="line">sess.run(result)</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/70c5fe1c.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/70c5fe1c.html" itemprop="url">
+                  牛客网2017校招真题在线编程.md
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-23 16:25:29" itemprop="dateCreated datePublished" datetime="2018-07-23T16:25:29+08:00">2018-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-25 16:23:02" itemprop="dateModified" datetime="2018-07-25T16:23:02+08:00">2018-07-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/70c5fe1c.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/70c5fe1c.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="星际穿越"><a href="#星际穿越" class="headerlink" title="星际穿越"></a>星际穿越</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>航天飞行器是一项复杂而又精密的仪器，飞行器的损耗主要集中在发射和降落的过程，科学家根据实验数据估计，如果在发射过程中，产生了 x 程度的损耗，那么在降落的过程中就会产生 x2 程度的损耗，如果飞船的总损耗超过了它的耐久度，飞行器就会爆炸坠毁。问一艘耐久度为 h 的飞行器，假设在飞行过程中不产生损耗，那么为了保证其可以安全的到达目的地，只考虑整数解，至多发射过程中可以承受多少程度的损耗？</p>
+<h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出:"></a>输入输出:</h2><h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h3><p>每个输入包含一个测试用例。每个测试用例包含一行一个整数 h （1 &lt;= h &lt;= 10^18）。</p>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h3><p>输出一行一个整数表示结果。</p>
+<h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p>输入</p>
+<blockquote>
+<p>10</p>
+</blockquote>
+<p>输出</p>
+<blockquote>
+<p>2</p>
+</blockquote>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>二分法，很简单<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(n)</span>:</span></div><div class="line">    <span class="keyword">return</span> n*(n+<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="keyword">while</span>(<span class="keyword">True</span>):</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        n=int(input())</div><div class="line">        left=<span class="number">0</span></div><div class="line">        right=n+<span class="number">1</span></div><div class="line">        mid=(left+right)//<span class="number">2</span></div><div class="line">        <span class="keyword">while</span>(<span class="keyword">True</span>):</div><div class="line">            <span class="keyword">if</span>(loss(mid)&gt;n <span class="keyword">and</span> loss(mid+<span class="number">1</span>)&gt;n):</div><div class="line">                right=mid<span class="number">-1</span></div><div class="line">                mid=(left+right)//<span class="number">2</span></div><div class="line">            <span class="keyword">elif</span>(loss(mid)&lt;=n <span class="keyword">and</span> loss(mid+<span class="number">1</span>)&lt;=n):</div><div class="line">                left=mid+<span class="number">1</span></div><div class="line">                mid=(left+right)//<span class="number">2</span></div><div class="line">            <span class="keyword">elif</span>(loss(mid)&lt;=n <span class="keyword">and</span> loss(mid+<span class="number">1</span>)&gt;n):</div><div class="line">                <span class="keyword">break</span></div><div class="line">        print(mid)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        <span class="keyword">break</span></div></pre></td></tr></table></figure></p>
+<h1 id="藏宝图"><a href="#藏宝图" class="headerlink" title="藏宝图"></a>藏宝图</h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>牛牛拿到了一个藏宝图，顺着藏宝图的指示，牛牛发现了一个藏宝盒，藏宝盒上有一个机关，机关每次会显示两个字符串 s 和 t，根据古老的传说，牛牛需要每次都回答 t 是否是 s 的子序列。注意，子序列不要求在原字符串中是连续的，例如串 abc，它的子序列就有 {空串, a, b, c, ab, ac, bc, abc} 8 种。</p>
+<h2 id="输入输出-1"><a href="#输入输出-1" class="headerlink" title="输入输出"></a>输入输出</h2><p>输入描述:</p>
+<blockquote>
+<p>每个输入包含一个测试用例。每个测试用例包含两行长度不超过 10 的不包含空格的可见 ASCII 字符串。</p>
+</blockquote>
+<p>输出描述:</p>
+<blockquote>
+<p>输出一行 “Yes” 或者 “No” 表示结果。</p>
+</blockquote>
+<h2 id="示例1-1"><a href="#示例1-1" class="headerlink" title="示例1"></a>示例1</h2><p>输入</p>
+<blockquote>
+<p>x.nowcoder.com\<br>ooo</p>
+</blockquote>
+<p>输出</p>
+<blockquote>
+<p>Yes</p>
+</blockquote>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>分析题意，子序列不需要字符连续，但相对位置使固定的。因此仅需要用字典记下s中每个字符的index，然后考虑t中字符，将s中相同字符中最小index的字符分配给t中（例如<code>s=&#39;123123&#39;,t=&#39;13&#39;</code>，1的index为0或3，t中的1只需考虑s中index为0的那个即可，因为不要求连续，只要在左边就好），最后检查t的index是否递增即可。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(<span class="keyword">True</span>):</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        s=input()</div><div class="line">        t=input()</div><div class="line">        dic=&#123;&#125;</div><div class="line">        judge=<span class="string">'Yes'</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">            <span class="keyword">if</span> s[i] <span class="keyword">not</span> <span class="keyword">in</span> dic:</div><div class="line">                dic[s[i]]=[i,]</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                dic[s[i]].append(i)</div><div class="line">        l=[]</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> t:</div><div class="line">            <span class="keyword">if</span> j <span class="keyword">not</span> <span class="keyword">in</span> dic:</div><div class="line">                judge=<span class="string">'No'</span></div><div class="line">                <span class="keyword">break</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">if</span>(dic[j]):</div><div class="line">                    l.append(dic[j][<span class="number">0</span>])</div><div class="line">                    <span class="keyword">del</span> dic[j][<span class="number">0</span>]</div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    judge=<span class="string">'No'</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">        <span class="keyword">if</span>(judge):</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(l)<span class="number">-1</span>):</div><div class="line">                <span class="keyword">if</span>(l[i]&gt;l[i+<span class="number">1</span>]):</div><div class="line">                    judge=<span class="string">'No'</span></div><div class="line">                    <span class="keyword">break</span></div><div class="line">        print(judge)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        <span class="keyword">break</span></div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/e8a24270.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/e8a24270.html" itemprop="url">
+                  深度学习之前馈网络
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-23 09:25:29 / 修改时间：13:53:10" itemprop="dateCreated datePublished" datetime="2018-07-23T09:25:29+08:00">2018-07-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/e8a24270.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/e8a24270.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>前馈网络与普通机器学习里的<a href="https://akihoo.github.io/posts/76466336.html">神经网络</a>比较类似，因此本博客没做深入总结，具体可以参考之前博客。</p>
+</blockquote>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>之前我们已经学习过了基础的神经网络模型，深度学习的深层神经网络所谓的深度，就是相较于普通神经网络的单隐层，深层神经网络模型往往有着更加复杂、更多的隐层关系，我们知道单隐层神经网络相当于一次非线性变换，而深层模型则相当于使用到三个或更多次非线性变换的更复杂的非线性回归模型，而前馈则意味着模型的输出与模型的本市没有反馈连接（如果有反馈，则次网络称为循环神经网络）。假设第一、第二、第三隐层对应的非线性变换为$f^{(1)},f^{(2)},f^{(3)}$，则这3层隐层相互连接将形成$f(x)=f^{(3)}(f^{(2)}(f^{(1)}(x)))$，为了书写、计算的方便，之后我们将学习如何用有向图来表示这个网络。</p>
+<h1 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h1><p>大多数现代神经网络采用极大似然训练，代价函数为负的对数似然。<br>$$J(\theta) = -\mathbb{E} _ {\mathbf{x, y} \sim \hat{p} _ \text{data}} \log p _ \text{model}(y \mid x)$$</p>
+<h1 id="输出单元"><a href="#输出单元" class="headerlink" title="输出单元"></a>输出单元</h1><ol>
+<li>线性单元</li>
+<li>softmax单元</li>
+<li>sigmoid单元</li>
+</ol>
+<h1 id="隐层单元"><a href="#隐层单元" class="headerlink" title="隐层单元"></a>隐层单元</h1><ol>
+<li>整流线性单元</li>
+<li>logistic sigmoid与双曲正切函数 </li>
+</ol>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><p>架构（architecture）一词是指网络的整体结构：它应该具有多少单元，以及这些单元应该如何连接。</p>
+<ol>
+<li>网络越深，泛化能力越强，但越难优化</li>
+<li>深度和宽度折中</li>
+<li>理想的架构需要不断实验<h2 id="万能近似性质和深度"><a href="#万能近似性质和深度" class="headerlink" title="万能近似性质和深度"></a>万能近似性质和深度</h2>一个前馈神经网络如果具有线性输出层和至少一层具有任何一种“挤压”性质的激活函数（例如logistic sigmoid激活函数）的隐藏层，只要给予网络足够数量的隐藏单元，它可以以任意的精度来近似任何从一个有限维空间到另一个有限维空间的Borel可测函数。 前馈网络的导数也可以任意好地来近似函数的导数。</li>
+</ol>
+<p>在神经网络框架中，更深的神经网络远远比大模型尺寸的单层网络好得多，这说明神经网络中应该用许多简单的函数组成，而尽量不用复杂庞大的单模型。</p>
+<h1 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>使用更精确的计算图（computational graph）可以更精确地描述反向传播算法。以下是计算图的基本规则：</p>
+<ol>
+<li>在计算图中，我们使用节点来表示变量。变量可以是标量、向量、矩阵、张量、或者甚至是另一类型的变量。</li>
+<li>我们通过有向边代表一个操作，操作是指一个或多个变量的简单函数。我们可以通过将多个操作复合在一起来描述更为复杂的函数。</li>
+</ol>
+<p>下面为计算图示例：</p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjmy2prkqj30d7071jrl.jpg" alt=""></p>
+<p>其中图(a)代表$z=x\times y$的计算图，(b)代表用于逻辑回归预测$\hat{y} = \sigma(x^\top w + b)$的图，$u^{(1)},u^{(2)}$代表计算过程中出现的中间变量。</p>
+<h2 id="微积分"><a href="#微积分" class="headerlink" title="微积分"></a>微积分</h2><p>使用计算图可以很方便地对反向传播算法地微积分进行计算。</p>
+<h3 id="例一："><a href="#例一：" class="headerlink" title="例一："></a>例一：</h3><p>例如上图(b)计算图，如果需要计算$\frac{\partial \hat{y}}{\partial x}$，则可沿$x\rightarrow \hat{y}$的有向边路径，依次求偏微分$\frac{\partial \hat{y}}{\partial u^{(2)}}$,$\frac{\partial u^{(2)}}{\partial u^{(1)}}$,$\frac{\partial u^{(1)}}{\partial x}$，然后依据链式法则依次相乘即可得到需要的$\frac{\partial \hat{y}}{\partial x}$。</p>
+<h3 id="例二："><a href="#例二：" class="headerlink" title="例二："></a>例二：</h3><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftjqgnkvdnj30nq09yjv7.jpg" alt=""></p>
+<p>有如下函数：</p>
+<p>$$y=xe^{x^2}$$</p>
+<p>求$\frac{\partial y}{\partial x}$，则沿有向边依次计算偏导得到上图中绿色部分。以最右边2个绿色参数为例，箭头代表的操作为点乘，则表达式为 $y=u\times x$ ，依次对变量$u,x$做偏导得$\frac{\partial y}{\partial u}=x,\frac{\partial y}{\partial x}=u$，将结果写在对应得有向边即可。最后将沿不同路径得到得$\frac{\partial y}{\partial x}$相加起来即是最后结果。</p>
+<h2 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h2><p>深度前馈网络反向传播与<a href="https://akihoo.github.io/posts/76466336.html">神经网络</a>中类似，差别仅在层数更多，计算叫复杂（使用矩阵之间的偏导），在此不多做介绍。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/av9770302/?p=3" target="_blank" rel="external">https://www.bilibili.com/video/av9770302/?p=3</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/26e8d9eb.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -358,7 +937,7 @@
                 
               
 
-              <time title="创建时间：2018-07-22 16:44:45 / 修改时间：17:38:57" itemprop="dateCreated datePublished" datetime="2018-07-22T16:44:45+08:00">2018-07-22</time>
+              <time title="创建时间：2018-07-22 16:44:45 / 修改时间：19:46:15" itemprop="dateCreated datePublished" datetime="2018-07-22T16:44:45+08:00">2018-07-22</time>
             
 
             
@@ -407,212 +986,18 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>本文使用的数据库来自<a href="https://www.yiibai.com/mysql/sample-database.html" target="_blank" rel="external">https://www.yiibai.com/mysql/sample-database.html</a> ，</p>
 </blockquote>
 <h1 id="连接SQL"><a href="#连接SQL" class="headerlink" title="连接SQL"></a>连接SQL</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 打开 MySQL 服务</div><div class="line">sudo service mysql <span class="keyword">start</span></div><div class="line"></div><div class="line">#连接<span class="keyword">SQL</span>服务器，参数-h为<span class="keyword">sql</span>服务器地址，-u为用户名，默认为root，-p为密码</div><div class="line">mysql -h host -u root -p <span class="keyword">password</span></div><div class="line"></div><div class="line"># 退出<span class="keyword">SQL</span></div><div class="line"><span class="keyword">exit</span></div></pre></td></tr></table></figure>
 <h1 id="数据库与数据表"><a href="#数据库与数据表" class="headerlink" title="数据库与数据表"></a>数据库与数据表</h1><h2 id="显示-SHOW"><a href="#显示-SHOW" class="headerlink" title="显示-SHOW"></a>显示-SHOW</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</div><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</div><div class="line"></div><div class="line"><span class="comment">--# eg.数据表概览</span></div><div class="line">mysql&gt; show tables;</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| Tables_in_yiibaidb |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| customers          |</div><div class="line">| employees          |</div><div class="line">| items              |</div><div class="line">| offices            |</div><div class="line">| orderdetails       |</div><div class="line">| orders             |</div><div class="line">| payments           |</div><div class="line">| productlines       |</div><div class="line">| products           |</div><div class="line">| tokens             |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-<h2 id="创建-CREAT"><a href="#创建-CREAT" class="headerlink" title="创建-CREAT"></a>创建-CREAT</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--#IF NOT EXISTS可选参数</span></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] DATABASE_NAME;</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> [<span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] table_name (column_name data_type[<span class="keyword">size</span>] </div><div class="line">                    [<span class="keyword">NOT</span> <span class="literal">NULL</span>|<span class="literal">NULL</span>] [<span class="keyword">DEFAULT</span> <span class="keyword">value</span>] [AUTO_INCREMENT]);</div></pre></td></tr></table></figure>
-<p>创建数据表时需要指定一下信息：</p>
-<ol>
-<li>表名</li>
-<li>表名字段</li>
-<li>定义每个表字段<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`customers`</span>;</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`customers`</span> (</div><div class="line">  <span class="string">`customerNumber`</span> <span class="built_in">INT</span> <span class="keyword">UNSIGNED</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`customerName`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`phone`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`address`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`city`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`salesRepEmployeeNumber`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`creditLimit`</span> <span class="built_in">decimal</span>(<span class="number">10</span>,<span class="number">2</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`customerNumber`</span>),</div><div class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li>如果你不想字段为 NULL 可以设置字段的属性为 NOT NULL， 在操作数据库时如果输入该字段的数据为NULL ，就会报错。</li>
-<li>AUTO_INCREMENT定义列为自增的属性，一般用于主键，数值会自动加1。</li>
-<li>PRIMARY KEY关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号分隔。</li>
-<li>ENGINE 设置存储引擎，CHARSET 设置编码。</li>
-</ul>
-<h2 id="删除-DROP"><a href="#删除-DROP" class="headerlink" title="删除-DROP"></a>删除-DROP</h2><p>小心，执行删除命令后所有数据都会消失。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">drop</span> <span class="keyword">database</span> DATABASE_NAME;</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> table_name ;</div></pre></td></tr></table></figure></p>
-<h2 id="选择数据库-USE"><a href="#选择数据库-USE" class="headerlink" title="选择数据库-USE"></a>选择数据库-USE</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use DATABASE_NAME;</div></pre></td></tr></table></figure>
-<h1 id="数值类型"><a href="#数值类型" class="headerlink" title="数值类型"></a>数值类型</h1><h2 id="数值类型-1"><a href="#数值类型-1" class="headerlink" title="数值类型"></a>数值类型</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">类型</th>
-<th style="text-align:left">大小</th>
-<th style="text-align:left">范围（有符号）</th>
-<th style="text-align:left">范围（无符号）</th>
-<th style="text-align:left">用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">TINYINT</td>
-<td style="text-align:left">1 字节</td>
-<td style="text-align:left">(-128，127)</td>
-<td style="text-align:left">(0，255)</td>
-<td style="text-align:left">小整数值</td>
-</tr>
-<tr>
-<td style="text-align:left">SMALLINT</td>
-<td style="text-align:left">2 字节</td>
-<td style="text-align:left">(-32 768，32 767)</td>
-<td style="text-align:left">(0，65 535)</td>
-<td style="text-align:left">大整数值</td>
-</tr>
-<tr>
-<td style="text-align:left">MEDIUMINT</td>
-<td style="text-align:left">3 字节</td>
-<td style="text-align:left">(-8 388 608，8 388 607)</td>
-<td style="text-align:left">(0，16 777 215)</td>
-<td style="text-align:left">大整数值</td>
-</tr>
-<tr>
-<td style="text-align:left">INT或INTEGER</td>
-<td style="text-align:left">4 字节</td>
-<td style="text-align:left">(-2 147 483 648，2 147 483 647)</td>
-<td style="text-align:left">(0，4 294 967 295)</td>
-<td style="text-align:left">大整数值</td>
-</tr>
-<tr>
-<td style="text-align:left">BIGINT</td>
-<td style="text-align:left">8 字节</td>
-<td style="text-align:left">(-9 233 372 036 854 775 808，9 223 372 036 854 775 807)</td>
-<td style="text-align:left">(0，18 446 744 073 709 551 615)</td>
-<td style="text-align:left">极大整数值</td>
-</tr>
-<tr>
-<td style="text-align:left">FLOAT</td>
-<td style="text-align:left">4 字节</td>
-<td style="text-align:left">(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-<td style="text-align:left">0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
-<td style="text-align:left">单精度，浮点数值</td>
-</tr>
-<tr>
-<td style="text-align:left">DOUBLE</td>
-<td style="text-align:left">8 字节</td>
-<td style="text-align:left">(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td style="text-align:left">0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td style="text-align:left">双精度，浮点数值 </td>
-</tr>
-<tr>
-<td style="text-align:left">DECIMAL</td>
-<td style="text-align:left">对DECIMAL(M,D) ，如果M&gt;D，为M+2否则为D+2</td>
-<td style="text-align:left">依赖于M和D的值</td>
-<td style="text-align:left">依赖于M和D的值</td>
-<td style="text-align:left">小数值</td>
-</tr>
-</tbody>
-</table>
-<h2 id="日期和时间类型"><a href="#日期和时间类型" class="headerlink" title="日期和时间类型"></a>日期和时间类型</h2><p>每个时间类型有一个有效值范围和一个”零”值，当指定不合法的MySQL不能表示的值时使用”零”值。<br>类型|大小(字节)|范围|格式|用途<br>:- | :- | :- | :- | :- |<br>DATE|3|1000-01-01/9999-12-31|YYYY-MM-DD|日期值<br>TIME|3|’-838:59:59’/‘838:59:59’|HH:MM:SS|时间值或持续时间<br>YEAR|1|1901/2155|YYYY|年份值<br>DATETIME|8|1000-01-01 00:00:00/9999-12-31 23:59:59|YYYY-MM-DD HH:MM:SS|混合日期和时间值<br>TIMESTAMP|4|1970-01-01 00:00:00/2038结束时间是第 2147483647 秒，北京时间 2038-1-19 11:14:07，格林尼治时间 2038年1月19日 凌晨 03:14:07|YYYYMMDD HHMMSS|混合日期和时间值，时间戳</p>
-<h2 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">类型</th>
-<th style="text-align:left">大小</th>
-<th style="text-align:left">用途</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">CHAR</td>
-<td style="text-align:left">0-255字节</td>
-<td style="text-align:left">定长字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">VARCHAR</td>
-<td style="text-align:left">0-65535 字节</td>
-<td style="text-align:left">变长字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">TINYBLOB</td>
-<td style="text-align:left">0-255字节</td>
-<td style="text-align:left">不超过 255 个字符的二进制字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">TINYTEXT</td>
-<td style="text-align:left">0-255字节</td>
-<td style="text-align:left">短文本字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">BLOB</td>
-<td style="text-align:left">0-65 535字节</td>
-<td style="text-align:left">二进制形式的长文本数据</td>
-</tr>
-<tr>
-<td style="text-align:left">TEXT</td>
-<td style="text-align:left">0-65 535字节</td>
-<td style="text-align:left">长文本数据</td>
-</tr>
-<tr>
-<td style="text-align:left">MEDIUMBLOB</td>
-<td style="text-align:left">0-16 777 215字节</td>
-<td style="text-align:left">二进制形式的中等长度文本数据</td>
-</tr>
-<tr>
-<td style="text-align:left">MEDIUMTEXT</td>
-<td style="text-align:left">0-16 777 215字节</td>
-<td style="text-align:left">中等长度文本数据</td>
-</tr>
-<tr>
-<td style="text-align:left">LONGBLOB</td>
-<td style="text-align:left">0-4 294 967 295字节</td>
-<td style="text-align:left">二进制形式的极大文本数据</td>
-</tr>
-<tr>
-<td style="text-align:left">LONGTEXT</td>
-<td style="text-align:left">0-4 294 967 295字节</td>
-<td style="text-align:left">极大文本数据</td>
-</tr>
-</tbody>
-</table>
-<p>CHAR 和 VARCHAR 类型类似，但它们保存和检索的方式不同。它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。</p>
-<p>BINARY 和 VARBINARY 类似于 CHAR 和 VARCHAR，不同的是它们包含二进制字符串而不要非二进制字符串。也就是说，它们包含字节字符串而不是字符字符串。这说明它们没有字符集，并且排序和比较基于列值字节的数值值。</p>
-<p>BLOB 是一个二进制大对象，可以容纳可变数量的数据。有 4 种 BLOB 类型：TINYBLOB、BLOB、MEDIUMBLOB 和 LONGBLOB。它们区别在于可容纳存储范围不同。</p>
-<p>有 4 种 TEXT 类型：TINYTEXT、TEXT、MEDIUMTEXT 和 LONGTEXT。对应的这 4 种 BLOB 类型，可存储的最大长度不同，可根据实际情况选择。</p>
-<h2 id="数据的插入-INSERT-INTO"><a href="#数据的插入-INSERT-INTO" class="headerlink" title="数据的插入- INSERT INTO"></a>数据的插入- INSERT INTO</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name ( field1, field2,...fieldN )</div><div class="line">                       <span class="keyword">VALUES</span></div><div class="line">                       ( value1, value2,...valueN );</div></pre></td></tr></table></figure>
-<p>如果数据是字符型，必须使用单引号或者双引号，如：”value”。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`customers`</span> <span class="keyword">VALUES</span> (<span class="string">'103'</span>, <span class="string">'Atelier graphique'</span>, </div><div class="line">    <span class="string">'40.32.2555'</span>, <span class="string">'54, rue Royale'</span>,  <span class="string">'Nantes'</span>, <span class="string">'44000'</span>, <span class="string">'1370'</span>, <span class="string">'21000.00'</span>);</div></pre></td></tr></table></figure>
-<h2 id="数据的查询-SELECT"><a href="#数据的查询-SELECT" class="headerlink" title="数据的查询-SELECT"></a>数据的查询-SELECT</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name,column_name <span class="keyword">FROM</span> table_name [<span class="keyword">WHERE</span> Clause][<span class="keyword">LIMIT</span> N][ <span class="keyword">OFFSET</span> M];</div></pre></td></tr></table></figure>
-<ul>
-<li>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。</li>
-<li>SELECT 命令可以读取一条或者多条记录。</li>
-<li>你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据</li>
-<li>你可以使用 WHERE 语句来包含任何条件。</li>
-<li>你可以使用 LIMIT 属性来设定返回的记录数。</li>
-<li>你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。<h3 id="WHERE-子句"><a href="#WHERE-子句" class="headerlink" title="WHERE 子句"></a>WHERE 子句</h3>WHERE 子句类似于程序语言中的 if 条件，根据 MySQL 表中的字段值来读取指定的数据。WHERE 子句也可以运用于 SQL 的 DELETE 或者 UPDATE 命令。</li>
-</ul>
-<p>WHERE 子句操作符包括：=（一个等号即可，不是==）    、&lt;&gt;, !=、&gt;    、&lt;    、&gt;=、&lt;=</p>
-<p>比较运算符包括：and、or、in、between、like等</p>
-<h2 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h2><p>UPDATE 命令修改 MySQL 数据表数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">UPDATE</span> table_name <span class="keyword">SET</span> field1=<span class="keyword">new</span>-value1, field2=<span class="keyword">new</span>-value2</div><div class="line">    [<span class="keyword">WHERE</span> Clause]</div><div class="line"><span class="comment">-- #eg:</span></div><div class="line"><span class="keyword">UPDATE</span> customers <span class="keyword">SET</span> customerName=<span class="string">'jack'</span>, city=<span class="string">'NewYork'</span></div><div class="line">    <span class="keyword">WHERE</span> customerNumber=<span class="number">119</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">-- #结果：</span></div><div class="line">mysql&gt; select customerName,city from customers where customerNumber=119;</div><div class="line">+<span class="comment">-------------------+--------+</span></div><div class="line">| customerName      | city   |</div><div class="line">+<span class="comment">-------------------+--------+</span></div><div class="line">| La Rochelle Gifts | Nantes |</div><div class="line">+<span class="comment">-------------------+--------+</span></div><div class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">mysql&gt; <span class="keyword">UPDATE</span> customers <span class="keyword">SET</span> customerName=<span class="string">'jack'</span>, city=<span class="string">'NewYork'</span></div><div class="line">    -&gt;     <span class="keyword">WHERE</span> customerNumber=<span class="number">119</span>;</div><div class="line">Query OK, 1 row affected (0.05 sec)</div><div class="line">Rows matched: 1  Changed: 1  Warnings: 0</div><div class="line"></div><div class="line">mysql&gt; select customerName,city from customers where customerNumber=119;        +--------------+---------+</div><div class="line">| customerName | city    |</div><div class="line">+<span class="comment">--------------+---------+</span></div><div class="line">| jack         | NewYork |</div><div class="line">+<span class="comment">--------------+---------+</span></div><div class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure></p>
-<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><p>使用 DELETE FROM 命令来删除 MySQL 数据表中的记录。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name [<span class="keyword">WHERE</span> Clause]</div><div class="line"><span class="comment">--# eg.</span></div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers <span class="keyword">WHERE</span> customerNumber=<span class="number">119</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">--#结果</span></div><div class="line">mysql&gt; select customerName,city from customers where customerNumber=119;</div><div class="line">+<span class="comment">--------------+---------+</span></div><div class="line">| customerName | city    |</div><div class="line">+<span class="comment">--------------+---------+</span></div><div class="line">| jack         | NewYork |</div><div class="line">+<span class="comment">--------------+---------+</span></div><div class="line">1 row in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">mysql&gt; <span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers <span class="keyword">WHERE</span> customerNumber=<span class="number">119</span>;</div><div class="line">Query OK, 1 row affected (0.05 sec)</div><div class="line"></div><div class="line">mysql&gt; select customerName,city from customers where customerNumber=119;</div><div class="line">Empty <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure></p>
-<h2 id="LIKE-子句"><a href="#LIKE-子句" class="headerlink" title="LIKE 子句"></a>LIKE 子句</h2><p>使用 LIKE 子句进行模糊匹配。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> field1, field2,...fieldN </div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> field1 <span class="keyword">LIKE</span> condition1 [<span class="keyword">AND</span> [<span class="keyword">OR</span>]] filed2 = <span class="string">'somevalue'</span></div><div class="line"></div><div class="line"><span class="comment">--#eg.</span></div><div class="line">mysql&gt; <span class="keyword">select</span> customerName,city <span class="keyword">from</span> customers <span class="keyword">where</span> city <span class="keyword">like</span> <span class="string">'n%'</span> <span class="keyword">limit</span> <span class="number">5</span>;</div><div class="line">+<span class="comment">------------------------+-----------+</span></div><div class="line">| customerName           | city      |</div><div class="line">+<span class="comment">------------------------+-----------+</span></div><div class="line">| Atelier graphique      | Nantes    |</div><div class="line">| Land of Toys Inc.      | NYC       |</div><div class="line">| Muscle Machine Inc     | NYC       |</div><div class="line">| American Souvenirs Inc | New Haven |</div><div class="line">| Vitachrome Inc.        | NYC       |</div><div class="line">+<span class="comment">------------------------+-----------+</span></div><div class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-<ul>
-<li>你可以在 WHERE 子句中使用LIKE子句。使用LIKE子句代替等号 =。</li>
-<li>LIKE 中 % 代表任意字符</li>
-</ul>
-<h2 id="UNION-操作符"><a href="#UNION-操作符" class="headerlink" title="UNION 操作符"></a>UNION 操作符</h2><p>UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n</div><div class="line"><span class="keyword">FROM</span> <span class="keyword">tables</span></div><div class="line">[<span class="keyword">WHERE</span> conditions]</div><div class="line"><span class="keyword">UNION</span> [ALL | <span class="keyword">DISTINCT</span>] <span class="comment">--#DISTINCT: 可选，删除结果集中重复的数据。ALL: 可选，返回所有结果集，包含重复数据。</span></div><div class="line"><span class="keyword">SELECT</span> expression1, expression2, ... expression_n</div><div class="line"><span class="keyword">FROM</span> <span class="keyword">tables</span></div><div class="line">[<span class="keyword">WHERE</span> conditions];</div><div class="line"></div><div class="line"><span class="comment">--#eg1. ALL</span></div><div class="line">mysql&gt; select city from customers where city like 'f%'</div><div class="line">    -&gt; union ALL</div><div class="line">    -&gt; select city from customers where city like 'g%';</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">| city         |</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">| Frankfurt    |</div><div class="line">| Frankfurt    |</div><div class="line">| Fribourg     |</div><div class="line">| Glendale     |</div><div class="line">| Genve        |</div><div class="line">| Glendale     |</div><div class="line">| Graz         |</div><div class="line">| Glen Waverly |</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">8 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line"><span class="comment">--#eg2. DISTINCT</span></div><div class="line">mysql&gt; <span class="keyword">select</span> city <span class="keyword">from</span> customers <span class="keyword">where</span> city <span class="keyword">like</span> <span class="string">'f%'</span></div><div class="line">    -&gt; <span class="keyword">union</span> <span class="keyword">DISTINCT</span></div><div class="line">    -&gt; <span class="keyword">select</span> city <span class="keyword">from</span> customers <span class="keyword">where</span> city <span class="keyword">like</span> <span class="string">'g%'</span>;</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">| city         |</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">| Frankfurt    |</div><div class="line">| Fribourg     |</div><div class="line">| Glendale     |</div><div class="line">| Genve        |</div><div class="line">| Graz         |</div><div class="line">| Glen Waverly |</div><div class="line">+<span class="comment">--------------+</span></div><div class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure></p>
-<h2 id="ORDER-BY-子句"><a href="#ORDER-BY-子句" class="headerlink" title="ORDER BY 子句"></a>ORDER BY 子句</h2><p>SQL SELECT 语句使用 ORDER BY 子句将查询数据排序后再返回数据。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> field1, field2,...fieldN table_name1, table_name2...</div><div class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> field1, [field2...] [<span class="keyword">ASC</span> [<span class="keyword">DESC</span>]]</div></pre></td></tr></table></figure></p>
-<p>使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升序排列。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--# eg.使用post local code 排序</span></div><div class="line">mysql&gt; select city,postalCode from customers where city like 'a%' ORDER BY postalCode;</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">| city       | postalCode |</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">| Auckland   | NULL       |</div><div class="line">| Auckland   | NULL       |</div><div class="line">| Auckland   | NULL       |</div><div class="line">| Amsterdam  | 1043 GR    |</div><div class="line">| Aachen     | 52066      |</div><div class="line">| Allentown  | 70267      |</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">mysql&gt; <span class="keyword">select</span> city,postalCode <span class="keyword">from</span> customers <span class="keyword">where</span> city <span class="keyword">like</span> <span class="string">'a%'</span>;</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">| city       | postalCode |</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">| Allentown  | 70267      |</div><div class="line">| Amsterdam  | 1043 GR    |</div><div class="line">| Auckland   | NULL       |</div><div class="line">| Auckland   | NULL       |</div><div class="line">| Aachen     | 52066      |</div><div class="line">| Auckland   | NULL       |</div><div class="line">+<span class="comment">------------+------------+</span></div><div class="line">6 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-<h2 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h2><p>GROUP BY 语句根据一个或多个列对结果集进行分组。在分组的列上我们可以使用 COUNT, SUM, AVG,等函数。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> column_name, <span class="keyword">function</span>(column_name)</div><div class="line"><span class="keyword">FROM</span> table_name</div><div class="line"><span class="keyword">WHERE</span> column_name <span class="keyword">operator</span> <span class="keyword">value</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_name;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">-- # 查看数据结构</span></div><div class="line">mysql&gt; select * from payments limit 5;</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">| customerNumber | checkNumber | paymentDate | amount   |</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">|            103 | HQ336336    | 2014-10-19  |  6066.78 |</div><div class="line">|            103 | JM555205    | 2013-06-05  | 14571.44 |</div><div class="line">|            103 | OM314933    | 2014-12-18  |  1676.14 |</div><div class="line">|            112 | BO864823    | 2014-12-17  | 14191.12 |</div><div class="line">|            112 | HQ55022     | 2013-06-06  | 32641.98 |</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line"><span class="comment">-- # 统计顾客购买次数、花费金额</span></div><div class="line"><span class="keyword">SELECT</span> customerNumber, <span class="keyword">count</span>(*),<span class="keyword">SUM</span>(amount),<span class="keyword">avg</span>(amount)</div><div class="line"><span class="keyword">FROM</span> payments</div><div class="line"><span class="keyword">WHERE</span> customerNumber &lt; <span class="number">150</span></div><div class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customerNumber;</div><div class="line"></div><div class="line"><span class="comment">--#result</span></div><div class="line">mysql&gt; SELECT customerNumber, count(*),SUM(amount),avg(amount)</div><div class="line">    -&gt; FROM payments</div><div class="line">    -&gt; WHERE customerNumber &lt; 150</div><div class="line">    -&gt; GROUP BY customerNumber;</div><div class="line">+<span class="comment">----------------+----------+-------------+--------------+</span></div><div class="line">| customerNumber | count(*) | SUM(amount) | avg(amount)  |</div><div class="line">+<span class="comment">----------------+----------+-------------+--------------+</span></div><div class="line">|            103 |        3 |    22314.36 |  7438.120000 |</div><div class="line">|            112 |        3 |    80180.98 | 26726.993333 |</div><div class="line">|            114 |        4 |   180585.07 | 45146.267500 |</div><div class="line">|            119 |        3 |   116949.68 | 38983.226667 |</div><div class="line">|            121 |        4 |   104224.79 | 26056.197500 |</div><div class="line">|            124 |        9 |   584188.24 | 64909.804444 |</div><div class="line">|            128 |        4 |    75937.76 | 18984.440000 |</div><div class="line">|            129 |        3 |    66710.56 | 22236.853333 |</div><div class="line">|            131 |        3 |   107639.94 | 35879.980000 |</div><div class="line">|            141 |       13 |   715738.98 | 55056.844615 |</div><div class="line">|            144 |        2 |    43680.65 | 21840.325000 |</div><div class="line">|            145 |        4 |   107446.50 | 26861.625000 |</div><div class="line">|            146 |        3 |   130305.35 | 43435.116667 |</div><div class="line">|            148 |        4 |   156251.03 | 39062.757500 |</div><div class="line">+<span class="comment">----------------+----------+-------------+--------------+</span></div><div class="line">14 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-<h2 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h2><p>使用 MySQL 的 JOIN 在两个或多个表中查询数据。可以在 SELECT, UPDATE 和 DELETE 语句中使用 Mysql 的 JOIN 来联合多表查询。</p>
-<ul>
-<li>INNER JOIN（内连接,或等值连接）：获取两个表中字段匹配关系的记录。</li>
-<li>LEFT JOIN（左连接）：获取左表所有记录，即使右表没有对应匹配的记录。</li>
-<li>RIGHT JOIN（右连接）： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录。<blockquote>
-<p>图片来自<a href="http://www.runoob.com/mysql/mysql-join.html" target="_blank" rel="external">菜鸟教程</a><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftir2a2mg1g305k041a9z.gif" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftir2a2q8hg305k0413yf.gif" alt=""><br><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftir2a2uv8g305k041mx2.gif" alt=""></p>
-</blockquote>
-<h3 id="INNER-JOIN"><a href="#INNER-JOIN" class="headerlink" title="INNER JOIN"></a>INNER JOIN</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--# eg1.选择在纽约（NYC）的顾客消费信息，以下inner join与where等价</span></div><div class="line"><span class="comment">--# join写法</span></div><div class="line"><span class="keyword">SELECT</span> a.customerNumber,a.customerName,a.city,b.amount</div><div class="line"><span class="keyword">FROM</span> customers a <span class="keyword">inner</span> <span class="keyword">join</span> payments b</div><div class="line"><span class="keyword">on</span> a.city = <span class="string">'NYC'</span> <span class="keyword">and</span> a.customerNumber=b.customerNumber;</div><div class="line"><span class="comment">--# where写法</span></div><div class="line"><span class="keyword">SELECT</span> a.customerNumber,a.customerName,a.city,b.amount</div><div class="line"><span class="keyword">FROM</span> customers a ,payments b</div><div class="line"><span class="keyword">where</span> a.city = <span class="string">'NYC'</span> <span class="keyword">and</span> a.customerNumber=b.customerNumber;</div><div class="line"></div><div class="line"><span class="comment">--# result</span></div><div class="line">mysql&gt; SELECT a.customerNumber,a.customerName,a.city,b.amount</div><div class="line">    -&gt; FROM customers a ,payments b</div><div class="line">    -&gt; where a.city = 'NYC' and a.customerNumber=b.customerNumber;</div><div class="line">+<span class="comment">----------------+----------------------+------+----------+</span></div><div class="line">| customerNumber | customerName         | city | amount   |</div><div class="line">+<span class="comment">----------------+----------------------+------+----------+</span></div><div class="line">|            131 | Land of Toys Inc.    | NYC  | 22292.62 |</div><div class="line">|            131 | Land of Toys Inc.    | NYC  | 50025.35 |</div><div class="line">|            131 | Land of Toys Inc.    | NYC  | 35321.97 |</div><div class="line">|            151 | Muscle Machine Inc   | NYC  | 58793.53 |</div><div class="line">|            151 | Muscle Machine Inc   | NYC  | 20314.44 |</div><div class="line">|            151 | Muscle Machine Inc   | NYC  | 58841.35 |</div><div class="line">|            151 | Muscle Machine Inc   | NYC  | 39964.63 |</div><div class="line">|            181 | Vitachrome Inc.      | NYC  | 22602.36 |</div><div class="line">|            181 | Vitachrome Inc.      | NYC  |  5494.78 |</div><div class="line">|            181 | Vitachrome Inc.      | NYC  | 44400.50 |</div><div class="line">|            424 | Classic Legends Inc. | NYC  | 25505.98 |</div><div class="line">|            424 | Classic Legends Inc. | NYC  | 21665.98 |</div><div class="line">|            424 | Classic Legends Inc. | NYC  | 22042.37 |</div><div class="line">|            456 | Microscale Inc.      | NYC  | 27550.51 |</div><div class="line">|            456 | Microscale Inc.      | NYC  |  1679.92 |</div><div class="line">+<span class="comment">----------------+----------------------+------+----------+</span></div><div class="line">15 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="left-join-and-right-join"><a href="#left-join-and-right-join" class="headerlink" title="left join and right join"></a>left join and right join</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> a.customerNumber,a.customerName,a.city,b.amount</div><div class="line"><span class="keyword">FROM</span> customers a <span class="keyword">left</span> <span class="keyword">join</span> payments b</div><div class="line"><span class="keyword">on</span> a.city = <span class="string">'NYC'</span> <span class="keyword">and</span> a.customerNumber=b.customerNumber</div><div class="line"><span class="keyword">limit</span> <span class="number">10</span>;</div><div class="line"><span class="comment">--# eg1.左连接选择在纽约（NYC）的顾客消费信息，可见顾客city并不全是NYC，仅有NYC城市的才会出现amount，参考左连接特性</span></div><div class="line">mysql&gt; SELECT a.customerNumber,a.customerName,a.city,b.amount</div><div class="line">    -&gt; FROM customers a left join payments b</div><div class="line">    -&gt; on a.city = 'NYC' and a.customerNumber=b.customerNumber</div><div class="line">    -&gt; limit 10;</div><div class="line">+<span class="comment">----------------+------------------------------+---------------+----------+</span></div><div class="line">| customerNumber | customerName                 | city          | amount   |</div><div class="line">+<span class="comment">----------------+------------------------------+---------------+----------+</span></div><div class="line">|            103 | Atelier graphique            | Nantes        |     NULL |</div><div class="line">|            112 | Signal Gift Stores           | Las Vegas     |     NULL |</div><div class="line">|            114 | Australian Collectors, Co.   | Melbourne     |     NULL |</div><div class="line">|            121 | Baane Mini Imports           | Stavern       |     NULL |</div><div class="line">|            124 | Mini Gifts Distributors Ltd. | San Rafael    |     NULL |</div><div class="line">|            125 | Havel &amp; Zbyszek Co           | Warszawa      |     NULL |</div><div class="line">|            128 | Blauer See Auto, Co.         | Frankfurt     |     NULL |</div><div class="line">|            129 | Mini Wheels Co.              | San Francisco |     NULL |</div><div class="line">|            131 | Land of Toys Inc.            | NYC           | 22292.62 |</div><div class="line">|            131 | Land of Toys Inc.            | NYC           | 50025.35 |</div><div class="line">+<span class="comment">----------------+------------------------------+---------------+----------+</span></div><div class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-<p>右连接类似。</p>
-<h2 id="NULL-值处理"><a href="#NULL-值处理" class="headerlink" title="NULL 值处理"></a>NULL 值处理</h2><ul>
-<li>通过 IS NULL 与 IS NOT NULL 判断是否空值</li>
-<li>不可使用 = 运算符比较 NULL （NULL=NULL返回false）<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select officecode,phone,state from offices;</div><div class="line">+<span class="comment">------------+------------------+-------+</span></div><div class="line">| officecode | phone            | state |</div><div class="line">+<span class="comment">------------+------------------+-------+</span></div><div class="line">| 1          | +1 650 219 4782  | CA    |</div><div class="line">| 2          | +1 215 837 0825  | MA    |</div><div class="line">| 3          | +1 212 555 3000  | NY    |</div><div class="line">| 4          | +33 14 723 4404  | NULL  |</div><div class="line">| 5          | +86 33 224 5000  | BJ    |</div><div class="line">| 6          | +61 2 9264 2451  | NULL  |</div><div class="line">| 7          | +44 20 7877 2041 | NULL  |</div><div class="line">+<span class="comment">------------+------------------+-------+</span></div><div class="line">7 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">mysql&gt; <span class="keyword">select</span> phone,state <span class="keyword">from</span> offices <span class="keyword">where</span> state <span class="keyword">is</span> <span class="literal">NULL</span>;</div><div class="line">+<span class="comment">------------------+-------+</span></div><div class="line">| phone            | state |</div><div class="line">+<span class="comment">------------------+-------+</span></div><div class="line">| +33 14 723 4404  | NULL  |</div><div class="line">| +61 2 9264 2451  | NULL  |</div><div class="line">| +44 20 7877 2041 | NULL  |</div><div class="line">+<span class="comment">------------------+-------+</span></div><div class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div><div class="line"></div><div class="line">mysql&gt; <span class="keyword">select</span> phone,state <span class="keyword">from</span> offices <span class="keyword">where</span> state <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">NULL</span>;</div><div class="line">+<span class="comment">-----------------+-------+</span></div><div class="line">| phone           | state |</div><div class="line">+<span class="comment">-----------------+-------+</span></div><div class="line">| +1 650 219 4782 | CA    |</div><div class="line">| +1 215 837 0825 | MA    |</div><div class="line">| +1 212 555 3000 | NY    |</div><div class="line">| +86 33 224 5000 | BJ    |</div><div class="line">+<span class="comment">-----------------+-------+</span></div><div class="line">4 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>MySQL中使用 REGEXP 操作符来进行正则表达式匹配。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">--# 匹配HQ开头的订单号</span></div><div class="line">mysql&gt; select * from payments where checkNumber regexp '^HQ' limit 5;</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">| customerNumber | checkNumber | paymentDate | amount   |</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">|            103 | HQ336336    | 2014-10-19  |  6066.78 |</div><div class="line">|            112 | HQ55022     | 2013-06-06  | 32641.98 |</div><div class="line">|            198 | HQ920205    | 2013-07-06  |  6036.96 |</div><div class="line">+<span class="comment">----------------+-------------+-------------+----------+</span></div><div class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure></p>
-<h2 id="ALTER命令"><a href="#ALTER命令" class="headerlink" title="ALTER命令"></a>ALTER命令</h2><p>修改数据表名或者修改数据表字段时，就需要使用到MySQL ALTER命令。<br>参考：<a href="https://www.yiibai.com/mysql/alter-table.html" target="_blank" rel="external">https://www.yiibai.com/mysql/alter-table.html</a> ， <a href="http://www.runoob.com/mysql/mysql-alter.html" target="_blank" rel="external">http://www.runoob.com/mysql/mysql-alter.html</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/26e8d9eb.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -712,7 +1097,7 @@
                 
               
 
-              <time title="创建时间：2018-07-22 09:51:35 / 修改时间：10:32:59" itemprop="dateCreated datePublished" datetime="2018-07-22T09:51:35+08:00">2018-07-22</time>
+              <time title="创建时间：2018-07-22 09:51:35 / 修改时间：19:47:00" itemprop="dateCreated datePublished" datetime="2018-07-22T09:51:35+08:00">2018-07-22</time>
             
 
             
@@ -761,8 +1146,7 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>不折腾毋宁死，为了更好地魔改博客，对hexo工作原理还是需要有一定地了解，本文节选自<a href="https://juejin.im/post/598eeaff5188257d592e55bb" target="_blank" rel="external">【掘金】sunshine小小倩</a></p>
 </blockquote>
 <h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>使用 Hexo + github pages 搭建博客，刚刚我们简单介绍了 github pages，那么现在我们就该介绍一下 Hexo，我们了解到 Hexo 是用来生成 HTML 的，那么这篇文章我们就主要来讲一下 Hexo 是怎样生成 HTML 的。</p>
@@ -771,133 +1155,13 @@
 <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
 </blockquote>
 <p>在官方文档中安装了 Hexo 中我们就安装了 Hexo，然后我们就可以看到文档结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml      // 站点配置文件</div><div class="line">├── db.json          // 缓存文件</div><div class="line">├── node_modules     // 安装的插件以及hexo所需的一些nodejs模块</div><div class="line">├── package.json     // 项目的依赖文件</div><div class="line">├── scaffolds        // 模版文件</div><div class="line">├── source           // 源文件，用来存放你的文章 md 文件</div><div class="line">└── themes           // 主题文件复制代码然后我们可以安装主题，比我我安装的 NexT 主题，安装完之后会在 themes 下面产生一个 next 文件存放主题中的内容，文档结构如下：</div><div class="line">.</div><div class="line">├── LICENSE</div><div class="line">├── README.en.md       // READEME 英文版</div><div class="line">├── README.md          // READEME 中文文件</div><div class="line">├── _config.yml        // 主题配置文件</div><div class="line">├── bower.json</div><div class="line">├── gulpfile.coffee</div><div class="line">├── languages         // 多语言配置文件</div><div class="line">├── layout            // 模板文件</div><div class="line">├── package.json      // 项目的依赖文件</div><div class="line">├── scripts           // 主题的脚本文件</div><div class="line">├── source            // 主题的资源文件 CSS IMG</div><div class="line">└── test</div></pre></td></tr></table></figure></p>
-<h2 id="Hexo-的工作原理"><a href="#Hexo-的工作原理" class="headerlink" title="Hexo 的工作原理"></a>Hexo 的工作原理</h2><p>这里我们来分析一下 Hexo 每次部署的流程</p>
-<ol>
-<li>hexo g：生成静态文件。将我们的数据和界面相结合生成静态文件的过程。会遍历主题文件中的 source 文件夹（js、css、img 等静态资源），然后建立索引，然后根据索引生成 pubild 文件夹中，此时的 publid 文件是由 html、 js、css、img 建立的纯静态文件可以通过 index.html 作为入口访问你的博客。</li>
-<li>hexo d：部署文件。部署主要是根据在 _config.yml 中配置的 git 仓库或者 coding 的地址，将 public 文件上传至 github 或者 coding 中。然后再根据上面的 github 提供的 pages 服务呈现出页面。当然你也可以直接将你生成的 public 文件上传至你自己的服务器上。</li>
-</ol>
-<h1 id="Hexo-的模板引擎"><a href="#Hexo-的模板引擎" class="headerlink" title="Hexo 的模板引擎"></a>Hexo 的模板引擎</h1><blockquote>
-<p>模板引擎的作用，就是将界面与数据分离。最简单的原理是将模板内容中指定的地方替换成数据，实现业务代码与逻辑代码分离。</p>
-</blockquote>
-<p>我们可以注意到，在 Hexo 中，source 文件夹和 themes 文件夹是在同级的，我们就可以将 source 文件夹理解为数据库，而主题文件夹相当于 界面。然后我们 hexo g 就将我们的数据和界面相结合生成静态文件 public。<br>Hexo 的模板引擎是默认使用 ejs 编写的。hexo首先会解析 md 文件，然后根据 layout 判断布局类型，再调用其他的文件，这样每一块的内容都是独立的，提高代码的复用性。最终会生成一个 html 页面。<br>模板文件在 layout 文件夹下，layout 文件文档结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _custom                           // 通用布局</div><div class="line">├── _layout.swig                      // 默认布局布局</div><div class="line">├── _macro                            // 插件模板</div><div class="line">├── _partials                         // 局部布局</div><div class="line">├── _scripts                          // script模板</div><div class="line">├── _third-party                      // 第三方插件模板</div><div class="line">├── archive.swig                      // 归档模板</div><div class="line">├── category.swig                     // 分类模板</div><div class="line">├── index.swig                        // 首页模板</div><div class="line">├── page.swig                         // 其他模板</div><div class="line">├── photo.swig                        // 照片模板（自定义）</div><div class="line">├── post.swig                         // 文章模板</div><div class="line">├── schedule.swig                     // 归档模板</div><div class="line">└── tag.swig                          // 标签模板</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>每个模板都默认使用layout布局，您可在文章的前置申明中指定其他布局，比如“post”或者“page”或是设为false来关闭布局功能（如果不填默认是post，这个在_config.yml中可以设置默认值），您甚至可在布局中再使用其他布局来建立嵌套布局。</p>
-</blockquote>
-<p>在我们新建页面或者新建文章的使用可以选定我们使用的模板。<code>hexo new [layout] &lt;title&gt;</code>就会使用对应的模板。<br>其中 <code>_layout.swig</code> 是通用模板，里面引入了 <code>head</code>、<code>footer</code> 等公共组件，然后在其他的模板中会引入这个 <code>_layout.swig</code> 通用模板，比如 <code>post.swig</code> 模板</p>
-<pre><code>{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
-
-
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
-
-        {% block page_class %}page-post-detail{% endblock %}
-
-
-{% block content %}
-
-        <div id="posts" class="posts-expand">
-            {{ post_template.render(page) }}
-
-            <div class="post-spread">
-            {% if theme.jiathis %}
-                {% include '_partials/share/jiathis.swig' %}
-            {% elseif theme.baidushare %}
-                {% include '_partials/share/baidushare.swig' %}
-            {% elseif theme.add_this_id %}
-                {% include '_partials/share/add-this.swig' %}
-            {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-                {% include '_partials/share/duoshuo_share.swig' %}
-            {% endif %}
-            </div>
-        </div>
-
-        {% endblock %}
-
-{% block sidebar %}
-        {{ sidebar_template.render(true) }}
-        {% endblock %}
-
-
-{% block script_extra %}
-        {% include '_scripts/pages/post-details.swig' %}
-        {% endblock %}
-</code></pre><p>其中在第 11 行</p>
-<pre><code>{% block content %} 
-            // 中间为该模板自定义内容
-        {% endblock %}
-</code></pre><h1 id="数据的填充"><a href="#数据的填充" class="headerlink" title="数据的填充"></a>数据的填充</h1><p>数据的填充主要是 hexo -g 的时候将数据传递给 swig 模板，然后再由 swig 模板填充到 HTML 中。</p>
-<h2 id="配置文件中的数据"><a href="#配置文件中的数据" class="headerlink" title="配置文件中的数据"></a>配置文件中的数据</h2><p>Hexo 的配置文件 <code>_config.yml</code> 使用 yml语法 。例如博客的名字、副标题等等之类。这些数据项组织在 config 对象中。可以数字、字符串、对象、数组，</p>
-<h2 id="配置文件中数据的使用"><a href="#配置文件中数据的使用" class="headerlink" title="配置文件中数据的使用"></a>配置文件中数据的使用</h2><p>如果要在模板中使用某个具体的值，比如字符串、数字、逻辑变量或者对象的某个成员，可以在主题的模板文件 swig 中直接使用：</p>
-<pre><code>{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
-</code></pre><h2 id="Hexo-中的变量"><a href="#Hexo-中的变量" class="headerlink" title="Hexo 中的变量"></a>Hexo 中的变量</h2><p>Hexo 提供了很多的变量，比如我们上面使用的 page 变量，还有 site 变量等，这些都是 Hexo 提供的，我们可以拿来直接使用的，常用的变量有：</p>
-<ul>
-<li>site：对应整个网站的变量，一般会用到 site.posts.length 制作分页器。<ul>
-<li>site.posts 所有文章</li>
-<li>site.pages 所有分页</li>
-<li>site.categories 所有分类</li>
-<li>site.tags 所有标签</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>page：存放当前页面的信息，例如我在 index.ejs 中使用 page.posts 获取了当前页面的所有文章而不是使用 site.posts。</li>
-<li>config：config 变量我们在主目录下配置文件 _config.yml 中保存的信息。</li>
-<li>theme：theme 变量是我们在主题目录下配置文件 _config.yml 中保存的信息。</li>
-<li>path：当前页面的路径（不含根路径）。</li>
-<li>url：页面完整网址。</li>
-</ul>
-<h3 id="页面变量"><a href="#页面变量" class="headerlink" title="页面变量"></a>页面变量</h3><p>Page(page) 这里指的是 <code>hexo new page</code> 创建的那个页面</p>
-<ul>
-<li>page.title：文章标题</li>
-<li>page.date：文章建立日期</li>
-<li>page.updated：文章更新日期</li>
-<li>page.comments：留言是否开启</li>
-<li>page.layout：布局名称</li>
-<li>page.content：文章完整内容</li>
-<li>page.excerpt：文章摘要</li>
-<li>page.more：除了摘要的其他内容</li>
-<li>page.source：文章原始路劲</li>
-<li>page.full_source：文章完整原始路径</li>
-<li>page.path：文章网址（不含根路径），通常在主题中使用url_for(page.path)</li>
-<li>page.permalink：文章永久网址</li>
-<li>page.prev：上一篇文章，如果此为第一篇文章则为null</li>
-<li>page.next：下一篇文章，如果此为最后一篇文章则为null</li>
-<li>page.raw：文章原始内容</li>
-<li>page.photos：文章的照片（用于相册）</li>
-<li>page.link：文章的外链（用于链接文章）</li>
-</ul>
-<h3 id="Post-post-变量"><a href="#Post-post-变量" class="headerlink" title="Post(post) 变量"></a>Post(post) 变量</h3><p>这里指的是文章页面，与page布局相同，添加如下变量：</p>
-<ul>
-<li>page.pulished：文章非草稿为true</li>
-<li>page.categories：文章分类</li>
-<li>page.tags：文章标签</li>
-</ul>
-<h3 id="首页-index"><a href="#首页-index" class="headerlink" title="首页(index)"></a>首页(index)</h3><ul>
-<li>page.per_page：每一页显示的文章数</li>
-<li>page.total：文章数量</li>
-<li>page.current：当前页码</li>
-<li>page.current_url：当前页的URL</li>
-<li>page.posts：当前页的文章</li>
-<li>page.prev：前一页页码，如果为第一页，该值为0</li>
-<li>page.prev_link：前一页URL，如果为第一页，则为’’</li>
-<li>page.next：后一页页码，如果为最后一页，则为0</li>
-<li>page.next_link：后一页URL，如果为最后一页，则为’’</li>
-<li>page.path：当前页网址（不含根路径），通常在主题中使用url_for(page.path)</li>
-</ul>
-<h3 id="归档页-archive"><a href="#归档页-archive" class="headerlink" title="归档页(archive)"></a>归档页(archive)</h3><p>与index布局相同，但是新增如下变量：</p>
-<ul>
-<li>archive 为true</li>
-<li>year 归档年份（4位）</li>
-<li>month 归档月份（不包含0）</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>非要说 Hexo 是什么的话，我觉得就是生成静态页面的工具，可以将我们使用 markdown 编写的内容与主题模板相结合，生成 HTML 静态文件。并且可以和 github 的 pages 或者其他可以将静态页面展现出来的服务（例如 coding 的 pages 服务）相结合，一键部署。</p>
-<p>再深入一点讲 Hexo 的原理的话，那就应该是使用 yaml 语言 做配置文件，使用 ejs 或者 swig 作为主题模板，与使用 markdown 书写的内容结合，生成静态 HTML 文件。</p>
-<blockquote>
-<p>想了解更多更详细的内容，可以参考：<a href="http://coderunthings.com/2017/08/20/howhexoworks/" target="_blank" rel="external">1.hexo是怎么工作的</a>,<a href="http://chensd.com/2016-06/hexo-theme-guide.html" target="_blank" rel="external">2.Hexo 主题开发指南</a><br>hexo主题优化教程：<a href="https://www.jianshu.com/p/1f8107a8778c" target="_blank" rel="external">hexo搭建个人博客–NexT主题优化</a>、<a href="https://oliverqueen.cn/2018/01/25/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%80%E5%85%A8%E7%9A%84%E4%BD%BF%E7%94%A8HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/" target="_blank" rel="external">可能是最全的使用HEXO搭建个人博客教程</a></p>
-</blockquote>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/undefined.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1174,7 +1438,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-21 18:01:32" itemprop="dateModified" datetime="2018-07-21T18:01:32+08:00">2018-07-21</time>
+                <time title="修改时间：2018-07-25 17:58:37" itemprop="dateModified" datetime="2018-07-25T17:58:37+08:00">2018-07-25</time>
               
             
           </span>
@@ -1807,533 +2071,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/c80e95e5.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/c80e95e5.html" itemprop="url">
-                  leetcode 刷题总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-13 10:08:39" itemprop="dateCreated datePublished" datetime="2018-07-13T10:08:39+08:00">2018-07-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/c80e95e5.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/c80e95e5.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="leetcode-刷题总结"><a href="#leetcode-刷题总结" class="headerlink" title="leetcode 刷题总结"></a>leetcode 刷题总结</h1><blockquote>
-<p>开始刷 leetcode 和剑指 offer 大概一周多了吧，从最开始最简单的代码也要敲 30 mins，各种 bug 不断，到现在简单的可以10 mins 敲完（当然也有些没有思路的），还是有些进步的，另外发现还是需要把一些题解记录下来，总结一下，因为目前按 tags 和难度分开刷的，题目编号可能不连续，打算长期更新，加油吧！</p>
-</blockquote>
-<blockquote>
-<p>进度更新（6月4日）：跌跌撞撞也做了80+题，从开始只做简单到现在开始做些中等题，也算有些进步吧，不足的是代码bug太多，总体接受率才28%，加油，接下来想办法提升接受率，不要一直改bug！</p>
-</blockquote>
-<blockquote>
-<p>更新（6月26号）：最近一段时间没怎么刷题，开始刷题一个多月了，现在leetcode上才刷97题，blog上才更了不到70题，不知道为什么有些题没有记录上来。另外做了一下牛客网的校招编程题，感觉还是不会做。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/c80e95e5.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/7ca61767.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/7ca61767.html" itemprop="url">
-                  使用python在文本文件中添加特定内容
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-13 09:08:39" itemprop="dateCreated datePublished" datetime="2018-07-13T09:08:39+08:00">2018-07-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/7ca61767.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/7ca61767.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>昨天折腾博客折腾了一整天，什么事情都没干，好气啊，于是又水了一篇blog。<br>主要就是加入了版权信息，具体效果可以看结尾。操作可参考<a href="https://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="external">此教程</a>。这教程写的很不错，欢迎大家一起折腾。<br>其实还有些改动，比如想加入导航页，最后也没成功，哎，不多说了。开始吧。</p>
-</blockquote>
-<p>需要在页面尾部显示版权信息，需要在开头加入<code>copyright: true</code>，效果如下：</p>
-<pre><code>---
-title: 使用python在文本文件中添加特定内容
-copyright: true
-date: 2018-07-13 09:08:39
-tags:
----
-</code></pre><p>于是想用python写个脚本，批量在md文件开头加入copyright，代码也不难，直接贴了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_name</span><span class="params">(file_dir)</span>:</span></div><div class="line">    <span class="comment"># 获取所有md文件名</span></div><div class="line">    filelist = []</div><div class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(file_dir):  </div><div class="line">        <span class="keyword">for</span> fileName <span class="keyword">in</span> files:</div><div class="line">            <span class="keyword">if</span>(fileName[<span class="number">-3</span>:]==<span class="string">'.md'</span>):</div><div class="line">                filelist.append(fileName) <span class="comment">#当前路径下所有非目录子文件</span></div><div class="line">    <span class="keyword">return</span> filelist</div><div class="line"></div><div class="line">path = <span class="string">'./'</span></div><div class="line">file_list = file_name(path)</div><div class="line">print(file_list)</div><div class="line">content_add=<span class="string">'copyright: true \n'</span> <span class="comment"># 需要加入的信息</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> file_list:</div><div class="line">    file = open(i,<span class="string">'r'</span>,encoding=<span class="string">'utf-8'</span>)</div><div class="line">    content = file.read() <span class="comment"># 读取文件</span></div><div class="line">    <span class="keyword">if</span>(content.find(<span class="string">'copyright: true'</span>)==<span class="number">-1</span>):</div><div class="line">    <span class="comment"># 如果没有copyright信息，则找到tags位置，并将copyright信息插入</span></div><div class="line">        pos=content.find(<span class="string">'tags:'</span>)</div><div class="line">        content = content[:pos] + content_add + content[pos:]</div><div class="line">    file.close()</div><div class="line">    file = open(i,<span class="string">'w'</span>,encoding=<span class="string">'utf-8'</span>) <span class="comment"># 保存文件</span></div><div class="line">    file.write( content )</div></pre></td></tr></table></figure>
-<p>昨天瞎改完，发现文章的图片已经不能正常显示了，然后折腾了一下也没解决，以后有机会再找个图床吧。</p>
-<p>又开心地水了篇博客。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/712a0b5b.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/712a0b5b.html" itemprop="url">
-                  机器学习之模型评估
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-11 10:39:14" itemprop="dateCreated datePublished" datetime="2018-07-11T10:39:14+08:00">2018-07-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 17:08:09" itemprop="dateModified" datetime="2018-07-19T17:08:09+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/712a0b5b.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/712a0b5b.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="过拟合与欠拟合"><a href="#过拟合与欠拟合" class="headerlink" title="过拟合与欠拟合"></a>过拟合与欠拟合</h1><h2 id="过拟合（over-fitting）"><a href="#过拟合（over-fitting）" class="headerlink" title="过拟合（over-fitting）"></a>过拟合（over-fitting）</h2><p>过拟合其实就是所建的机器学习模型或者是深度学习模型在训练样本中过度学习，将训练样本的误差等特点也当作样本的一般特性，导致在验证数据集以及测试数据集中表现不佳。</p>
-<h2 id="欠拟合"><a href="#欠拟合" class="headerlink" title="欠拟合"></a>欠拟合</h2><p>欠拟合值机器学习模型并没有将样本的一般性质学好。</p>
-<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h2><p>使用实验测试来对模型的泛化能力做出评估进而做出选择，通常使用测试集对模型识别新样本能力进行测试。</p>
-<h3 id="留出法"><a href="#留出法" class="headerlink" title="留出法"></a>留出法</h3><p>“留出法”（hold-out）直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集S，另一个作为测试集T。在S上训练出模型后，用T来评估其测试误差，作为对泛化误差的估计。</p>
-<p>需注意的是，训练/测试集的划分要尽可能保持数据分布的一致性，避免因数据划分过程引入额外的偏差而对最终结果产生影响，例如在分类任务中至少要保持样本的类别比例相似。另一个需注意的问题是，即便在给定训练/测试集的样本比例后，仍存在多种划分方式对初始数据集D进行分割，这些不同的划分将导致不同的训练/测试集，相应的，模型评估的结果也会有差别。因此，单次使用留出法得到的估计结果往往不够稳定可靠，在使用留出法时，一般要采用若干次随机划分、重复进行实验评估后取平均值作为留出法的评估结果。</p>
-<p>另外使用留出法会导致一个窘境：若令训练集S包含绝大多数样本，则训练出的模型可能更接近于用D训练出的模型，但由于T比较小，评估结果可能不够稳定准确；若令测试集T多包含一些样本，则训练集S与D差别更大了，被评估的模型与用D训练出的模型相比可能有较大差别，从而降低了评估结果的保真性（fidelity）。这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。可从“偏差-方差”的角度来理解：测试集小时，评估结果的方差较大；训练集小时，评估结果的偏差较大。</p>
-<p>这个问题没有完美的解决方案，常见做法是将大约2/3~4/5的样本用于训练，剩余样本用于测试。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/712a0b5b.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2385,7 +2122,7 @@ tags:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
