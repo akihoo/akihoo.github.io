@@ -109,14 +109,14 @@
 
 
   <meta name="description" content="之前的章节说到使用计算图可以很方便地计算偏导数，可大大加快神经网络逆传播地速度，tensorflow作为常用地深度学习库，本质上来说也是一个构建计算图与执行计算图的过程，下面我们将来学习在tensorflow中如何构建计算图。  图的节点节点的初始化计算图分为节点与操作2部分，其中节点对应为变量（如常量、矢量、矩阵、张量等），而在tensorflow中，我们可以通过 constant  或 v">
-<meta name="keywords" content="deeplearning">
+<meta name="keywords" content="DeepLearning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习之tensorflow计算图">
 <meta property="og:url" content="akihoo.github.io/posts/847b3d41.html">
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="之前的章节说到使用计算图可以很方便地计算偏导数，可大大加快神经网络逆传播地速度，tensorflow作为常用地深度学习库，本质上来说也是一个构建计算图与执行计算图的过程，下面我们将来学习在tensorflow中如何构建计算图。  图的节点节点的初始化计算图分为节点与操作2部分，其中节点对应为变量（如常量、矢量、矩阵、张量等），而在tensorflow中，我们可以通过 constant  或 v">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-27T08:06:05.348Z">
+<meta property="og:updated_time" content="2018-07-27T08:18:59.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习之tensorflow计算图">
 <meta name="twitter:description" content="之前的章节说到使用计算图可以很方便地计算偏导数，可大大加快神经网络逆传播地速度，tensorflow作为常用地深度学习库，本质上来说也是一个构建计算图与执行计算图的过程，下面我们将来学习在tensorflow中如何构建计算图。  图的节点节点的初始化计算图分为节点与操作2部分，其中节点对应为变量（如常量、矢量、矩阵、张量等），而在tensorflow中，我们可以通过 constant  或 v">
@@ -355,7 +355,7 @@
                 
               
 
-              <time title="创建时间：2018-07-27 10:44:45 / 修改时间：16:06:05" itemprop="dateCreated datePublished" datetime="2018-07-27T10:44:45+08:00">2018-07-27</time>
+              <time title="创建时间：2018-07-27 10:44:45 / 修改时间：16:18:59" itemprop="dateCreated datePublished" datetime="2018-07-27T10:44:45+08:00">2018-07-27</time>
             
 
             
@@ -417,6 +417,7 @@
 <h1 id="图的节点"><a href="#图的节点" class="headerlink" title="图的节点"></a>图的节点</h1><h2 id="节点的初始化"><a href="#节点的初始化" class="headerlink" title="节点的初始化"></a>节点的初始化</h2><p>计算图分为节点与操作2部分，其中节点对应为变量（如常量、矢量、矩阵、张量等），而在tensorflow中，我们可以通过 <a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/constant" target="_blank" rel="external">constant</a>  或 <a href="https://www.tensorflow.org/versions/master/api_docs/python/tf/Variable" target="_blank" rel="external">variable</a> 来建立节点。（注意：节点中并不保存数据，而是保存运算结果的引用）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 节点的初始化</span></div><div class="line">tf.constant(</div><div class="line">    value,</div><div class="line">    dtype=<span class="keyword">None</span>,</div><div class="line">    shape=<span class="keyword">None</span>,</div><div class="line">    name=<span class="string">'Const'</span>,</div><div class="line">    verify_shape=<span class="keyword">False</span></div><div class="line">)</div><div class="line">tf.Variable(</div><div class="line">    initial_value=<span class="keyword">None</span>,</div><div class="line">    trainable=<span class="keyword">True</span>,</div><div class="line">    collections=<span class="keyword">None</span>,</div><div class="line">    validate_shape=<span class="keyword">True</span>,</div><div class="line">    caching_device=<span class="keyword">None</span>,</div><div class="line">    name=<span class="keyword">None</span>,</div><div class="line">    variable_def=<span class="keyword">None</span>,</div><div class="line">    dtype=<span class="keyword">None</span>,</div><div class="line">    expected_shape=<span class="keyword">None</span>,</div><div class="line">    import_scope=<span class="keyword">None</span>,</div><div class="line">    constraint=<span class="keyword">None</span></div><div class="line">)</div></pre></td></tr></table></figure>
 <p>其中<code>constant</code>用于生成常数张量，而<code>Variable</code>生成变量张量，<code>Variable()</code>时需要指定初始值（也可指定初始形状），初始化后变量的形状和类型是固定的，如要更改形状，则必须使用<code>assign</code>操作且<code>validate_shape=False</code>，在运行其他操作前，必须对变量初始化，最简单的操作是使用<code>tf.global_variables_initializer()</code>进行全局初始化。</p>
+<a id="more"></a>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 初始化变量</span></div><div class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>], dtype=np.int32)</div><div class="line">w = tf.Variable([<span class="number">1</span>,<span class="number">2</span>])</div><div class="line">y = tf.add(w,a)</div><div class="line">init_op = tf.initialize_all_variables()</div><div class="line">sess = tf.Session()</div><div class="line">sess.run(init_op)</div><div class="line"></div><div class="line">w_new = tf.assign(w,y) <span class="comment"># 将y的值赋给w</span></div><div class="line">sess.run(w_new)</div><div class="line"></div><div class="line"><span class="comment"># tensorflow中有很多辅助函数来创建高阶张量</span></div><div class="line"><span class="comment"># 参考https://www.tensorflow.org/versions/master/api_guides/python/constant_op#Constant_Value_Tensors</span></div><div class="line"><span class="comment"># 2x2 全零矩阵</span></div><div class="line">tf.zeros([<span class="number">2</span>, <span class="number">2</span>])</div><div class="line"><span class="comment"># 为1的向量</span></div><div class="line">tf.ones([<span class="number">6</span>])</div><div class="line"><span class="comment"># 3x3x3张量,服从0~10的均匀分布</span></div><div class="line">tf.random_uniform([<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>], minval=<span class="number">0</span>, maxval=<span class="number">10</span>)</div><div class="line"><span class="comment"># 服从0均值,标准差为2的正太分布</span></div><div class="line">tf.random_normal([<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>], mean=<span class="number">0</span>, stddev=<span class="number">2.0</span>)</div></pre></td></tr></table></figure>
 <h2 id="节点的数据类型"><a href="#节点的数据类型" class="headerlink" title="节点的数据类型"></a>节点的数据类型</h2><p>创建节点时，如果未显示指定节点数据类型，则tf会根据python原生数据类型进行推断，推断过程不一定靠谱，建议自行指定数据类型。tf中的数据类型与numpy中的数据类型是兼容的，可以直接将np数组传入tf的计算图进行计算。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.array([<span class="number">1</span>, <span class="number">2</span>], dtype=np.int32)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = np.array([<span class="number">3</span>, <span class="number">4</span>], dtype=np.int32)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>c = tf.add(a, b)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sess = tf.Session()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sess.run(c)</div><div class="line">array([<span class="number">4</span>, <span class="number">6</span>])</div></pre></td></tr></table></figure>
@@ -511,7 +512,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/deeplearning/" rel="tag"><i class="fa fa-tag"></i> deeplearning</a>
+            <a href="/tags/DeepLearning/" rel="tag"><i class="fa fa-tag"></i> DeepLearning</a>
           
         </div>
       
