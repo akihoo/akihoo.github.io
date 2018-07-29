@@ -312,6 +312,361 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/1584f721.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/1584f721.html" itemprop="url">
+                  C++Python字符串处理合集
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-16 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-16T10:44:45+08:00">2018-07-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/1584f721.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/1584f721.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="char"><a href="#char" class="headerlink" title="char"></a>char</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> a,b[<span class="number">10</span>]; <span class="comment">//定义字符变量a与字符数组b</span></div><div class="line"><span class="keyword">char</span> c[]=<span class="string">"hello,world"</span>,d[]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//字符数组的初始化，未指明数组长度，且数组中没有终止符，数组末尾将生成终止符\0，代表字符串结束,此时sizeof=strlen+1</span></div><div class="line"><span class="keyword">char</span> e[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>&#125;; <span class="comment">//初始化数据小于指定长度，剩余部分自动填充终止符</span></div><div class="line"><span class="keyword">char</span> f[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//初始化数据大于指定长度，超过部分将被丢弃，此时数组中不含终止符，可能回造成不可预期的后果</span></div></pre></td></tr></table></figure>
+<h2 id="长度计算"><a href="#长度计算" class="headerlink" title="长度计算"></a>长度计算</h2><ol>
+<li>strlen：strlen函数只计算可见的字符，从字符串开头到第一个终止符为止</li>
+<li>sizeof：计算整个数组长度</li>
+</ol>
+<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><h3 id="strcmp-st1-st2"><a href="#strcmp-st1-st2" class="headerlink" title="strcmp(st1,st2)"></a>strcmp(st1,st2)</h3><p>比较2个字符串，设这两个字符串为str1，str2：</p>
+<ol>
+<li>若str1==str2，则返回零； </li>
+<li>若str1 &gt; str2，则返回正数； </li>
+<li>若str1&lt; str2，则返回负数。</li>
+<li>==,&gt;,&lt;,是通过比较对应位置字符的ASCII码大小实现。<h3 id="strncmp-st1-st2-n"><a href="#strncmp-st1-st2-n" class="headerlink" title="strncmp(st1,st2,n)"></a>strncmp(st1,st2,n)</h3>把st1,st2的前n个进行比较。  </li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/1584f721.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/ef999dcb.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/ef999dcb.html" itemprop="url">
+                  git版本回退
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-15 16:25:07" itemprop="dateCreated datePublished" datetime="2018-07-15T16:25:07+08:00">2018-07-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/ef999dcb.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/ef999dcb.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>由于多电脑使用一个版本仓库，经常出现版本冲突的情况，错误提示<code>error: Your local changes to &#39;example.py&#39; would be overwritten by merge. Aborting.Please, commit your changes or stash them before you can merge.</code>，然后本次我的错误commit导致问题一直没解决，于是直接使用版本回退功能解决问题。</p>
+</blockquote>
+<h1 id="版本回退-git-reset"><a href="#版本回退-git-reset" class="headerlink" title="版本回退 git reset"></a>版本回退 <code>git reset</code></h1><p>使用<code>git reset commit_id</code>可以将版本号回到指定版本，<code>commit_id</code>如何指定？可以使用以下方法：</p>
+<h2 id="commit-id"><a href="#commit-id" class="headerlink" title="commit_id"></a><code>commit_id</code></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><code>git log</code></h3><p>通过用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。此方法一半适用与比较回退版本较少情况，因为<code>git bash</code>里输出的信息太多，不方便查看。</p>
+<p><code>git log -n</code>可查看最近n此提交，<code>git log</code>状态下按q键可退出。</p>
+<h3 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a><code>HEAD</code></h3><p>在<code>git</code>中，<code>HEAD</code>指向当前版本，上一版本<code>HEAD^</code>，上上版本<code>HEAD^^</code>，依次类推，也可使用<code>HEAD~n</code>来回退n个版本。</p>
+<h3 id="git-GUI"><a href="#git-GUI" class="headerlink" title="git GUI"></a><code>git GUI</code></h3><p>可在<code>git GUI</code>中点击菜单上的 repository – visualize master’s History/visualize all branch History 查看历史版本。</p>
+<h2 id="git-reset参数"><a href="#git-reset参数" class="headerlink" title="git reset参数"></a><code>git reset</code>参数</h2><p><code>git reset</code>参数在<code>git reset</code>后输入，比如<code>git reset --hard commit_id</code></p>
+<h3 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a><code>mixed</code></h3><p>将本地版本库的头指针全部重置到指定版本，且会重置暂存区，即这次提交之后的所有变更都移动到未暂存阶段</p>
+<h3 id="soft"><a href="#soft" class="headerlink" title="soft"></a><code>soft</code></h3><p>软回退表示将本地版本库的头指针全部重置到指定版本，且将这次提交之后的所有变更都移动到暂存区</p>
+<h3 id="hard"><a href="#hard" class="headerlink" title="hard"></a><code>hard</code></h3><p>将本地版本库的头指针全部重置到指定版本，也会重置暂存区，并且会将工作区代码也回退到这个版本</p>
+<h2 id="追加提交"><a href="#追加提交" class="headerlink" title="追加提交"></a>追加提交</h2><p>回退版本之后可以使用<code>git commit --amend</code>进行追加提交，优点是不会产生新的<code>commit-id</code>，</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/c80e95e5.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1420,7 +1775,7 @@ tags:
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-29 09:40:34" itemprop="dateModified" datetime="2018-07-29T09:40:34+08:00">2018-07-29</time>
               
             
           </span>
@@ -1694,354 +2049,11 @@ tags:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/f1703e5d.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/f1703e5d.html" itemprop="url">
-                  机器学习之高斯混合模型
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-26 21:38:32" itemprop="dateCreated datePublished" datetime="2018-06-26T21:38:32+08:00">2018-06-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-25 15:51:32" itemprop="dateModified" datetime="2018-07-25T15:51:32+08:00">2018-07-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/f1703e5d.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/f1703e5d.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>极大似然估计：只是一种概率论在统计学的应用，它是参数估计的方法之一。说的是已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，则可通过极大似然估计来估计模型的参数。</p>
-<p>参数估计：通过若干次试验，观察其结果，利用结果推出参数的大概值。</p>
-<p>最大似然估计：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
-<h1 id="高斯分布"><a href="#高斯分布" class="headerlink" title="高斯分布"></a>高斯分布</h1><p>高斯分布（Gaussian distribution）有时也被称为正态分布（normal distribution），是一种在自然界大量的存在的、最为常见的分布形式。<br>其概率密度函数为：<br>$$f\left( x\right) =\dfrac {1}{\sqrt {2\pi }\sigma }\exp \left( -\dfrac {\left( x-\mu \right)^2 }{2\sigma ^{2}}\right)$$<br>如果随机变量服从的正态分布，记作$X\sim N\left( \mu ,\sigma ^{2}\right)$</p>
-<p>可见高斯分布包含两个参数，参数μ表示均值，参数σ表示标准差。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/f1703e5d.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/1669902a.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/1669902a.html" itemprop="url">
-                  C++map常见用法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-25 20:06:48" itemprop="dateCreated datePublished" datetime="2018-06-25T20:06:48+08:00">2018-06-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/1669902a.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/1669902a.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><p>C++中的map，相当于python中的dic，是键-值对的组合，map内部自建一颗红黑树，查找效率为$O(\log n)$，下面将简单介绍map的常见用法。</p>
-<h1 id="map的定义于初始化"><a href="#map的定义于初始化" class="headerlink" title="map的定义于初始化"></a>map的定义于初始化</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m;   #定义<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; m;</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(map1); #拷贝构造map1的副本</div><div class="line"><span class="built_in">map</span>&lt;T1,T2&gt; m(b, e); #通过迭代器拷贝构造<span class="built_in">map</span>,eg:<span class="built_in">map</span>&lt;T1,T2&gt; m(map1.begin(), map1.end())</div></pre></td></tr></table></figure>
-<h1 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h1><h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">m.insert(pair)</div><div class="line">m.insert(value_type)</div></pre></td></tr></table></figure>
-<p>举个例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">map1.insert(pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;(<span class="number">1</span>, <span class="number">10</span>));</div><div class="line">map1.insert(make_pair(<span class="number">2</span>, <span class="number">20</span>))</div><div class="line">map1.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;::value_type (<span class="number">3</span>, <span class="number">30</span>));</div><div class="line"><span class="meta">#insert只能插入不存在元素</span></div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/1669902a.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2088,7 +2100,7 @@ tags:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

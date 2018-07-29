@@ -312,6 +312,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/17556c44.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/17556c44.html" itemprop="url">
+                  深度学习之卷积神经网络
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-29 16:44:45 / 修改时间：17:47:36" itemprop="dateCreated datePublished" datetime="2018-07-29T16:44:45+08:00">2018-07-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/17556c44.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/17556c44.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>卷积神经网络（convolutional neural network，CNN），是一种专门用来处理具有类似网格结构的数据的神经网络。例如时间序列数据（可以认为是在时间轴上有规律地采样形成的一维网格）和图像数据（可以看作是二维的像素网格）。卷积网络在诸多应用领域都表现优异。“卷积神经网络”一词表明该网络使用了卷积（convolution）这种数学运算。卷积是一种特殊的线性运算。卷积网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。</p>
+<h1 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h1><p>卷积的定义如下：<br>$$<br>s(t)=(X*W)(t)<br>$$<br>上式中，$X$代表输入层输入，$W$叫做核函数（卷积核）。</p>
+<p>对于二维（图像）情况，则有：<br>$$<br>s(i,j)=(X*W)(i,j) = \sum\limits_m \sum\limits_n x(i+m,j+n) w(m,n)<br>$$<br>上式与二维卷积的定义稍有不同，但许多机器学习的库都是使用此运算。</p>
+<p>如下图为一个$3\times 4$的矩阵经过$2\times 2$的核映射得到$2\times 3$的输出矩阵，具体计算方式是在左上角初始化一个$2\times 2$的窗口，将窗口内元素分别与核函数对应位置相乘并求和，得到$aw+bx+cy+fz$（不是矩阵乘法哦！），再将窗口向右移动一位，再计算一次输出，依次类推。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftqspbryqhj30h60e93zb.jpg" alt=""></p>
+<p>在斯坦福大学的cs231n的课程上，有一个动态的例子，<a href="http://cs231n.github.io/assets/conv-demo/index.html" target="_blank" rel="external">链接在这</a>。 如下图，可以方便理解。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftqsxcnbd7g30m40imq8c.gif" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/17556c44.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/847b3d41.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -999,6 +1161,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/1e893844.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/1e893844.html" itemprop="url">
+                  深度学习之keras入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-22 14:44:45" itemprop="dateCreated datePublished" datetime="2018-07-22T14:44:45+08:00">2018-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-29 17:48:09" itemprop="dateModified" datetime="2018-07-29T17:48:09+08:00">2018-07-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/1e893844.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/1e893844.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>阅读本文需要有一定的深度学习、神经网络基础</p>
+</blockquote>
+<h1 id="Keras-顺序-Sequential-模型"><a href="#Keras-顺序-Sequential-模型" class="headerlink" title="Keras 顺序 (Sequential) 模型"></a>Keras 顺序 (Sequential) 模型</h1><p>顺序模型是多个网络层的线性堆叠。 使用顺序模型的基本步骤如下：</p>
+<ol>
+<li>初始化顺序模型并指定网络结构</li>
+<li>编译：通过 <code>compile</code> 方法指定优化器、损失函数、评估标准</li>
+<li>训练模型：使用 <code>fit</code> 函数 </li>
+</ol>
+<h2 id="模型的初始化"><a href="#模型的初始化" class="headerlink" title="模型的初始化"></a>模型的初始化</h2><p>建立方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 样例1，使用层的列表初始化</span></div><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, Activation</div><div class="line"></div><div class="line">model = Sequential([</div><div class="line">    Dense(<span class="number">32</span>, input_shape=(<span class="number">784</span>,)),</div><div class="line">    Activation(<span class="string">'relu'</span>),</div><div class="line">    Dense(<span class="number">10</span>),</div><div class="line">    Activation(<span class="string">'softmax'</span>),</div><div class="line">])</div><div class="line"><span class="comment"># 样例2，初始化后使用 .add() 方法将各层添加到模型中</span></div><div class="line">model = Sequential()</div><div class="line">model.add(Dense(<span class="number">32</span>, input_dim=<span class="number">784</span>))</div><div class="line">model.add(Activation(<span class="string">'relu'</span>))</div></pre></td></tr></table></figure>
+<p>以上2种方式是等价的，以下将进行基本解释：</p>
+<ol>
+<li><code>model.add(Dense(32, input_dim=784))</code>：<a href="https://keras.io/zh/layers/core/" target="_blank" rel="external">Dense</a>代表核心网络层（即普通的全连接层），其中32代表输出空间的维度，input_dim则表示输入数据的维度，类似的还有Conv2D（卷积层），MaxPooling2D （MaxPooling层），lstm（循环层）等。</li>
+<li><code>model.add(Activation(&#39;relu&#39;))</code>：Activation代表激活函数，可以配置单独的激活层（也可统称位隐层层）实现，也可在构造层对象时通过传递<code>activation</code>参数实现 ，常用的有<code>tanh</code> <code>relu</code> <code>softmax</code>等，一般深层模型使用多用relu ，对于多分类的情况，最后一层是softmax，二分类问题最后一层用sigmoid 。类似的隐藏层有Dropout层、池化层。</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/1e893844.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/undefined.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1323,6 +1668,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/10a4d630.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/10a4d630.html" itemprop="url">
+                  【转载】如何正确的选择图床
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-19 10:44:45 / 修改时间：11:39:03" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/10a4d630.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/10a4d630.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本文由 Torther 创作，转载自<a href="https://www.torther.club/33" target="_blank" rel="external">https://www.torther.club/33</a></p>
+</blockquote>
+<p>说到图床，一些建站的朋友都不陌生吧，图床支撑着网站的图像储存，是不可缺少的东西之一。</p>
+<h1 id="镇楼图"><a href="#镇楼图" class="headerlink" title="镇楼图"></a>镇楼图</h1><p><img src="https://i.loli.net/2018/07/07/5b400fcfda258.png" alt="镇楼图"></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>图床，说白了就是在网络上存储图片的地方，目的是为了节省本地服务器空间，加快图片打开速度。</p>
+<p>本文为大家介绍以下几款图床，不保证能够完全适合你，仅供参考，希望你能找到适合自己的图床。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/10a4d630.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a45772c3.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1386,7 +1893,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-27 16:22:43" itemprop="dateModified" datetime="2018-07-27T16:22:43+08:00">2018-07-27</time>
+                <time title="修改时间：2018-07-29 09:40:46" itemprop="dateModified" datetime="2018-07-29T09:40:46+08:00">2018-07-29</time>
               
             
           </span>
@@ -1550,528 +2057,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/10a4d630.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/10a4d630.html" itemprop="url">
-                  【转载】如何正确的选择图床
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-19 10:44:45 / 修改时间：11:39:03" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/10a4d630.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/10a4d630.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文由 Torther 创作，转载自<a href="https://www.torther.club/33" target="_blank" rel="external">https://www.torther.club/33</a></p>
-</blockquote>
-<p>说到图床，一些建站的朋友都不陌生吧，图床支撑着网站的图像储存，是不可缺少的东西之一。</p>
-<h1 id="镇楼图"><a href="#镇楼图" class="headerlink" title="镇楼图"></a>镇楼图</h1><p><img src="https://i.loli.net/2018/07/07/5b400fcfda258.png" alt="镇楼图"></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>图床，说白了就是在网络上存储图片的地方，目的是为了节省本地服务器空间，加快图片打开速度。</p>
-<p>本文为大家介绍以下几款图床，不保证能够完全适合你，仅供参考，希望你能找到适合自己的图床。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/10a4d630.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/1584f721.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/1584f721.html" itemprop="url">
-                  C++Python字符串处理合集
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-16 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-16T10:44:45+08:00">2018-07-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/1584f721.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/1584f721.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="char"><a href="#char" class="headerlink" title="char"></a>char</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> a,b[<span class="number">10</span>]; <span class="comment">//定义字符变量a与字符数组b</span></div><div class="line"><span class="keyword">char</span> c[]=<span class="string">"hello,world"</span>,d[]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//字符数组的初始化，未指明数组长度，且数组中没有终止符，数组末尾将生成终止符\0，代表字符串结束,此时sizeof=strlen+1</span></div><div class="line"><span class="keyword">char</span> e[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>&#125;; <span class="comment">//初始化数据小于指定长度，剩余部分自动填充终止符</span></div><div class="line"><span class="keyword">char</span> f[<span class="number">10</span>]=&#123;<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>,<span class="string">','</span>,<span class="string">'w'</span>,<span class="string">'o'</span>,<span class="string">'r'</span>,<span class="string">'l'</span>,<span class="string">'d'</span>&#125;; <span class="comment">//初始化数据大于指定长度，超过部分将被丢弃，此时数组中不含终止符，可能回造成不可预期的后果</span></div></pre></td></tr></table></figure>
-<h2 id="长度计算"><a href="#长度计算" class="headerlink" title="长度计算"></a>长度计算</h2><ol>
-<li>strlen：strlen函数只计算可见的字符，从字符串开头到第一个终止符为止</li>
-<li>sizeof：计算整个数组长度</li>
-</ol>
-<h2 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h2><h3 id="strcmp-st1-st2"><a href="#strcmp-st1-st2" class="headerlink" title="strcmp(st1,st2)"></a>strcmp(st1,st2)</h3><p>比较2个字符串，设这两个字符串为str1，str2：</p>
-<ol>
-<li>若str1==str2，则返回零； </li>
-<li>若str1 &gt; str2，则返回正数； </li>
-<li>若str1&lt; str2，则返回负数。</li>
-<li>==,&gt;,&lt;,是通过比较对应位置字符的ASCII码大小实现。<h3 id="strncmp-st1-st2-n"><a href="#strncmp-st1-st2-n" class="headerlink" title="strncmp(st1,st2,n)"></a>strncmp(st1,st2,n)</h3>把st1,st2的前n个进行比较。  </li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/1584f721.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/ef999dcb.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/ef999dcb.html" itemprop="url">
-                  git版本回退
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-15 16:25:07" itemprop="dateCreated datePublished" datetime="2018-07-15T16:25:07+08:00">2018-07-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/ef999dcb.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/ef999dcb.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>由于多电脑使用一个版本仓库，经常出现版本冲突的情况，错误提示<code>error: Your local changes to &#39;example.py&#39; would be overwritten by merge. Aborting.Please, commit your changes or stash them before you can merge.</code>，然后本次我的错误commit导致问题一直没解决，于是直接使用版本回退功能解决问题。</p>
-</blockquote>
-<h1 id="版本回退-git-reset"><a href="#版本回退-git-reset" class="headerlink" title="版本回退 git reset"></a>版本回退 <code>git reset</code></h1><p>使用<code>git reset commit_id</code>可以将版本号回到指定版本，<code>commit_id</code>如何指定？可以使用以下方法：</p>
-<h2 id="commit-id"><a href="#commit-id" class="headerlink" title="commit_id"></a><code>commit_id</code></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><code>git log</code></h3><p>通过用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。此方法一半适用与比较回退版本较少情况，因为<code>git bash</code>里输出的信息太多，不方便查看。</p>
-<p><code>git log -n</code>可查看最近n此提交，<code>git log</code>状态下按q键可退出。</p>
-<h3 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a><code>HEAD</code></h3><p>在<code>git</code>中，<code>HEAD</code>指向当前版本，上一版本<code>HEAD^</code>，上上版本<code>HEAD^^</code>，依次类推，也可使用<code>HEAD~n</code>来回退n个版本。</p>
-<h3 id="git-GUI"><a href="#git-GUI" class="headerlink" title="git GUI"></a><code>git GUI</code></h3><p>可在<code>git GUI</code>中点击菜单上的 repository – visualize master’s History/visualize all branch History 查看历史版本。</p>
-<h2 id="git-reset参数"><a href="#git-reset参数" class="headerlink" title="git reset参数"></a><code>git reset</code>参数</h2><p><code>git reset</code>参数在<code>git reset</code>后输入，比如<code>git reset --hard commit_id</code></p>
-<h3 id="mixed"><a href="#mixed" class="headerlink" title="mixed"></a><code>mixed</code></h3><p>将本地版本库的头指针全部重置到指定版本，且会重置暂存区，即这次提交之后的所有变更都移动到未暂存阶段</p>
-<h3 id="soft"><a href="#soft" class="headerlink" title="soft"></a><code>soft</code></h3><p>软回退表示将本地版本库的头指针全部重置到指定版本，且将这次提交之后的所有变更都移动到暂存区</p>
-<h3 id="hard"><a href="#hard" class="headerlink" title="hard"></a><code>hard</code></h3><p>将本地版本库的头指针全部重置到指定版本，也会重置暂存区，并且会将工作区代码也回退到这个版本</p>
-<h2 id="追加提交"><a href="#追加提交" class="headerlink" title="追加提交"></a>追加提交</h2><p>回退版本之后可以使用<code>git commit --amend</code>进行追加提交，优点是不会产生新的<code>commit-id</code>，</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2118,7 +2108,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="本文使用python代码实现了常用的排序算法，并分析复杂度。有关动图以及算法详细介绍可以参考blog  插入排序法 基本介绍   插入排序法依次选择元素，当选择第i位元素时，[0,i]为已排序序列，比较第i+1位元素大小并将其插入[0,i+1]序列中合适的位置。  算法复杂度   插入排序法分为比较与插入（交换）2个过程。  最好情况：$O(n)$ 最坏情况：$O(N^2)$ 平均情况：$O(N">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-19T03:39:03.132Z">
+<meta property="og:updated_time" content="2018-07-27T09:15:56.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用排序算法代码实现">
 <meta name="twitter:description" content="本文使用python代码实现了常用的排序算法，并分析复杂度。有关动图以及算法详细介绍可以参考blog  插入排序法 基本介绍   插入排序法依次选择元素，当选择第i位元素时，[0,i]为已排序序列，比较第i+1位元素大小并将其插入[0,i+1]序列中合适的位置。  算法复杂度   插入排序法分为比较与插入（交换）2个过程。  最好情况：$O(n)$ 最坏情况：$O(N^2)$ 平均情况：$O(N">
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-27 17:15:56" itemprop="dateModified" datetime="2018-07-27T17:15:56+08:00">2018-07-27</time>
               
             
           </span>
@@ -495,7 +495,7 @@
 <li>最坏情况：$O(n^2)$</li>
 <li>平均情况：$O(n\log n)\thicksim O(n^2)$</li>
 <li>辅助空间：$O(1)$</li>
-<li>不稳定<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">def shell(l,gap):</div><div class="line">    gap=min(len(l)//2,gap)#初始化增量</div><div class="line">    while(gap!=0):#循环使用插入排序法</div><div class="line">        for i in range(0,gap):</div><div class="line">            for j in range(i+gap,len(l),gap):</div><div class="line">                while(j&gt;=0):</div><div class="line">                    if(l[j]&lt;l[j-gap]):</div><div class="line">                        l[j],l[j-gap]=l[j-gap],l[j]</div><div class="line">                        j-=gap</div><div class="line">                    else:</div><div class="line">                        break</div><div class="line">        gap=gap//2#缩小增量</div><div class="line"></div><div class="line">#使用python需要注意边界条件，对于C++，v[i]，当i&lt;0时，越界就直接报错了，但对python，v[i]，i&lt;0还是会能取一个值，排完序就乱了。</div><div class="line">l=[0,20,3,5,4,65,7,3,9,10,15,19,15,18,13,16,23]</div><div class="line">shell(l,5)</div><div class="line">print(l)</div><div class="line">#shell sort简介：https://blog.csdn.net/qq845579063/article/details/51447404</div></pre></td></tr></table></figure>
+<li>不稳定<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">shell</span><span class="params">(l,gap)</span>:</span></div><div class="line">    gap=min(len(l)//<span class="number">2</span>,gap)<span class="comment">#初始化增量</span></div><div class="line">    <span class="keyword">while</span>(gap!=<span class="number">0</span>):<span class="comment">#循环使用插入排序法</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,gap):</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+gap,len(l),gap):</div><div class="line">                <span class="keyword">while</span>(j&gt;=<span class="number">0</span>):</div><div class="line">                    <span class="keyword">if</span>(l[j]&lt;l[j-gap]):</div><div class="line">                        l[j],l[j-gap]=l[j-gap],l[j]</div><div class="line">                        j-=gap</div><div class="line">                    <span class="keyword">else</span>:</div><div class="line">                        <span class="keyword">break</span></div><div class="line">        gap=gap//<span class="number">2</span><span class="comment">#缩小增量</span></div><div class="line"></div><div class="line"><span class="comment">#使用python需要注意边界条件，对于C++，v[i]，当i&lt;0时，越界就直接报错了，但对python，v[i]，i&lt;0还是会能取一个值，排完序就乱了。</span></div><div class="line">l=[<span class="number">0</span>,<span class="number">20</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">65</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">19</span>,<span class="number">15</span>,<span class="number">18</span>,<span class="number">13</span>,<span class="number">16</span>,<span class="number">23</span>]</div><div class="line">shell(l,<span class="number">5</span>)</div><div class="line">print(l)</div><div class="line"><span class="comment">#shell sort简介：https://blog.csdn.net/qq845579063/article/details/51447404</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -558,7 +558,7 @@
   <p><span>本文标题:</span><a href="/posts/65b6ff79.html">常用排序算法代码实现</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年06月05日 - 18:06</p>
-  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>最后更新:</span>2018年07月27日 - 17:07</p>
   <p><span>原始链接:</span><a href="/posts/65b6ff79.html" title="常用排序算法代码实现">akihoo.github.io/posts/65b6ff79.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/65b6ff79.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -698,7 +698,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

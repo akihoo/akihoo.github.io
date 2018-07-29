@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="聚类聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”（cluster），每个簇可能对应于一些潜在的概念（类别），需说明的是，这些概念对聚类算法而言事先是未知的，聚类过程仅能自动形成簇结构，簇所对应的概念语义需由使用者来把握和命名。 无监督学习聚类是研究最多应用最广的无监督学习，在“无监督学习”（unsupervised learning）中，训练样本的标记信息是未知的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-19T03:39:03.144Z">
+<meta property="og:updated_time" content="2018-07-29T01:40:34.813Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之聚类">
 <meta name="twitter:description" content="聚类聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”（cluster），每个簇可能对应于一些潜在的概念（类别），需说明的是，这些概念对聚类算法而言事先是未知的，聚类过程仅能自动形成簇结构，簇所对应的概念语义需由使用者来把握和命名。 无监督学习聚类是研究最多应用最广的无监督学习，在“无监督学习”（unsupervised learning）中，训练样本的标记信息是未知的">
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+                <time title="修改时间：2018-07-29 09:40:34" itemprop="dateModified" datetime="2018-07-29T09:40:34+08:00">2018-07-29</time>
               
             
           </span>
@@ -441,19 +441,93 @@
 <li>“外部指标”（external index）：将聚类结果与某个“参考模型”（reference model）进行比较</li>
 <li>“内部指标”（internal index）：直接考察聚类结果而不利用任何参考模型</li>
 </ol>
+<h1 id="聚类模型的分类"><a href="#聚类模型的分类" class="headerlink" title="聚类模型的分类"></a>聚类模型的分类</h1><h2 id="原型聚类"><a href="#原型聚类" class="headerlink" title="原型聚类"></a>原型聚类</h2><p>原型聚类假设聚类结构能通过一组原型刻画，在现实聚类任务中极为常用。其中“原型”是指样本空间中具有代表性的点。通常情形下，算法先对原型进行初始化，然后对原型进行迭代更新求解。常用的原型聚类有：</p>
+<ol>
+<li>k-means</li>
+<li>高斯混合模型</li>
+</ol>
+<h2 id="密度聚类"><a href="#密度聚类" class="headerlink" title="密度聚类"></a>密度聚类</h2><p>密度聚类算法假设聚类结构能通过样本分布的紧密程度确定。通常情形下，密度聚类算法从样本密度的角度来考察样本之间的可连接性，并基于可连接样本不断扩展聚类簇以获得最终的聚类结果。比如<code>DBSCAN</code>是一种著名的密度聚类算法。</p>
+<h2 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h2><p>层次聚类（hierarchical clustering）一般指通过从下往上不断合并簇，或者从上往下不断分离簇，从而形成树形的层次聚类结构。比如<code>AGNES</code>是一种采用自底向上聚合策略的层次聚类算法。</p>
 <h1 id="k-means"><a href="#k-means" class="headerlink" title="k-means"></a>k-means</h1><p>k-means就是把空间内点，分成K类。最大化簇间距离，最小化簇内距离。用均值来代表类中心，并用于衡量与新点的距离。</p>
 <h2 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a>算法原理：</h2><ol>
 <li>随机选取k个中心点；</li>
 <li>在第j次迭代中，对于每个样本点，选取最近的中心点，归为该类；</li>
 <li>更新中心点为每类的均值；</li>
-<li>j=j+1 ,重复(2)(3)迭代更新，直至误差小到某个值或者到达一定的迭代步数，误差不变。<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2>损失函数为平方误差，损失函数刻画了簇内样本围绕簇均值向量的紧密程度，E值越小则簇内样本相似度越高。<h2 id="中心点选取"><a href="#中心点选取" class="headerlink" title="中心点选取"></a>中心点选取</h2></li>
+<li>j=j+1 ,重复(2)(3)迭代更新，直至误差小到某个值或者到达一定的迭代步数，误差不变。</li>
+</ol>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>损失函数为平方误差，损失函数刻画了簇内样本围绕簇均值向量的紧密程度，E值越小则簇内样本相似度越高。</p>
+<h2 id="中心点选取"><a href="#中心点选取" class="headerlink" title="中心点选取"></a>中心点选取</h2><ol>
 <li>随机选取</li>
 <li>随机选取一个点，接下来选择距离该点最远的点做第二个初始类中心点，再选择距离前两个点最远的点做第三初始类中心点，以此类推</li>
 <li>选用层次聚类或者Canopy算法进行初始聚类，然后利用这些类簇的中心点作为KMeans算法初始类簇中心点。</li>
 </ol>
 <h2 id="k值的确定"><a href="#k值的确定" class="headerlink" title="k值的确定"></a>k值的确定</h2><p>依据一个合适得类簇指标，如平均直径等，只要我们假设的类簇的数目等于或者高于真实的类簇的数目时，该指标上升会很缓慢，而一旦试图得到少于真实数目的类簇时，该指标会急剧上升。</p>
-<h1 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h1><p>层次聚类（hierarchical clustering）试图在不同层次对数据集进行划分，从而形成树形的聚类结构。数据集的划分可采用“自底向上”的聚合策略，也可采用“自顶向下”的分拆策略。</p>
-<h2 id="AGNES"><a href="#AGNES" class="headerlink" title="AGNES"></a>AGNES</h2><p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并，该过程不断重复，直至达到预设的聚类簇个数。</p>
+<h2 id="优缺点："><a href="#优缺点：" class="headerlink" title="优缺点："></a>优缺点：</h2><ol>
+<li>优点：  <ol>
+<li>经典聚类算法，算法简单、快速</li>
+<li>处理大数据集的时候，该算法可以保证较好的伸缩性和高效率</li>
+<li>当簇近似高斯分布的时候，聚类效果不错</li>
+</ol>
+</li>
+<li>缺点:<ol>
+<li>K值是用户给定的，在进行数据处理前，K值是未知的，不同的K值得到的结果也不一样；</li>
+<li>对初始簇中心点是敏感的</li>
+<li>不适合发现非凸形状的簇或者大小差别较大的簇</li>
+<li>特殊值、离群值对模型的影响比较大</li>
+</ol>
+</li>
+</ol>
+<h1 id="DBSCAN"><a href="#DBSCAN" class="headerlink" title="DBSCAN"></a>DBSCAN</h1><p>DBSCAN(Density-Based Spatial Clustering of Applications with Noise，具有噪声的基于密度的聚类方法)是一种典型的聚类算法，这类密度聚类算法一般假定类别可以通过样本分布的紧密程度决定。通常情形下，密度聚类算法从样本密度的角度来考察样本之间的可连接性，并基于可连接样本不断扩展聚类簇以获得最终的聚类结果。</p>
+<h2 id="密度的判定"><a href="#密度的判定" class="headerlink" title="密度的判定"></a>密度的判定</h2><p>DBSCAN是基于一组邻域来描述样本集的紧密程度的，参数($ϵ$, MinPts)用来描述邻域的样本分布紧密程度。其中，$ϵ$描述了某一样本的邻域距离阈值，MinPts描述了某一样本的距离为$ϵ$的邻域中样本个数的阈值。</p>
+<ol>
+<li>$ϵ$-邻域：对于$x_j\in D$，其$ϵ$-邻域包含样本集D中与$x_j$的距离不大于$ϵ$的子样本集，即$N_{\epsilon}(x_j) = {x_i \in D | distance(x_i,x_j) \leq \epsilon}$, 这个子样本集的个数记为$|N_{\epsilon}(x_j)|$</li>
+<li>核心对象：对于任一样本$x_j\in D$，如果其$ϵ$-邻域对应的$N_{\epsilon}(x_j)$至少包含MinPts个样本，即如果$|N_{\epsilon}(x_j)| \geq MinPts$，则$x_j$是核心对象。　</li>
+<li>密度直达：如果$x_i$位于$x_j$的$ϵ$-邻域中，且$x_j$是核心对象，则称$x_i$由$x_j$密度直达。注意反之不一定成立，即此时不能说$x_j$由$x_i$密度直达, 除非且$x_i$也是核心对象。</li>
+<li>密度可达：对于$x_i$和$x_j$,如果存在样本样本序列$p_1, p_2,…,p_T$，满足$p_1 = x_i, p_T = x_j$, 且$p_{t+1}$由$p_t$密度直达，则称$x_j$由$x_i$密度可达。也就是说，密度可达满足传递性。此时序列中的传递样本$p_1, p_2,…,p_{T-1}$均为核心对象，因为只有核心对象才能使其他样本密度直达。注意密度可达也不满足对称性，这个可以由密度直达的不对称性得出。</li>
+<li>密度相连：对于$x_i$和$x_j$,如果存在核心对象样本$x_k$，使$x_i$和$x_j$均由$x_k$密度可达，则称$x_i$和$x_j$密度相连。注意密度相连关系是满足对称性的。</li>
+</ol>
+<p>上面的语言太官方，下面开始说人话：</p>
+<ol>
+<li>$ϵ$-邻域：对某个点，他的$ϵ$-邻域为一个区域内，该区域内任何点到该点的距离均小于$\epsilon$，如果选用欧式距离的话，某点的$ϵ$-邻域就是该点位圆心，$ϵ$位半径做园。</li>
+<li>核心对象：如果某个样本点的$ϵ$-邻域内包含的样本点数大于某阈值MinPts，则该样本点可以称作核心对象。</li>
+<li>密度直达：如果$x_i$位于$x_j$的$ϵ$-邻域中，且$x_j$是核心对象，则称$x_i$由$x_j$密度直达。注意反之不一定成立。</li>
+<li>密度可达：将密度直达看作2格点的连通，如果对于$x_i$和$x_j$，存在某以连通路径，则$x_i$和$x_j$密度可达。</li>
+<li>密度相连：对于$x_i$和$x_j$,如果存在核心对象样本$x_k$，使$x_i$和$x_j$均由$x_k$密度可达，则称$x_i$和$x_j$密度相连。注意密度相连关系是满足对称性的。</li>
+</ol>
+<h2 id="簇"><a href="#簇" class="headerlink" title="簇"></a>簇</h2><p>基于这些概念，DBSCAN将簇定义为：由密度可达关系导出的<strong>最大</strong>的密度<strong>相连</strong>样本集合。D中不属于任何簇的样本被认为是噪声（noise）或异常（anomaly）样本。</p>
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p>算法步骤一般分为：</p>
+<ol>
+<li>将所有点标记为核心点、边界点或噪声点；</li>
+<li>删除噪声点；</li>
+<li>为距离在Eps之内的所有核心点之间赋予一条边；</li>
+<li>每组连通的核心点形成一个簇；</li>
+<li>将每个边界点指派到一个与之关联的核心点的簇中（哪一个核心点的半径范围之内）。</li>
+</ol>
+<h2 id="算法总结"><a href="#算法总结" class="headerlink" title="算法总结"></a>算法总结</h2><ul>
+<li>优点<ol>
+<li>可以对任意形状的稠密数据集进行聚类，相对的，K-Means之类的聚类算法一般只适用于凸数据集。</li>
+<li>可以在聚类的同时发现异常点，对数据集中的异常点不敏感。</li>
+<li>聚类结果没有偏倚，相对的，K-Means之类的聚类算法初始值对聚类结果有很大影响。</li>
+</ol>
+</li>
+<li>缺点<ol>
+<li>如果样本集的密度不均匀、聚类间距差相差很大时，聚类质量较差，这时用DBSCAN聚类一般不适合。</li>
+<li>如果样本集较大时，聚类收敛时间较长，此时可以对搜索最近邻时建立的KD树或者球树进行规模限制来改进。</li>
+<li>调参相对于传统的K-Means之类的聚类算法稍复杂，主要需要对距离阈值ϵ，邻域样本数阈值MinPts联合调参，</li>
+</ol>
+</li>
+</ul>
+<h2 id="本小节参考资料"><a href="#本小节参考资料" class="headerlink" title="本小节参考资料"></a>本小节参考资料</h2><ol>
+<li><a href="https://www.cnblogs.com/python-machine/p/6941949.html" target="_blank" rel="external">https://www.cnblogs.com/python-machine/p/6941949.html</a></li>
+<li><a href="https://www.cnblogs.com/pinard/p/6208966.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6208966.html</a></li>
+<li><a href="https://www.cnblogs.com/hdu-2010/p/4621258.html" target="_blank" rel="external">https://www.cnblogs.com/hdu-2010/p/4621258.html</a></li>
+</ol>
+<h1 id="AGNES"><a href="#AGNES" class="headerlink" title="AGNES"></a>AGNES</h1><p>AGNES是一种采用自底向上聚合策略的层次聚类算法。它先将数据集中的每个样本看作一个初始聚类簇，然后在算法运行的每一步中找出距离最近的两个聚类簇进行合并，该过程不断重复，直至达到预设的聚类簇个数。</p>
+<h2 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h2><ol>
+<li>最小距离$d_{min}$：由两个簇的最近样本决定</li>
+<li>最大距离$d_{max}$：由两个簇的最远样本决定</li>
+<li>平均距离$d_{avg}$：由两个簇的所有样本共同决定</li>
+</ol>
 
       
     </div>
@@ -475,7 +549,7 @@
   <p><span>本文标题:</span><a href="/posts/b7143dc.html">机器学习之聚类</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年07月01日 - 11:07</p>
-  <p><span>最后更新:</span>2018年07月19日 - 11:07</p>
+  <p><span>最后更新:</span>2018年07月29日 - 09:07</p>
   <p><span>原始链接:</span><a href="/posts/b7143dc.html" title="机器学习之聚类">akihoo.github.io/posts/b7143dc.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/b7143dc.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -613,7 +687,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">61</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -733,7 +807,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类"><span class="nav-number">1.</span> <span class="nav-text">聚类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无监督学习"><span class="nav-number">2.</span> <span class="nav-text">无监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督与监督的区别"><span class="nav-number">2.1.</span> <span class="nav-text">无监督与监督的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类模型的性能度量"><span class="nav-number">3.</span> <span class="nav-text">聚类模型的性能度量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-means"><span class="nav-number">4.</span> <span class="nav-text">k-means</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法原理："><span class="nav-number">4.1.</span> <span class="nav-text">算法原理：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">4.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中心点选取"><span class="nav-number">4.3.</span> <span class="nav-text">中心点选取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k值的确定"><span class="nav-number">4.4.</span> <span class="nav-text">k值的确定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#层次聚类"><span class="nav-number">5.</span> <span class="nav-text">层次聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AGNES"><span class="nav-number">5.1.</span> <span class="nav-text">AGNES</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类"><span class="nav-number">1.</span> <span class="nav-text">聚类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无监督学习"><span class="nav-number">2.</span> <span class="nav-text">无监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督与监督的区别"><span class="nav-number">2.1.</span> <span class="nav-text">无监督与监督的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类模型的性能度量"><span class="nav-number">3.</span> <span class="nav-text">聚类模型的性能度量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类模型的分类"><span class="nav-number">4.</span> <span class="nav-text">聚类模型的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原型聚类"><span class="nav-number">4.1.</span> <span class="nav-text">原型聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密度聚类"><span class="nav-number">4.2.</span> <span class="nav-text">密度聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次聚类"><span class="nav-number">4.3.</span> <span class="nav-text">层次聚类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-means"><span class="nav-number">5.</span> <span class="nav-text">k-means</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法原理："><span class="nav-number">5.1.</span> <span class="nav-text">算法原理：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#损失函数"><span class="nav-number">5.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中心点选取"><span class="nav-number">5.3.</span> <span class="nav-text">中心点选取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k值的确定"><span class="nav-number">5.4.</span> <span class="nav-text">k值的确定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点："><span class="nav-number">5.5.</span> <span class="nav-text">优缺点：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DBSCAN"><span class="nav-number">6.</span> <span class="nav-text">DBSCAN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密度的判定"><span class="nav-number">6.1.</span> <span class="nav-text">密度的判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#簇"><span class="nav-number">6.2.</span> <span class="nav-text">簇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">6.3.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法总结"><span class="nav-number">6.4.</span> <span class="nav-text">算法总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本小节参考资料"><span class="nav-number">6.5.</span> <span class="nav-text">本小节参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AGNES"><span class="nav-number">7.</span> <span class="nav-text">AGNES</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#距离"><span class="nav-number">7.1.</span> <span class="nav-text">距离</span></a></li></ol></li></ol></div>
             
 
           </div>
