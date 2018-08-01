@@ -4,16 +4,14 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/1e893844.html</loc>
-    <lastmod>2018-07-29T09:48:09.474Z</lastmod>
+    <loc>akihoo.github.io/posts/17556c44.html</loc>
+    <lastmod>2018-08-01T12:32:04.741Z</lastmod>
     <data>
         <display>
-        <title>深度学习之keras入门</title>
-        <pubTime>2018-07-22T06:44:45.000Z</pubTime>
+        <title>深度学习之卷积神经网络</title>
+        <pubTime>2018-07-29T08:44:45.000Z</pubTime>
         
-        <tag>keras</tag>
-         
-        <tag>DeepLearning</tag>
+        <tag>深度学习</tag>
          
          
            
@@ -23,14 +21,50 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/17556c44.html</loc>
-    <lastmod>2018-07-29T09:47:36.461Z</lastmod>
+    <loc>akihoo.github.io/posts/1e893844.html</loc>
+    <lastmod>2018-07-29T09:56:04.356Z</lastmod>
     <data>
         <display>
-        <title>深度学习之卷积神经网络</title>
-        <pubTime>2018-07-29T08:44:45.000Z</pubTime>
+        <title>深度学习之keras入门</title>
+        <pubTime>2018-07-29T06:44:45.000Z</pubTime>
         
-        <tag>DeepLearning</tag>
+        <tag>keras</tag>
+         
+        <tag>深度学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/847b3d41.html</loc>
+    <lastmod>2018-07-29T09:55:39.847Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习之tensorflow计算图</title>
+        <pubTime>2018-07-27T02:44:45.000Z</pubTime>
+        
+        <tag>深度学习</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>akihoo.github.io/posts/e8a24270.html</loc>
+    <lastmod>2018-07-29T09:55:26.230Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习之前馈网络</title>
+        <pubTime>2018-07-23T01:25:29.000Z</pubTime>
+        
+        <tag>深度学习</tag>
          
          
            
@@ -84,40 +118,6 @@
         <tag>leetcode</tag>
          
         <tag>数据结构与算法</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/e8a24270.html</loc>
-    <lastmod>2018-07-27T08:19:25.966Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习之前馈网络</title>
-        <pubTime>2018-07-23T01:25:29.000Z</pubTime>
-        
-        <tag>DeepLearning</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>akihoo.github.io/posts/847b3d41.html</loc>
-    <lastmod>2018-07-27T08:18:59.972Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习之tensorflow计算图</title>
-        <pubTime>2018-07-27T02:44:45.000Z</pubTime>
-        
-        <tag>DeepLearning</tag>
          
          
            
