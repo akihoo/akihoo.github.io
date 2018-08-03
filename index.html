@@ -263,6 +263,14 @@
     <a href="/sitemap.xml" rel="section">
       <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />站点地图</a>
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-storehouse">
+    <a href="/storehouse/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-gift"></i> <br />仓库</a>
+  </li>
 
       
       
@@ -296,6 +304,197 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/69ac6833.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/69ac6833.html" itemprop="url">
+                  推荐算法总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-02 11:13:11" itemprop="dateCreated datePublished" datetime="2018-08-02T11:13:11+08:00">2018-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-03 08:45:49" itemprop="dateModified" datetime="2018-08-03T08:45:49+08:00">2018-08-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/69ac6833.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/69ac6833.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本文为《推荐系统实战》（项亮编著）的阅读笔记。</p>
+</blockquote>
+<h1 id="推荐算法的评价指标"><a href="#推荐算法的评价指标" class="headerlink" title="推荐算法的评价指标"></a>推荐算法的评价指标</h1><ol>
+<li>用户满意度：用户满意度没有办法离线计算，只能通过用户调查或者在线实验获得</li>
+<li>预测准确度：<ol>
+<li>评分预测：一般通过均方根误差（RMSE）和平均绝对误差（MAE）计算。</li>
+<li>TopN 推荐：TopN 推荐的预测准确率一般通过准确率（ precision ） / 召回率（ recall ）度量。</li>
+</ol>
+</li>
+<li>覆盖率：覆盖率（ coverage ）描述一个推荐系统对物品长尾的发掘能力。也可使用基尼指数。</li>
+<li>多样性：多样性描述了推荐列表中物品两两之间的不相似性。</li>
+<li>新颖性：新颖的推荐是指给用户推荐那些他们以前没有听说过的物品。</li>
+<li>惊喜度：目前并没有什么公认的惊喜度指标定义方式，这里只给出一种定性的度量方式。上面提到，<br>令用户惊喜的推荐结果是和用户历史上喜欢的物品不相似，但用户却觉得满意的推荐。</li>
+<li>信任度：用户对推荐系统的信任程度。（以让用户信任的方式推荐给用户就更能让用户产生购买欲）</li>
+<li>实时性：推荐系统需要实时地更新推荐列表来满足用户新的行为变化；推荐系统需要能够将新加入系统的物品推荐给用户。</li>
+<li>健壮性：任何一个能带来利益的算法系统都会被人攻击，这方面最典型的例子就是搜索引擎。健壮性可以通过以下方法提高：<ol>
+<li>设计推荐系统时尽量使用代价比较高的用户行为。如购买的代价远高于浏览</li>
+<li>在使用数据前，进行攻击检测，从而对数据进行清理。</li>
+</ol>
+</li>
+<li>商业目标：网站评测推荐系统更加注重网站的商业目标是否达成，而商业目标和网站的盈利模式是息息相关的。</li>
+</ol>
+<h1 id="基于用户行为分析的推荐算法"><a href="#基于用户行为分析的推荐算法" class="headerlink" title="基于用户行为分析的推荐算法"></a>基于用户行为分析的推荐算法</h1><p>基于用户行为分析的推荐算法是个性化推荐系统的重要算法，学术界一般将这种类型的算法称为协同过滤算法。顾名思义，协同过滤就是指用户可以齐心协力，通过不断地和网站互动，使自己的推荐列表能够不断过滤掉自己不感兴趣的物品，从而越来越满足自己的需求。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/69ac6833.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -532,12 +731,24 @@
                 
               
 
-              <time title="创建时间：2018-07-29 14:44:45 / 修改时间：17:56:04" itemprop="dateCreated datePublished" datetime="2018-07-29T14:44:45+08:00">2018-07-29</time>
+              <time title="创建时间：2018-07-29 14:44:45" itemprop="dateCreated datePublished" datetime="2018-07-29T14:44:45+08:00">2018-07-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-01 21:07:36" itemprop="dateModified" datetime="2018-08-01T21:07:36+08:00">2018-08-01</time>
               
             
           </span>
@@ -1907,168 +2118,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/10a4d630.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/10a4d630.html" itemprop="url">
-                  【转载】如何正确的选择图床
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-19 10:44:45 / 修改时间：11:39:03" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/10a4d630.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/10a4d630.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文由 Torther 创作，转载自<a href="https://www.torther.club/33" target="_blank" rel="external">https://www.torther.club/33</a></p>
-</blockquote>
-<p>说到图床，一些建站的朋友都不陌生吧，图床支撑着网站的图像储存，是不可缺少的东西之一。</p>
-<h1 id="镇楼图"><a href="#镇楼图" class="headerlink" title="镇楼图"></a>镇楼图</h1><p><img src="https://i.loli.net/2018/07/07/5b400fcfda258.png" alt="镇楼图"></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>图床，说白了就是在网络上存储图片的地方，目的是为了节省本地服务器空间，加快图片打开速度。</p>
-<p>本文为大家介绍以下几款图床，不保证能够完全适合你，仅供参考，希望你能找到适合自己的图床。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/10a4d630.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2120,7 +2169,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

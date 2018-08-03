@@ -4,13 +4,31 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/17556c44.html</loc>
-    <lastmod>2018-08-01T12:32:04.741Z</lastmod>
+    <loc>akihoo.github.io/posts/69ac6833.html</loc>
+    <lastmod>2018-08-03T00:45:49.961Z</lastmod>
     <data>
         <display>
-        <title>深度学习之卷积神经网络</title>
-        <pubTime>2018-07-29T08:44:45.000Z</pubTime>
+        <title>推荐算法总结</title>
+        <pubTime>2018-08-02T03:13:11.000Z</pubTime>
         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>akihoo.github.io/posts/1e893844.html</loc>
+    <lastmod>2018-08-01T13:07:36.693Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习之keras入门</title>
+        <pubTime>2018-07-29T06:44:45.000Z</pubTime>
+        
+        <tag>keras</tag>
+         
         <tag>深度学习</tag>
          
          
@@ -21,15 +39,13 @@
 
     
   <url>
-    <loc>akihoo.github.io/posts/1e893844.html</loc>
-    <lastmod>2018-07-29T09:56:04.356Z</lastmod>
+    <loc>akihoo.github.io/posts/17556c44.html</loc>
+    <lastmod>2018-08-01T12:32:04.741Z</lastmod>
     <data>
         <display>
-        <title>深度学习之keras入门</title>
-        <pubTime>2018-07-29T06:44:45.000Z</pubTime>
+        <title>深度学习之卷积神经网络</title>
+        <pubTime>2018-07-29T08:44:45.000Z</pubTime>
         
-        <tag>keras</tag>
-         
         <tag>深度学习</tag>
          
          
