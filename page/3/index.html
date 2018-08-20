@@ -320,6 +320,703 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/461acaa3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/461acaa3.html" itemprop="url">
+                  机器学习竞赛大杀器-xgboost
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-10 15:55:28" itemprop="dateCreated datePublished" datetime="2018-07-10T15:55:28+08:00">2018-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 17:04:09" itemprop="dateModified" datetime="2018-07-19T17:04:09+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/461acaa3.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/461acaa3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>有关决策树与集成学习的介绍：<a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/">决策树</a>、<a href="https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/">集成学习</a></p>
+</blockquote>
+<h1 id="XGB"><a href="#XGB" class="headerlink" title="XGB"></a>XGB</h1><p>XGB 同随机森林一样，通过构建一系列决策树（准确说应该是CART树）来组成最终的预测模型，由 $K$ 棵函数为 $f _ k(x _ i)$ 树组成的 XGB 模型可写成：</p>
+<p>$$\hat y _ i = \sum _ {k=1}^K f _ k(x _ i), \quad f _ k \in \mathcal{F}$$</p>
+<p>模型的目标函数为：<br>$$Obj(\Theta) = \sum _ i^n l(y _ i,\hat y _ i) +\sum _ {k=1}^K\Omega(f _ k)$$<br>这个目标函数的第一部分就是损失函数，第二部分就是正则项。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/461acaa3.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/b6b5a9dd.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/b6b5a9dd.html" itemprop="url">
+                  初识深度学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-08 18:07:05" itemprop="dateCreated datePublished" datetime="2018-07-08T18:07:05+08:00">2018-07-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/b6b5a9dd.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/b6b5a9dd.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>传统的机器学习再许多问题上都有良好效果，但却无法解决人工智能的关键问题，如语音识别、对象识别等。于是，深度学习应运而生。</p>
+</blockquote>
+<h1 id="维数灾难"><a href="#维数灾难" class="headerlink" title="维数灾难"></a>维数灾难</h1><p>当数据的维数很高时，很多机器学习问题变得相当困难。在低维空间，仅需要少量样本便可将样本空间填充得非常稠密，随着维度得增加需要的样本数则是指数型增长的趋势，很显然我们无法在收集数据上花费如此大量的时间，少量样本在高维空间的系数存在将导致模型的繁华能力很弱。</p>
+<h1 id="局部不变性和平滑正则化"><a href="#局部不变性和平滑正则化" class="headerlink" title="局部不变性和平滑正则化"></a>局部不变性和平滑正则化</h1><p>机器学习中我们一般会通过先验经验来决定学习什么样的函数集，许多模型完全依靠这些先验获得良好的泛化。其中最广泛使用的隐式 ‘‘先验’’ 是平滑先验（smoothness prior），或局部不变性先验（local constancy prior）。这个先验表明我们学习的函数不应在小区域内发生很大的变化。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/b6b5a9dd.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/c086302f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/c086302f.html" itemprop="url">
+                  机器学习之感知机
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-03 15:55:30" itemprop="dateCreated datePublished" datetime="2018-07-03T15:55:30+08:00">2018-07-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/c086302f.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/c086302f.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>感知机（perceptron）是二类分类的线性分类模型，其输入为实例的特征向量，输出为实例的类别，取+1和-1二值。感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于判别模型。感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此导入了基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。感知机学习算法具有简单而易于实现的优点，分为原始形式和对偶形式。感知机预测是用学习得到的感知基模型对新的输入实例进行分类。感知机是神经网络与支持向量机的基础。</p>
+</blockquote>
+<h1 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h1><p>$$f(x) = sign(w \cdot x + b)$$<br>其中 sign 为符号函数，输出值为$+1,-1$。</p>
+<p>感知机的几何解释为：使用线性函数$w \cdot x + b=0$作为超平面将特征空间的点分为正负两类。其中$w$代表权值向量，即超平面的法向量，b表示偏置，几何意义为超平面的截距。</p>
+<p>感知机为线性模型，要求正负样本必须线性可分。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/c086302f.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/b7143dc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/b7143dc.html" itemprop="url">
+                  机器学习之聚类
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-01 11:16:51" itemprop="dateCreated datePublished" datetime="2018-07-01T11:16:51+08:00">2018-07-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-29 09:40:34" itemprop="dateModified" datetime="2018-07-29T09:40:34+08:00">2018-07-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/b7143dc.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/b7143dc.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”（cluster），每个簇可能对应于一些潜在的概念（类别），需说明的是，这些概念对聚类算法而言事先是未知的，聚类过程仅能自动形成簇结构，簇所对应的概念语义需由使用者来把握和命名。</p>
+<h1 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h1><p>聚类是研究最多应用最广的无监督学习，在“无监督学习”（unsupervised learning）中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。</p>
+<p>无监督学习有：</p>
+<ol>
+<li>聚类</li>
+<li>密度估计</li>
+<li>异常检测</li>
+</ol>
+<h2 id="无监督与监督的区别"><a href="#无监督与监督的区别" class="headerlink" title="无监督与监督的区别"></a>无监督与监督的区别</h2><ol>
+<li>监督学习（supervised learning）：通过已有的训练样本（即已知数据以及其对应的输出）进行算法模型重构。</li>
+<li>无监督学习（unsupervised learning）：我们事先没有任何训练数据样本，需要直接对数据进行建模。用模型来揭示数据的内在性质及规律。</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/b7143dc.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/1ecc272.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1361,769 +2058,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/47f04b2c.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/47f04b2c.html" itemprop="url">
-                  二叉树的常见遍历以及面试题总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-15 09:14:05" itemprop="dateCreated datePublished" datetime="2018-06-15T09:14:05+08:00">2018-06-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 17:11:07" itemprop="dateModified" datetime="2018-07-19T17:11:07+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/47f04b2c.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/47f04b2c.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文总结了二叉树的常见遍历方式，以及剪枝offer上的一些有关二叉树的面试题。</p>
-</blockquote>
-<ol>
-<li>前序：中$\rightarrow$左$\rightarrow$右</li>
-<li>中序：左$\rightarrow$中$\rightarrow$右</li>
-<li>后序：左$\rightarrow$右$\rightarrow$中</li>
-<li>层序遍历：第一层$\rightarrow$第二层$\rightarrow$第三层$\rightarrow$第n层（每层从做到右）</li>
-</ol>
-<h1 id="前序、中序、后序"><a href="#前序、中序、后序" class="headerlink" title="前序、中序、后序"></a>前序、中序、后序</h1><p>树的遍历分递归实现与非递归实现：</p>
-<ol>
-<li>递归实现：递归实现树的遍历，只需按照顺序依次递归即可，较为简单。</li>
-<li>非递归实现：非递归实现需要用到STL容器，按照容器特性依次将树的节点放入容器中。<ol>
-<li>stack容器：先进后出的特性<ul>
-<li>先序遍历：应按右左的顺序将一个节点的子节点放入容器中，这样可保证左节点先于右节点取出。</li>
-<li>中序遍历：从根节点开始依次将节点的左节点放入栈，</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/47f04b2c.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a926dcd5.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/a926dcd5.html" itemprop="url">
-                  【转载】数据结构中各种树
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-13 20:49:00" itemprop="dateCreated datePublished" datetime="2018-06-13T20:49:00+08:00">2018-06-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 17:20:14" itemprop="dateModified" datetime="2018-07-19T17:20:14+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/a926dcd5.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/a926dcd5.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文转载自<a href="http://www.cnblogs.com/maybe2030/p/4732377.html#top" target="_blank" rel="external">Poll的笔记</a>，有关红黑树的内容还可参考<a href="https://www.cnblogs.com/skywang12345/p/3245399.html" target="_blank" rel="external">skywang12345</a>，有关二叉树的面试算法总结可以参考<a href="https://blog.csdn.net/anonymalias/article/details/10897009" target="_blank" rel="external">面试算法之二叉树操作集锦</a>，<a href="https://www.cnblogs.com/Kobe10/p/5569095.html" target="_blank" rel="external">C++面试笔记–树</a></p>
-</blockquote>
-<p>数据结构中有很多树的结构，其中包括二叉树、二叉搜索树、2-3树、红黑树等等。本文中对数据结构中常见的几种树的概念和用途进行了汇总，不求严格精准，但求简单易懂。</p>
-<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="二叉树是数据结构中一种重要的数据结构，也是树表家族最为基础的结构。"><a href="#二叉树是数据结构中一种重要的数据结构，也是树表家族最为基础的结构。" class="headerlink" title="二叉树是数据结构中一种重要的数据结构，也是树表家族最为基础的结构。"></a>二叉树是数据结构中一种重要的数据结构，也是树表家族最为基础的结构。</h2><h2 id="二叉树的定义："><a href="#二叉树的定义：" class="headerlink" title="二叉树的定义："></a>二叉树的定义：</h2><p>二叉树的每个结点至多只有二棵子树(不存在度大于2的结点)，二叉树的子树有左右之分，次序不能颠倒。二叉树的第i层至多有 $2^{i-1}$ 个结点；深度为k的二叉树至多有 $2^{k-1}$ 个结点；对任何一棵二叉树T，如果其终端结点数为$n_0$，度为2的结点数为$n_2$，则$n_0=n_2+1$。</p>
-<h2 id="二叉树的示例："><a href="#二叉树的示例：" class="headerlink" title="二叉树的示例："></a>二叉树的示例：</h2><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft81domb0uj30b709d0uu.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/a926dcd5.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/48cd5d7a.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/48cd5d7a.html" itemprop="url">
-                  百行Python代码教你认识遗传算法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-12 09:33:57" itemprop="dateCreated datePublished" datetime="2018-06-12T09:33:57+08:00">2018-06-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 17:09:44" itemprop="dateModified" datetime="2018-07-19T17:09:44+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/48cd5d7a.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/48cd5d7a.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>遗传算法是一种启发式搜索算法，其基本原理是模拟自然界物竞天择的演化法则。（说的这么高大上，其实就是比较高级的穷举法，不过穷举的时候给出穷举方向而已）。遗传算法具体步骤见下图（来自百度百科）：</p>
-<p><img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=43976a72d11373f0e13267cdc566209e/5ab5c9ea15ce36d347ed71393af33a87e850b1ca.jpg" alt=""></p>
-<h1 id="名词介绍"><a href="#名词介绍" class="headerlink" title="名词介绍"></a>名词介绍</h1><h2 id="染色体，个体，基因"><a href="#染色体，个体，基因" class="headerlink" title="染色体，个体，基因"></a>染色体，个体，基因</h2><p>这3个概念基本等价，遗传算法中每个个体都含有一个染色体\基因，遗传算法将在种群中选择优秀个体，将他们的染色体交叉、变异后产生新的下一代种群。</p>
-<p>一下说了这么多新概念，你可能会有些晕，说到底，染色体就相当于自变量<code>x</code>，而我们的优化目标就相当于因变量<code>y</code>，他们之间有函数关系<code>y=f(x)</code>，这个函数<code>f(x)</code>就是评价一个染色体好坏、能否适应环境的适应度函数。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/48cd5d7a.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/4fdf7389.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/4fdf7389.html" itemprop="url">
-                  正则表达式语法速查
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-10 21:49:00" itemprop="dateCreated datePublished" datetime="2018-06-10T21:49:00+08:00">2018-06-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/4fdf7389.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/4fdf7389.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>前人总结<a href="http://www.regexlab.com/zh/regref.htm" target="_blank" rel="external">揭开正则表达式的神秘面纱</a>，<a href="https://www.jb51.net/tools/zhengze.html#introduction" target="_blank" rel="external">正则表达式30分钟入门教程</a>，<a href="http://rubular.com/" target="_blank" rel="external">在线测试工具</a></p>
-</blockquote>
-<h1 id="某些字符"><a href="#某些字符" class="headerlink" title="某些字符"></a>某些字符</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:left">换行</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:left">回车</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:left">制表符</td>
-</tr>
-</tbody>
-</table>
-<h1 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h1><table>
-<thead>
-<tr>
-<th style="text-align:center">代码</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:left">匹配除换行符以外的任意字符</td>
-</tr>
-<tr>
-<td style="text-align:center">\w</td>
-<td style="text-align:left">匹配字母或数字或下划线或汉字</td>
-</tr>
-<tr>
-<td style="text-align:center">\s</td>
-<td style="text-align:left">匹配任意的空白符</td>
-</tr>
-<tr>
-<td style="text-align:center">\d</td>
-<td style="text-align:left">匹配数字</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:left">匹配单词的开始或结束</td>
-</tr>
-<tr>
-<td style="text-align:center">^</td>
-<td style="text-align:left">匹配字符串的开始（行的开始）</td>
-</tr>
-<tr>
-<td style="text-align:center">$</td>
-<td style="text-align:left">匹配字符串的结束（行的结束）</td>
-</tr>
-</tbody>
-</table>
-<p>如果想匹配<code>. or ^ or $</code>，需要在前面加上转义字符 <code>\</code> ，如<code>\.</code> 。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/4fdf7389.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2175,7 +2109,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

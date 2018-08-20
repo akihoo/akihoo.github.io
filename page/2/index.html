@@ -320,6 +320,502 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/26e8d9eb.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/26e8d9eb.html" itemprop="url">
+                  SQL基础
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-22 16:44:45" itemprop="dateCreated datePublished" datetime="2018-07-22T16:44:45+08:00">2018-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-11 16:56:55" itemprop="dateModified" datetime="2018-08-11T16:56:55+08:00">2018-08-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/26e8d9eb.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/26e8d9eb.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>本文使用的数据库来自<a href="https://www.yiibai.com/mysql/sample-database.html" target="_blank" rel="external">https://www.yiibai.com/mysql/sample-database.html</a> ，</p>
+</blockquote>
+<h1 id="连接SQL"><a href="#连接SQL" class="headerlink" title="连接SQL"></a>连接SQL</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 打开 MySQL 服务</div><div class="line">sudo service mysql <span class="keyword">start</span></div><div class="line"></div><div class="line">#连接<span class="keyword">SQL</span>服务器，参数-h为<span class="keyword">sql</span>服务器地址，-u为用户名，默认为root，-p为密码</div><div class="line">mysql -h host -u root -p <span class="keyword">password</span></div><div class="line"></div><div class="line"># 退出<span class="keyword">SQL</span></div><div class="line"><span class="keyword">exit</span></div></pre></td></tr></table></figure>
+<h1 id="数据库与数据表"><a href="#数据库与数据表" class="headerlink" title="数据库与数据表"></a>数据库与数据表</h1><h2 id="显示-SHOW"><a href="#显示-SHOW" class="headerlink" title="显示-SHOW"></a>显示-SHOW</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</div><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</div><div class="line"></div><div class="line"><span class="comment">--# eg.数据表概览</span></div><div class="line">mysql&gt; show tables;</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| Tables_in_yiibaidb |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| customers          |</div><div class="line">| employees          |</div><div class="line">| items              |</div><div class="line">| offices            |</div><div class="line">| orderdetails       |</div><div class="line">| orders             |</div><div class="line">| payments           |</div><div class="line">| productlines       |</div><div class="line">| products           |</div><div class="line">| tokens             |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/26e8d9eb.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/undefined.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/undefined.html" itemprop="url">
+                  搭建博客的原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-22 09:51:35 / 修改时间：19:47:00" itemprop="dateCreated datePublished" datetime="2018-07-22T09:51:35+08:00">2018-07-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/undefined.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/undefined.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>不折腾毋宁死，为了更好地魔改博客，对hexo工作原理还是需要有一定地了解，本文节选自<a href="https://juejin.im/post/598eeaff5188257d592e55bb" target="_blank" rel="external">【掘金】sunshine小小倩</a></p>
+</blockquote>
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>使用 Hexo + github pages 搭建博客，刚刚我们简单介绍了 github pages，那么现在我们就该介绍一下 Hexo，我们了解到 Hexo 是用来生成 HTML 的，那么这篇文章我们就主要来讲一下 Hexo 是怎样生成 HTML 的。</p>
+<h2 id="什么是-Hexo"><a href="#什么是-Hexo" class="headerlink" title="什么是 Hexo"></a>什么是 Hexo</h2><p>hexo官网在 Hexo 的官网，我们可以直观的看到对 Hexo 的介绍：快速、简洁且高效的博客框架<br>在 Hexo 的文档中，我们可以找到官方对 Hexo 的定义：</p>
+<blockquote>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<p>在官方文档中安装了 Hexo 中我们就安装了 Hexo，然后我们就可以看到文档结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml      // 站点配置文件</div><div class="line">├── db.json          // 缓存文件</div><div class="line">├── node_modules     // 安装的插件以及hexo所需的一些nodejs模块</div><div class="line">├── package.json     // 项目的依赖文件</div><div class="line">├── scaffolds        // 模版文件</div><div class="line">├── source           // 源文件，用来存放你的文章 md 文件</div><div class="line">└── themes           // 主题文件复制代码然后我们可以安装主题，比我我安装的 NexT 主题，安装完之后会在 themes 下面产生一个 next 文件存放主题中的内容，文档结构如下：</div><div class="line">.</div><div class="line">├── LICENSE</div><div class="line">├── README.en.md       // READEME 英文版</div><div class="line">├── README.md          // READEME 中文文件</div><div class="line">├── _config.yml        // 主题配置文件</div><div class="line">├── bower.json</div><div class="line">├── gulpfile.coffee</div><div class="line">├── languages         // 多语言配置文件</div><div class="line">├── layout            // 模板文件</div><div class="line">├── package.json      // 项目的依赖文件</div><div class="line">├── scripts           // 主题的脚本文件</div><div class="line">├── source            // 主题的资源文件 CSS IMG</div><div class="line">└── test</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/undefined.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/20a77595.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/20a77595.html" itemprop="url">
+                  【转载】Hexo - 修改永久链接的默认格式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-19 11:44:45 / 修改时间：16:22:04" itemprop="dateCreated datePublished" datetime="2018-07-19T11:44:45+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/20a77595.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/20a77595.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文转载自<a href="https://lewky.cn/posts/ff4321d8.html" target="_blank" rel="external">https://lewky.cn/posts/ff4321d8.html</a> ，大佬博客里面由许多魔改教程的，强烈推荐。</p>
+</blockquote>
+<p>Hexo的永久链接的默认格式是 <code>:year/:month/:day/:title/</code>，比如访问站点下某一篇文章时，其路径是 <code>2018/04/12/xxxx/</code>，如果我们的文章标题是中文的，那么该路径就会出现中文字符。在路径中出现了中文字符很容易引发各种问题，而且也不利于seo，因为路径包含了年月日三个层级，层级太深不利于百度蜘蛛抓取。</p>
+<p>解决办法就是利用其它的插件来生成唯一的路径，这样就算我们的文件标题随意修改，而不会导致原本的链接失效而造成站点下存在大量的死链。</p>
+<p>安装插件<br>在站点根目录使用 <code>git bash</code> 执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-abbrlink --save</div></pre></td></tr></table></figure></p>
+<p>修改站点配置文件<br>打开根目录下的 <code>_config.yml</code> 文件，修改如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># permalink: :year/:month/:day/:title/</div><div class="line"># permalink_defaults:</div><div class="line">permalink: posts/:abbrlink.html</div><div class="line">abbrlink:</div><div class="line">  alg: crc32  # 算法：crc16(default) and crc32</div><div class="line">  rep: hex    # 进制：dec(default) and hex</div></pre></td></tr></table></figure></p>
+<p>这里将页面都添加了 <code>.html</code> 的后缀，用来伪装成静态页面(虽说Hexo的页面本身就是静态页面)，这样可以直接从路径就知道这是个静态页面，方便seo。</p>
+<p>接下来重新部署三连，可以看到我们的文章路径变成了 <code>/posts/xxxxx.html</code>，接下来就算我们将文字标题命名为中文也没问题了。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/10a4d630.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,6 +921,249 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/10a4d630.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a45772c3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/a45772c3.html" itemprop="url">
+                  机器学习之模型整理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-19 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-18 12:55:21" itemprop="dateModified" datetime="2018-08-18T12:55:21+08:00">2018-08-18</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/a45772c3.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/a45772c3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。</p>
+</blockquote>
+<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="模型总结"><a href="#模型总结" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<li>简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。</li>
+<li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
+<li>损失函数：极大似然函数 ： $L _ \theta\left(x\right )= \prod _ {i=1}^{m}h _ \theta(x^{i};\theta )^{y{i}}*(1-h _\theta(x^{i};\theta))^{1-y^{i}}$</li>
+<li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
+<li>为什么LR要使用sigmoid函数：LR属于广义线性模型，sigmoid函数则是指数族函数，</li>
+<li>优点：<ol>
+<li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
+<li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
+<li>实现简单，分类时计算量非常小，速度快，存储资源低</li>
+<li>可解释性强：线性回归的参数取值反应特征的强弱。</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>准确性不高，容易过拟合</li>
+<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须线性可分；</li>
+</ol>
+</li>
+<li><a href="https://www.zhihu.com/question/26726794" target="_blank" rel="external">适用场景</a>：<ol>
+<li>是否支持大规模数据：支持，并且有分布式实现</li>
+<li>特征维度：可以很高</li>
+<li>是否有 Online 算法:有（<a href="https://www.zhihu.com/question/28025036/answer/107297334" target="_blank" rel="external">参考自</a>）</li>
+<li>特征处理：支持数值型数据，类别型类型</li>
+<li>预估问题场景（如推荐、广告系统中的点击率预估，转化率预估等）</li>
+<li>分类场景（如用户画像中的标签预测，判断内容是否具有商业价值，判断点击作弊等</li>
+</ol>
+</li>
+<li>多分类问题：<ol>
+<li>对k个类别的分类，建立k个二元分类器</li>
+<li>将逻辑回归推广到多元逻辑回归（Multinomial Logistic Regression），模型使用softmax对概率建模，$P(y=i|x, \theta) = \dfrac{e^{\theta_i^T x}}{\sum_j^K{e^{\theta_j^T x}}}$，其中决策函数为$y^* = argmax_i P(y=i|x,\theta)$，损失函数为$J(\theta)=-\dfrac{1}{N} \sum_i^N \sum_j^K {1[y_i=j] \log{\dfrac{e^{\theta_i^T x}}{\sum {e^{\theta_k^T x}}}}}$</li>
+<li>如何选择：如果如果类别之间互斥，则使用softmax.如果类别间有联系，则选用k个二元分类器。</li>
+</ol>
+</li>
+<li>模型比较：<ol>
+<li>与线性回归比较：<ul>
+<li>相同点：都是广义线性模型</li>
+<li>不同点：<ol>
+<li>经典线性模型的优化目标函数是最小二乘，而逻辑回归则是似然函数</li>
+<li>线性回归输出连续值，分布范围在整个实数域。逻辑回归通过sigmoid函数将预测值限定为[0,1]间，输出值代表真实标记概率，因而对于这类问题来说，逻辑回归的鲁棒性比线性回归的要好。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">与svm比较</a>，<a href="https://www.zhihu.com/question/26768865" target="_blank" rel="external">答案2</a><ul>
+<li>相同点：<ol>
+<li>LR和SVM都可以处理分类问题，且一般都用于处理线性可分的二分类问题（在改进的情况下可以处理多分类问题） </li>
+</ol>
+</li>
+<li>不同点：<ol>
+<li>LR是参数模型，SVM是非参数模型。</li>
+<li>逻辑回归采用的是Logistical Loss，SVM采用的是hinge loss.这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。</li>
+<li>SVM的处理方法是只考虑Support Vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。 </li>
+<li>逻辑回归相对来说模型更简单，好理解，特别是大规模线性分类时比较方便。而SVM的理解和优化相对来说复杂一些，只需要计算与少数几个支持向量的距离,这个在进行复杂核函数计算时优势很明显,能够大大简化模型和计算。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>与感知机比较<ul>
+<li>相同点：<ol>
+<li>都是线性分类模型，原始模型都只能处理二分类问题</li>
+<li>模型的形式相似(都是在线性模型外通过联系函数映射到另外的空间，只不过感知机是符号函数，LR是sigmoid(或者说Logistic)函数)</li>
+<li>训练方法都是使用梯度下降法</li>
+</ol>
+</li>
+<li>不同点：<ol>
+<li>LR输出为仅是概率的值，而感知机输出为1/-1</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/a45772c3.html#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1253,7 +1992,7 @@ tags:
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-19 17:08:09" itemprop="dateModified" datetime="2018-07-19T17:08:09+08:00">2018-07-19</time>
+                <time title="修改时间：2018-08-05 21:29:49" itemprop="dateModified" datetime="2018-08-05T21:29:49+08:00">2018-08-05</time>
               
             
           </span>
@@ -1349,703 +2088,6 @@ tags:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/461acaa3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/461acaa3.html" itemprop="url">
-                  机器学习竞赛大杀器-xgboost
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-10 15:55:28" itemprop="dateCreated datePublished" datetime="2018-07-10T15:55:28+08:00">2018-07-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 17:04:09" itemprop="dateModified" datetime="2018-07-19T17:04:09+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/461acaa3.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/461acaa3.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>有关决策树与集成学习的介绍：<a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/">决策树</a>、<a href="https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/">集成学习</a></p>
-</blockquote>
-<h1 id="XGB"><a href="#XGB" class="headerlink" title="XGB"></a>XGB</h1><p>XGB 同随机森林一样，通过构建一系列决策树（准确说应该是CART树）来组成最终的预测模型，由 $K$ 棵函数为 $f _ k(x _ i)$ 树组成的 XGB 模型可写成：</p>
-<p>$$\hat y _ i = \sum _ {k=1}^K f _ k(x _ i), \quad f _ k \in \mathcal{F}$$</p>
-<p>模型的目标函数为：<br>$$Obj(\Theta) = \sum _ i^n l(y _ i,\hat y _ i) +\sum _ {k=1}^K\Omega(f _ k)$$<br>这个目标函数的第一部分就是损失函数，第二部分就是正则项。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/461acaa3.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/b6b5a9dd.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/b6b5a9dd.html" itemprop="url">
-                  初识深度学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-08 18:07:05" itemprop="dateCreated datePublished" datetime="2018-07-08T18:07:05+08:00">2018-07-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/b6b5a9dd.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/b6b5a9dd.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>传统的机器学习再许多问题上都有良好效果，但却无法解决人工智能的关键问题，如语音识别、对象识别等。于是，深度学习应运而生。</p>
-</blockquote>
-<h1 id="维数灾难"><a href="#维数灾难" class="headerlink" title="维数灾难"></a>维数灾难</h1><p>当数据的维数很高时，很多机器学习问题变得相当困难。在低维空间，仅需要少量样本便可将样本空间填充得非常稠密，随着维度得增加需要的样本数则是指数型增长的趋势，很显然我们无法在收集数据上花费如此大量的时间，少量样本在高维空间的系数存在将导致模型的繁华能力很弱。</p>
-<h1 id="局部不变性和平滑正则化"><a href="#局部不变性和平滑正则化" class="headerlink" title="局部不变性和平滑正则化"></a>局部不变性和平滑正则化</h1><p>机器学习中我们一般会通过先验经验来决定学习什么样的函数集，许多模型完全依靠这些先验获得良好的泛化。其中最广泛使用的隐式 ‘‘先验’’ 是平滑先验（smoothness prior），或局部不变性先验（local constancy prior）。这个先验表明我们学习的函数不应在小区域内发生很大的变化。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/b6b5a9dd.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/c086302f.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/c086302f.html" itemprop="url">
-                  机器学习之感知机
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-03 15:55:30" itemprop="dateCreated datePublished" datetime="2018-07-03T15:55:30+08:00">2018-07-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-19 11:39:03" itemprop="dateModified" datetime="2018-07-19T11:39:03+08:00">2018-07-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/c086302f.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/c086302f.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>感知机（perceptron）是二类分类的线性分类模型，其输入为实例的特征向量，输出为实例的类别，取+1和-1二值。感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于判别模型。感知机学习旨在求出将训练数据进行线性划分的分离超平面，为此导入了基于误分类的损失函数，利用梯度下降法对损失函数进行极小化，求得感知机模型。感知机学习算法具有简单而易于实现的优点，分为原始形式和对偶形式。感知机预测是用学习得到的感知基模型对新的输入实例进行分类。感知机是神经网络与支持向量机的基础。</p>
-</blockquote>
-<h1 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h1><p>$$f(x) = sign(w \cdot x + b)$$<br>其中 sign 为符号函数，输出值为$+1,-1$。</p>
-<p>感知机的几何解释为：使用线性函数$w \cdot x + b=0$作为超平面将特征空间的点分为正负两类。其中$w$代表权值向量，即超平面的法向量，b表示偏置，几何意义为超平面的截距。</p>
-<p>感知机为线性模型，要求正负样本必须线性可分。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/c086302f.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/b7143dc.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/b7143dc.html" itemprop="url">
-                  机器学习之聚类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-01 11:16:51" itemprop="dateCreated datePublished" datetime="2018-07-01T11:16:51+08:00">2018-07-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-29 09:40:34" itemprop="dateModified" datetime="2018-07-29T09:40:34+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/b7143dc.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/b7143dc.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>聚类试图将数据集中的样本划分为若干个通常是不相交的子集，每个子集称为一个“簇”（cluster），每个簇可能对应于一些潜在的概念（类别），需说明的是，这些概念对聚类算法而言事先是未知的，聚类过程仅能自动形成簇结构，簇所对应的概念语义需由使用者来把握和命名。</p>
-<h1 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h1><p>聚类是研究最多应用最广的无监督学习，在“无监督学习”（unsupervised learning）中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据的内在性质及规律，为进一步的数据分析提供基础。</p>
-<p>无监督学习有：</p>
-<ol>
-<li>聚类</li>
-<li>密度估计</li>
-<li>异常检测</li>
-</ol>
-<h2 id="无监督与监督的区别"><a href="#无监督与监督的区别" class="headerlink" title="无监督与监督的区别"></a>无监督与监督的区别</h2><ol>
-<li>监督学习（supervised learning）：通过已有的训练样本（即已知数据以及其对应的输出）进行算法模型重构。</li>
-<li>无监督学习（unsupervised learning）：我们事先没有任何训练数据样本，需要直接对数据进行建模。用模型来揭示数据的内在性质及规律。</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/b7143dc.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2097,7 +2139,7 @@ tags:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

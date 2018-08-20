@@ -320,6 +320,720 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/0.html" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-16 19:40:47" itemprop="dateCreated datePublished" datetime="2018-08-16T19:40:47+08:00">2018-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-17 14:06:41" itemprop="dateModified" datetime="2018-08-17T14:06:41+08:00">2018-08-17</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/0.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/0.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="adaboost"><a href="#adaboost" class="headerlink" title="adaboost"></a>adaboost</h1><p>adaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入一个新的弱分类器，知道达到某个预定的足够小的的错误率或达到预定的最大迭代次数。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.cnblogs.com/en-heng/p/5974371.html" target="_blank" rel="external">https://www.cnblogs.com/en-heng/p/5974371.html</a></li>
+</ol>
+<h1 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h1><p>GBDT 模型也是基于boosting的集成学习算法的变种，GB这边，就是Gradient Boost，通过在梯度上进行boost，每一次的计算是为了减少上一次的残差(residual)，在Gradient Boost中，每个新的模型的遍历是为了使得之前模型的残差往梯度方向减少。与传统Boost对错误的样本进行加权有着很大的区别。从公式上，就是下一个函数等于上一个函数+拟合了残差的函数（实际上这个残差函数会乘以一个乘数，是让目标函数最小化，这个乘数怎么来不作展开）。</p>
+<h1 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h1><p>XGBoost 是GBDT的一个变种，最大的区别是xgboost通过对目标函数做二阶泰勒展开，从而求出下一步要拟合的树的叶子节点权重（需要先确定树的结构），从而根据分裂损失选择合适的属性进行分裂。</p>
+<h2 id="一些特性"><a href="#一些特性" class="headerlink" title="一些特性"></a>一些特性</h2><ol>
+<li>GBDT无显式正则化，xgboost对每棵树的叶子节点个数和权重都做了惩罚，避免过拟合</li>
+<li>类似于随机森林，XGBoost在构建树的过程中，加入了行采样与列采样，防止过拟合</li>
+<li>分裂算法有两种，一种是精确的分裂，一种是近似分裂算法，精确分裂算法就是把每个属性的每个取值都当作一次阈值进行遍历，采用的决策树是CART。近似分裂算法是对每个属性的所有取值进行分桶，按照各个桶之间的值作为划分阈值，xgboost提出了一个特殊的分桶策略，一般的分桶策略是每个样本的权重都是相同的，但是xgboost使每个样本的权重为损失函数在该样本点的二阶导(泰勒展开不应该是损失函数关于模型的展开吗？为什么会有在该样本点的二阶导这种说法？ 因为模型是对所有样本点都通用的，把该样本输入到二阶导公式中就可以得到了)。</li>
+<li>xgboost加入了对缺失值的处理，xgboost分别将缺失样本放置到左子树和右子树，比较两者分裂增益，选择增益较大的那一边作为该样本的分裂方向。</li>
+<li>XGBoost通过预排序的方法来实现特征并行，提高模型训练效率</li>
+<li>xgboost 在实现时，需要将所有数据导入内存，做一次pre-sort（exact algorithm），这样在选择分裂节点时比较迅速。</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>level-wise 建树方式对当前层的所有叶子节点一视同仁，有些叶子节点分裂收益非常小，对结果没影响，但还是要分裂，加重了计算代价。</li>
+<li>预排序方法空间消耗比较大，不仅要保存特征值，也要保存特征的排序索引，同时时间消耗也大，在遍历每个分裂点时都要计算分裂增益(不过这个缺点可以被近似算法所克服)</li>
+</ol>
+<h1 id="lightgbm"><a href="#lightgbm" class="headerlink" title="lightgbm"></a>lightgbm</h1><p>相对XGB进行了大量优化</p>
+<ol>
+<li>在效率和内存上：采用直方图算法，相对Numpy,Pandas,Array等数据对象而言节省了内存的使用，原因在于他只需要保存离散的直方图，LightGBM里默认的训练决策树时使用直方图算法，XGBoost里现在也提供了这一选项，不过默认的方法是对特征预排序，直方图算法是一种牺牲了一定的切分准确性而换取训练速度以及节省内存空间消耗的算法。<ol>
+<li>在训练决策树计算切分点的增益时，预排序需要对每个样本的切分位置计算，所以时间复杂度是O(#data)而LightGBM则是计算将样本离散化为直方图后的直方图切割位置的增益即可，时间复杂度为O(#bins),时间效率上大大提高了(初始构造直方图是需要一次O(#data)的时间复杂度，不过这里只涉及到加和操作)</li>
+<li>直方图做差进一步提高效率，计算某一节点的叶节点的直方图可以通过将该节点的直方图与另一子节点的直方图做差得到，所以每次分裂只需计算分裂后样本数较少的子节点的直方图然后通过做差的方式获得另一个子节点的直方图，进一步提高效率</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/0.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/0.html" itemprop="url">
+                  未命名
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-16 16:37:29 / 修改时间：16:37:30" itemprop="dateCreated datePublished" datetime="2018-08-16T16:37:29+08:00">2018-08-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/0.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/0.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="XGB"><a href="#XGB" class="headerlink" title="XGB"></a>XGB</h1><p>XGB 是 boosting 的其中一种方法，所谓 Boosting ，就是将弱分离器 f_i(x) 组合起来形成强分类器 F(x) 的一种方法。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/cdd358bc.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/cdd358bc.html" itemprop="url">
+                  leetcode之BFS与DFS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-04 09:49:00" itemprop="dateCreated datePublished" datetime="2018-08-04T09:49:00+08:00">2018-08-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-05 21:29:24" itemprop="dateModified" datetime="2018-08-05T21:29:24+08:00">2018-08-05</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/cdd358bc.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/cdd358bc.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>深度优先与广度优先算法，从名字上便很好理解，以在二叉树结构中搜索某一值为例：</p>
+<ol>
+<li>深度优先算法将从顶点V开始，沿着一个路径一直走到底（叶子节点），如果搜索到目标值则退出，否则返回上一个还有子节点未被搜索的节点继续搜索。</li>
+<li>广度优先算法将从顶点V开始，依次访问当前节点未被访问过的子节点，再从子节出发，继续访问他们的子节点，直到所有节点被访问。（相当于树的层次遍历）</li>
+<li>一般说来，能用DFS解决的问题都能用BFS解决。DFS通过递归实现，易于实现，DFS的常数时间开销会比较少，所以大多数情况下优先考虑DFS实现。然后就是，DFS容易栈溢出，而BFS可以自己控制队列的长度。 </li>
+</ol>
+<h1 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h1><h2 id="基本实现思想："><a href="#基本实现思想：" class="headerlink" title="基本实现思想："></a>基本实现思想：</h2><p>​        （1）顶点v入队列。</p>
+<p>​        （2）当队列非空时则继续执行，否则算法结束。</p>
+<p>​        （3）出队列取得队头顶点v；</p>
+<p>​        （4）查找顶点v的所以子节点，并依次进入队列；</p>
+<p>​        （5）转到步骤（2）。</p>
+<h2 id="树的层次遍历"><a href="#树的层次遍历" class="headerlink" title="树的层次遍历"></a><a href="https://www.nowcoder.com/practice/7fe2212963db4790b57431d9ed259701?tpId=13&amp;tqId=11175&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="external">树的层次遍历</a></h2><ul>
+<li>从上往下打印出二叉树的每个节点，同层节点从左至右打印。 </li>
+<li>这里使用2个数组保存节点，也可以使用queue这一数据结构。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">struct TreeNode &#123;</span></div><div class="line"><span class="comment">	int val;</span></div><div class="line"><span class="comment">	struct TreeNode *left;</span></div><div class="line"><span class="comment">	struct TreeNode *right;</span></div><div class="line"><span class="comment">	TreeNode(int x) :</span></div><div class="line"><span class="comment">			val(x), left(NULL), right(NULL) &#123;</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;;*/</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; print_vec;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; PrintFromTopToBottom(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; node_pre,node; <span class="comment">//使用2个数组，分别保存上一层的树节点与当前层的树节点</span></div><div class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)<span class="keyword">return</span> print_vec;</div><div class="line">        <span class="keyword">if</span>(root-&gt;left!=<span class="literal">NULL</span>)</div><div class="line">            node.push_back(root-&gt;left);</div><div class="line">        <span class="keyword">if</span>(root-&gt;right!=<span class="literal">NULL</span>)</div><div class="line">            node.push_back(root-&gt;right);</div><div class="line">        print_vec.push_back(root-&gt;val);</div><div class="line">        <span class="keyword">while</span>(!node.empty())</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> i=<span class="number">0</span>;i&lt;node.size();i++)</div><div class="line">            &#123;</div><div class="line">                print_vec.push_back(node[i]-&gt;val);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; x;</div><div class="line">            node_pre.swap(node);</div><div class="line">            x.swap(node);</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> i=<span class="number">0</span>;i&lt;node_pre.size();i++)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//遍历node_pre的节点，并将子节点保存到node</span></div><div class="line">                <span class="keyword">if</span>(node_pre[i]-&gt;left!=<span class="literal">NULL</span>)</div><div class="line">                    node.push_back(node_pre[i]-&gt;left);</div><div class="line">                <span class="keyword">if</span>(node_pre[i]-&gt;right!=<span class="literal">NULL</span>)</div><div class="line">                    node.push_back(node_pre[i]-&gt;right);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> print_vec;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="DFS"><a href="#DFS" class="headerlink" title="DFS　"></a>DFS　</h1><h2 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：</h2><p>​             （1）访问顶点v，打印节点；</p>
+<p>​             （2）遍历v的子节点w，while（w存在），递归执行该节点；</p>
+<h2 id="非递归实现："><a href="#非递归实现：" class="headerlink" title="非递归实现："></a>非递归实现：</h2><p>​             （1）访问顶点v，顶点v入栈S，打印输出顶点，visited[v]=1</p>
+<p>​              （2）while(栈S非空)</p>
+<p>​                      x=栈S的顶元素(不出栈)；</p>
+<p>​                      if(存在并找到未被访问的x的子结点w)</p>
+<p>​                      　　访问w，打印输出，visited[w]=1；w进栈;</p>
+<p>​                      else</p>
+<p>​                      　　x出栈;</p>
+<p> 注：visited[x]=1，标记该节点已被访问</p>
+<h2 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a><a href="https://www.nowcoder.com/practice/435fb86331474282a3499955f0a41e8b?tpId=13&amp;tqId=11191&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="external">二叉树的深度</a></h2><ul>
+<li>输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。 </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">struct TreeNode &#123;</span></div><div class="line"><span class="comment">	int val;</span></div><div class="line"><span class="comment">	struct TreeNode *left;</span></div><div class="line"><span class="comment">	struct TreeNode *right;</span></div><div class="line"><span class="comment">	TreeNode(int x) :</span></div><div class="line"><span class="comment">			val(x), left(NULL), right(NULL) &#123;</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;;*/</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">TreeDepth</span><span class="params">(TreeNode* pRoot)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">if</span>(!pRoot)</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> max(!(pRoot-&gt;left)?<span class="number">1</span>:TreeDepth(pRoot-&gt;left)+<span class="number">1</span>,!(pRoot-&gt;right)?<span class="number">1</span>:TreeDepth(pRoot-&gt;right)+<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="二叉树中和为某一值的路径"><a href="#二叉树中和为某一值的路径" class="headerlink" title="二叉树中和为某一值的路径"></a><a href="https://www.nowcoder.com/practice/b736e784e3e34731af99065031301bca?tpId=13&amp;tqId=11177&amp;tPage=2&amp;rp=2&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking" target="_blank" rel="external">二叉树中和为某一值的路径</a></h2><ul>
+<li>输入一颗二叉树的跟节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。(注意: 在返回值的list中，数组长度大的数组靠前) </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">struct TreeNode &#123;</span></div><div class="line"><span class="comment">	int val;</span></div><div class="line"><span class="comment">	struct TreeNode *left;</span></div><div class="line"><span class="comment">	struct TreeNode *right;</span></div><div class="line"><span class="comment">	TreeNode(int x) :</span></div><div class="line"><span class="comment">			val(x), left(NULL), right(NULL) &#123;</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;;*/</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; FindPath(TreeNode* root,<span class="keyword">int</span> expectNumber) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; n;</div><div class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> res;</div><div class="line">        finder(root,expectNumber,res,n);</div><div class="line">        <span class="keyword">return</span> res;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">finder</span><span class="params">(TreeNode* root,<span class="keyword">int</span> expectNumber,<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; &amp;res,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;n)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(!root||root-&gt;val&gt;expectNumber||(root-&gt;val==expectNumber&amp;&amp;(root-&gt;left||root-&gt;right))) <span class="keyword">return</span>;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;val==expectNumber&amp;&amp;(!root-&gt;left&amp;&amp;!root-&gt;right))&#123;</div><div class="line">            n.push_back(root-&gt;val);</div><div class="line">            res.push_back(n);</div><div class="line">            n.pop_back();</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        n.push_back(root-&gt;val);</div><div class="line">        finder(root-&gt;left,expectNumber-root-&gt;val,res,n);</div><div class="line">        finder(root-&gt;right,expectNumber-root-&gt;val,res,n);</div><div class="line">        n.pop_back();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="迷宫寻路问题"><a href="#迷宫寻路问题" class="headerlink" title="迷宫寻路问题"></a>迷宫寻路问题</h1><h2 id="推箱子"><a href="#推箱子" class="headerlink" title="推箱子"></a><a href="https://blog.csdn.net/u010009169/article/details/60892521" target="_blank" rel="external">推箱子</a></h2><ul>
+<li>这是网易的一道笔试题，需要将箱子推到指定位置。输入一张地图，其中*表示箱子,X表示人,@表示目的地,#表示障碍。</li>
+<li>这道题采用广度优先算法，第一次将箱子推送到目标地即为最短路径。使用st[x][y][bx][by]（人位 置(x,y),箱子位置(bx,by) ）记录状态，防止重复的路径。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span> ;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">vector</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line"><span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">queue</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">4 4</span></div><div class="line"><span class="comment">....</span></div><div class="line"><span class="comment">..*@</span></div><div class="line"><span class="comment">....</span></div><div class="line"><span class="comment">.X..</span></div><div class="line"><span class="comment">*/</span></div><div class="line"></div><div class="line"><span class="keyword">int</span> st[<span class="number">10</span>][<span class="number">10</span>][<span class="number">10</span>][<span class="number">10</span>];</div><div class="line"><span class="keyword">int</span> x,y,bx,by,tx,ty;</div><div class="line"> <span class="keyword">int</span> m ,  n ;</div><div class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt; mm ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y )</span></span>&#123;</div><div class="line">  <span class="comment">//判断移动是否合法</span></div><div class="line">   <span class="keyword">if</span>(x&gt;=<span class="number">0</span>&amp;&amp;x&lt;m&amp;&amp;y&gt;=<span class="number">0</span>&amp;&amp;y&lt;n&amp;&amp;mm[x][y]!=<span class="string">'#'</span>)<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">   <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">   <span class="built_in">cin</span> &gt;&gt; m &gt;&gt;n;</div><div class="line">   mm= <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;(m , <span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;(n ,<span class="string">' '</span> ));</div><div class="line"></div><div class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; m ; i++)</div><div class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span> ; j&lt; n ; j++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span> t ;</div><div class="line">        <span class="built_in">cin</span> &gt;&gt;t;</div><div class="line">        <span class="keyword">if</span>(t==<span class="string">'X'</span>)&#123;</div><div class="line">          x = i;y = j;</div><div class="line">         <span class="comment">// cout &lt;&lt;x&lt;&lt;" "&lt;&lt;y&lt;&lt;endl;</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(t == <span class="string">'*'</span>)&#123;</div><div class="line">           bx = i ;by = j;</div><div class="line">         &#125;</div><div class="line">        <span class="keyword">if</span>(t == <span class="string">'@'</span>)&#123;</div><div class="line">          tx = i ; ty = j;</div><div class="line">        &#125;</div><div class="line">        mm[i][j] = t;           </div><div class="line">    &#125; </div><div class="line"></div><div class="line"><span class="comment">//  record every state of the </span></div><div class="line">  <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; next= &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;&#125;;</div><div class="line">  <span class="built_in">queue</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; que ;</div><div class="line">  que.push(&#123;x,y,bx,by&#125;);</div><div class="line"></div><div class="line">  st[x][y][bx][by] =<span class="number">1</span> ;<span class="comment">//状态初始化</span></div><div class="line">  <span class="keyword">while</span>(!que.empty())</div><div class="line">  &#123;</div><div class="line">      <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; t = que.front();</div><div class="line">      que.pop();</div><div class="line">      x =  t[<span class="number">0</span>];  y = t[<span class="number">1</span>];  bx=t[<span class="number">2</span>]; by = t[<span class="number">3</span>];</div><div class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i &lt; next.size() ; i++)</div><div class="line">      &#123;</div><div class="line">         <span class="keyword">int</span> nx = x+next[i][<span class="number">0</span>],ny =y+next[i][<span class="number">1</span>]; </div><div class="line">         <span class="keyword">int</span> nnx = nx+next[i][<span class="number">0</span>],nny =ny+next[i][<span class="number">1</span>]; </div><div class="line">         <span class="keyword">if</span>(valid(nx,ny)&amp;&amp;(nx!=bx||ny!=by)&amp;&amp;st[nx][ny][bx][by]==<span class="number">0</span>)</div><div class="line">         <span class="comment">//移动合法且状态不重复且不退箱子的情况下</span></div><div class="line">         &#123;</div><div class="line">             st[nx][ny][bx][by]= st[x][y][bx][by]+<span class="number">1</span>;</div><div class="line">             que.push(&#123;nx,ny,bx,by&#125;);</div><div class="line">             <span class="keyword">continue</span>;</div><div class="line">         &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nx==bx&amp;&amp;ny==by&amp;&amp;valid(nnx,nny)&amp;&amp;st[nx][ny][nnx][nny]==<span class="number">0</span>)&#123; </div><div class="line">         <span class="comment">//移动合法且状态不重复且推箱子情况</span></div><div class="line">              st[nx][ny][nnx][nny] = st[x][y][bx][by]+<span class="number">1</span>;</div><div class="line">              <span class="keyword">if</span>(mm[nnx][nny]==<span class="string">'@'</span>)&#123;<span class="built_in">cout</span>&lt;&lt;st[nx][ny][nnx][nny]<span class="number">-1</span>;<span class="keyword">return</span> <span class="number">0</span>;&#125;</div><div class="line">              que.push(&#123;nx,ny,nnx,nny&#125;);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125; </div><div class="line"></div><div class="line">   <span class="built_in">cout</span> &lt;&lt;<span class="number">-1</span>;</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="迷宫寻路"><a href="#迷宫寻路" class="headerlink" title="迷宫寻路 "></a><a href="https://www.nowcoder.com/questionTerminal/e3fc4f8094964a589735d640424b6a47" target="_blank" rel="external">迷宫寻路 </a></h2><ul>
+<li>请设计一个算法，帮助探险家找到脱困的最短路径。如前所述，迷宫是通过一个二维矩阵表示的，每个元素的值的含义如下 0-墙，1-路，2-探险家的起始位置，3-迷宫的出口，大写字母-门，小写字母-对应大写字母所代表的门的钥匙 </li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">链接：https:<span class="comment">//www.nowcoder.com/questionTerminal/e3fc4f8094964a589735d640424b6a47</span></div><div class="line">来源：牛客网</div><div class="line"></div><div class="line"><span class="comment">//AC代码:</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">char</span> G[<span class="number">105</span>][<span class="number">105</span>];</div><div class="line"><span class="keyword">int</span> book[<span class="number">105</span>][<span class="number">105</span>][<span class="number">1200</span>],N,M;</div><div class="line"><span class="keyword">int</span> Next[<span class="number">4</span>][<span class="number">2</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> x,y,k,step;</div><div class="line">    node(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> k,<span class="keyword">int</span> step):x(x),y(y),k(k),step(step)&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">int</span> i,j;</div><div class="line">    <span class="comment">//freopen("input.txt","r",stdin);</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;M)!=EOF)&#123;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;N;i++) <span class="built_in">scanf</span>(<span class="string">"%s"</span>,G[i]);</div><div class="line">        <span class="built_in">memset</span>(book,<span class="number">0</span>,<span class="keyword">sizeof</span>(book));</div><div class="line">        <span class="keyword">int</span> flag=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;N;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(flag==<span class="number">1</span>) <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;M;j++)</div><div class="line">                <span class="keyword">if</span>(G[i][j]==<span class="string">'2'</span>)&#123;</div><div class="line">                    flag=<span class="number">1</span>;</div><div class="line">                    book[i][j][<span class="number">0</span>]=<span class="number">1</span>;</div><div class="line">                    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,bfs(i,j));</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> startX,<span class="keyword">int</span> startY)</span></span>&#123;</div><div class="line">    <span class="built_in">queue</span>&lt;node&gt; Q;</div><div class="line">    Q.push(node(startX,startY,<span class="number">0</span>,<span class="number">0</span>));</div><div class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</div><div class="line">        node head=Q.front();Q.pop();</div><div class="line">        <span class="keyword">if</span>(G[head.x][head.y]==<span class="string">'3'</span>) <span class="keyword">return</span> head.step;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</div><div class="line">            <span class="keyword">int</span> nx=head.x+Next[i][<span class="number">0</span>],ny=head.y+Next[i][<span class="number">1</span>];</div><div class="line">            <span class="keyword">if</span>(nx&gt;=N||nx&lt;<span class="number">0</span>||ny&gt;=M||ny&lt;<span class="number">0</span>||G[nx][ny]==<span class="string">'0'</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">int</span> key=head.k;</div><div class="line">            <span class="keyword">if</span>(<span class="string">'a'</span>&lt;=G[nx][ny]&amp;&amp;G[nx][ny]&lt;=<span class="string">'z'</span>) key=key|(<span class="number">1</span>&lt;&lt;(G[nx][ny]-<span class="string">'a'</span>));</div><div class="line">            <span class="keyword">if</span>(<span class="string">'A'</span>&lt;=G[nx][ny]&amp;&amp;G[nx][ny]&lt;=<span class="string">'Z'</span>&amp;&amp;(key&amp;(<span class="number">1</span>&lt;&lt;(G[nx][ny]-<span class="string">'A'</span>)))==<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">if</span>(!book[nx][ny][key])&#123;</div><div class="line">                book[nx][ny][key]=<span class="number">1</span>;</div><div class="line">                Q.push(node(nx,ny,key,head.step+<span class="number">1</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;<span class="comment">//这题就是普通的bfs多了‘钥匙’这个状态</span></div><div class="line"> <span class="comment">//所以book[x][y][key]的意义就是 横坐标为x,纵坐标为y,钥匙状态为key的点是否访问过</span></div><div class="line"> <span class="comment">//钥匙的状态 就用二进制数表示 最多10 把钥匙 那就是1024</span></div><div class="line"> <span class="comment">//比如我现在有第二把钥匙和第四把钥匙  那么我的钥匙状态就是 0101000000 也就是 320</span></div></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="https://www.cnblogs.com/skywang12345/p/3711483.html" target="_blank" rel="external">https://www.cnblogs.com/skywang12345/p/3711483.html</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/f1626718.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/f1626718.html" itemprop="url">
+                  深度学习之循环神经网络
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-03 17:44:45 / 修改时间：20:50:08" itemprop="dateCreated datePublished" datetime="2018-08-03T17:44:45+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/f1626718.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/f1626718.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>循环神经网络（RNN）是一类用于处理序列数据的神经网络。每一个神经元除了当前信息的输入外还接受上一个隐藏神经元的输入（这就是所谓的记忆信息），保留序列依赖型。 </p>
+<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>循环神经网络结构如下图，其中左边为循环图，右边为展开图。</p>
+<p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ftwmt1ag4nj30f90a1mxz.jpg" alt=""></p>
+<p>对于如上图所示的RNN网络，每个时间步都有输出，并且隐藏单元之间有循环连接的网络结构。且有以下特性：</p>
+<ol>
+<li>权值共享，图中的W全是相同的，U和V也一样。 </li>
+<li>每一个输入值都只与它本身的那条路线建立权连接，不会和别的神经元连接。 </li>
+</ol>
+<p>所谓循环，即指隐层h的循环连接，隐层神经元除了接受输入X，还需要接受上一个隐层的输出，因此对第t个隐层神经元有：<br>$$<br>h^{(t)}=f(h^{(t-1)},x;\theta)<br>$$<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/f1626718.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/69ac6833.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -574,7 +1288,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-01 20:32:04" itemprop="dateModified" datetime="2018-08-01T20:32:04+08:00">2018-08-01</time>
+                <time title="修改时间：2018-08-03 17:25:27" itemprop="dateModified" datetime="2018-08-03T17:25:27+08:00">2018-08-03</time>
               
             
           </span>
@@ -1392,732 +2106,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/26e8d9eb.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/26e8d9eb.html" itemprop="url">
-                  SQL基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-22 16:44:45 / 修改时间：19:46:15" itemprop="dateCreated datePublished" datetime="2018-07-22T16:44:45+08:00">2018-07-22</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/26e8d9eb.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/26e8d9eb.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文使用的数据库来自<a href="https://www.yiibai.com/mysql/sample-database.html" target="_blank" rel="external">https://www.yiibai.com/mysql/sample-database.html</a> ，</p>
-</blockquote>
-<h1 id="连接SQL"><a href="#连接SQL" class="headerlink" title="连接SQL"></a>连接SQL</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 打开 MySQL 服务</div><div class="line">sudo service mysql <span class="keyword">start</span></div><div class="line"></div><div class="line">#连接<span class="keyword">SQL</span>服务器，参数-h为<span class="keyword">sql</span>服务器地址，-u为用户名，默认为root，-p为密码</div><div class="line">mysql -h host -u root -p <span class="keyword">password</span></div><div class="line"></div><div class="line"># 退出<span class="keyword">SQL</span></div><div class="line"><span class="keyword">exit</span></div></pre></td></tr></table></figure>
-<h1 id="数据库与数据表"><a href="#数据库与数据表" class="headerlink" title="数据库与数据表"></a>数据库与数据表</h1><h2 id="显示-SHOW"><a href="#显示-SHOW" class="headerlink" title="显示-SHOW"></a>显示-SHOW</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</div><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</div><div class="line"></div><div class="line"><span class="comment">--# eg.数据表概览</span></div><div class="line">mysql&gt; show tables;</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| Tables_in_yiibaidb |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| customers          |</div><div class="line">| employees          |</div><div class="line">| items              |</div><div class="line">| offices            |</div><div class="line">| orderdetails       |</div><div class="line">| orders             |</div><div class="line">| payments           |</div><div class="line">| productlines       |</div><div class="line">| products           |</div><div class="line">| tokens             |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/26e8d9eb.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/undefined.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/undefined.html" itemprop="url">
-                  搭建博客的原理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-22 09:51:35 / 修改时间：19:47:00" itemprop="dateCreated datePublished" datetime="2018-07-22T09:51:35+08:00">2018-07-22</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/undefined.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/undefined.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>不折腾毋宁死，为了更好地魔改博客，对hexo工作原理还是需要有一定地了解，本文节选自<a href="https://juejin.im/post/598eeaff5188257d592e55bb" target="_blank" rel="external">【掘金】sunshine小小倩</a></p>
-</blockquote>
-<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>使用 Hexo + github pages 搭建博客，刚刚我们简单介绍了 github pages，那么现在我们就该介绍一下 Hexo，我们了解到 Hexo 是用来生成 HTML 的，那么这篇文章我们就主要来讲一下 Hexo 是怎样生成 HTML 的。</p>
-<h2 id="什么是-Hexo"><a href="#什么是-Hexo" class="headerlink" title="什么是 Hexo"></a>什么是 Hexo</h2><p>hexo官网在 Hexo 的官网，我们可以直观的看到对 Hexo 的介绍：快速、简洁且高效的博客框架<br>在 Hexo 的文档中，我们可以找到官方对 Hexo 的定义：</p>
-<blockquote>
-<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-</blockquote>
-<p>在官方文档中安装了 Hexo 中我们就安装了 Hexo，然后我们就可以看到文档结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml      // 站点配置文件</div><div class="line">├── db.json          // 缓存文件</div><div class="line">├── node_modules     // 安装的插件以及hexo所需的一些nodejs模块</div><div class="line">├── package.json     // 项目的依赖文件</div><div class="line">├── scaffolds        // 模版文件</div><div class="line">├── source           // 源文件，用来存放你的文章 md 文件</div><div class="line">└── themes           // 主题文件复制代码然后我们可以安装主题，比我我安装的 NexT 主题，安装完之后会在 themes 下面产生一个 next 文件存放主题中的内容，文档结构如下：</div><div class="line">.</div><div class="line">├── LICENSE</div><div class="line">├── README.en.md       // READEME 英文版</div><div class="line">├── README.md          // READEME 中文文件</div><div class="line">├── _config.yml        // 主题配置文件</div><div class="line">├── bower.json</div><div class="line">├── gulpfile.coffee</div><div class="line">├── languages         // 多语言配置文件</div><div class="line">├── layout            // 模板文件</div><div class="line">├── package.json      // 项目的依赖文件</div><div class="line">├── scripts           // 主题的脚本文件</div><div class="line">├── source            // 主题的资源文件 CSS IMG</div><div class="line">└── test</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/undefined.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/20a77595.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/20a77595.html" itemprop="url">
-                  【转载】Hexo - 修改永久链接的默认格式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-19 11:44:45 / 修改时间：16:22:04" itemprop="dateCreated datePublished" datetime="2018-07-19T11:44:45+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/20a77595.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/20a77595.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>本文转载自<a href="https://lewky.cn/posts/ff4321d8.html" target="_blank" rel="external">https://lewky.cn/posts/ff4321d8.html</a> ，大佬博客里面由许多魔改教程的，强烈推荐。</p>
-</blockquote>
-<p>Hexo的永久链接的默认格式是 <code>:year/:month/:day/:title/</code>，比如访问站点下某一篇文章时，其路径是 <code>2018/04/12/xxxx/</code>，如果我们的文章标题是中文的，那么该路径就会出现中文字符。在路径中出现了中文字符很容易引发各种问题，而且也不利于seo，因为路径包含了年月日三个层级，层级太深不利于百度蜘蛛抓取。</p>
-<p>解决办法就是利用其它的插件来生成唯一的路径，这样就算我们的文件标题随意修改，而不会导致原本的链接失效而造成站点下存在大量的死链。</p>
-<p>安装插件<br>在站点根目录使用 <code>git bash</code> 执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-abbrlink --save</div></pre></td></tr></table></figure></p>
-<p>修改站点配置文件<br>打开根目录下的 <code>_config.yml</code> 文件，修改如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># permalink: :year/:month/:day/:title/</div><div class="line"># permalink_defaults:</div><div class="line">permalink: posts/:abbrlink.html</div><div class="line">abbrlink:</div><div class="line">  alg: crc32  # 算法：crc16(default) and crc32</div><div class="line">  rep: hex    # 进制：dec(default) and hex</div></pre></td></tr></table></figure></p>
-<p>这里将页面都添加了 <code>.html</code> 的后缀，用来伪装成静态页面(虽说Hexo的页面本身就是静态页面)，这样可以直接从路径就知道这是个静态页面，方便seo。</p>
-<p>接下来重新部署三连，可以看到我们的文章路径变成了 <code>/posts/xxxxx.html</code>，接下来就算我们将文字标题命名为中文也没问题了。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/a45772c3.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/a45772c3.html" itemprop="url">
-                  机器学习之模型整理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-19 10:44:45" itemprop="dateCreated datePublished" datetime="2018-07-19T10:44:45+08:00">2018-07-19</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-07-29 09:40:46" itemprop="dateModified" datetime="2018-07-29T09:40:46+08:00">2018-07-29</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/a45772c3.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/a45772c3.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。</p>
-</blockquote>
-<h1 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h1><h2 id="模型总结"><a href="#模型总结" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
-<li>简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。</li>
-<li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
-<li>损失函数：极大似然函数 ： $L _ \theta\left(x\right )= \prod _ {i=1}^{m}h _ \theta(x^{i};\theta )^{y{i}}*(1-h _\theta(x^{i};\theta))^{1-y^{i}}$</li>
-<li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
-<li>优点：<ol>
-<li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
-<li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
-<li>实现简单，分类时计算量非常小，速度快，存储资源低</li>
-<li>可解释性强：线性回归的参数取值反应特征的强弱。</li>
-</ol>
-</li>
-<li>缺点：<ol>
-<li>准确性不高，容易过拟合</li>
-<li>只能处理两分类问题（在此基础上衍生出来的softmax可以用于多分类），且必须线性可分；</li>
-</ol>
-</li>
-<li><a href="https://www.zhihu.com/question/26726794" target="_blank" rel="external">适用场景</a>：<ol>
-<li>是否支持大规模数据：支持，并且有分布式实现</li>
-<li>特征维度：可以很高</li>
-<li>是否有 Online 算法:有（<a href="https://www.zhihu.com/question/28025036/answer/107297334" target="_blank" rel="external">参考自</a>）</li>
-<li>特征处理：支持数值型数据，类别型类型</li>
-<li>预估问题场景（如推荐、广告系统中的点击率预估，转化率预估等）</li>
-<li>分类场景（如用户画像中的标签预测，判断内容是否具有商业价值，判断点击作弊等</li>
-</ol>
-</li>
-<li>多分类问题：<ol>
-<li>对k个类别的分类，建立k个二元分类器</li>
-<li>将逻辑回归推广到多元逻辑回归（Multinomial Logistic Regression），模型使用softmax对概率建模，$P(y=i|x, \theta) = \dfrac{e^{\theta_i^T x}}{\sum_j^K{e^{\theta_j^T x}}}$，其中决策函数为$y^* = argmax_i P(y=i|x,\theta)$，损失函数为$J(\theta)=-\dfrac{1}{N} \sum_i^N \sum_j^K {1[y_i=j] \log{\dfrac{e^{\theta_i^T x}}{\sum {e^{\theta_k^T x}}}}}$</li>
-<li>如何选择：如果如果类别之间互斥，则使用softmax.如果类别间有联系，则选用k个二元分类器。</li>
-</ol>
-</li>
-<li>模型比较：<ol>
-<li>与线性回归比较：<ul>
-<li>相同点：都是广义线性模型</li>
-<li>不同点：<ol>
-<li>经典线性模型的优化目标函数是最小二乘，而逻辑回归则是似然函数</li>
-<li>线性回归输出连续值，分布范围在整个实数域。逻辑回归通过sigmoid函数将预测值限定为[0,1]间，输出值代表真实标记概率，因而对于这类问题来说，逻辑回归的鲁棒性比线性回归的要好。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">与svm比较</a>，<a href="https://www.zhihu.com/question/26768865" target="_blank" rel="external">答案2</a><ul>
-<li>相同点：<ol>
-<li>LR和SVM都可以处理分类问题，且一般都用于处理线性可分的二分类问题（在改进的情况下可以处理多分类问题） </li>
-</ol>
-</li>
-<li>不同点：<ol>
-<li>LR是参数模型，SVM是非参数模型。</li>
-<li>逻辑回归采用的是Logistical Loss，SVM采用的是hinge loss.这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。</li>
-<li>SVM的处理方法是只考虑Support Vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。 </li>
-<li>逻辑回归相对来说模型更简单，好理解，特别是大规模线性分类时比较方便。而SVM的理解和优化相对来说复杂一些，只需要计算与少数几个支持向量的距离,这个在进行复杂核函数计算时优势很明显,能够大大简化模型和计算。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>与感知机比较<ul>
-<li>相同点：<ol>
-<li>都是线性分类模型，原始模型都只能处理二分类问题</li>
-<li>模型的形式相似(都是在线性模型外通过联系函数映射到另外的空间，只不过感知机是符号函数，LR是sigmoid(或者说Logistic)函数)</li>
-<li>训练方法都是使用梯度下降法</li>
-</ol>
-</li>
-<li>不同点：<ol>
-<li>LR输出为仅是概率的值，而感知机输出为1/-1</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/a45772c3.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2169,7 +2157,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

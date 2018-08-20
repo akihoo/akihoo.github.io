@@ -116,10 +116,12 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。  逻辑回归模型总结 简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。 基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$ 损失">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-07-29T01:40:46.792Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg">
+<meta property="og:updated_time" content="2018-08-18T04:55:21.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之模型整理">
 <meta name="twitter:description" content="马上开始秋招了，自己总结了一份算法常用知识点，如有错误，欢迎指教。如有遗漏，欢迎补充。  逻辑回归模型总结 简介：LR回归是一个线性的二分类模型，可计算样本发生的概率。LR的最终结果是通过使用sigmoid函数（指数族函数）将线性回归的结果与分类任务的真实标记结合起来。 基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$ 损失">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg">
 
 
 
@@ -380,7 +382,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-07-29 09:40:46" itemprop="dateModified" datetime="2018-07-29T09:40:46+08:00">2018-07-29</time>
+                <time title="修改时间：2018-08-18 12:55:21" itemprop="dateModified" datetime="2018-08-18T12:55:21+08:00">2018-08-18</time>
               
             
           </span>
@@ -439,6 +441,7 @@
 <li>基本假设：假设数据服从伯努利分布，且样本为正概率为 $p=\dfrac{1}{1+e^{-\theta^{T} x}}$</li>
 <li>损失函数：极大似然函数 ： $L _ \theta\left(x\right )= \prod _ {i=1}^{m}h _ \theta(x^{i};\theta )^{y{i}}*(1-h _\theta(x^{i};\theta))^{1-y^{i}}$</li>
 <li>求解方法：梯度下降法(<a href="http://www.cnblogs.com/ModifyRong/p/7739955.html" target="_blank" rel="external">拓展知识点</a>：随机梯度下降，批梯度下降，small batch 梯度下降,Adam，动量法等优化方法)</li>
+<li>为什么LR要使用sigmoid函数：LR属于广义线性模型，sigmoid函数则是指数族函数，</li>
 <li>优点：<ol>
 <li>适用于二分类问题，以概率形式输出结果，可以通过取阈值得到分类结果。</li>
 <li>判别模型：LR模型直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题</li>
@@ -514,6 +517,7 @@
 <li><a href="https://www.jianshu.com/p/d792279a30bc" target="_blank" rel="external">https://www.jianshu.com/p/d792279a30bc</a></li>
 <li><a href="http://izhaoyi.top/2017/09/03/model-pre/" target="_blank" rel="external">http://izhaoyi.top/2017/09/03/model-pre/</a></li>
 <li><a href="https://www.cnblogs.com/arachis/p/LR.html" target="_blank" rel="external">https://www.cnblogs.com/arachis/p/LR.html</a></li>
+<li><a href="http://chenrudan.github.io/blog/2016/01/09/logisticregression.html" target="_blank" rel="external">http://chenrudan.github.io/blog/2016/01/09/logisticregression.html</a></li>
 </ol>
 <h1 id="支持向量机"><a href="#支持向量机" class="headerlink" title="支持向量机"></a>支持向量机</h1><h2 id="模型总结-1"><a href="#模型总结-1" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
 <li>简介：SVM是一个面向数据的分类算法，它的目标是为确定一个分类超平面，使不同的数据分隔开的同时,不同样例点到分割超平面的距离尽可能大。线性支持向量机通过最大化硬间隔得到线性分类器，当样本近似线性可分时通过最大化软间隔得到线性分类器，当样本线性不可分时可通过核函数及软间隔得到非线性分类器。</li>
@@ -528,8 +532,7 @@
 <li>为何转化对偶问题：参考<a href="https://blog.csdn.net/cppjava_/article/details/68060439" target="_blank" rel="external">[1]</a><ol>
 <li>求解对偶问题可以将支持向量机原问题约束中的不等式约束转化为等式约束,因此对偶问题往往更加容易求解(结合拉格朗日和kkt条件)。</li>
 <li>使用对偶问题可以就可以导出含有内积形式的目标函数，方便引用核函数（拉格朗日表达式里面有内积，而核函数也是通过内积进行映射的）</li>
-<li>目前处理的模型严重依赖于数据集的维度d，如果维度d太高就会严重提升运算时间；</li>
-<li>对偶问题事实上把SVM从依赖d个维度转变到依赖N个数据点，考虑到在最后计算时只有支持向量才有意义，所以这个计算量实际上比N小很多。</li>
+<li>目前处理的模型严重依赖于数据集的维度d，如果维度d太高就会严重提升运算时间。对偶问题事实上把SVM从依赖d个维度转变到依赖N个数据点，考虑到在最后计算时只有支持向量才有意义，所以这个计算量实际上比N小很多。（<a href="https://www.jianshu.com/p/de882f0fc434" target="_blank" rel="external">对偶问题详解</a>）</li>
 </ol>
 </li>
 <li>为何引入核函数：<ol>
@@ -652,7 +655,10 @@
 <li><a href="http://akihoo.github.io/posts/8e9de4f1.html">http://akihoo.github.io/posts/8e9de4f1.html</a></li>
 <li><a href="https://www.cnblogs.com/pinard/p/6053344.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6053344.html</a></li>
 </ol>
-<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><h2 id="模型总结-3"><a href="#模型总结-3" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
+<h1 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h1><blockquote>
+<p>条件概率：在某条件下事件发生的概率。<br>后验概率：已知原分布，在实际发生某事件时,是原先某情况的可能性。<br>后验概率在某些情况下是条件概率的一种</p>
+</blockquote>
+<h2 id="模型总结-3"><a href="#模型总结-3" class="headerlink" title="模型总结"></a>模型总结</h2><ol>
 <li>简介：基于贝叶斯定理，通过特征独立假设，计算后验概率分布的分类模型。</li>
 <li>何为朴素：利用贝叶斯定理求解联合概率P(XY)时，需要计算条件概率P(X|Y)。在计算P(X|Y)时，朴素贝叶斯做了一个很强的条件独立假设（当Y确定时，X的各个分量取值之间相互独立），即$P(X1=x1,X2=x2|Y=yk) = P(X1=x1|Y=yk)*P(X2=x2|Y=yk)$。</li>
 <li>为什么属性独立性假设在实际情况中很难成立，但朴素贝叶斯仍能取得较好的效果：<ol>
@@ -784,7 +790,7 @@
 <li><a href="https://zhuanlan.zhihu.com/p/25110450" target="_blank" rel="external">各激活函数图像可参考</a>，<a href="https://blog.csdn.net/not_guy/article/details/78749509" target="_blank" rel="external">参考2</a></li>
 </ol>
 </li>
-<li>梯度消失：这本质上是由于激活函数的选择导致的， 最简单的sigmoid函数为例，在函数的两端梯度求导结果非常小（饱和区），导致后向传播过程中由于多次用到激活函数的导数值使得整体的乘积梯度结果变得越来越小，也就出现了梯度消失的现象。 </li>
+<li><a href="https://blog.csdn.net/qq_25737169/article/details/78847691" target="_blank" rel="external">梯度消失</a>：这本质上是由于激活函数的选择导致的， 最简单的sigmoid函数为例，在函数的两端梯度求导结果非常小（饱和区），导致后向传播过程中由于多次用到激活函数的导数值使得整体的乘积梯度结果变得越来越小，也就出现了梯度消失的现象。 </li>
 <li>梯度爆炸：同理，出现在激活函数处在激活区，而且权重W过大的情况下。但是梯度爆炸不如梯度消失出现的机会多。 </li>
 <li>解决过拟合：<ol>
 <li>数据集增强，获取更多的数据，创建更多的数据；</li>
@@ -792,7 +798,39 @@
 <li>结合多种模型：dropout，bagging，boosting</li>
 </ol>
 </li>
-<li>dropout：在每一次迭代训练中随机的选择一定的单元进行隐藏，因此每一次迭代的模型都是不同的，每一个神经元都不能过度依赖于另一个神经元，因此增强了模型的鲁棒性。 </li>
+<li><a href="hhttps://zhuanlan.zhihu.com/p/25110150" target="_blank" rel="external">权值初始化方式</a>,<a href="https://blog.csdn.net/u012328159/article/details/80025785" target="_blank" rel="external">参考2</a>：<ol>
+<li>把w初始化为0【不可行】：如果把w初始化0，那么每一层的神经元学到的东西都是一样的（输出是一样的），而且在bp的时候，每一层内的神经元也是相同的，因为他们的gradient相同。</li>
+<li>随机初始化：缺点：随机数其实是在一个均值为0，方差为1的高斯分布中采样。当神经网络的层数增多时，会发现越往后面的层的激活函数（使用tanH）的输出值几乎都接近于0，会导致梯度消失</li>
+<li>哈维尔初始化（Xavier initialization）：<code>w=np.random.randn(fan_in, fan_out)/np.sqrt(fan_in)</code>，保持输入和输出的方差一致，这样就避免了所有输出值都趋向于0，缺点是只对tanh有效，对ReLU无效</li>
+<li>He initialization：在ReLU网络中，假定每一层有一半的神经元被激活，另一半为0，所以，要保持variance不变，只需要在Xavier的基础上再除以2。</li>
+<li>Batch Normalization：对输出值进行正则化变换，可以削弱不好地权值初始化方式带来的影响。<ol>
+<li>Batch Normalization中所有的操作都是平滑可导，这使得back propagation可以有效运行并学到相应的参数$\gamma,\beta$。需要注意的一点是Batch Normalization在training和testing时行为有所差别。Training时$\mu_\mathcal{B}$和$\sigma_\mathcal{B}$由当前batch计算得出；在Testing时$\mu_\mathcal{B}$和$\sigma_\mathcal{B}$应使用Training时保存的均值或类似的经过处理的值，而不是由当前batch计算。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="https://zhuanlan.zhihu.com/p/23178423" target="_blank" rel="external">dropout</a>：在每一次迭代训练中随机的选择一定的单元进行隐藏，因此每一次迭代的模型都是不同的，每一个神经元都不能过度依赖于另一个神经元，因此增强了模型的鲁棒性。 <ol>
+<li>为什么dropout可以防止过拟合：<ol>
+<li>取平均的作用：dropout掉不同的隐藏神经元就类似在训练不同的网络（随机删掉一半隐藏神经元导致网络结构已经不同)，整个dropout过程就相当于对很多个不同的神经网络取平均。</li>
+<li>减少神经元之间复杂的共适应关系： 因为dropout程序导致两个神经元不一定每次都在一个dropout网络中出现。使得神经网络不再依赖某些固定关系的神经元，迫使网络取学习更加鲁棒的特征。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="https://zhuanlan.zhihu.com/p/26138673" target="_blank" rel="external">batch normalizatin</a>（批量归一化）：<ol>
+<li>BN的本质原理：相当于一个归一化层，也就是先做一个归一化处理（归一化至：均值0、方差为1），然后再进入网络的下一层，它是一个可学习、有参数（γ、β）的网络层。</li>
+<li>作用：<ol>
+<li>改善流经网络的梯度(具体来说就是反向传播中，经过每一层的梯度会乘以该层的权重，权重的大小影响了梯度的消失和爆炸，batchnorm就是通过对每一层的输出规范为均值和方差一致的方法，消除了权重带来的放大缩小的影响，进而解决梯度消失和爆炸的问题，或者可以理解为BN将输出从饱和区拉倒了非饱和区)</li>
+<li>允许更大的学习率，大幅提高训练速度</li>
+<li>模型隐藏输出特征的分布更稳定，更利于模型的学习</li>
+<li>减少对初始化的强烈依赖</li>
+<li>改善正则化策略：作为正则化的一种形式，轻微减少了对dropout的需求</li>
+<li>你再也不用去理会过拟合中dropout、L2正则项参数的选择问题，采用BN算法后，你可以移除这两项了参数，或者可以选择更小的L2正则约束参数了，因为BN具有提高网络泛化能力的特性；</li>
+<li>再也不需要使用使用局部响应归一化层了（局部响应归一化是Alexnet网络用到的方法，搞视觉的估计比较熟悉），因为BN本身就是一个归一化网络层；</li>
+</ol>
+</li>
+</ol>
+</li>
 <li><a href="https://blog.csdn.net/chengl920828/article/details/69946881/" target="_blank" rel="external">神经网络优缺点</a>:<ol>
 <li>优点：<ol>
 <li>自学习和自适应能力强：能够通过学习自动提取输出、输出数据间的“合理规则”，并自适应的将学习内容记忆于网络的权值中。（可以利用神经网络中某一层的输出当做是数据的另一种表达，从而可以将其认为是经过神经网络学习到的特征。）</li>
@@ -819,15 +857,69 @@
 <li><a href="https://blog.csdn.net/xwd18280820053/article/details/76026523" target="_blank" rel="external">https://blog.csdn.net/xwd18280820053/article/details/76026523</a></li>
 <li><a href="https://blog.csdn.net/tyhj_sf/article/details/54983858" target="_blank" rel="external">https://blog.csdn.net/tyhj_sf/article/details/54983858</a></li>
 </ol>
+<h2 id="深度学习相关"><a href="#深度学习相关" class="headerlink" title="深度学习相关"></a>深度学习相关</h2><blockquote>
+<p>前面也涉及到一部分深度学习的内容（如梯度爆炸等）</p>
+</blockquote>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ol>
+<li>对卡在局部极小值的处理方法：<ol>
+<li>调节步伐：调节学习速率，使每一次的更新“步伐”不同；</li>
+<li>优化起点：合理初始化权重（weights initialization）</li>
+<li>预训练网络（pre-train），使网络获得一个较好的“起始点”，如最右侧的起始点就比最左侧的起始点要好。常用方法有：高斯分布初始权重（Gaussian distribution）、均匀分布初始权重（Uniform distribution）、Glorot 初始权重、He初始权、稀疏矩阵初始权重（sparse matrix）。</li>
+</ol>
+</li>
+<li>为何使用Batch Normalization：<ol>
+<li>BN本质上解决的是反向传播过程中的梯度问题，指在采用梯度下降法训练DNN时，对网络层中每个mini-batch的数据进行归一化，使其均值变为0，方差变为1，这样可以防止神经元进入sigmoid函数的饱和区，缓解DNN训练中的梯度消失/爆炸现象，加快模型的训练速度。 </li>
+<li>为什么在normalize后还有一个scale and shift操作？ 简单的对网络层输入作归一化可能会改变原本的输入表示，而加入scale and shift操作，让归一化操作有机会通过对参数γ,β 的学习将其变回去，不改变输入表示。</li>
+</ol>
+</li>
+</ol>
+<h3 id="卷积神经网络-CNN"><a href="#卷积神经网络-CNN" class="headerlink" title="卷积神经网络(CNN)"></a>卷积神经网络(CNN)</h3><ol>
+<li>原理：由于图片的特殊性，CNN改变全连接为局部连接，通过局部连接和参数共享大范围的减少参数值。CNN的输入可以是tensor，例如二维矩阵，通过filter获得局部特征，较好的保留了平面结构信息。池化是一种降维的方法，按照卷积计算得出的特征向量维度大的惊人，可以通过池化的方式把图像中局部区域的特征做一个平滑压缩处理，保留主要的特征同时减少参数(降维，效果类似PCA)和计算量，防止过拟合，还可使模型具有一定的平移不变性。</li>
+<li>卷积的作用：卷积核就相当于一个特征提取器，可以自动地从图像中提取特征，并且卷积核是二维的，可以把图像本身具有局部特性提取出来。使模型更加关注对模型有用的信息，而不是图像中的噪声。（关键词：<strong>局部相关性</strong>，<strong>权值共享-平移不变性</strong>）</li>
+<li>参数共享机制<ol>
+<li>在卷积层中每个神经元连接数据窗的权重是固定的，每个神经元只关注一个特性。神经元就是图像处理中的滤波器，比如边缘检测专用的Sobel滤波器，即卷积层的每个滤波器都会有自己所关注一个图像特征，比如垂直边缘，水平边缘，颜色，纹理等等，这些所有神经元加起来就好比就是整张图像的特征提取器集合。</li>
+<li>需要估算的权重个数减少: AlexNet 1亿 =&gt; 3.5w</li>
+<li>一组固定的权重和不同窗口内数据做内积: 卷积</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/wonengguwozai/article/details/72980828" target="_blank" rel="external">1*1卷积的作用</a>：<ol>
+<li>实现跨通道的交互和信息整合</li>
+<li>进行卷积核通道数的降维和升维</li>
+<li>对于单通道feature map 用单核卷积即为乘以一个参数，而一般情况都是多核卷积多通道，实现多个feature map的线性组合</li>
+<li>可以实现与全连接层等价的效果。</li>
+</ol>
+</li>
+<li>请解释为什么3X3的卷积是最为常用的卷积核大小？小尺寸卷积核（1x1）和大尺寸卷积核（如7x7）都具有哪些优势和劣势，各自适用于什么场景？卷积核的尺寸可否为偶数，为什么？<ol>
+<li>3x3卷积3x3是最小的能够捕获像素八邻域信息的尺寸。可以通过小尺寸卷积层的堆叠替代大尺寸卷积层，并且感受野大小不变。多个3x3的卷基层比一个大尺寸filter卷基层有更多的非线性（更多层的非线性函数），使得判决函数更加具有判决性。多个3x3的卷积层比一个大尺寸的filter有更少的参数，假设卷基层的输入和输出的特征图大小相同为C，那么三个3x3的卷积层参数个数3x（3x3xCxC）=27C2；一个7x7的卷积层参数为49C2；所以可以把三个3x3的filter看成是一个7x7filter的分解（中间层有非线性的分解, 并且起到隐式正则化的作用。</li>
+<li>卷积层尺寸越大，感受野越大，小尺寸的卷积层可以通过多层堆叠的方式获得大尺寸卷积层相同的感知野，同时还可以减少计算参数。使用大的卷积核，提取的特征更少，更粗犷。一般而言，对于图片较为简单如风景蓝天大海等，可以使用大尺寸的卷积核。图片较为复杂则选用小尺寸的卷积核。</li>
+<li>对于1x1卷积，可以代替全联接层，可以起到降维作用，也可以保持特征尺度不变的情况下做非线性变换，加深网络。</li>
+<li>是否可以是偶数：可以，但一般使用奇数是因为奇数有中心点，方便提取特征，另外也可以对称地padding。</li>
+</ol>
+</li>
+<li>假设我们有一个已经训练好的网络模型，有哪些方法可以在尽可能保证精度损失小的前提下实现模型压缩及网络加速？分别有什么需要注意的地方？ 　<br>　　1. 网络权值从高精度转化成低精度，模型准确率等指标与原来相近，模型大小变小，运行速度加快。<br>　　2. 将标准卷积层拆分成两个卷积层的MolileNet网络，可以在基本保证准确率的前提下大大减少计算时间和参数数量。<br>　　3. <a href="http://ai.51cto.com/art/201710/555869.htm" target="_blank" rel="external">http://ai.51cto.com/art/201710/555869.htm</a></li>
+</ol>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><ol>
+<li>RNN原理：在普通的全连接网络或CNN中，每层神经元的信号只能向上一层传播，样本的处理在各个时刻独立，因此又被成为前向神经网络(Feed-forward+Neural+Networks)。而在RNN中，神经元的输出可以在下一个时间戳直接作用到自身，即第i层神经元在m时刻的输入，除了（i-1）层神经元在该时刻的输出外，还包括其自身在（m-1）时刻的输出。所以叫循环神经网络。</li>
+<li>LSTM、GRU、RNN的原理以及差别：<ol>
+<li>RNN引入了循环的概念，但是在实际过程中却出现了初始信息随时间消失的问题，即长期依赖（Long-Term Dependencies）问题，所以引入了LSTM。</li>
+<li>LSTM：因为LSTM有进有出且当前的cell informaton是通过input gate控制之后叠加的，RNN是叠乘，因此LSTM可以防止梯度消失或者爆炸。推导forget gate，input gate，cell state， hidden information等因为LSTM有进有出且当前的cell informaton是通过input gate控制之后叠加的，RNN是叠乘，因此LSTM可以防止梯度消失或者爆炸的变化是关键。（画LSTM示意图）</li>
+<li>GRU是LSTM的变体，将忘记门和输入门合成了一个单一的更新门。 </li>
+</ol>
+</li>
+</ol>
+<h3 id="参考资料-6"><a href="#参考资料-6" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li>LSTM 详解： <a href="https://www.zybuluo.com/hanbingtao/note/581764" target="_blank" rel="external">https://www.zybuluo.com/hanbingtao/note/581764</a></li>
+<li><a href="https://blog.csdn.net/w5688414/article/details/78079335" target="_blank" rel="external">https://blog.csdn.net/w5688414/article/details/78079335</a></li>
+</ol>
 <h1 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h1><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><ol>
 <li>简介：集成学习的目的是通过结合多个基学习器的预测结果来改善单个学习器的泛化能力和鲁棒性。根据个体学习器的生成方式，目前的集成学习方法大致分为两大类：即个体学习器之间存在强依赖关系、必须串行生成的序列化方法，以及个体学习器间不存在强依赖关系、可同时生成的并行化方法；前者的代表就是Boosting，后者的代表是Bagging和“随机森林”（Random Forest）。</li>
 <li>分类：<ol>
 <li>Bagging：Bagging方法中每一个基学习器的数据来源，都是将整体样本和所有特征进行一种有放回的抽取。每个基学习器在“不同”的数据集中学习出一个模型，最后的预测结果通过所有基学习器共同决定。分类问题采用投票的方式，回归问题采用平均值的方式。代表：随机森林</li>
-<li>Boosting：用所有的数据去训练基学习器，每一个基学习器相互依赖，基于前面所有的学习器的结果，学习他们与真实值之间的残差，集中关注预测出错的地方，来形成一个新的学习器。是一种串行的学习方式。代表：AdaBoost、GDBT</li>
+<li>Boosting：用所有的数据去训练基学习器，每一个基学习器相互依赖，基于前面所有的学习器的结果，学习他们与真实值之间的残差，集中关注预测出错的地方，来形成一个新的学习器。是一种串行的学习方式。代表：AdaBoost、gbdt</li>
 <li>Stacking：Stacking 是一种集成学习技术，通过元分类器或元回归聚合多个分类或回归模型。基础层次模型（level model）基于完整的训练集进行训练，然后元模型基于基础层次模型的输出进行训练。</li>
 </ol>
 </li>
-<li>Bagging和Boosting的区别：<ol>
+<li>Bagging和Boosting的区别（关键点：1. 降低方差 &amp; 降低偏差  2. 降低过拟合 &amp; 降低欠拟合  3. 并行，彼此独立 &amp; 串行，相互依赖）：<ol>
 <li>样本选择：<ol>
 <li>Bagging： 训练集是在原始集中有放回选取的，从原始集中选出的各轮训练集之间是独立的。</li>
 <li>Boosting：每一轮的训练集不变，只是训练集中每个样例在分类器中的权重发生变化。而权值是根据上一轮的分类结果进行调整。</li>
@@ -850,11 +942,14 @@
 </li>
 </ol>
 </li>
-<li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">bagging是减少variance，而boosting是减少bias</a>？<ol>
-<li>Bagging 通过再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，所以是降低模型的 variance. Bagging 比如 Random Forest 这种先天并行的算法都有这个效果。</li>
-<li>Boosting 根据基学习器表现，对训练样本进行调整，使得之前分类错误的样本后续更受关注，用改变后的样本学习下一个分类器。重复学习T个分类器，T个分类器的结果加权得到最终结果。例子比如 Adaptive Boosting.</li>
+<li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">bagging是减少variance，而boosting是减少bias</a>，<a href="https://blog.csdn.net/shenxiaoming77/article/details/53894973" target="_blank" rel="external">参考2</a>？<ol>
+<li>Bagging 通过再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，因为每个基学习器权重相等，因此集成后的模型的偏差与单个基学习器的偏差近似，集成后主要降低的是模型的偏差。</li>
+<li>Boosting 选用的基模型一般为弱模型，导致了每个基模型的准确度都不是很高（低方差，高偏差）。因此boosting集成之后主要降低模型的偏差。</li>
 </ol>
 </li>
+<li>使用gbdt处理分类与回归问题的不同点：损失函数不同：处理回归问题采用的是均方误差（MSE)，而处理分类问题的损失函数则是对数似然函数（<a href="https://blog.csdn.net/Liangjun_Feng/article/details/80668461" target="_blank" rel="external">https://blog.csdn.net/Liangjun_Feng/article/details/80668461</a>  or  <a href="https://www.cnblogs.com/pinard/p/6140514.html）" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/6140514.html）</a></li>
+<li>gbdt为何要采用负梯度拟合残差：当损失函数为误差平方函数时，gbdt拟合的是残差，当损失函数推广到一般函数时，一般通过损失函数的负梯度来拟合，这是一种通用的拟合损失误差的办法，这样无轮是分类问题还是回归问题，我们通过其损失函数的负梯度的拟合，就可以用GBDT来解决我们的分类回归问题。区别仅仅在于损失函数不同导致的负梯度不同而已。</li>
+<li>随机森林的数量与过拟合：随机森林中的决策树的泛化误差都收敛于：$\underset{n \rightarrow \infty}{\lim}PE^{*}=P _ {xy}(P _ {\Theta}(k(X,\Theta)=Y)-\underset{j\neq Y}{\max}P _ {\Theta}(k(X,\Theta)\neq Y) &gt; 0)$，随着随机森林中决策树数量(n)的增加，随机森林泛化误差(PE∗)将趋向一个上界。随机森林对未知实例有很好的扩展性，也就是说随机森林随着决策树数量的增多不易过拟合</li>
 <li>优缺点：<ol>
 <li>bagging：<ol>
 <li>优点<ul>
@@ -875,14 +970,14 @@
 </ol>
 </li>
 </ol>
-<h3 id="参考资料-6"><a href="#参考资料-6" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<h3 id="参考资料-7"><a href="#参考资料-7" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><a href="https://blog.csdn.net/wongleetion/article/details/79748591" target="_blank" rel="external">https://blog.csdn.net/wongleetion/article/details/79748591</a></li>
 <li><a href="https://akihoo.github.io/posts/3906b830.html">https://akihoo.github.io/posts/3906b830.html</a></li>
 <li><a href="https://www.zhihu.com/question/26760839/answer/33963551" target="_blank" rel="external">https://www.zhihu.com/question/26760839/answer/33963551</a></li>
 </ol>
 <h2 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h2><ol>
-<li>GDBT简介：gdbt是一种boosting算法，通过多轮迭代,每轮迭代产生一个弱分类器，每个分类器在上一轮分类器的残差基础上进行训练，最终组成的强分类与回归模型。</li>
-<li>GDBT部分面试总结：<a href="https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702" target="_blank" rel="external">https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702</a></li>
+<li>gbdt简介：gbdt是一种boosting算法，通过多轮迭代,每轮迭代产生一个弱分类器，每个分类器在上一轮分类器的残差基础上进行训练，最终组成的强分类与回归模型。</li>
+<li>gbdt部分面试总结：<a href="https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702" target="_blank" rel="external">https://www.cnblogs.com/ModifyRong/p/7744987.html、https://blog.csdn.net/tinkle181129/article/details/79681702</a></li>
 <li><a href="https://blog.csdn.net/LeYOUNGER/article/details/78771791" target="_blank" rel="external">传统Boosting 与 GradientBoost</a>:<ol>
 <li>原始的Boost算法是在算法开始的时候，为每一个样本赋上一个权重值，初始的时候，大家都是一样重要的。在之后的学习过程种，增加分错的点的权重，减少分对的点的权重，这样使得某些点如果老是被分错，那么就会被“严重关注”，也就被赋上一个很高的权重。、</li>
 <li>Gradient Boost与传统的Boost的区别是，每一次的计算是为了减少上一次的残差(residual)，而为了消除残差，我们可以在残差减少的梯度(Gradient)方向上建立一个新的模型。</li>
@@ -900,6 +995,7 @@
 <li>LightGBM相对XGBoost的改进参考:<a href="https://zhuanlan.zhihu.com/p/25308051" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/25308051</a> ，<a href="http://msra.cn/zh-cn/news/blogs/2017/01/lightgbm-20170105.aspx，http://izhaoyi.top/2017/08/02/model-cmp/" target="_blank" rel="external">http://msra.cn/zh-cn/news/blogs/2017/01/lightgbm-20170105.aspx，http://izhaoyi.top/2017/08/02/model-cmp/</a></li>
 <li><a href="https://www.jianshu.com/p/4a3c5e34d0f8" target="_blank" rel="external">为什么XGBoost要用泰勒展开，优势在哪里？</a> XGBoost使用了一阶和二阶偏导, 二阶导数有利于梯度下降的更快更准. 使用泰勒展开取得二阶倒数形式, 可以在不选定损失函数具体形式的情况下用于算法优化分析.本质上也就把损失函数的选取和模型算法优化/参数选择分开了. 这种去耦合增加了XGBoost的适用性。</li>
 </ol>
+<h2 id="stacking"><a href="#stacking" class="headerlink" title="stacking"></a>stacking</h2><p>Stacking是指训练一个模型用于组合(combine)其他各个模型。即首先我们先训练多个不同的模型，然后再以之前训练的各个模型的输出为输入来训练一个模型，以得到一个最终的输出。实际中，我们通常使用单层logistic回归作为组合模型。</p>
 <h1 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h1><h2 id="梯度类"><a href="#梯度类" class="headerlink" title="梯度类"></a>梯度类</h2><p>梯度类算法是求解优化问题种最常见的优化算法，梯度类算法以负梯度方向为搜索方向的，通过不断迭代逐渐逼近最优值。<br>$$\theta_i = \theta_i - \alpha\frac{\partial}{\partial\theta_i}J(\theta_0, \theta_1…, \theta_n)$$</p>
 <h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><ul>
 <li>优缺点：</li>
@@ -915,7 +1011,7 @@
 <h3 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h3><p>SGD方法的一个缺点是其更新方向完全依赖于当前batch计算出的梯度，因而十分不稳定。Momentum算法会观察历史梯度$v_{t−1}$，若当前梯度的方向与历史梯度一致（表明当前样本不太可能为异常点），则会增强这个方向的梯度，若当前梯度与历史梯方向不一致，则梯度会衰减。类似于动量概念。这样一来，可以在一定程度上增加稳定性，从而学习地更快，并且还有一定摆脱局部最优的能力：<br>$$v_{t} = \gamma \cdot v_{t-1}  + \alpha \cdot \triangledown_\Theta J(\Theta )$$<br>$$\Theta = \Theta-v_{t}$$</p>
 <h3 id="Adagrad"><a href="#Adagrad" class="headerlink" title="Adagrad"></a>Adagrad</h3><p>Adagrad算法能够在训练中自动的对learning rate进行调整，对于出现频率较低参数采用较大的α更新；相反，对于出现频率较高的参数采用较小的α更新。因此，Adagrad非常适合处理稀疏数据。</p>
 <h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h3><p>Adam(Adaptive Moment Estimation)是另一种自适应学习率的方法。它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率。Adam的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。</p>
-<h3 id="参考资料-7"><a href="#参考资料-7" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<h3 id="参考资料-8"><a href="#参考资料-8" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><a href="https://www.cnblogs.com/pinard/p/5970503.html" target="_blank" rel="external">https://www.cnblogs.com/pinard/p/5970503.html</a></li>
 <li><a href="https://blog.csdn.net/bupt_wx/article/details/52761751" target="_blank" rel="external">https://blog.csdn.net/bupt_wx/article/details/52761751</a></li>
 <li><a href="https://blog.csdn.net/u010089444/article/details/76725843" target="_blank" rel="external">https://blog.csdn.net/u010089444/article/details/76725843</a></li>
@@ -929,7 +1025,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="参考资料-8"><a href="#参考资料-8" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<h3 id="参考资料-9"><a href="#参考资料-9" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
 <li><a href="https://blog.csdn.net/wtq1993/article/details/51607040" target="_blank" rel="external">https://blog.csdn.net/wtq1993/article/details/51607040</a></li>
 <li><a href="https://www.jianshu.com/p/f00715396c7b" target="_blank" rel="external">https://www.jianshu.com/p/f00715396c7b</a></li>
 </ol>
@@ -961,6 +1057,13 @@
 <li>参考资料：<a href="http://blog.csdn.net/xbinworld?viewmode=contents" target="_blank" rel="external">http://blog.csdn.net/xbinworld?viewmode=contents</a></li>
 </ol>
 </li>
+</ol>
+</li>
+<li>对特征工程的理解：特征工程是一种将原始数据转化为能更好地表现预测模型本质问题的特征，使模型对没见过的数据能取得更好的预测效果。一般特征工程包括：<ol>
+<li>数据处理：包括统一量纲（归一化、标准化等），虚拟变量（离散型的数据转化为连续型的数据），缺失值填充（数据补齐、删除缺失行）</li>
+<li>特征选择：数据中可能存在不相关的特征，特征之间也可能存在相互依赖，容易导致如下的后果：特征个数越多，分析特征、训练模型所需的时间就越长。特征个数越多，容易引起“维度灾难”。特征选择能剔除不相关(irrelevant)或亢余(redundant)的特征，从而达到减少特征个数，提高模型精确度，减少运行时间的目的。另一方面，选取出真正相关的特征简化了模型，使研究人员易于理解数据产生的过程。</li>
+<li>维度压缩：减少数据集的维度的同时，包含信息更多的信息。</li>
+<li>特征构建：从原始数据中人造新特征，要求在样本数据上花费大量的时间并且思考问题的本质，以及怎么最好的在预测模型中利用他们。</li>
 </ol>
 </li>
 <li>过拟合：学习器学习能力过强，在训练集上过度学习，导致模型在训练集表现好，在真实数据表现不好，即模型的泛化能力不够。从另外一个方面来讲，模型在达到经验损失最小的时候，模型复杂度较高，结构风险没有达到最优。可以通过以下方式解决：<ol>
@@ -1034,10 +1137,42 @@
 </ol>
 </li>
 <li><a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/" target="_blank" rel="external">模型优缺点</a></li>
-<li>数据不均衡问题：<ol>
-<li>过采样或欠采样</li>
+<li><a href="http://www.docin.com/p-1878485764.html?docfrom=rrela" target="_blank" rel="external">数据不均衡问题</a>：<ol>
+<li>过采样或欠采样：<ol>
+<li>随机欠采样：目标是通过随机地消除占多数的类的样本来平衡类分布；直到多数类和少数类的实例实现平衡，目标才算达成。<ol>
+<li>优点：它可以提升运行时间；并且当训练数据集很大时，可以通过减少样本数量来解决存储问题。</li>
+<li>缺点：它会丢弃对构建规则分类器很重要的有价值的潜在信息。被随机欠采样选取的样本可能具有偏差。它不能准确代表大多数。从而在实际的测试数据集上得到不精确的结果。</li>
+</ol>
+</li>
+<li>随机过采样（Over-Sampling）：通过随机复制少数类来增加其中的实例数量，从而可增加样本中少数类的代表性。<ol>
+<li>优点：与欠采样不同，这种方法不会带来信息损失。表现优于欠采样。</li>
+<li>缺点：由于复制少数类事件，它加大了过拟合的可能性。</li>
+</ol>
+</li>
+<li>基于聚类的过采样：使用K-均值聚类算法识别数据集中的聚类。随后，对每一个聚类过采样，使聚类拥有相同的实例数量。<ol>
+<li>优点：这种聚类技术有助于克服类之间不平衡的挑战。有助于克服由不同子聚类组成的类之间的不平衡的挑战。每一个子聚类不包含相同数量的实例。</li>
+<li>缺点：可能过拟合</li>
+</ol>
+</li>
+<li>信息性过采样：合成少数类过采样技术（SMOTE）：通过插值的方式创建相似的新合成的实例，可以避免直接复制少数类实例带来的过拟合问题。<ol>
+<li>优点：可以缓解过拟合的问题。不会损失有价值信息。</li>
+<li>缺点：当生成合成性实例时，SMOTE并不会把来自其他类的相邻实例考虑进来，这导致了类重叠的增加，并会引入额外的噪音。并且，SMOTE 对高维数据不是很有效。</li>
+</ol>
+</li>
+<li>改进的合成少数类过采样技术（MSMOTE）：该算法将少数类别的样本分为3个不同的组：安全样本、边界样本和潜在噪声样本。该算法是从安全样本出发随机选择k-最近邻的数据点，并从边界样本出发选择最近邻，并且不对潜在噪声样本进行任何操作。</li>
+</ol>
+</li>
 <li>选用合适评价函数</li>
 <li>代价敏感学习</li>
+<li>使用集成学习方法</li>
+</ol>
+</li>
+<li>异常点检测：<ol>
+<li>基于距离离群检测（聚类）：考虑给定样本的一定距离内样本点个数小于一个阈值，则是离群点</li>
+<li>基于密度的离群检测：离群点周围的密度显著不同于其邻域周围的密度</li>
+<li>基于统计方法的离群点检测：一般根据样本分布给出概率分布模型，一般也可假设样本呈正态分布，绘制样本箱型图（依据四分位极差）判断离群点</li>
+<li>孤立森林、one class SVM</li>
+<li>参考： <a href="https://www.jianshu.com/p/ac6418ee8e3f" target="_blank" rel="external">https://www.jianshu.com/p/ac6418ee8e3f</a></li>
 </ol>
 </li>
 </ol>
@@ -1055,6 +1190,36 @@
 </ol>
 </li>
 <li>类别不均衡问题：类别不均衡是指在分类学习算法中，不同类别样本的比例相差悬殊，它会对算法的学习过程造成重大的干扰。在类别不均衡时，准确度这个评价指标并不能work，甚至误导分类器。</li>
+</ol>
+<h2 id="距离的度量"><a href="#距离的度量" class="headerlink" title="距离的度量"></a>距离的度量</h2><ol>
+<li>欧式距离：$d =  \sqrt{\sum _ {i=1}^N(x _ {1i}-x _ {2i})^2}$ <ol>
+<li>缺点：每个坐标对欧氏距离的贡献是同等的。它将样品的不同属性（即各指标或各变量）之间的差别等同看待，这一点有时不能满足实际要求。</li>
+</ol>
+</li>
+<li>马氏距离：$\sqrt{(x-u _ x)^T\Sigma^{-1}(y-u _ y)}$，其中$\Sigma$为协方差，计算公式为$E(XY)-E(X)E(Y)$<ol>
+<li>优点：它不受量纲的影响，两点之间的马氏距离与原始数据的测量单位无关。它考虑到各种特性之间的联系，并且是尺度无关的</li>
+<li>缺点：夸大了变化微小的变量的作用。受协方差矩阵不稳定的影响，马氏距离并不总是能顺利计算出。</li>
+</ol>
+</li>
+</ol>
+<h2 id="偏差与方差"><a href="#偏差与方差" class="headerlink" title="偏差与方差"></a>偏差与方差</h2><p>$$E(f;D)=bias^2(x)+var(x)+\epsilon^2$$<br>泛化误差为偏差方差与噪声之和。</p>
+<ol>
+<li>偏差度量了学习算法的期望预测与真实结果的偏离程度，即刻画了学习算法本身的拟合能力。<br>$$bias^2(x)={(\overline{f}(x)-y)^2}$$</li>
+<li>方差度量了同样大小的训练集的变动所导致的学习性能的变化，即刻画了数据扰动所造成的影响。<br>$$var(x)=\mathbb{E}_D\big[(f(x;D)-\overline{f}(x))^2\big]$$</li>
+<li>噪声则表达了在当前任务上任何学习算法所能达到的期望泛化误差的下界，即刻画了学习问题本身的难度。<br>$$\epsilon^2=\mathbb{E}_D\big[(y_D-y)^2\big]$$</li>
+</ol>
+<h3 id="偏差方差窘境"><a href="#偏差方差窘境" class="headerlink" title="偏差方差窘境"></a>偏差方差窘境</h3><p><img src="http://ww1.sinaimg.cn/large/005zWpc4ly1ft80j8wjo9j30bs0a6js0.jpg" alt="机器学习之模型评估/error.png"></p>
+<ol>
+<li>假如学习算法训练不足时，这个时候偏差主导了算法的泛化能力。</li>
+<li>随着训练的进行，学习器的拟合能力逐渐增强，偏差逐渐减小，但此时通过不同数据学习得到的学习器就可能会有较大的偏差，即此时的方差会主导模型的泛化能力。</li>
+<li>若学习进一步进行，学习器就可能学到数据集所独有的特征，而这些特征对于其它的数据是不适用的，这个时候就是发生了过拟合。</li>
+</ol>
+<h2 id="在线算法"><a href="#在线算法" class="headerlink" title="在线算法"></a><a href="https://www.zhihu.com/question/28025036/answer/107986651" target="_blank" rel="external">在线算法</a></h2><p>在线学习实际上就是每来一个/批样本增量更新一次，主要有两类：</p>
+<ol>
+<li>基于贝叶斯公式，这种更新方式非常自然。有名的应用包括微软的MatchBox，以及其在广告点击率上的应用，具体的paper名字大概是web-scale ctr prediction</li>
+<li>基于sgd的方法，基于梯度优化的算法大都可以应用 。这一类方法有很多变种，大多数是加速sgd的收敛速度，以及减少调参对收敛的影响，神经网络的训练基本都是此类方法。另外google有一篇文章Ad Predictor，算是把ctr预估的方向指向实时更新了其他还有一些online的方法，不过往往需要各种trick,比如近邻法，因为这类方法是非参数模型</li>
+<li>基于kernel(非线性)的方法则不能online，虽然可以每来一个样本就更新一次，但是必须把之前看所有的数据都保存下来来构建kernel matrix，这样空间需求会越来越大。</li>
+<li>总结如下：logistic regression, linear svm, 神经网络</li>
 </ol>
 
       
@@ -1077,7 +1242,7 @@
   <p><span>本文标题:</span><a href="/posts/a45772c3.html">机器学习之模型整理</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年07月19日 - 10:07</p>
-  <p><span>最后更新:</span>2018年07月29日 - 09:07</p>
+  <p><span>最后更新:</span>2018年08月18日 - 12:08</p>
   <p><span>原始链接:</span><a href="/posts/a45772c3.html" title="机器学习之模型整理">akihoo.github.io/posts/a45772c3.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/a45772c3.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -1122,8 +1287,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/10a4d630.html" rel="next" title="【转载】如何正确的选择图床">
-                <i class="fa fa-chevron-left"></i> 【转载】如何正确的选择图床
+              <a href="/posts/1584f721.html" rel="next" title="C++Python字符串处理合集">
+                <i class="fa fa-chevron-left"></i> C++Python字符串处理合集
               </a>
             
           </div>
@@ -1132,8 +1297,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/20a77595.html" rel="prev" title="【转载】Hexo - 修改永久链接的默认格式">
-                【转载】Hexo - 修改永久链接的默认格式 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/10a4d630.html" rel="prev" title="【转载】如何正确的选择图床">
+                【转载】如何正确的选择图床 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1215,7 +1380,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-count">66</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1335,7 +1500,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结"><span class="nav-number">1.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持向量机"><span class="nav-number">2.</span> <span class="nav-text">支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-1"><span class="nav-number">2.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">3.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-2"><span class="nav-number">3.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-2"><span class="nav-number">3.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朴素贝叶斯"><span class="nav-number">4.</span> <span class="nav-text">朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-3"><span class="nav-number">4.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-3"><span class="nav-number">4.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kmeans"><span class="nav-number">5.</span> <span class="nav-text">kmeans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-4"><span class="nav-number">5.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">6.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-4"><span class="nav-number">6.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-5"><span class="nav-number">6.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集成学习"><span class="nav-number">7.</span> <span class="nav-text">集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览"><span class="nav-number">7.1.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-6"><span class="nav-number">7.1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boosting"><span class="nav-number">7.2.</span> <span class="nav-text">boosting</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化算法"><span class="nav-number">8.</span> <span class="nav-text">优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度类"><span class="nav-number">8.1.</span> <span class="nav-text">梯度类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降法"><span class="nav-number">8.1.1.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量梯度下降-Batch-graduebt-descent"><span class="nav-number">8.1.2.</span> <span class="nav-text">批量梯度下降(Batch graduebt descent)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降-Stochatic-gradient-decent，-SGD"><span class="nav-number">8.1.3.</span> <span class="nav-text">随机梯度下降(Stochatic gradient decent， SGD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量梯度下降法（Mini-batch-Gradient-Descent）"><span class="nav-number">8.1.4.</span> <span class="nav-text">小批量梯度下降法（Mini-batch Gradient Descent）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Momentum"><span class="nav-number">8.1.5.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adagrad"><span class="nav-number">8.1.6.</span> <span class="nav-text">Adagrad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">8.1.7.</span> <span class="nav-text">Adam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-7"><span class="nav-number">8.1.8.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛顿法"><span class="nav-number">8.2.</span> <span class="nav-text">牛顿法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-8"><span class="nav-number">8.2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">8.3.</span> <span class="nav-text">拟牛顿法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要知识点"><span class="nav-number">8.4.</span> <span class="nav-text">重要知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习基础"><span class="nav-number">9.</span> <span class="nav-text">机器学习基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征"><span class="nav-number">9.1.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价指标"><span class="nav-number">9.2.</span> <span class="nav-text">评价指标</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结"><span class="nav-number">1.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#支持向量机"><span class="nav-number">2.</span> <span class="nav-text">支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-1"><span class="nav-number">2.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树"><span class="nav-number">3.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-2"><span class="nav-number">3.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-2"><span class="nav-number">3.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朴素贝叶斯"><span class="nav-number">4.</span> <span class="nav-text">朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-3"><span class="nav-number">4.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-3"><span class="nav-number">4.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kmeans"><span class="nav-number">5.</span> <span class="nav-text">kmeans</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-4"><span class="nav-number">5.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">6.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型总结-4"><span class="nav-number">6.1.</span> <span class="nav-text">模型总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料-5"><span class="nav-number">6.2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度学习相关"><span class="nav-number">6.3.</span> <span class="nav-text">深度学习相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">6.3.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络-CNN"><span class="nav-number">6.3.2.</span> <span class="nav-text">卷积神经网络(CNN)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN"><span class="nav-number">6.3.3.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-6"><span class="nav-number">6.3.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集成学习"><span class="nav-number">7.</span> <span class="nav-text">集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.1.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概览"><span class="nav-number">7.1.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-7"><span class="nav-number">7.1.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boosting"><span class="nav-number">7.2.</span> <span class="nav-text">boosting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stacking"><span class="nav-number">7.3.</span> <span class="nav-text">stacking</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化算法"><span class="nav-number">8.</span> <span class="nav-text">优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#梯度类"><span class="nav-number">8.1.</span> <span class="nav-text">梯度类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降法"><span class="nav-number">8.1.1.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批量梯度下降-Batch-graduebt-descent"><span class="nav-number">8.1.2.</span> <span class="nav-text">批量梯度下降(Batch graduebt descent)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降-Stochatic-gradient-decent，-SGD"><span class="nav-number">8.1.3.</span> <span class="nav-text">随机梯度下降(Stochatic gradient decent， SGD)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量梯度下降法（Mini-batch-Gradient-Descent）"><span class="nav-number">8.1.4.</span> <span class="nav-text">小批量梯度下降法（Mini-batch Gradient Descent）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Momentum"><span class="nav-number">8.1.5.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adagrad"><span class="nav-number">8.1.6.</span> <span class="nav-text">Adagrad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">8.1.7.</span> <span class="nav-text">Adam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-8"><span class="nav-number">8.1.8.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#牛顿法"><span class="nav-number">8.2.</span> <span class="nav-text">牛顿法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料-9"><span class="nav-number">8.2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拟牛顿法"><span class="nav-number">8.3.</span> <span class="nav-text">拟牛顿法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要知识点"><span class="nav-number">8.4.</span> <span class="nav-text">重要知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习基础"><span class="nav-number">9.</span> <span class="nav-text">机器学习基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#特征"><span class="nav-number">9.1.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评价指标"><span class="nav-number">9.2.</span> <span class="nav-text">评价指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#距离的度量"><span class="nav-number">9.3.</span> <span class="nav-text">距离的度量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#偏差与方差"><span class="nav-number">9.4.</span> <span class="nav-text">偏差与方差</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#偏差方差窘境"><span class="nav-number">9.4.1.</span> <span class="nav-text">偏差方差窘境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线算法"><span class="nav-number">9.5.</span> <span class="nav-text">在线算法</span></a></li></ol></li></ol></div>
             
 
           </div>
