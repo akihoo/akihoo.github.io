@@ -320,178 +320,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/26e8d9eb.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="微石">
-      <meta itemprop="description" content="吾本逍遥">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="微石的碎碎念">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/26e8d9eb.html" itemprop="url">
-                  SQL基础
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-22 16:44:45" itemprop="dateCreated datePublished" datetime="2018-07-22T16:44:45+08:00">2018-07-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-11 16:56:55" itemprop="dateModified" datetime="2018-08-11T16:56:55+08:00">2018-08-11</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/posts/26e8d9eb.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/26e8d9eb.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>本文使用的数据库来自<a href="https://www.yiibai.com/mysql/sample-database.html" target="_blank" rel="external">https://www.yiibai.com/mysql/sample-database.html</a> ，</p>
-</blockquote>
-<h1 id="连接SQL"><a href="#连接SQL" class="headerlink" title="连接SQL"></a>连接SQL</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># 打开 MySQL 服务</div><div class="line">sudo service mysql <span class="keyword">start</span></div><div class="line"></div><div class="line">#连接<span class="keyword">SQL</span>服务器，参数-h为<span class="keyword">sql</span>服务器地址，-u为用户名，默认为root，-p为密码</div><div class="line">mysql -h host -u root -p <span class="keyword">password</span></div><div class="line"></div><div class="line"># 退出<span class="keyword">SQL</span></div><div class="line"><span class="keyword">exit</span></div></pre></td></tr></table></figure>
-<h1 id="数据库与数据表"><a href="#数据库与数据表" class="headerlink" title="数据库与数据表"></a>数据库与数据表</h1><h2 id="显示-SHOW"><a href="#显示-SHOW" class="headerlink" title="显示-SHOW"></a>显示-SHOW</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SHOW</span> <span class="keyword">DATABASES</span>;</div><div class="line"><span class="keyword">SHOW</span> <span class="keyword">TABLES</span>;</div><div class="line"></div><div class="line"><span class="comment">--# eg.数据表概览</span></div><div class="line">mysql&gt; show tables;</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| Tables_in_yiibaidb |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">| customers          |</div><div class="line">| employees          |</div><div class="line">| items              |</div><div class="line">| offices            |</div><div class="line">| orderdetails       |</div><div class="line">| orders             |</div><div class="line">| payments           |</div><div class="line">| productlines       |</div><div class="line">| products           |</div><div class="line">| tokens             |</div><div class="line">+<span class="comment">--------------------+</span></div><div class="line">10 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/26e8d9eb.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-    <div>
-          
-    </div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/undefined.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2088,6 +1916,179 @@ tags:
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/461acaa3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="微石">
+      <meta itemprop="description" content="吾本逍遥">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="微石的碎碎念">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/461acaa3.html" itemprop="url">
+                  机器学习竞赛大杀器-xgboost
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-10 15:55:28" itemprop="dateCreated datePublished" datetime="2018-07-10T15:55:28+08:00">2018-07-10</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-07-19 17:04:09" itemprop="dateModified" datetime="2018-07-19T17:04:09+08:00">2018-07-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/461acaa3.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/461acaa3.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>有关决策树与集成学习的介绍：<a href="https://akihoo.github.io/2018/05/29/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E4%B9%8B%E5%86%B3%E7%AD%96%E6%A0%91/">决策树</a>、<a href="https://akihoo.github.io/2018/06/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%A1/">集成学习</a></p>
+</blockquote>
+<h1 id="XGB"><a href="#XGB" class="headerlink" title="XGB"></a>XGB</h1><p>XGB 同随机森林一样，通过构建一系列决策树（准确说应该是CART树）来组成最终的预测模型，由 $K$ 棵函数为 $f _ k(x _ i)$ 树组成的 XGB 模型可写成：</p>
+<p>$$\hat y _ i = \sum _ {k=1}^K f _ k(x _ i), \quad f _ k \in \mathcal{F}$$</p>
+<p>模型的目标函数为：<br>$$Obj(\Theta) = \sum _ i^n l(y _ i,\hat y _ i) +\sum _ {k=1}^K\Omega(f _ k)$$<br>这个目标函数的第一部分就是损失函数，第二部分就是正则项。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/461acaa3.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+    <div>
+          
+    </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2139,7 +2140,7 @@ tags:
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

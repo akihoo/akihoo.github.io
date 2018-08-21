@@ -108,24 +108,25 @@
 
 
 
-  <meta name="description" content="XGBXGB 是 boosting 的其中一种方法，所谓 Boosting ，就是将弱分离器 f_i(x) 组合起来形成强分类器 F(x) 的一种方法。">
+  <meta name="description" content="本文主要节选自：http://izhaoyi.top/2017/09/23/sklearn-xgboost/  adaboostadaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入">
+<meta name="keywords" content="ML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微石的碎碎念">
-<meta property="og:url" content="akihoo.github.io/posts/0.html">
+<meta property="og:title" content="机器学习之boosting大家族">
+<meta property="og:url" content="akihoo.github.io/posts/e9c1acb4.html">
 <meta property="og:site_name" content="微石的碎碎念">
-<meta property="og:description" content="XGBXGB 是 boosting 的其中一种方法，所谓 Boosting ，就是将弱分离器 f_i(x) 组合起来形成强分类器 F(x) 的一种方法。">
+<meta property="og:description" content="本文主要节选自：http://izhaoyi.top/2017/09/23/sklearn-xgboost/  adaboostadaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-16T08:37:30.391Z">
+<meta property="og:updated_time" content="2018-08-21T09:00:06.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微石的碎碎念">
-<meta name="twitter:description" content="XGBXGB 是 boosting 的其中一种方法，所谓 Boosting ，就是将弱分离器 f_i(x) 组合起来形成强分类器 F(x) 的一种方法。">
+<meta name="twitter:title" content="机器学习之boosting大家族">
+<meta name="twitter:description" content="本文主要节选自：http://izhaoyi.top/2017/09/23/sklearn-xgboost/  adaboostadaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入">
 
 
 
 
 
 
-  <link rel="canonical" href="akihoo.github.io/posts/0.html"/>
+  <link rel="canonical" href="akihoo.github.io/posts/e9c1acb4.html"/>
 
 
 
@@ -135,7 +136,7 @@
   };
 </script>
 
-  <title> | 微石的碎碎念</title>
+  <title>机器学习之boosting大家族 | 微石的碎碎念</title>
   
 
 
@@ -320,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/0.html">
+    <link itemprop="mainEntityOfPage" href="akihoo.github.io/posts/e9c1acb4.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="微石">
@@ -337,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">机器学习之boosting大家族
               
             
           </h1>
@@ -362,12 +363,24 @@
                 
               
 
-              <time title="创建时间：2018-08-16 16:37:29 / 修改时间：16:37:30" itemprop="dateCreated datePublished" datetime="2018-08-16T16:37:29+08:00">2018-08-16</time>
+              <time title="创建时间：2018-08-20 11:44:45" itemprop="dateCreated datePublished" datetime="2018-08-20T11:44:45+08:00">2018-08-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-21 17:00:06" itemprop="dateModified" datetime="2018-08-21T17:00:06+08:00">2018-08-21</time>
               
             
           </span>
@@ -381,8 +394,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/0.html#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/0.html" itemprop="commentCount"></span>
+                <a href="/posts/e9c1acb4.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/posts/e9c1acb4.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -418,7 +431,68 @@
       
 
       
-        <h1 id="XGB"><a href="#XGB" class="headerlink" title="XGB"></a>XGB</h1><p>XGB 是 boosting 的其中一种方法，所谓 Boosting ，就是将弱分离器 f_i(x) 组合起来形成强分类器 F(x) 的一种方法。</p>
+        <blockquote>
+<p>本文主要节选自：<a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></p>
+</blockquote>
+<h1 id="adaboost"><a href="#adaboost" class="headerlink" title="adaboost"></a>adaboost</h1><p>adaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入一个新的弱分类器，知道达到某个预定的足够小的的错误率或达到预定的最大迭代次数。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.cnblogs.com/en-heng/p/5974371.html" target="_blank" rel="external">https://www.cnblogs.com/en-heng/p/5974371.html</a></li>
+</ol>
+<h1 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h1><p>GBDT 模型也是基于boosting的集成学习算法的变种，GB这边，就是Gradient Boost，通过在梯度上进行boost，每一次的计算是为了减少上一次的残差(residual)，在Gradient Boost中，每个新的模型的遍历是为了使得之前模型的残差往梯度方向减少。与传统Boost对错误的样本进行加权有着很大的区别。从公式上，就是下一个函数等于上一个函数+拟合了残差的函数（实际上这个残差函数会乘以一个乘数，是让目标函数最小化，这个乘数怎么来不作展开）。</p>
+<h1 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a>XGBoost</h1><p>XGBoost 是GBDT的一个变种，最大的区别是xgboost通过对目标函数做二阶泰勒展开，从而求出下一步要拟合的树的叶子节点权重（需要先确定树的结构），从而根据分裂损失选择合适的属性进行分裂。</p>
+<h2 id="一些特性"><a href="#一些特性" class="headerlink" title="一些特性"></a>一些特性</h2><ol>
+<li>GBDT无显式正则化，xgboost对每棵树的叶子节点个数和权重都做了惩罚，避免过拟合</li>
+<li>类似于随机森林，XGBoost在构建树的过程中，加入了行采样与列采样，防止过拟合</li>
+<li>GBDT仅使用了目标函数一阶泰勒展开，而XGBoost使用了二阶的泰勒展开值<ol>
+<li>为什么二阶展开？加快收敛速度，另外有说本身模型训练的学习率shrinkage可以通过二阶导数做一个逼近，而原始的GBDT没有计算这个，所以一般是通过预设的超参数eta人为指定</li>
+</ol>
+</li>
+<li>分裂算法有两种，一种是精确的分裂，一种是近似分裂算法，精确分裂算法就是把每个属性的每个取值都当作一次阈值进行遍历，采用的决策树是CART。近似分裂算法是对每个属性的所有取值进行分桶，按照各个桶之间的值作为划分阈值，xgboost提出了一个特殊的分桶策略，一般的分桶策略是每个样本的权重都是相同的，但是xgboost使每个样本的权重为损失函数在该样本点的二阶导(泰勒展开不应该是损失函数关于模型的展开吗？为什么会有在该样本点的二阶导这种说法？ 因为模型是对所有样本点都通用的，把该样本输入到二阶导公式中就可以得到了)。</li>
+<li>xgboost加入了对缺失值的处理，xgboost分别将缺失样本放置到左子树和右子树，比较两者分裂增益，选择增益较大的那一边作为该样本的分裂方向。</li>
+<li>XGBoost通过预排序的方法来实现特征并行，提高模型训练效率</li>
+<li>xgboost 在实现时，需要将所有数据导入内存，做一次pre-sort（exact algorithm），这样在选择分裂节点时比较迅速。</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
+<li>level-wise 建树方式对当前层的所有叶子节点一视同仁，有些叶子节点分裂收益非常小，对结果没影响，但还是要分裂，加重了计算代价。</li>
+<li>预排序方法空间消耗比较大，不仅要保存特征值，也要保存特征的排序索引，同时时间消耗也大，在遍历每个分裂点时都要计算分裂增益(不过这个缺点可以被近似算法所克服)</li>
+</ol>
+<h2 id="与GBDT比较"><a href="#与GBDT比较" class="headerlink" title="与GBDT比较"></a>与GBDT比较</h2><ol>
+<li>正则化方式不同（XGB在目标函数中加入显式的控制树复杂程度的项）</li>
+<li>GBDT仅使用了目标函数一阶泰勒展开，而XGBoost使用了二阶的泰勒展开值</li>
+<li>XGB可以处理缺失值</li>
+<li>特征重要性的判断标准<ol>
+<li>sklearn GBDT是根据树的节点特征对应的深度来判断</li>
+<li>XGBoost则有三种方法(get_score)<ol>
+<li>weight:特征用来作为切分特征的次数</li>
+<li>gain:使用特征进行切分的平均增益</li>
+<li>cover:各个树中该特征平均覆盖情况(根据样本？)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>XGB 树的切分算法：原始的贪心算法(每个特征值切分)、近似贪心(分位点切分)(使得对于大量的特征取值尤其是连续变量时XGBoost会比sklearn-gbdt快很多)、直方图算法</li>
+</ol>
+<h1 id="lightgbm"><a href="#lightgbm" class="headerlink" title="lightgbm"></a>lightgbm</h1><p>相对XGB进行了大量优化</p>
+<ol>
+<li>在效率和内存上：采用直方图算法，将连续特征（属性）值存储到离散区间。这加快了培训速度并减少了内存使用量。基于直方图的算法的优点包括：<ol>
+<li>减少内存使用量(用离散箱替换连续值)</li>
+<li>降低并行学习的通信成本</li>
+<li>在训练决策树计算切分点的增益时，预排序需要对每个样本的切分位置计算，所以时间复杂度是O(#data)而LightGBM则是计算将样本离散化为直方图后的直方图切割位置的增益即可，时间复杂度为O(#bins),时间效率上大大提高了(初始构造直方图是需要一次O(#data)的时间复杂度，不过这里只涉及到加和操作)</li>
+<li>直方图做差进一步提高效率，计算某一节点的叶节点的直方图可以通过将该节点的直方图与另一子节点的直方图做差得到</li>
+</ol>
+</li>
+<li>LEAF-WISE(BEST-FIRST)树生长策略：相对于level-wise的生长策略而言，这种策略每次都是选取当前损失下降最多的叶节点进行分割使得整体模型的损失下降得更多，但是容易过拟合(特别当数据量较小的时候)，可以通过设置参数max_depth来控制树身防止出现过拟合（<em>Notes:XGBoost现在两种方式都是支持的</em>）</li>
+<li>LightGBM直接支持类别特征：在对离散特征分裂时，每个取值都当作一个桶，分裂时的增益算的是“是否属于某个category”的gain。类似于one-hot编码。（基于单热特征构建的树往往是不平衡的，并且需要非常深地生长以实现良好的准确性）</li>
+<li>优化通信代价：特征并行、数据并行、投票并行</li>
+<li>使用多项评价指标同时评价时两者的早停止策略不同，XGBoost是根据评价指标列表中的最后一项来作为停止标准，而LightGBM则受到所有评价指标的影响</li>
+</ol>
+<h1 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></li>
+<li><a href="https://www.cnblogs.com/mata123/p/7440774.html" target="_blank" rel="external">https://www.cnblogs.com/mata123/p/7440774.html</a></li>
+<li><a href="http://scikit-learn.org/stable/modules/ensemble.html#ensemble" target="_blank" rel="external">sklearn</a></li>
+<li><a href="https://lightgbm.readthedocs.io/en/latest/Quick-Start.html" target="_blank" rel="external">LGB_DOC</a></li>
+<li><a href="https://xgboost.readthedocs.io/en/latest/python/python_intro.html#early-stopping" target="_blank" rel="external">XGB_DOC</a></li>
+</ol>
 
       
     </div>
@@ -441,6 +515,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"><i class="fa fa-tag"></i> ML</a>
+          
+        </div>
+      
 
       
       
@@ -459,10 +539,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/0.html" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -543,7 +619,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -663,7 +739,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XGB"><span class="nav-number">1.</span> <span class="nav-text">XGB</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#adaboost"><span class="nav-number">1.</span> <span class="nav-text">adaboost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBDT"><span class="nav-number">2.</span> <span class="nav-text">GBDT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#XGBoost"><span class="nav-number">3.</span> <span class="nav-text">XGBoost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些特性"><span class="nav-number">3.1.</span> <span class="nav-text">一些特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点"><span class="nav-number">3.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与GBDT比较"><span class="nav-number">3.3.</span> <span class="nav-text">与GBDT比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lightgbm"><span class="nav-number">4.</span> <span class="nav-text">lightgbm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料-1"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

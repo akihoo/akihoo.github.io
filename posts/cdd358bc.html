@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="简介深度优先与广度优先算法，从名字上便很好理解，以在二叉树结构中搜索某一值为例：  深度优先算法将从顶点V开始，沿着一个路径一直走到底（叶子节点），如果搜索到目标值则退出，否则返回上一个还有子节点未被搜索的节点继续搜索。 广度优先算法将从顶点V开始，依次访问当前节点未被访问过的子节点，再从子节出发，继续访问他们的子节点，直到所有节点被访问。（相当于树的层次遍历） 一般说来，能用DFS解决的问题都能">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-05T13:29:24.703Z">
+<meta property="og:updated_time" content="2018-08-20T10:02:43.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode之BFS与DFS">
 <meta name="twitter:description" content="简介深度优先与广度优先算法，从名字上便很好理解，以在二叉树结构中搜索某一值为例：  深度优先算法将从顶点V开始，沿着一个路径一直走到底（叶子节点），如果搜索到目标值则退出，否则返回上一个还有子节点未被搜索的节点继续搜索。 广度优先算法将从顶点V开始，依次访问当前节点未被访问过的子节点，再从子节出发，继续访问他们的子节点，直到所有节点被访问。（相当于树的层次遍历） 一般说来，能用DFS解决的问题都能">
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-05 21:29:24" itemprop="dateModified" datetime="2018-08-05T21:29:24+08:00">2018-08-05</time>
+                <time title="修改时间：2018-08-20 18:02:43" itemprop="dateModified" datetime="2018-08-20T18:02:43+08:00">2018-08-20</time>
               
             
           </span>
@@ -446,6 +446,7 @@
 <li>从上往下打印出二叉树的每个节点，同层节点从左至右打印。 </li>
 <li>这里使用2个数组保存节点，也可以使用queue这一数据结构。</li>
 </ul>
+<a id="more"></a>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">struct TreeNode &#123;</span></div><div class="line"><span class="comment">	int val;</span></div><div class="line"><span class="comment">	struct TreeNode *left;</span></div><div class="line"><span class="comment">	struct TreeNode *right;</span></div><div class="line"><span class="comment">	TreeNode(int x) :</span></div><div class="line"><span class="comment">			val(x), left(NULL), right(NULL) &#123;</span></div><div class="line"><span class="comment">	&#125;</span></div><div class="line"><span class="comment">&#125;;*/</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; print_vec;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; PrintFromTopToBottom(TreeNode* root) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; node_pre,node; <span class="comment">//使用2个数组，分别保存上一层的树节点与当前层的树节点</span></div><div class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)<span class="keyword">return</span> print_vec;</div><div class="line">        <span class="keyword">if</span>(root-&gt;left!=<span class="literal">NULL</span>)</div><div class="line">            node.push_back(root-&gt;left);</div><div class="line">        <span class="keyword">if</span>(root-&gt;right!=<span class="literal">NULL</span>)</div><div class="line">            node.push_back(root-&gt;right);</div><div class="line">        print_vec.push_back(root-&gt;val);</div><div class="line">        <span class="keyword">while</span>(!node.empty())</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> i=<span class="number">0</span>;i&lt;node.size();i++)</div><div class="line">            &#123;</div><div class="line">                print_vec.push_back(node[i]-&gt;val);</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; x;</div><div class="line">            node_pre.swap(node);</div><div class="line">            x.swap(node);</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">auto</span> i=<span class="number">0</span>;i&lt;node_pre.size();i++)</div><div class="line">            &#123;</div><div class="line">                <span class="comment">//遍历node_pre的节点，并将子节点保存到node</span></div><div class="line">                <span class="keyword">if</span>(node_pre[i]-&gt;left!=<span class="literal">NULL</span>)</div><div class="line">                    node.push_back(node_pre[i]-&gt;left);</div><div class="line">                <span class="keyword">if</span>(node_pre[i]-&gt;right!=<span class="literal">NULL</span>)</div><div class="line">                    node.push_back(node_pre[i]-&gt;right);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> print_vec;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h1 id="DFS"><a href="#DFS" class="headerlink" title="DFS　"></a>DFS　</h1><h2 id="递归实现："><a href="#递归实现：" class="headerlink" title="递归实现："></a>递归实现：</h2><p>​             （1）访问顶点v，打印节点；</p>
 <p>​             （2）遍历v的子节点w，while（w存在），递归执行该节点；</p>
@@ -498,7 +499,7 @@
   <p><span>本文标题:</span><a href="/posts/cdd358bc.html">leetcode之BFS与DFS</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 微石 的个人博客">微石</a></p>
   <p><span>发布时间:</span>2018年08月04日 - 09:08</p>
-  <p><span>最后更新:</span>2018年08月05日 - 21:08</p>
+  <p><span>最后更新:</span>2018年08月20日 - 18:08</p>
   <p><span>原始链接:</span><a href="/posts/cdd358bc.html" title="leetcode之BFS与DFS">akihoo.github.io/posts/cdd358bc.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="akihoo.github.io/posts/cdd358bc.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -555,8 +556,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/0.html" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/e9c1acb4.html" rel="prev" title="机器学习之boosting大家族">
+                机器学习之boosting大家族 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -638,7 +639,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">66</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
