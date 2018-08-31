@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="微石的碎碎念">
 <meta property="og:description" content="本文主要节选自：http://izhaoyi.top/2017/09/23/sklearn-xgboost/  adaboostadaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-21T09:00:06.394Z">
+<meta property="og:updated_time" content="2018-08-21T09:10:41.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习之boosting大家族">
 <meta name="twitter:description" content="本文主要节选自：http://izhaoyi.top/2017/09/23/sklearn-xgboost/  adaboostadaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入">
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-21 17:00:06" itemprop="dateModified" datetime="2018-08-21T17:00:06+08:00">2018-08-21</time>
+                <time title="修改时间：2018-08-21 17:10:41" itemprop="dateModified" datetime="2018-08-21T17:10:41+08:00">2018-08-21</time>
               
             
           </span>
@@ -452,6 +452,7 @@
 <li>XGBoost通过预排序的方法来实现特征并行，提高模型训练效率</li>
 <li>xgboost 在实现时，需要将所有数据导入内存，做一次pre-sort（exact algorithm），这样在选择分裂节点时比较迅速。</li>
 </ol>
+<a id="more"></a>
 <h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
 <li>level-wise 建树方式对当前层的所有叶子节点一视同仁，有些叶子节点分裂收益非常小，对结果没影响，但还是要分裂，加重了计算代价。</li>
 <li>预排序方法空间消耗比较大，不仅要保存特征值，也要保存特征的排序索引，同时时间消耗也大，在遍历每个分裂点时都要计算分裂增益(不过这个缺点可以被近似算法所克服)</li>

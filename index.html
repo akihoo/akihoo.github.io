@@ -383,7 +383,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-21 17:00:06" itemprop="dateModified" datetime="2018-08-21T17:00:06+08:00">2018-08-21</time>
+                <time title="修改时间：2018-08-21 17:10:41" itemprop="dateModified" datetime="2018-08-21T17:10:41+08:00">2018-08-21</time>
               
             
           </span>
@@ -427,8 +427,7 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>本文主要节选自：<a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></p>
 </blockquote>
 <h1 id="adaboost"><a href="#adaboost" class="headerlink" title="adaboost"></a>adaboost</h1><p>adaboost 解决二分类问题$y\in{0,1}$，算法针对同一训练集训练出许多不同的弱分类器，将训练的分类器以某种方式组合起来，组合成一个强分类器。算法每次训练分类器时，会将前一个分类器分错的样本给与更大地权重，加强后的全体样本会用于下一次分类器的训练，每一轮加入一个新的弱分类器，知道达到某个预定的足够小的的错误率或达到预定的最大迭代次数。</p>
@@ -449,49 +448,13 @@
 <li>XGBoost通过预排序的方法来实现特征并行，提高模型训练效率</li>
 <li>xgboost 在实现时，需要将所有数据导入内存，做一次pre-sort（exact algorithm），这样在选择分裂节点时比较迅速。</li>
 </ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>level-wise 建树方式对当前层的所有叶子节点一视同仁，有些叶子节点分裂收益非常小，对结果没影响，但还是要分裂，加重了计算代价。</li>
-<li>预排序方法空间消耗比较大，不仅要保存特征值，也要保存特征的排序索引，同时时间消耗也大，在遍历每个分裂点时都要计算分裂增益(不过这个缺点可以被近似算法所克服)</li>
-</ol>
-<h2 id="与GBDT比较"><a href="#与GBDT比较" class="headerlink" title="与GBDT比较"></a>与GBDT比较</h2><ol>
-<li>正则化方式不同（XGB在目标函数中加入显式的控制树复杂程度的项）</li>
-<li>GBDT仅使用了目标函数一阶泰勒展开，而XGBoost使用了二阶的泰勒展开值</li>
-<li>XGB可以处理缺失值</li>
-<li>特征重要性的判断标准<ol>
-<li>sklearn GBDT是根据树的节点特征对应的深度来判断</li>
-<li>XGBoost则有三种方法(get_score)<ol>
-<li>weight:特征用来作为切分特征的次数</li>
-<li>gain:使用特征进行切分的平均增益</li>
-<li>cover:各个树中该特征平均覆盖情况(根据样本？)</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>XGB 树的切分算法：原始的贪心算法(每个特征值切分)、近似贪心(分位点切分)(使得对于大量的特征取值尤其是连续变量时XGBoost会比sklearn-gbdt快很多)、直方图算法</li>
-</ol>
-<h1 id="lightgbm"><a href="#lightgbm" class="headerlink" title="lightgbm"></a>lightgbm</h1><p>相对XGB进行了大量优化</p>
-<ol>
-<li>在效率和内存上：采用直方图算法，将连续特征（属性）值存储到离散区间。这加快了培训速度并减少了内存使用量。基于直方图的算法的优点包括：<ol>
-<li>减少内存使用量(用离散箱替换连续值)</li>
-<li>降低并行学习的通信成本</li>
-<li>在训练决策树计算切分点的增益时，预排序需要对每个样本的切分位置计算，所以时间复杂度是O(#data)而LightGBM则是计算将样本离散化为直方图后的直方图切割位置的增益即可，时间复杂度为O(#bins),时间效率上大大提高了(初始构造直方图是需要一次O(#data)的时间复杂度，不过这里只涉及到加和操作)</li>
-<li>直方图做差进一步提高效率，计算某一节点的叶节点的直方图可以通过将该节点的直方图与另一子节点的直方图做差得到</li>
-</ol>
-</li>
-<li>LEAF-WISE(BEST-FIRST)树生长策略：相对于level-wise的生长策略而言，这种策略每次都是选取当前损失下降最多的叶节点进行分割使得整体模型的损失下降得更多，但是容易过拟合(特别当数据量较小的时候)，可以通过设置参数max_depth来控制树身防止出现过拟合（<em>Notes:XGBoost现在两种方式都是支持的</em>）</li>
-<li>LightGBM直接支持类别特征：在对离散特征分裂时，每个取值都当作一个桶，分裂时的增益算的是“是否属于某个category”的gain。类似于one-hot编码。（基于单热特征构建的树往往是不平衡的，并且需要非常深地生长以实现良好的准确性）</li>
-<li>优化通信代价：特征并行、数据并行、投票并行</li>
-<li>使用多项评价指标同时评价时两者的早停止策略不同，XGBoost是根据评价指标列表中的最后一项来作为停止标准，而LightGBM则受到所有评价指标的影响</li>
-</ol>
-<h1 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
-<li><a href="http://izhaoyi.top/2017/09/23/sklearn-xgboost/" target="_blank" rel="external">http://izhaoyi.top/2017/09/23/sklearn-xgboost/</a></li>
-<li><a href="https://www.cnblogs.com/mata123/p/7440774.html" target="_blank" rel="external">https://www.cnblogs.com/mata123/p/7440774.html</a></li>
-<li><a href="http://scikit-learn.org/stable/modules/ensemble.html#ensemble" target="_blank" rel="external">sklearn</a></li>
-<li><a href="https://lightgbm.readthedocs.io/en/latest/Quick-Start.html" target="_blank" rel="external">LGB_DOC</a></li>
-<li><a href="https://xgboost.readthedocs.io/en/latest/python/python_intro.html#early-stopping" target="_blank" rel="external">XGB_DOC</a></li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/e9c1acb4.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
